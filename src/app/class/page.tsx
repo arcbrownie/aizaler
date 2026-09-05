@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { GraduationCap, CheckCircle2, Clock, Users, ArrowRight, Sparkles, Check } from 'lucide-react';
+import { GraduationCap, CheckCircle2, Clock, Users, ArrowRight, Sparkles, Layout, Target, Zap } from 'lucide-react';
 
 export default function ClassPage() {
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [name, setName] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -18,98 +18,123 @@ export default function ClassPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-12 font-sans">
       {/* Header */}
       <div className="space-y-3 text-center max-w-2xl mx-auto">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold border border-brand-200">
-          <GraduationCap className="w-3.5 h-3.5" />
-          <span>에잘러 실전 부트캠프</span>
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-zinc-100 text-zinc-800 text-xs font-semibold border border-zinc-200">
+          <GraduationCap className="w-3.5 h-3.5 text-zinc-700" />
+          <span>실무 프로덕트 빌더 부트캠프</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-black text-zinc-900 tracking-tight leading-tight">
-          비개발자가 AI로 3일 만에 실서비스 런칭하는 바이브코딩 실전
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight leading-tight">
+          AI로 brownevents 같은 티켓팅 예약 사이트 만들고, 메타(인스타) 광고로 첫 100명 모객하기
         </h1>
-        <p className="text-sm text-zinc-600 leading-relaxed font-normal">
-          코딩 문법 암기는 그만! Claude Code와 Antigravity, Next.js, Supabase를 활용해 
-          실제 결제와 모객이 일어나는 내 서비스를 처음부터 끝까지 직접 런칭해보는 1기 과정입니다.
+        <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal">
+          외주 개발비 800만 원 들이지 마세요. AI 코딩 에이전트로 나만의 이벤트·예약 랜딩페이지를 직접 완성하고, 
+          인스타그램 메타 광고로 실제 결제 고객 100명을 전환시키는 풀퍼널 3주 실전 과정입니다.
         </p>
       </div>
 
-      {/* Course Highlights */}
+      {/* 3 Steps Curriculum */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="clean-card p-6 space-y-2">
-          <span className="text-xs font-bold text-brand-600">STEP 1</span>
-          <h3 className="text-base font-bold text-zinc-900">AI 에이전트 조련법</h3>
+        <div className="p-6 rounded-2xl border border-zinc-200 bg-white space-y-3 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-zinc-400 font-mono">WEEK 01</span>
+            <Layout className="w-4 h-4 text-zinc-700" />
+          </div>
+          <h3 className="text-base font-bold text-zinc-900">AI 예약 랜딩페이지 제작</h3>
           <p className="text-xs text-zinc-600 leading-relaxed">
-            프롬프트 룰셋과 Git 커밋 백업 전략으로 AI가 코드를 지우거나 망가뜨리지 않게 통제하는 실무 노하우.
+            Next.js와 Claude Code/Antigravity를 조련해 brownevents 스타일의 3D 플립 타이머와 2-Step 모바일 예약 폼을 3일 만에 직접 구축합니다.
           </p>
         </div>
 
-        <div className="clean-card p-6 space-y-2">
-          <span className="text-xs font-bold text-brand-600">STEP 2</span>
-          <h3 className="text-base font-bold text-zinc-900">DB &amp; 결제/신청 폼 구축</h3>
+        <div className="p-6 rounded-2xl border border-zinc-200 bg-white space-y-3 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-zinc-400 font-mono">WEEK 02</span>
+            <Zap className="w-4 h-4 text-amber-600" />
+          </div>
+          <h3 className="text-base font-bold text-zinc-900">Vercel 배포 &amp; 결제 자동화</h3>
           <p className="text-xs text-zinc-600 leading-relaxed">
-            Supabase RLS 보안과 카카오톡 인앱 브라우저 최적화로 손님 개인정보를 안전하게 수집하고 대기자 큐 운영.
+            무료 서버리스 Vercel 배포, 도메인 연결, 카카오톡 인앱 브라우저 최적화 및 토스페이/계좌이체 즉시 확인 알림톡 파이프라인을 연동합니다.
           </p>
         </div>
 
-        <div className="clean-card p-6 space-y-2">
-          <span className="text-xs font-bold text-brand-600">STEP 3</span>
-          <h3 className="text-base font-bold text-zinc-900">Vercel 배포 &amp; 애드센스</h3>
+        <div className="p-6 rounded-2xl border border-zinc-200 bg-white space-y-3 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-zinc-400 font-mono">WEEK 03</span>
+            <Target className="w-4 h-4 text-emerald-600" />
+          </div>
+          <h3 className="text-base font-bold text-zinc-900">메타(인스타) 광고 첫 모객</h3>
           <p className="text-xs text-zinc-600 leading-relaxed">
-            도메인 연결, 캐시 무효화, 3D CSS 사파리 버그 해결부터 고단가 구글 애드센스 승인받는 꿀팁까지.
+            일 예산 2만 원으로 CTR 3.5%+ 숏폼 릴스 광고 소재를 기획하고, 메타 픽셀 전환 추적으로 첫 100명 유료 티켓 완판을 실습합니다.
           </p>
         </div>
       </div>
 
-      {/* Early-Bird Lead Form */}
-      <div className="clean-card p-8 sm:p-10 border-brand-200 bg-gradient-to-br from-white via-brand-50/20 to-white shadow-md space-y-6">
-        <div className="text-center space-y-2">
-          <span className="text-xs font-black uppercase text-brand-700 px-2 py-0.5 bg-brand-100 rounded">
-            EARLY BIRD REGISTRATION
+      {/* Trust & Guarantee Box */}
+      <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-8 space-y-4 text-xs sm:text-sm text-zinc-700">
+        <h4 className="font-bold text-zinc-900 text-base">수강생에게 100% 무료 제공되는 실전 에셋</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>brownevents 실제 프로덕션 소스코드 원본</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>CTR 3.8% 뽑아낸 인스타 릴스 광고 템플릿</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>모바일 사파리 3D 플립 CSS &amp; 폼 템플릿</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>메타 픽셀 &amp; 전환 API 노코드 세팅 치트시트</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Lead Capture Form */}
+      <div className="p-8 rounded-2xl bg-zinc-900 text-white space-y-5">
+        <div className="space-y-1.5">
+          <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+            LIMITED TO 15 SEATS · 1기 사전 알림 신청
           </span>
-          <h2 className="text-2xl font-black text-zinc-900 tracking-tight">
-            에잘러 클래스 1기 사전 알림 신청
-          </h2>
-          <p className="text-xs sm:text-sm text-zinc-600 max-w-md mx-auto leading-relaxed">
-            사전 신청자에게만 정식 오픈 시 <strong>최대 40% 얼리버드 수강 할인 쿠폰</strong>과 
-            <strong>《비개발자 실전 바이브코딩 시크릿 치트시트 PDF》</strong>를 선물로 보내드립니다.
+          <h3 className="text-xl sm:text-2xl font-black text-white">
+            1기 오픈 알림 신청하고 얼리버드 40% 장학 혜택 받기
+          </h3>
+          <p className="text-xs sm:text-sm text-zinc-300">
+            소수 정예(15명)로 1:1 코드 리뷰 및 광고 세팅 피드백이 진행됩니다.
           </p>
         </div>
 
         {submitted ? (
-          <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2">
-            <Check className="w-8 h-8 text-emerald-600 mx-auto" />
-            <h3 className="text-base font-bold text-emerald-900">사전 알림 등록이 완료되었습니다!</h3>
-            <p className="text-xs text-emerald-700">1기 클래스 일정이 확정되는 즉시 가장 먼저 연락드리겠습니다.</p>
+          <div className="p-4 rounded-xl bg-zinc-800 border border-zinc-700 text-emerald-400 text-xs font-semibold flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 shrink-0" />
+            <span>사전 알림 등록이 완료되었습니다! 1기 오픈 시 가장 먼저 메일로 안내해 드립니다.</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-3">
-            <div>
-              <label className="block text-xs font-bold text-zinc-700 mb-1">이메일 주소 <span className="text-red-500">*</span></label>
-              <input
-                type="email"
-                placeholder="example@gmail.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-white text-xs sm:text-sm text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:border-brand-500 shadow-sm"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-zinc-700 mb-1">연락처 / 카카오톡 (선택)</label>
-              <input
-                type="text"
-                placeholder="010-1234-5678"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-white text-xs sm:text-sm text-zinc-800 placeholder:text-zinc-400 focus:outline-none focus:border-brand-500 shadow-sm"
-              />
-            </div>
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              placeholder="이름 (예: 홍길동)"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="px-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-white text-xs placeholder:text-zinc-500 focus:outline-none focus:border-zinc-500 w-full sm:w-44"
+            />
+            <input
+              type="email"
+              placeholder="알림받을 이메일 주소"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="px-4 py-3 rounded-xl bg-zinc-800 border border-zinc-700 text-white text-xs placeholder:text-zinc-500 focus:outline-none focus:border-zinc-500 flex-1"
+            />
             <button
               type="submit"
-              className="w-full py-3 px-5 rounded-xl bg-zinc-900 hover:bg-brand-600 text-white text-xs sm:text-sm font-bold transition-colors shadow-sm"
+              className="px-6 py-3 rounded-xl bg-white text-zinc-900 text-xs font-bold hover:bg-zinc-100 transition-colors shrink-0 shadow-xs"
             >
-              얼리버드 알림 및 혜택 신청하기 →
+              사전 알림 신청하기
             </button>
           </form>
         )}

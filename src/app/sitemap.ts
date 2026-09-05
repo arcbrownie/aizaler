@@ -35,14 +35,47 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/editorial`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/terms`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ];
 
-  const articleRoutes: MetadataRoute.Sitemap = INSIGHTS_ARTICLES.map((article) => ({
-    url: `${BASE_URL}/insights/${article.slug}`,
-    lastModified: new Date(article.date.replace(/\./g, '-').trim()),
-    changeFrequency: 'monthly',
-    priority: 0.85,
-  }));
+  const articleRoutes: MetadataRoute.Sitemap = INSIGHTS_ARTICLES.map((article) => {
+    const dateStr = article.updatedDate || article.date;
+    return {
+      url: `${BASE_URL}/insights/${article.slug}`,
+      lastModified: new Date(dateStr.replace(/\./g, '-').trim()),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    };
+  });
 
   return [...staticRoutes, ...articleRoutes];
 }

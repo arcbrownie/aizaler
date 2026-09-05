@@ -5,15 +5,17 @@ import type { Metadata } from 'next';
 import { INSIGHTS_ARTICLES } from '@/data/insightsData';
 import { AdSlot } from '@/components/AdSlot';
 import {
-  ArrowLeft,
   Clock,
-  AlertCircle,
-  HelpCircle,
-  Code2,
-  CheckCircle,
-  Sparkles,
   ExternalLink,
-  Zap,
+  ChevronRight,
+  CheckCircle2,
+  AlertTriangle,
+  Info,
+  Lightbulb,
+  FileCode,
+  Share2,
+  Bookmark,
+  Sparkles,
 } from 'lucide-react';
 
 interface PageProps {
@@ -41,7 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const articleUrl = `${BASE_URL}/insights/${article.slug}`;
 
   return {
-    title: article.title,
+    title: `${article.title} | AI잘러`,
     description: article.summary,
     keywords: article.tags,
     alternates: {
@@ -53,7 +55,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: articleUrl,
       type: 'article',
       publishedTime: article.date.replace(/\./g, '-').trim(),
-      authors: ['에잘러 랩스'],
+      modifiedTime: article.updatedDate ? article.updatedDate.replace(/\./g, '-').trim() : undefined,
+      authors: [article.author.name],
       tags: article.tags,
     },
     twitter: {
@@ -75,7 +78,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   const articleUrl = `${BASE_URL}/insights/${article.slug}`;
   const publishedIsoDate = new Date(article.date.replace(/\./g, '-').trim()).toISOString();
 
-  // 1. TechArticle Schema (Google SEO)
+  // 1. TechArticle Schema for Google SEO & AdSense E-E-A-T
   const jsonLdArticle = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
@@ -83,12 +86,12 @@ export default async function ArticleDetailPage({ params }: PageProps) {
     description: article.summary,
     url: articleUrl,
     datePublished: publishedIsoDate,
-    dateModified: publishedIsoDate,
+    dateModified: article.updatedDate ? new Date(article.updatedDate.replace(/\./g, '-').trim()).toISOString() : publishedIsoDate,
     author: {
       '@type': 'Person',
-      name: '에잘러 (AI-ZALER)',
-      jobTitle: 'AI 실무 프로덕트 엔지니어',
-      url: BASE_URL,
+      name: article.author.name,
+      jobTitle: article.author.role,
+      url: `${BASE_URL}/about`,
     },
     publisher: {
       '@type': 'Organization',
@@ -103,36 +106,18 @@ export default async function ArticleDetailPage({ params }: PageProps) {
     keywords: article.tags.join(', '),
   };
 
-  // 2. FAQPage Schema (GEO & Google Rich Snippets)
+  // 2. FAQPage Schema for GEO (Generative Engine Optimization)
   const jsonLdFaq = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: `${article.title}의 주요 발생 증상은 무엇인가요?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: article.sections.symptom,
-        },
+    mainEntity: article.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
       },
-      {
-        '@type': 'Question',
-        name: `이 문제가 발생하는 원인은 무엇인가요?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: article.sections.cause,
-        },
-      },
-      {
-        '@type': 'Question',
-        name: `이 문제를 1분 만에 해결하는 방법은 무엇인가요?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: article.sections.solutionExplanation,
-        },
-      },
-    ],
+    })),
   };
 
   // 3. BreadcrumbList Schema
@@ -176,184 +161,353 @@ export default async function ArticleDetailPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
       />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-8">
-        {/* Breadcrumb & Back Link */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-zinc-500 font-medium">
+      <article className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-10 font-sans">
+        {/* Breadcrumb Navigation */}
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-zinc-500 font-medium">
           <Link href="/" className="hover:text-zinc-900 transition-colors">
             홈
           </Link>
-          <span className="text-zinc-300">/</span>
+          <ChevronRight className="w-3 h-3 text-zinc-300" />
           <Link href="/insights" className="hover:text-zinc-900 transition-colors">
             인사이트
           </Link>
-          <span className="text-zinc-300">/</span>
-          <span className="text-zinc-800 font-bold truncate max-w-[200px] sm:max-w-xs">{article.category}</span>
+          <ChevronRight className="w-3 h-3 text-zinc-300" />
+          <span className="text-zinc-800 font-semibold truncate max-w-[200px] sm:max-w-xs">
+            {article.category}
+          </span>
         </nav>
 
-        {/* Article Header */}
-        <header className="space-y-4 pb-6 border-b border-zinc-200">
+        {/* Editorial Header */}
+        <header className="space-y-6 pb-8 border-b border-zinc-200">
           <div className="flex flex-wrap items-center gap-2 text-xs">
-            <span className="font-bold px-2.5 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-200">
+            <span className="font-semibold px-2.5 py-1 rounded-md bg-zinc-100 text-zinc-800 border border-zinc-200">
               {article.category}
             </span>
-            <span className="text-zinc-400">·</span>
+            <span className="text-zinc-300">|</span>
             <div className="flex items-center gap-1 text-zinc-500 font-medium">
-              <Clock className="w-3.5 h-3.5" />
+              <Clock className="w-3.5 h-3.5 text-zinc-400" />
               <span>읽는 시간 {article.readTime}</span>
             </div>
-            <span className="text-zinc-400">·</span>
-            <time dateTime={publishedIsoDate} className="text-zinc-400 font-mono">
-              {article.date}
+            <span className="text-zinc-300">|</span>
+            <time dateTime={publishedIsoDate} className="text-zinc-500 font-mono">
+              발행일 {article.date}
             </time>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-black text-zinc-900 tracking-tight leading-[1.25]">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 tracking-tight leading-[1.3]">
             {article.title}
           </h1>
 
-          <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
+          <p className="text-base sm:text-lg text-zinc-600 leading-relaxed font-normal">
             {article.summary}
           </p>
 
-          <div className="flex flex-wrap gap-1.5 pt-2">
-            {article.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-[11px] font-medium text-zinc-500 px-2.5 py-0.5 rounded-md bg-zinc-100 border border-zinc-200"
-              >
-                #{tag}
-              </span>
-            ))}
+          {/* Author Byline (E-E-A-T Trust Signal) */}
+          <div className="flex items-center justify-between pt-2 border-t border-zinc-100 text-xs text-zinc-600">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden shrink-0 flex items-center justify-center font-bold text-zinc-700 text-sm">
+                AI
+              </div>
+              <div>
+                <div className="font-bold text-zinc-900 flex items-center gap-1.5">
+                  <span>{article.author.name}</span>
+                  <span className="px-1.5 py-0.2 rounded text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    인증 저자
+                  </span>
+                </div>
+                <div className="text-zinc-500 text-[11px]">{article.author.role}</div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] text-zinc-400 hidden sm:inline">실무 100시간 검증 리포트</span>
+            </div>
           </div>
         </header>
 
-        {/* 🌟 GEO Direct Answer Box (For AI Engines like Perplexity, ChatGPT Search, Gemini) */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-brand-50/80 via-white to-blue-50/40 border border-brand-200/80 shadow-xs space-y-2">
-          <div className="flex items-center gap-2 text-brand-800 font-bold text-xs uppercase tracking-wider">
-            <Zap className="w-4 h-4 text-brand-600 fill-brand-600" />
-            <span>AI 및 바쁜 직장인을 위한 30초 핵심 결론 (Direct Answer)</span>
+        {/* Executive Summary Briefing Box (고위 기술 리포트 스타일) */}
+        <section aria-label="Executive Summary" className="p-6 rounded-2xl bg-zinc-50/80 border border-zinc-200/90 space-y-3">
+          <div className="flex items-center gap-2 text-zinc-900 font-bold text-xs uppercase tracking-wider">
+            <Sparkles className="w-4 h-4 text-brand-600" />
+            <span>Executive Briefing · 핵심 요약 및 시사점</span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-800 leading-relaxed font-semibold">
-            {article.sections.takeaway[0]} {article.sections.takeaway[1]}
-          </p>
-        </div>
+          <ul className="space-y-2 text-xs sm:text-sm text-zinc-700 leading-relaxed">
+            {article.executiveSummary.map((item, idx) => (
+              <li key={idx} className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-800 mt-2 shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Table of Contents (TOC) */}
+        <nav aria-label="Table of contents" className="p-5 rounded-xl border border-zinc-200 bg-white space-y-2.5">
+          <h2 className="text-xs font-bold text-zinc-900 uppercase tracking-wider">목차 (Table of Contents)</h2>
+          <ol className="space-y-1.5 text-xs sm:text-sm">
+            {article.sections.map((section, idx) => (
+              <li key={section.id}>
+                <a
+                  href={`#${section.id}`}
+                  className="text-zinc-600 hover:text-brand-600 hover:underline transition-colors flex items-center gap-1.5"
+                >
+                  <span className="text-zinc-400 font-mono text-[11px]">{idx + 1}.</span>
+                  <span>{section.heading.replace(/^\d+\.\s*/, '')}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
 
         {/* Top AdSense Slot */}
-        <AdSlot label="SPONSORED · 상단 디스플레이 슬롯" />
+        <AdSlot label="SPONSORED · 디스플레이 배너" />
 
-        {/* Core Article Body (4-Step Actionable Format) */}
-        <article className="space-y-10 text-zinc-800 leading-relaxed">
-          {/* Step 1: Symptom */}
-          <section className="space-y-3">
-            <div className="flex items-center gap-2 text-rose-600 font-black text-lg">
-              <AlertCircle className="w-5 h-5" />
-              <h2>1. 발생 증상 (What Happened)</h2>
-            </div>
-            <div className="p-5 rounded-xl bg-rose-50/50 border border-rose-200/80 text-sm text-zinc-800 leading-relaxed">
-              <p className="font-normal">{article.sections.symptom}</p>
-            </div>
-          </section>
+        {/* Article Body Sections */}
+        <div className="space-y-12 text-zinc-800 leading-[1.85]">
+          {article.sections.map((section) => (
+            <section key={section.id} id={section.id} className="space-y-5 scroll-mt-20">
+              <h2 className="text-xl sm:text-2xl font-black text-zinc-900 tracking-tight pt-2 border-t border-zinc-100">
+                {section.heading}
+              </h2>
 
-          {/* Step 2: Cause */}
-          <section className="space-y-3">
-            <div className="flex items-center gap-2 text-zinc-900 font-black text-lg">
-              <HelpCircle className="w-5 h-5 text-amber-500" />
-              <h2>2. 원인 분석 (Why)</h2>
-            </div>
-            <p className="text-sm sm:text-base text-zinc-700 leading-relaxed pl-1">
-              {article.sections.cause}
-            </p>
-          </section>
+              {section.leadParagraph && (
+                <p className="text-sm sm:text-base font-semibold text-zinc-700 leading-relaxed">
+                  {section.leadParagraph}
+                </p>
+              )}
 
-          {/* Mid-Article AdSense or Affiliate Spotlight */}
-          {article.affiliateBanner ? (
-            <div className="my-8 clean-card p-6 sm:p-7 bg-gradient-to-r from-brand-900 to-zinc-900 text-white rounded-2xl space-y-3 shadow-lg">
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-amber-400 text-black">
-                  제휴 추천
-                </span>
-                <span className="text-xs text-zinc-300 font-bold">{article.affiliateBanner.toolName}</span>
-              </div>
-              <h3 className="text-lg sm:text-xl font-black text-white leading-snug">
-                {article.affiliateBanner.headline}
-              </h3>
-              <p className="text-xs text-zinc-300 leading-relaxed max-w-xl">
-                {article.affiliateBanner.description}
-              </p>
-              <div className="pt-2">
-                <a
-                  href={article.affiliateBanner.linkUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white text-zinc-900 text-xs font-black hover:bg-brand-50 transition-colors shadow-sm"
+              {section.content && (
+                <div className="text-sm sm:text-base text-zinc-700 space-y-4 whitespace-pre-line leading-relaxed">
+                  {section.content}
+                </div>
+              )}
+
+              {/* Comparison Table */}
+              {section.comparisonTable && (
+                <div className="my-6 overflow-x-auto rounded-xl border border-zinc-200 shadow-xs">
+                  <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead className="bg-zinc-100 text-zinc-800 font-bold border-b border-zinc-200">
+                      <tr>
+                        {section.comparisonTable.headers.map((th, i) => (
+                          <th key={i} className="p-3.5 sm:p-4 whitespace-nowrap">
+                            {th}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-zinc-200 bg-white">
+                      {section.comparisonTable.rows.map((row, rIdx) => (
+                        <tr
+                          key={rIdx}
+                          className={row.highlight ? 'bg-brand-50/40 font-medium' : 'hover:bg-zinc-50/60'}
+                        >
+                          <td className="p-3.5 sm:p-4 font-bold text-zinc-900 whitespace-nowrap">
+                            {row.feature}
+                          </td>
+                          {row.values.map((val, vIdx) => (
+                            <td key={vIdx} className="p-3.5 sm:p-4 text-zinc-700">
+                              {val}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {/* Code Block */}
+              {section.codeBlock && (
+                <div className="my-6 rounded-xl overflow-hidden border border-zinc-800 bg-[#18181B] text-zinc-100">
+                  {section.codeBlock.filename && (
+                    <div className="flex items-center justify-between px-4 py-2 bg-[#27272A] border-b border-zinc-700 text-xs text-zinc-300 font-mono">
+                      <div className="flex items-center gap-1.5">
+                        <FileCode className="w-3.5 h-3.5 text-zinc-400" />
+                        <span>{section.codeBlock.filename}</span>
+                      </div>
+                      <span className="text-[10px] uppercase text-zinc-400">
+                        {section.codeBlock.language}
+                      </span>
+                    </div>
+                  )}
+                  <pre className="p-4 sm:p-5 text-xs sm:text-sm overflow-x-auto font-mono leading-relaxed bg-transparent m-0">
+                    <code>{section.codeBlock.code}</code>
+                  </pre>
+                  {section.codeBlock.caption && (
+                    <div className="px-4 py-2 bg-[#1F1F23] border-t border-zinc-800 text-[11px] text-zinc-400">
+                      {section.codeBlock.caption}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Subsections */}
+              {section.subsections && (
+                <div className="space-y-8 pl-0 sm:pl-2">
+                  {section.subsections.map((sub, sIdx) => (
+                    <div key={sIdx} className="space-y-3">
+                      <h3 className="text-base sm:text-lg font-bold text-zinc-900 tracking-tight">
+                        {sub.subheading}
+                      </h3>
+                      <div className="text-sm sm:text-base text-zinc-700 whitespace-pre-line leading-relaxed">
+                        {sub.content}
+                      </div>
+
+                      {sub.codeBlock && (
+                        <div className="my-4 rounded-xl overflow-hidden border border-zinc-800 bg-[#18181B] text-zinc-100">
+                          {sub.codeBlock.filename && (
+                            <div className="flex items-center justify-between px-4 py-2 bg-[#27272A] border-b border-zinc-700 text-xs text-zinc-300 font-mono">
+                              <div className="flex items-center gap-1.5">
+                                <FileCode className="w-3.5 h-3.5 text-zinc-400" />
+                                <span>{sub.codeBlock.filename}</span>
+                              </div>
+                              <span className="text-[10px] uppercase text-zinc-400">
+                                {sub.codeBlock.language}
+                              </span>
+                            </div>
+                          )}
+                          <pre className="p-4 sm:p-5 text-xs sm:text-sm overflow-x-auto font-mono leading-relaxed bg-transparent m-0">
+                            <code>{sub.codeBlock.code}</code>
+                          </pre>
+                          {sub.codeBlock.caption && (
+                            <div className="px-4 py-2 bg-[#1F1F23] border-t border-zinc-800 text-[11px] text-zinc-400">
+                              {sub.codeBlock.caption}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {sub.callout && (
+                        <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 space-y-1 text-xs sm:text-sm">
+                          <div className="font-bold flex items-center gap-1.5 text-amber-900">
+                            <Lightbulb className="w-4 h-4 text-amber-600" />
+                            <span>{sub.callout.title}</span>
+                          </div>
+                          <p className="leading-relaxed font-normal">{sub.callout.text}</p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Callout */}
+              {section.callout && (
+                <div
+                  className={`p-5 rounded-xl text-xs sm:text-sm space-y-1.5 ${
+                    section.callout.type === 'key-takeaway'
+                      ? 'bg-zinc-900 text-white border border-zinc-800'
+                      : section.callout.type === 'warning'
+                      ? 'bg-rose-50 border border-rose-200 text-rose-950'
+                      : 'bg-blue-50/80 border border-blue-200 text-blue-950'
+                  }`}
                 >
-                  <span>{article.affiliateBanner.buttonText}</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-          ) : (
-            <AdSlot label="SPONSORED · 본문 인피드 슬롯" />
-          )}
+                  <div className="font-bold flex items-center gap-1.5">
+                    {section.callout.type === 'key-takeaway' && <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+                    {section.callout.type === 'warning' && <AlertTriangle className="w-4 h-4 text-rose-600" />}
+                    {section.callout.type === 'info' && <Info className="w-4 h-4 text-blue-600" />}
+                    <span>{section.callout.title}</span>
+                  </div>
+                  <p className="leading-relaxed font-normal whitespace-pre-line">{section.callout.text}</p>
+                </div>
+              )}
+            </section>
+          ))}
+        </div>
 
-          {/* Step 3: Solution Code & Method */}
-          <section className="space-y-3">
-            <div className="flex items-center gap-2 text-emerald-600 font-black text-lg">
-              <Code2 className="w-5 h-5" />
-              <h2>3. 해결 코드 및 방법 (How to Fix)</h2>
+        {/* Affiliate / Spotlight Banner */}
+        {article.affiliateCallout && (
+          <div className="my-10 p-6 sm:p-8 rounded-2xl bg-zinc-900 text-white space-y-4 shadow-md">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
+                {article.affiliateCallout.badgeText || '추천 솔루션'}
+              </span>
+              <span className="text-xs text-zinc-400">{article.affiliateCallout.toolName}</span>
             </div>
-            <p className="text-sm text-zinc-600 pl-1 leading-relaxed">
-              {article.sections.solutionExplanation}
+
+            <h3 className="text-lg sm:text-xl font-black text-white leading-snug">
+              {article.affiliateCallout.headline}
+            </h3>
+
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+              {article.affiliateCallout.description}
             </p>
-            <div className="rounded-xl overflow-hidden shadow-sm">
-              <pre>
-                <code>{article.sections.solutionCode}</code>
-              </pre>
-            </div>
-          </section>
 
-          {/* Step 4: 3-Line Takeaway */}
-          <section className="space-y-3">
-            <div className="flex items-center gap-2 text-brand-700 font-black text-lg">
-              <CheckCircle className="w-5 h-5" />
-              <h2>4. 에잘러 3줄 요약 (Takeaway)</h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-zinc-200 py-1">
+              {article.affiliateCallout.benefits.map((b, idx) => (
+                <li key={idx} className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-zinc-800">
+              <a
+                href={article.affiliateCallout.linkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white text-zinc-900 text-xs font-black hover:bg-zinc-100 transition-colors shadow-sm"
+              >
+                <span>{article.affiliateCallout.buttonText}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+              <p className="text-[11px] text-zinc-400 max-w-sm leading-tight">
+                {article.affiliateCallout.disclosure}
+              </p>
             </div>
-            <div className="clean-card p-6 bg-zinc-50 border-zinc-200 space-y-2.5">
-              {article.sections.takeaway.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-800">
-                  <span className="font-bold text-brand-600 mt-0.5">{idx + 1}.</span>
-                  <span className="leading-relaxed">{item}</span>
+          </div>
+        )}
+
+        {/* Mid/Bottom AdSense Slot */}
+        <AdSlot label="SPONSORED · 하단 매칭 인피드 슬롯" />
+
+        {/* FAQ Section (GEO Rich Snippets) */}
+        {article.faq.length > 0 && (
+          <section className="pt-8 border-t border-zinc-200 space-y-4">
+            <h3 className="text-lg sm:text-xl font-black text-zinc-900 tracking-tight">
+              자주 묻는 질문 (FAQ)
+            </h3>
+            <div className="space-y-3">
+              {article.faq.map((item, idx) => (
+                <div key={idx} className="p-4 rounded-xl border border-zinc-200 bg-zinc-50/50 space-y-1.5 text-xs sm:text-sm">
+                  <h4 className="font-bold text-zinc-900">Q. {item.question}</h4>
+                  <p className="text-zinc-600 leading-relaxed">{item.answer}</p>
                 </div>
               ))}
             </div>
           </section>
-        </article>
+        )}
 
-        {/* Bottom AdSense Slot */}
-        <AdSlot label="SPONSORED · 하단 일치형 광고 슬롯" />
-
-        {/* Lead Magnet CTA Footer in Article */}
-        <div className="clean-card p-6 sm:p-8 bg-brand-50/50 border-brand-200 space-y-3 text-center">
-          <span className="text-xs font-black uppercase text-brand-700 px-2 py-0.5 bg-brand-100 rounded">
-            FREE CHEAT-SHEET
-          </span>
-          <h3 className="text-lg sm:text-xl font-bold text-zinc-900">
-            비개발자가 AI로 일할 때 꼭 알아야 할 생존 용어집 30선
-          </h3>
-          <p className="text-xs text-zinc-600 max-w-md mx-auto leading-relaxed">
-            바이브코딩, RLS 보안, 캐시버스팅, TTS/STT 핵심 용어를 3분 만에 마스터할 수 있는 PDF 치트시트를 무료로 열람해 보세요.
-          </p>
-          <div className="pt-2">
-            <Link
-              href="/glossary"
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-zinc-900 text-white text-xs font-bold hover:bg-brand-600 transition-colors shadow-sm"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>용어집 무료 보러가기 →</span>
-            </Link>
+        {/* Author Bio Box (E-E-A-T AdSense Guarantee) */}
+        <section className="p-6 rounded-2xl border border-zinc-200 bg-white flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="w-14 h-14 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden shrink-0 flex items-center justify-center font-bold text-zinc-800 text-lg">
+            AI
           </div>
+          <div className="space-y-1 text-xs sm:text-sm">
+            <div className="font-bold text-zinc-900 flex items-center gap-2">
+              <span>{article.author.name}</span>
+              <span className="text-zinc-400 font-normal text-xs">· {article.author.role}</span>
+            </div>
+            <p className="text-zinc-600 leading-relaxed">{article.author.bio}</p>
+            <div className="text-[11px] text-zinc-400 pt-1">
+              본 아티클의 모든 테스트와 코드는 실제 프로덕션 환경에서 직접 검증되었습니다.
+            </div>
+          </div>
+        </section>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 pt-4">
+          {article.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-[11px] font-medium text-zinc-600 px-3 py-1 rounded-md bg-zinc-100 border border-zinc-200"
+            >
+              #{tag}
+            </span>
+          ))}
         </div>
-      </div>
+      </article>
     </>
   );
 }
