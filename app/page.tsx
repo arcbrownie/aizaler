@@ -507,26 +507,58 @@ export default function Home() {
             return (
               <div
                 key={idx}
-                className="bezel-card-outer overflow-hidden"
+                className={`rounded-2xl transition-all duration-200 overflow-hidden bg-white border ${
+                  isOpen
+                    ? 'border-[#3182f6]/40 shadow-sm ring-1 ring-[#3182f6]/10'
+                    : 'border-black/[0.08] hover:border-black/[0.16] shadow-xs'
+                }`}
               >
                 <button
+                  type="button"
                   onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="bezel-card-inner w-full flex items-center justify-between text-left transition-colors"
+                  className="w-full p-5 sm:p-6 flex items-center justify-between text-left focus:outline-none select-none transition-colors hover:bg-slate-50/50"
                 >
-                  <span className="font-bold text-sm sm:text-base text-[#191f28]">
-                    {faq.q}
-                  </span>
-                  <CaretDown
-                    size={18}
-                    weight="bold"
-                    className={`text-[#8b95a1] transition-transform duration-200 shrink-0 ml-4 ${
-                      isOpen ? 'rotate-180 text-[#3182f6]' : ''
+                  <div className="flex items-start gap-3.5 pr-3">
+                    <span
+                      className={`w-6 h-6 rounded-lg text-xs font-black flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+                        isOpen
+                          ? 'bg-[#3182f6] text-white'
+                          : 'bg-gray-100 text-[#8b95a1]'
+                      }`}
+                    >
+                      Q
+                    </span>
+                    <span className="font-bold text-sm sm:text-base text-[#191f28] leading-snug">
+                      {faq.q}
+                    </span>
+                  </div>
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ml-2 transition-all duration-200 ${
+                      isOpen
+                        ? 'bg-blue-50 text-[#3182f6]'
+                        : 'bg-gray-100 text-[#8b95a1]'
                     }`}
-                  />
+                  >
+                    <CaretDown
+                      size={16}
+                      weight="bold"
+                      className={`transition-transform duration-250 ease-out ${
+                        isOpen ? 'rotate-180 text-[#3182f6]' : ''
+                      }`}
+                    />
+                  </div>
                 </button>
+
                 {isOpen && (
-                  <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-[#4e5968] leading-relaxed border-t border-black/[0.03] bg-white">
-                    {faq.a}
+                  <div className="px-5 pb-6 sm:px-6 sm:pb-6 pt-0 animate-in fade-in duration-200">
+                    <div className="pt-4 border-t border-black/[0.06] flex items-start gap-3.5">
+                      <span className="w-6 h-6 rounded-lg bg-[#e8f3ff] text-[#3182f6] text-xs font-black flex items-center justify-center shrink-0 mt-0.5">
+                        A
+                      </span>
+                      <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed pt-0.5">
+                        {faq.a}
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>

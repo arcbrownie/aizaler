@@ -30,6 +30,13 @@
     -webkit-font-smoothing: antialiased;
     word-break: keep-all;
   }
+  button {
+    outline: none;
+  }
+  button:focus-visible {
+    outline: 2px solid #3182f6;
+    outline-offset: 2px;
+  }
 }
 
 .toss-container {
@@ -41,27 +48,33 @@
   padding-right: 20px;
 }
 
-/* ── Supanova & Maengmo Double-Bezel Card Architecture ── */
+/* ── Modern Toss & Linear Single-Surface Card Architecture ── */
 .bezel-card-outer {
-  border-radius: 28px;
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 6px;
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.03);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 24px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bezel-card-outer:hover {
-  border-color: rgba(49, 130, 246, 0.2);
-  box-shadow: 0 16px 36px -8px rgba(49, 130, 246, 0.08);
+  transform: translateY(-2px);
 }
 
 .bezel-card-inner {
-  border-radius: 22px;
+  border-radius: 24px;
   background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 16px -4px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bezel-card-outer:hover .bezel-card-inner,
+.bezel-card-inner:hover {
+  border-color: rgba(49, 130, 246, 0.3);
+  box-shadow: 0 12px 30px -6px rgba(49, 130, 246, 0.1), 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 /* 토스 버튼 & 햅틱 모션 */
