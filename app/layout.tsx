@@ -13,7 +13,6 @@ import {
   DownloadSimple
 } from '@phosphor-icons/react';
 import { usePathname } from 'next/navigation';
-import FloatingDock from '@/components/FloatingDock';
 
 export default function RootLayout({
   children,
@@ -114,9 +113,6 @@ export default function RootLayout({
         <main className="flex-1 pb-20">
           {children}
         </main>
-
-        {/* 플로팅 글래스 독 바 */}
-        <FloatingDock />
 
         {/* 신뢰 기반 푸터 */}
         <footer className="border-t border-black/[0.04] bg-white text-[#8b95a1] text-xs py-14">

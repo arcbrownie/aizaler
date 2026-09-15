@@ -29,7 +29,7 @@ export default function First9VectorDiagnoser() {
   ];
 
   return (
-    <section id="first9-diagnoser" className="toss-container space-y-8">
+    <section id="first-9" className="toss-container space-y-8 scroll-mt-24">
       {/* 섹션 상단 헤더 */}
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">

@@ -95,14 +95,14 @@ export default function Home() {
             {/* CTA 버튼 세트 */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <a
-                href="#founder-story"
+                href="#origin-story"
                 className="toss-button-primary px-7 py-4 text-sm sm:text-base font-bold text-center flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
               >
                 <Target size={20} weight="bold" />
                 <span>창업자 생존 서사 타임라인 읽기</span>
               </a>
               <a
-                href="#hangover-simulator"
+                href="#algorithm"
                 className="px-6 py-4 rounded-2xl bg-white border border-black/[0.08] text-[#191f28] text-sm sm:text-base font-bold text-center hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shadow-xs"
               >
                 <span>20만 뷰 알고리즘 실측 보기</span>

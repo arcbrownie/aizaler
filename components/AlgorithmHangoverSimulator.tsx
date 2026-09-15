@@ -92,7 +92,7 @@ ORDER BY avg_cvr_pct DESC;
   };
 
   return (
-    <section id="hangover-simulator" className="toss-container space-y-8">
+    <section id="algorithm" className="toss-container space-y-8 scroll-mt-24">
       {/* 상단 헤더 */}
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">

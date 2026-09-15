@@ -114,7 +114,7 @@ export default function FounderNarrativeTimeline() {
   const IconComponent = current.icon;
 
   return (
-    <section className="toss-container space-y-8">
+    <section id="origin-story" className="toss-container space-y-8 scroll-mt-24">
       {/* 섹션 상단 헤더 */}
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#191f28] text-white text-xs font-bold">
@@ -271,3 +271,4 @@ export default function FounderNarrativeTimeline() {
     </section>
   );
 }
+
