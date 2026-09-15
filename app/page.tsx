@@ -39,7 +39,7 @@ export default function Home() {
   const [emailInput, setEmailInput] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
 
-  const categories = ['전체', '실전 그로스 바이블', '무료 리포트 & SQL', '1:1 프라이빗 전략'];
+  const categories = ['전체', '실전 그로스 바이블', '무료 리포트 & 가이드', '1:1 프라이빗 전략'];
 
   const filteredProducts = selectedCategory === '전체'
     ? PRODUCTS
@@ -58,7 +58,7 @@ export default function Home() {
     },
     {
       q: '20만 뷰가 터졌는데 왜 유료 결제는 4건뿐이었나요?',
-      a: '대중적인 직장인 사이다 썰로 메타 DLRM 추천 엔진의 후보 풀이 비타겟 유저로 오염되었기 때문입니다. 다음 날 올린 진짜 프로덕트 칼럼을 그 20만 명이 0.5초 만에 스킵하면서 계정 품질 점수(Quality Score)가 강등되었고, 5일간 유입이 -92% 폭락했습니다. 이 "알고리즘 숙취"를 겪은 뒤, 1,000~3,000뷰의 고순도 타깃 글이 훨씬 더 높은 결제 전환율(CVR 4.49%)을 만든다는 사실을 증명했습니다.'
+      a: '대중적인 직장인 사이다 썰로 인스타그램 추천 머신러닝의 타겟 풀이 비구매 구경꾼 군집으로 왜곡되었기 때문입니다. 다음 날 올린 진짜 프로덕트 칼럼을 그 20만 명이 0.5초 만에 스킵하면서 계정 품질 점수(Quality Score)가 강등되었고, 5일간 유입이 -92% 폭락했습니다. 이 "알고리즘 숙취"를 겪은 뒤, 1,000~3,000뷰의 고순도 타깃 글이 훨씬 더 높은 결제 전환율(CVR 4.49%)을 만든다는 사실을 증명했습니다.'
     },
     {
       q: '메타 광고에서 "소오름 매칭"이란 구체적으로 무엇인가요?',
@@ -122,7 +122,7 @@ export default function Home() {
                 <div className="text-lg sm:text-2xl font-black text-[#191f28] font-mono tabular-nums">
                   4,230,000+
                 </div>
-                <div className="text-[11px] text-[#8b95a1] font-medium">실측 결제 DB 로그</div>
+                <div className="text-[11px] text-[#8b95a1] font-medium">실측 분석 데이터</div>
               </div>
               <div className="space-y-0.5">
                 <div className="text-lg sm:text-2xl font-black text-rose-600 font-mono tabular-nums">
@@ -176,7 +176,7 @@ export default function Home() {
                   <div className="text-xs text-[#191f28] space-y-1.5">
                     <div className="font-bold text-[#191f28]">✓ 공기업·주재원 퇴사 후 야생에서 생존한 1인 창업가</div>
                     <div className="text-[#3182f6] font-bold">✓ Meta Certified Media Planning Professional (공인 자격)</div>
-                    <div className="text-emerald-700 font-semibold">✓ 423만 뷰 결제 DB 전수 분석 & 광고 결제율 8.6% 달성</div>
+                    <div className="text-emerald-700 font-semibold">✓ 423만 뷰 퍼널 데이터 전수 분석 & 광고 결제율 8.6% 달성</div>
                     <div className="text-[#4e5968] font-semibold">✓ 오늘도 직접 코딩하고 서비스를 굴리는 현역 빌더</div>
                   </div>
                 </div>
@@ -200,7 +200,7 @@ export default function Home() {
         <FounderNarrativeTimeline />
       </div>
 
-      {/* ── 3. 20만 뷰 바이럴 숙취 & 메타 DLRM 알고리즘 시뮬레이터 ── */}
+      {/* ── 3. 20만 뷰 바이럴 숙취 & 메타 알고리즘 퍼널 시뮬레이터 ── */}
       <AlgorithmHangoverSimulator />
 
       {/* ── 4. 메타 광고 14일 실측 & 소오름 매칭 뷰어 ── */}

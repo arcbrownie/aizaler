@@ -15,13 +15,13 @@ export const COLUMNS: Column[] = [
   {
     id: 'c1',
     slug: 'meta-algorithm-hangover-db-proof',
-    title: '20만 뷰 터지고 결제 4건? 메타 추천 알고리즘의 ‘숙취’를 DB 까서 증명함',
-    excerpt: '조회수가 207,709뷰 터졌을 때 우리는 축배를 들지 못했습니다. DB 결제 테이블 조인 결과는 단 4건. 그 후 5일간 찾아온 오가닉 노출 급감(The Hangover) 현상을 메타 DLRM 추천 모델 수식과 실제 PostgreSQL 쿼리로 역공학했습니다.',
+    title: '20만 뷰 터지고 결제 4건? 메타 추천 알고리즘의 ‘숙취’를 실측 퍼널로 증명함',
+    excerpt: '조회수가 207,709뷰 터졌을 때 우리는 축배를 들지 못했습니다. 실측 결제는 단 4건. 그 후 5일간 찾아온 도달률 급감(The Hangover) 현상을 Meta 공인 미디어 플래닝 전문가의 시각에서 알고리즘 메커니즘과 퍼널 지표로 역공학했습니다.',
     readTime: '6분 읽기',
     date: '2026. 09. 11',
     category: '알고리즘 역공학',
     views: 14280,
-    highlightTag: '실측 DB 로그',
+    highlightTag: '실측 퍼널 로그',
   },
   {
     id: 'c2',

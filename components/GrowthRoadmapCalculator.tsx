@@ -49,7 +49,7 @@ const ROLES: RoleProfile[] = [
     assistantRole: '소비자 심리를 찌르는 고전환 카피라이터 & 데이터 분석관',
     tasksToDelegate: [
       '클릭률 12% 보장 숏폼 릴스/스레드 후킹 스크립트 20종 일괄 생성',
-      '광고 소재 A/B 테스트 성과 데이터 SQL 및 코호트 리텐션 즉시 분석',
+      '메타 광고 소재 A/B 테스트 퍼널 성과 및 전환 코호트 즉시 분석',
       '고객 인터뷰 및 리뷰 1,000건 감성 분석을 통한 킬러 소구점 발굴'
     ],
     weeklyHoursSaved: 9.0,
@@ -78,7 +78,7 @@ const ROLES: RoleProfile[] = [
     badge: '에이전틱 코딩',
     assistantRole: '터미널에서 1초 만에 보일러플레이트와 디버깅을 끝내는 페어 프로그래머',
     tasksToDelegate: [
-      'Claude Code / Cursor로 복잡한 정규식, SQL 쿼리, DTO 타입 자동 생성',
+      'Claude Code / Cursor로 복잡한 정규식, 데이터 파이프라인, DTO 타입 자동 생성',
       '테스트 코드(Vitest/Jest) 작성 및 엣지 케이스 버그 사전 탐색',
       '서버리스 배포 파이프라인(Cloudflare + Neon DB) 10분 만에 셋업'
     ],

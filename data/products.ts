@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   rank: number;
   badge: 'BEST' | 'FREE' | 'HOT' | '선착순' | 'NEW';
-  category: '실전 그로스 바이블' | '무료 리포트 & SQL' | '14일 액션 챌린지' | '1:1 프라이빗 전략';
+  category: '실전 그로스 바이블' | '무료 리포트 & 가이드' | '14일 액션 챌린지' | '1:1 프라이빗 전략';
   title: string;
   tagline: string;
   description: string;
@@ -23,8 +23,8 @@ export const PRODUCTS: Product[] = [
     badge: 'BEST',
     category: '실전 그로스 바이블',
     title: '메타 알고리즘 실전 바이블: 조회수 20만 터져도 결제 0건인 이유와 황금 고객 도달 공식',
-    tagline: 'Meta 공인 미디어 플래닝 전문가가 423만 뷰 결제 DB 전수 분석으로 밝혀낸 소셜 알고리즘 실전서',
-    description: '조회수 20만이 터졌는데 왜 유료 결제는 4건뿐이었을까요? 뜬구름 잡는 마케팅 이론을 찢고, 실제 695편 포스트 전수 데이터와 결제 DB 로그를 대조해 밝혀낸 메타 알고리즘의 추천 원리와 1,000~3,000뷰의 황금 스위트 스팟, 그리고 계정 역주행 시 10분 만에 되살리는 정상화 프로토콜을 집대성했습니다.',
+    tagline: 'Meta 공인 미디어 플래닝 전문가가 423만 뷰 실측 분석으로 밝혀낸 소셜 알고리즘 실전서',
+    description: '조회수 20만이 터졌는데 왜 유료 결제는 4건뿐이었을까요? 뜬구름 잡는 마케팅 이론을 찢고, 실제 695편 포스트 전수 데이터와 결제 로그를 대조해 밝혀낸 메타 알고리즘의 추천 원리와 1,000~3,000뷰의 황금 스위트 스팟, 그리고 계정 역주행 시 10분 만에 되살리는 정상화 프로토콜을 집대성했습니다.',
     originalPrice: 129000,
     discountRate: 62,
     salePrice: 49000,
@@ -36,29 +36,29 @@ export const PRODUCTS: Product[] = [
       '계정 건강 자동 진단 도구(threads-health.ts) 소스코드 제공'
     ],
     target: '조회수만 터지고 실제 매출이 안 나와 답답한 1인 창업가, 퍼포먼스 마케터, 인디해커',
-    highlightProof: 'Meta Certified Media Planning Pro 자격 보유 & 423만 뷰 실측 DB 검증',
+    highlightProof: 'Meta Certified Media Planning Pro 자격 보유 & 423만 뷰 실측 분석 검증',
     accentColor: '#3182f6',
   },
   {
     id: '2',
     rank: 2,
     badge: 'FREE',
-    category: '무료 리포트 & SQL',
-    title: '알고리즘 역주행 자가진단 쿼리북 & 3초 팔로우 체크리스트 (100% 무료)',
+    category: '무료 리포트 & 가이드',
+    title: '알고리즘 역주행 자가진단 체크리스트 & 3초 팔로우 가이드북 (100% 무료)',
     tagline: '내 계정이 왜 엉뚱한 사람에게 노출되는지 10분 만에 진단하고 되살리는 무료 리포트',
-    description: '내 글이 왜 스킵당하는지, 어떤 글이 계정에 독이 되는지 감으로 짐작하지 마세요. 실제 데이터베이스에서 조회수 대비 유료 결제 전환율을 측정하는 실전 쿼리 10선과 프로필 상단 9개 피드 점검 체크리스트를 100% 무료 배포합니다.',
+    description: '내 글이 왜 스킵당하는지, 어떤 글이 계정에 독이 되는지 감으로 짐작하지 마세요. 실제 조회수 대비 유료 결제 전환율을 분석한 실전 퍼널 성과표와 프로필 상단 9개 피드 점검 체크리스트를 100% 무료 배포합니다.',
     originalPrice: 39000,
     discountRate: 100,
     salePrice: 0,
     monthlyPrice: '100% 무료 즉시 다운로드',
     features: [
-      '조회수 대비 결제 전환율(CVR) 실측 분석 SQL 쿼리 10선',
+      '조회수 대비 결제 전환율(CVR) 실측 퍼널 분석 성과표',
       '대중 밈 바이럴로 인한 알고리즘 역주행 자가진단 프로토콜',
       '3초 만에 팔로우를 부르는 First 9 3-Pillar 배치도 템플릿',
       '엉뚱한 밈 노출을 10분 만에 청소하는 관심 없음 5연타 매뉴얼'
     ],
     target: '데이터 기반으로 소셜 채널과 매출 파이프라인을 점검하고 싶은 모든 테크 빌더',
-    highlightProof: '다운로드 즉시 사내 데이터베이스 쿼리 템플릿 그대로 복사해 사용 가능',
+    highlightProof: '다운로드 즉시 내 계정과 캠페인에 그대로 대입해 사용 가능한 체크리스트',
     accentColor: '#10b981',
   },
   {
