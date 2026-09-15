@@ -244,6 +244,48 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── 4.5. 신규 런칭: aizaler 커리어 의사결정 연구소 배너 ── */}
+      <section className="toss-container">
+        <div className="relative overflow-hidden rounded-3xl bg-[#050A18] text-[#FAF6F0] p-8 sm:p-12 border border-white/10 shadow-2xl">
+          {/* Background Ambient Glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#60A5FA]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="space-y-4 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#60A5FA]/10 border border-[#60A5FA]/25 text-[#60A5FA] text-xs font-bold">
+                <span className="w-2 h-2 rounded-full bg-[#60A5FA] animate-pulse" />
+                <span>PILOT OPEN · 선착순 10명 한정</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#FAF6F0] leading-tight tracking-tight">
+                이직할 것인가, 버틸 것인가,<br />
+                아니면 내 일을 시작할 것인가.
+              </h2>
+              <p className="text-sm sm:text-base text-[#FAF6F0]/70 leading-relaxed font-normal">
+                경력 5~20년차, 다음 선택의 기회비용을 계산하는 50분의 심층 전략 세션.<br className="hidden sm:inline" />
+                감정적 위로를 걷어내고, 철저한 손익 계산과 90일 실행 Action Blueprint를 도출합니다.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 text-xs text-[#FAF6F0]/60 pt-1 font-mono">
+                <span className="flex items-center gap-1.5 font-medium">✓ 50분 1:1 심층 화상 세션</span>
+                <span className="flex items-center gap-1.5 font-medium">✓ 90일 실행 Action Summary 제공</span>
+                <span className="flex items-center gap-1.5 font-medium text-[#60A5FA]">✓ 파일럿 혜택가 49,000원</span>
+              </div>
+            </div>
+
+            <div className="shrink-0 flex flex-col items-start lg:items-end gap-3 w-full sm:w-auto">
+              <Link
+                href="/career"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-[#FAF6F0] text-[#050A18] hover:bg-white text-sm sm:text-base font-bold shadow-lg transition-all hover:scale-[1.02]"
+              >
+                <span>커리어 전략 세션 알아보기</span>
+                <ArrowRight size={18} weight="bold" />
+              </Link>
+              <span className="text-[11px] text-[#FAF6F0]/40">
+                * 파일럿 10세션 마감 후 79,000원으로 자동 전환됩니다
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── 5. 실전 솔루션 & 성장 가이드 라인업 ── */}
       <section id="solutions" className="toss-container space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -349,10 +391,14 @@ export default function Home() {
                   </div>
 
                   <Link
-                    href={`/product/${p.id}`}
-                    className="w-full py-3 rounded-xl bg-[#f2f4f6] text-[#191f28] hover:bg-[#3182f6] hover:text-white transition-all text-xs font-bold text-center block tactile-btn"
+                    href={p.id === '4' ? '/career' : `/product/${p.id}`}
+                    className={`w-full py-3 rounded-xl transition-all text-xs font-bold text-center block tactile-btn ${
+                      p.id === '4'
+                        ? 'bg-[#050A18] text-white hover:bg-[#3182f6]'
+                        : 'bg-[#f2f4f6] text-[#191f28] hover:bg-[#3182f6] hover:text-white'
+                    }`}
                   >
-                    상세 안내 & 신청하기
+                    {p.id === '4' ? '전략 세션 상세 및 신청 (선착순)' : '상세 안내 & 신청하기'}
                   </Link>
                 </div>
               </div>

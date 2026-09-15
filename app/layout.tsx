@@ -12,6 +12,7 @@ import {
   Target,
   DownloadSimple
 } from '@phosphor-icons/react';
+import { usePathname } from 'next/navigation';
 import FloatingDock from '@/components/FloatingDock';
 
 export default function RootLayout({
@@ -19,6 +20,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const isCareerPage = pathname?.startsWith('/career');
+
   return (
     <html lang="ko" className="scroll-smooth">
       <head>
@@ -34,15 +38,19 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/variable/complete/WantedSansVariable.min.css" 
         />
       </head>
-      <body className="bg-[#f2f4f6] text-[#191f28] min-h-screen flex flex-col antialiased">
-        {/* 상단 띠배너 (토스 스타일 슬림 인포 바) */}
-        <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
-          <span className="text-[#3182f6] font-bold mr-2">✦ 2026 무료 배포</span>
-          <span>챗GPT 1000% 뽕뽑기! <b>'AI 성장 로드맵 & 프롬프트 치트키 30선'</b> 무료 증정</span>
-          <a href="#lead-magnet" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
-            다운받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
-          </a>
-        </div>
+      <body className={`${isCareerPage ? 'bg-[#050A18] text-[#FAF6F0]' : 'bg-[#f2f4f6] text-[#191f28]'} min-h-screen flex flex-col antialiased`}>
+        {isCareerPage ? (
+          children
+        ) : (
+          <>
+            {/* 상단 띠배너 (토스 스타일 슬림 인포 바) */}
+            <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
+              <span className="text-[#3182f6] font-bold mr-2">✦ 2026 무료 배포</span>
+              <span>챗GPT 1000% 뽕뽑기! <b>'AI 성장 로드맵 & 프롬프트 치트키 30선'</b> 무료 증정</span>
+              <a href="#lead-magnet" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
+                다운받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
+              </a>
+            </div>
 
         {/* 메인 헤더 (모던 미니멀 & 클린 GNB) */}
         <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-black/[0.04]">
@@ -64,6 +72,10 @@ export default function RootLayout({
 
             {/* 네비게이션 */}
             <nav className="hidden md:flex items-center gap-7 text-[14px] font-semibold text-[#4e5968]">
+              <Link href="/career" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-[#3182f6] font-bold">
+                커리어 전략
+                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#e8f3ff] text-[#3182f6] font-mono">NEW</span>
+              </Link>
               <a href="#roadmap" className="hover:text-[#3182f6] transition-colors flex items-center gap-1">
                 <Target size={16} weight="duotone" className="text-[#3182f6]" />
                 성장 로드맵
@@ -169,6 +181,8 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+          </>
+        )}
       </body>
     </html>
   );
