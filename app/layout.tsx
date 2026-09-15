@@ -26,10 +26,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth">
       <head>
-        <title>aizaler.kr | AI 잘 쓰는 사람들 — AI 뽕뽑기 ➔ 초격차 성장 실무 허브</title>
+        <title>aizaler.kr | 1인 빌더의 메타 알고리즘 역공학 & 실전 그로스 엔지니어링</title>
         <meta 
           name="description" 
-          content="월 2만 원 챗GPT를 5명의 가상 부사수로 굴려 주당 8.5시간을 회수하고 내 본업의 가치를 10배로 올리는 실전 AI 레버리지 지식 허브." 
+          content="공기업·해외주재원 퇴사 후 1인 개발 도전. 423만 뷰 695편 전수 DB 로그 분석, 메타 알고리즘(DLRM) 역공학과 메타 광고 실측 전환율 8.6% 소오름 매칭 공식 공개." 
         />
         <link 
           rel="stylesheet" 
@@ -46,7 +46,7 @@ export default function RootLayout({
             {/* 상단 띠배너 (토스 스타일 슬림 인포 바) */}
             <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
               <span className="text-[#3182f6] font-bold mr-2">✦ 2026 무료 배포</span>
-              <span>챗GPT 1000% 뽕뽑기! <b>'AI 성장 로드맵 & 프롬프트 치트키 30선'</b> 무료 증정</span>
+              <span>423만 뷰 실측 DB! <b>'메타 Two-Tower 오염 진단 SQL 쿼리북'</b> 무료 증정</span>
               <a href="#lead-magnet" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
                 다운받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
               </a>
@@ -71,24 +71,26 @@ export default function RootLayout({
             </Link>
 
             {/* 네비게이션 */}
-            <nav className="hidden md:flex items-center gap-7 text-[14px] font-semibold text-[#4e5968]">
+            <nav className="hidden lg:flex items-center gap-6 text-[14px] font-semibold text-[#4e5968]">
+              <a href="#origin-story" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-slate-800">
+                <Sparkle size={15} weight="fill" className="text-amber-500" />
+                창업자 스토리
+              </a>
+              <a href="#algorithm" className="hover:text-[#3182f6] transition-colors">
+                알고리즘 역공학
+              </a>
+              <a href="#meta-ads" className="hover:text-[#3182f6] transition-colors">
+                메타 광고 실측
+              </a>
+              <a href="#first-9" className="hover:text-[#3182f6] transition-colors">
+                First 9 벡터
+              </a>
               <Link href="/career" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-[#3182f6] font-bold">
                 커리어 전략
                 <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#e8f3ff] text-[#3182f6] font-mono">NEW</span>
               </Link>
-              <a href="#roadmap" className="hover:text-[#3182f6] transition-colors flex items-center gap-1">
-                <Target size={16} weight="duotone" className="text-[#3182f6]" />
-                성장 로드맵
-              </a>
-              <a href="#diff-viewer" className="hover:text-[#3182f6] transition-colors">
-                프롬프트 DIFF
-              </a>
               <a href="#solutions" className="hover:text-[#3182f6] transition-colors">
                 실전 솔루션
-              </a>
-              <a href="#lessons" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-amber-600">
-                <Flame size={16} weight="fill" className="text-amber-500" />
-                실패 복기록
               </a>
               <a href="#faq" className="hover:text-[#3182f6] transition-colors">
                 FAQ
@@ -102,7 +104,7 @@ export default function RootLayout({
                 className="toss-button-primary px-4 py-2 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm"
               >
                 <DownloadSimple size={16} weight="bold" />
-                <span>무료 워크북 받기</span>
+                <span>무료 쿼리북 받기</span>
               </a>
             </div>
           </div>
@@ -128,7 +130,7 @@ export default function RootLayout({
                   </span>
                 </div>
                 <p className="text-[#4e5968] leading-relaxed text-xs">
-                  aizaler는 이론만 말하는 강사가 아닙니다. 실제 1인 기업으로 프로덕트를 직접 운영하며 매달 나가는 인프라 비용과 AI 구독료를 철저히 검증해 밝혀낸 실전 AI 레버리지 지식 허브입니다.
+                  aizaler는 이론만 말하는 강사가 아닙니다. 남들이 선망하던 공기업과 해외 주재원 생활을 마치고 1인 개발에 도전해 살아남은 솔로프리너의 실제 생존 기록이자, 423만 뷰 DB 로그와 실측 전환 데이터로 검증된 실전 그로스 엔지니어링 지식 허브입니다.
                 </p>
                 <div className="text-[11px] text-[#8b95a1] space-y-1">
                   <p>운영사: 브라운임팩트랩스 (Brown Impact Labs) | 대표 포트폴리오: 라이브 프로덕트 A, B, C 운영</p>

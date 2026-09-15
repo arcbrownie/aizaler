@@ -27,11 +27,11 @@ import {
 
 import { PRODUCTS } from '@/data/products';
 import { LESSONS } from '@/data/lessons';
-import { COLUMNS } from '@/data/columns';
-import { REVIEWS } from '@/data/reviews';
+import FounderNarrativeTimeline from '@/components/FounderNarrativeTimeline';
+import AlgorithmHangoverSimulator from '@/components/AlgorithmHangoverSimulator';
+import MetaAdsAngleMatrix from '@/components/MetaAdsAngleMatrix';
+import First9VectorDiagnoser from '@/components/First9VectorDiagnoser';
 import PromptDiffViewer from '@/components/PromptDiffViewer';
-import GrowthRoadmapCalculator from '@/components/GrowthRoadmapCalculator';
-import SubscriptionCalculator from '@/components/SubscriptionCalculator';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -39,7 +39,7 @@ export default function Home() {
   const [emailInput, setEmailInput] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
 
-  const categories = ['전체', '실전 전자책 & 템플릿', '무료 성장 워크북', '14일 액션 챌린지', '1:1 프라이빗 처방'];
+  const categories = ['전체', '실전 그로스 바이블', '무료 리포트 & SQL', '1:1 프라이빗 전략'];
 
   const filteredProducts = selectedCategory === '전체'
     ? PRODUCTS
@@ -53,59 +53,59 @@ export default function Home() {
 
   const faqs = [
     {
-      q: '챗GPT를 단순 챗봇이 아니라 "내 부사수"로 쓴다는 게 구체적으로 어떤 뜻인가요?',
-      a: '대부분은 "이거 요약해줘", "영어 번역해줘" 같은 1회성 질문에 그칩니다. 하지만 aizaler 워크플로우는 AI에게 명확한 역할(예: YC 출신 시니어 PM), 제약 조건, 실무 산출물 포맷을 사전에 주입하여, 기획서 초안, 광고 카피 20종, 복잡한 데이터 분석까지 단 15초 만에 상사나 클라이언트에게 보고할 수 있는 실무급 산출물을 뽑아내도록 시스템화하는 것을 뜻합니다.'
+      q: '공기업과 해외 주재원을 퇴사하고 1인 개발을 시작하신 이유가 무엇인가요?',
+      a: '정년과 급여가 보장되는 안락한 테두리였지만, 거대한 조직의 톱니바퀴로 남는 대신 오직 내 이름과 내 손으로 만든 제품으로 시장에서 가치를 증명하고 싶었습니다. 퇴사 후 야생에서 겪은 수많은 실패와 시행착오 끝에, 데이터와 엔지니어링으로 생존하는 1인 비즈니스 파이프라인을 완성했습니다.'
     },
     {
-      q: '비개발자나 마케터, 일반 사무직도 따라 할 수 있나요?',
-      a: '100% 비개발자를 위해 설계되었습니다. 복잡한 코딩 지식 없이 웹 브라우저나 모바일 앱에서 그대로 복사해 붙여넣는 프롬프트 템플릿과 업무 자동화 파이프라인으로 구성되어 있습니다.'
+      q: '20만 뷰가 터졌는데 왜 유료 결제는 4건뿐이었나요?',
+      a: '대중적인 직장인 사이다 썰로 메타 DLRM 추천 엔진의 후보 풀이 비타겟 유저로 오염되었기 때문입니다. 다음 날 올린 진짜 프로덕트 칼럼을 그 20만 명이 0.5초 만에 스킵하면서 계정 품질 점수(Quality Score)가 강등되었고, 5일간 유입이 -92% 폭락했습니다. 이 "알고리즘 숙취"를 겪은 뒤, 1,000~3,000뷰의 고순도 타깃 글이 훨씬 더 높은 결제 전환율(CVR 4.49%)을 만든다는 사실을 증명했습니다.'
     },
     {
-      q: '무료 버전만 써도 충분한가요, 아니면 유료 플랜(Plus/Pro)이 필수인가요?',
-      a: '무료 버전으로도 기본 워크플로우의 70% 이상을 즉시 실행할 수 있습니다. 이미 월 2~3만 원을 결제 중이시라면 그 돈의 1000% 본전을 뽑는 방법을, 결제하지 않으셨다면 무료 티어와 무료 API로 0원에 스마트하게 굴리는 법을 안내합니다.'
+      q: '메타 광고에서 "소오름 매칭"이란 구체적으로 무엇인가요?',
+      a: '광고 소재(Creative)에서 건드린 구체적인 장면(예: 지우지 못한 사진)이 랜딩페이지 첫 문장("지우지 못한 흔적이 미련인지부터 갈라야 합니다")에서 1:1로 정확히 회수되는 설계를 뜻합니다. 14일간의 실측 결과, 소재와 랜딩이 불일치하면 전환율이 0%로 추락하지만, 1:1로 회수되면 결제 전환율이 8.6%까지 폭등했습니다.'
     },
     {
-      q: '14일 챌린지는 직장 생활과 병행이 가능한가요?',
-      a: '네, 하루 20분 액션으로 설계되었습니다. 주말이나 퇴근 후 20분 동안 주어진 1일 1미션을 따라 하다 보면, 14일 뒤 내 실제 업무 루틴 3개가 AI 자동화로 넘어가 있고 나만의 첫 웹서비스 랜딩페이지까지 완성됩니다.'
+      q: '비개발자나 1인 창업가도 월 $42 인프라를 구축할 수 있나요?',
+      a: '네, 외주 개발사에 수천만 원을 주지 않아도 V0, Cursor, Supabase, Cloudflare Pages를 조합하면 누구나 1인 풀스택 시스템을 구축할 수 있습니다. aizaler의 가이드와 템플릿은 1인 테크 스튜디오가 실제 운영 중인 검증된 파이프라인 그대로 제공됩니다.'
     },
   ];
 
   return (
     <div className="space-y-16 sm:space-y-24 pt-6 sm:pt-10">
-      {/* ── 1. 히어로 섹션 (Asymmetric Split: 뽕뽑기 ➔ 초격차 성장) ── */}
+      {/* ── 1. 히어로 섹션 (공기업·주재원 ➔ 1인 개발 솔로프리너 오리진) ── */}
       <section className="toss-container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
-          {/* 좌측: 강력한 성장 제안 (7열) */}
+          {/* 좌측: 강력한 서사 & 실측 제안 (7열) */}
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
               <RocketLaunch size={14} weight="duotone" />
-              <span>AI LEVERAGE: 뽕뽑기 ➔ 초격차 성장</span>
+              <span>FOUNDER STORY & GROWTH ENGINEERING</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-black text-[#191f28] leading-[1.2] tracking-tight">
-              월 2만 원 내고 번역·요약만 시키던 시절은 끝났습니다.<br />
-              AI를 내 1등 부사수로 굴려,<br />
-              <span className="text-[#3182f6] underline decoration-[#3182f6]/30">본업 초격차 성장</span>을 만드는 법.
+            <h1 className="text-3xl sm:text-5xl lg:text-[50px] font-black text-[#191f28] leading-[1.2] tracking-tight">
+              남들이 선망하던 공기업과 해외 주재원을 박차고 나와,<br />
+              <span className="text-[#3182f6] underline decoration-[#3182f6]/30">1인 개발 솔로프리너</span>로<br />
+              생존하기까지의 날것의 실측 기록.
             </h1>
 
             <p className="text-base sm:text-lg text-[#4e5968] leading-relaxed max-w-xl font-normal">
-              단순 질문 챗봇으로 쓰면 월 2만 원도 아깝지만, <b>5명의 가상 팀원</b>으로 세팅하는 순간 주당 8.5시간이 회수되고 내 커리어 밸류가 10배로 뜁니다. 뜬구름 잡는 이론이 아닌, 1인 테크 스튜디오의 실측 워크플로우를 공개합니다.
+              퇴사 후 마주한 20만 뷰 4건 결제의 참사, 48회 셧다운의 절망을 넘어 — 실제 <b>423만 뷰 DB 결제 로그</b>와 메타 API를 뜯어내어 규명한 소셜 알고리즘 역공학, <b>결제 CVR 8.6% 소오름 매칭</b>, 그리고 <b>월 $42 1인 인프라 아키텍처</b>를 공개합니다.
             </p>
 
             {/* CTA 버튼 세트 */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <a
-                href="#roadmap"
+                href="#founder-story"
                 className="toss-button-primary px-7 py-4 text-sm sm:text-base font-bold text-center flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
               >
                 <Target size={20} weight="bold" />
-                <span>내 직무 성장 로드맵 진단하기</span>
+                <span>창업자 생존 서사 타임라인 읽기</span>
               </a>
               <a
-                href="#diff-viewer"
+                href="#hangover-simulator"
                 className="px-6 py-4 rounded-2xl bg-white border border-black/[0.08] text-[#191f28] text-sm sm:text-base font-bold text-center hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shadow-xs"
               >
-                <span>프롬프트 DIFF 비교기 보기</span>
+                <span>20만 뷰 알고리즘 실측 보기</span>
                 <ArrowRight size={16} weight="bold" />
               </a>
             </div>
@@ -114,71 +114,72 @@ export default function Home() {
             <div className="pt-4 grid grid-cols-3 gap-2 sm:gap-4 max-w-lg border-t border-black/[0.05]">
               <div className="space-y-0.5">
                 <div className="text-lg sm:text-2xl font-black text-[#3182f6] font-mono tabular-nums">
-                  주 8.5시간
+                  4,230,000+
                 </div>
-                <div className="text-[11px] text-[#8b95a1] font-medium">실무 시간 회수</div>
+                <div className="text-[11px] text-[#8b95a1] font-medium">소셜 뷰 전수 DB 로그</div>
               </div>
               <div className="space-y-0.5">
                 <div className="text-lg sm:text-2xl font-black text-[#191f28] font-mono tabular-nums">
-                  18배
+                  8.6%
                 </div>
-                <div className="text-[11px] text-[#8b95a1] font-medium">기획·카피 작성 가속</div>
+                <div className="text-[11px] text-[#8b95a1] font-medium">메타 광고 최고 결제율</div>
               </div>
               <div className="space-y-0.5">
                 <div className="text-lg sm:text-2xl font-black text-emerald-600 font-mono tabular-nums">
-                  월 100만+
+                  월 $42
                 </div>
-                <div className="text-[11px] text-[#8b95a1] font-medium">회수 시간 가치 환산</div>
+                <div className="text-[11px] text-[#8b95a1] font-medium">4개 프로덕트 인프라</div>
               </div>
             </div>
           </div>
 
-          {/* 우측: 뽕뽑기 ➔ 성장 매트릭스 카드 (5열) */}
+          {/* 우측: 흔한 강사 vs 현재 진행형 1인 창업가 비교 카드 (5열) */}
           <div className="lg:col-span-5">
             <div className="bezel-card-outer">
               <div className="bezel-card-inner space-y-4">
                 <div className="flex items-center justify-between border-b border-black/[0.04] pb-3">
                   <span className="text-xs font-bold text-[#8b95a1] uppercase tracking-wider">
-                    AI 활용의 차원이 다른 2가지 세상
+                    빌더의 차원이 다른 2가지 세상
                   </span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#3182f6]">
-                    성장 매트릭스
+                    BUILDING IN PUBLIC
                   </span>
                 </div>
 
-                {/* 1단계: 하수 세상 */}
+                {/* 1단계: 뜬구름 잡는 강사 */}
                 <div className="p-4 rounded-2xl bg-[#f9fafb] border border-black/[0.04] space-y-1.5">
                   <div className="text-xs font-bold text-[#8b95a1] flex items-center justify-between">
-                    <span>99%의 활용 (제자리걸음)</span>
-                    <span className="text-red-500 font-bold">1% 기능만 사용</span>
+                    <span>인터넷 마케팅 강사</span>
+                    <span className="text-red-500 font-bold">뜬구름 잡는 이론</span>
                   </div>
                   <div className="text-xs text-[#4e5968] leading-relaxed">
-                    이메일 몇 줄 번역, 뉴스 요약, 단답형 질문에 그침 ➔ <b>월 2만 원 구독료 날림 & 업무 피로도 그대로</b>
+                    해외 아티클 짜깁기, "퇴사 후 AI로 월 천만 원" 허상 강의 ➔ <b>실제 내 돈 태워본 적 없는 훈계</b>
                   </div>
                 </div>
 
-                {/* 2단계: aizaler 세상 */}
+                {/* 2단계: aizaler 현재 진행형 빌더 */}
                 <div className="p-4 rounded-2xl bg-[#e8f3ff]/70 border border-[#3182f6]/30 space-y-2 shadow-xs">
                   <div className="text-xs font-bold text-[#3182f6] flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
-                      <Sparkle size={15} weight="duotone" /> aizaler 상위 1% 활용 (초격차 성장)
+                      <Sparkle size={15} weight="duotone" /> aizaler (현재 진행형 1인 창업가)
                     </span>
                     <span className="bg-[#3182f6] text-white px-2 py-0.5 rounded-full text-[10px]">
-                      10배 레버리지
+                      현역 빌더
                     </span>
                   </div>
                   <div className="text-xs text-[#191f28] space-y-1">
-                    <div className="font-bold">✓ 24시간 가상 부사수로 3대 귀찮은 업무 완전 위임</div>
-                    <div className="text-emerald-700 font-semibold">✓ 주 8.5시간 확보 ➔ 연봉 협상 / 1인 사이드 런칭</div>
+                    <div className="font-bold">✓ 공기업·주재원 퇴사 후 실제 겪은 실패·생존 복기록</div>
+                    <div className="text-emerald-700 font-semibold">✓ PostgreSQL 결제 테이블 & 메타 Graph API 실측</div>
+                    <div className="text-[#3182f6] font-semibold">✓ 오늘도 코드를 치고 광고비를 방어하는 오픈 랩</div>
                   </div>
                 </div>
 
                 <div className="pt-2 text-center">
                   <a
-                    href="#roadmap"
+                    href="#founder-story"
                     className="inline-flex items-center gap-1 text-xs font-bold text-[#3182f6] hover:underline"
                   >
-                    내 직무별 로드맵 바로 확인하기 <ArrowRight size={14} weight="bold" />
+                    창업자의 4단계 서사 타임라인 바로보기 <ArrowRight size={14} weight="bold" />
                   </a>
                 </div>
               </div>
@@ -187,26 +188,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 2. 킬러 기능 1: AI 뽕뽑기 ➔ 초격차 성장 로드맵 진단기 ── */}
-      <section id="roadmap" className="toss-container space-y-4">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <div className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
-            GROWTH ROADMAP
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-[#191f28] tracking-tight">
-            내 직무 전용 AI 뽕뽑기 ➔ 성장 로드맵
-          </h2>
-          <p className="text-[#4e5968] text-sm leading-relaxed">
-            남들의 뻔한 팁이 아닌, 내 직무에 바로 꽂히는 3단계 레버리지 처방전을 확인해 보세요.
-          </p>
-        </div>
+      {/* ── 2. 창업자 오리진 서사: 공기업·주재원에서 1인 개발 솔로프리너까지 ── */}
+      <div id="founder-story">
+        <FounderNarrativeTimeline />
+      </div>
 
-        <div className="max-w-4xl mx-auto">
-          <GrowthRoadmapCalculator />
-        </div>
-      </section>
+      {/* ── 3. 20만 뷰 바이럴 숙취 & 메타 DLRM 알고리즘 시뮬레이터 ── */}
+      <AlgorithmHangoverSimulator />
 
-      {/* ── 3. 킬러 기능 2: 프롬프트 Before vs After 라이브 비교기 ── */}
+      {/* ── 4. 메타 광고 14일 실측 & 소오름 매칭 뷰어 ── */}
+      <MetaAdsAngleMatrix />
+
+      {/* ── 5. First 9 텍스트 임베딩 순도 & 3초 프로필 진단기 ── */}
+      <First9VectorDiagnoser />
+
+      {/* ── 6. 프롬프트 Before vs After 라이브 비교기 ── */}
       <section id="diff-viewer" className="toss-container space-y-4">
         <div className="text-center space-y-2 max-w-xl mx-auto">
           <div className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
@@ -216,31 +212,12 @@ export default function Home() {
             질문 하나 바꿨을 뿐인데, 결과는 100만 원짜리
           </h2>
           <p className="text-[#4e5968] text-sm leading-relaxed">
-            프롬프트를 바꿨을 때 실제 산출물 퀄리티가 어떻게 급변하는지 직접 눈으로 비교해 보세요.
+            1인 테크 스튜디오 실무에서 실제 사용하는 Before vs After 프롬프트를 직접 비교해 보세요.
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
           <PromptDiffViewer />
-        </div>
-      </section>
-
-      {/* ── 4. 킬러 기능 3: AI 구독료 다이어트 계산기 ── */}
-      <section id="calculator" className="toss-container space-y-4">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <div className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
-            COST OPTIMIZATION
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-[#191f28] tracking-tight">
-            불필요한 중복 구독 다이어트 계산기
-          </h2>
-          <p className="text-[#4e5968] text-sm leading-relaxed">
-            중복 결제되던 툴을 정리하고, 딱 1개 메인 툴로 10배의 퍼포먼스를 내는 법.
-          </p>
-        </div>
-
-        <div className="max-w-3xl mx-auto">
-          <SubscriptionCalculator />
         </div>
       </section>
 
@@ -253,15 +230,15 @@ export default function Home() {
             <div className="space-y-4 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#60A5FA]/10 border border-[#60A5FA]/25 text-[#60A5FA] text-xs font-bold">
                 <span className="w-2 h-2 rounded-full bg-[#60A5FA] animate-pulse" />
-                <span>PILOT OPEN · 선착순 10명 한정</span>
+                <span>PILOT OPEN · 공기업·주재원 퇴사 파운더 직강</span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-[#FAF6F0] leading-tight tracking-tight">
                 이직할 것인가, 버틸 것인가,<br />
                 아니면 내 일을 시작할 것인가.
               </h2>
               <p className="text-sm sm:text-base text-[#FAF6F0]/70 leading-relaxed font-normal">
-                경력 5~20년차, 다음 선택의 기회비용을 계산하는 50분의 심층 전략 세션.<br className="hidden sm:inline" />
-                감정적 위로를 걷어내고, 철저한 손익 계산과 90일 실행 Action Blueprint를 도출합니다.
+                공기업·해외주재원의 황금 족쇄를 끊고 야생에 뛰어든 창업자의 실전 기회비용 계산 세션.<br className="hidden sm:inline" />
+                감정적 위로를 걷어내고, 철저한 손익 계산과 90일 생존 Action Blueprint를 도출합니다.
               </p>
               <div className="flex flex-wrap items-center gap-4 text-xs text-[#FAF6F0]/60 pt-1 font-mono">
                 <span className="flex items-center gap-1.5 font-medium">✓ 50분 1:1 심층 화상 세션</span>
@@ -294,10 +271,10 @@ export default function Home() {
               PRACTICAL OFFERS
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-[#191f28] tracking-tight">
-              AI 뽕뽑기 ➔ 성장 실전 솔루션
+              실전 그로스 & 엔지니어링 솔루션
             </h2>
             <p className="text-[#4e5968] text-sm">
-              당장 오늘부터 내 실무 시간을 절반으로 줄이고 성과를 폭발시킬 검증된 가이드와 챌린지입니다.
+              423만 뷰 DB 로그와 메타 광고 실측 데이터에서 검증된 실전 바이블과 시스템 가이드입니다.
             </p>
           </div>
 
@@ -464,24 +441,24 @@ export default function Home() {
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-black text-white leading-tight">
-              'AI 뽕뽑기 ➔ 초격차 성장 로드맵 워크북'을 무료로 받으세요
+              '메타 Two-Tower 오염 진단 SQL 쿼리북'을 무료로 받으세요
             </h2>
 
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-              지금 이메일을 입력하시면, 직무별 10배 뽕뽑는 시스템 프롬프트 30선과 주간 업무 자동화 체크리스트(PDF)를 1분 이내로 보내드립니다.
+              지금 이메일을 입력하시면, 423만 뷰 로그를 분석한 'DLRM 알고리즘 숙취 진단 쿼리 10선'과 'First 9 벡터 정화 프로토콜 PDF'를 즉시 보내드립니다.
             </p>
 
             {isDownloaded ? (
               <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-sm font-bold flex items-center gap-2">
                 <CheckCircle size={20} weight="fill" />
-                입력하신 이메일로 워크북 발송이 완료되었습니다! (스팸함도 확인해 주세요)
+                입력하신 이메일로 SQL 쿼리북과 프로토콜 발송이 완료되었습니다! (스팸함도 확인해 주세요)
               </div>
             ) : (
               <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2 max-w-md">
                 <input
                   type="email"
                   required
-                  placeholder="워크북을 받을 이메일 주소"
+                  placeholder="쿼리북을 받을 이메일 주소"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   className="px-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 text-sm outline-none focus:border-[#3182f6] flex-1"
