@@ -9,7 +9,7 @@ import {
   Sparkle, 
   Flame, 
   Calculator,
-  Article,
+  Target,
   DownloadSimple
 } from '@phosphor-icons/react';
 import FloatingDock from '@/components/FloatingDock';
@@ -22,10 +22,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth">
       <head>
-        <title>aizaler.kr | AI 잘 쓰는 사람들 — AI 구독료 다이어트 & 뽕뽑기 실전 허브</title>
+        <title>aizaler.kr | AI 잘 쓰는 사람들 — AI 뽕뽑기 ➔ 초격차 성장 실무 허브</title>
         <meta 
           name="description" 
-          content="월 2만 원 챗GPT 구독료로 내 본업 10배 레버리지 내기. 불필요한 AI 중복 구독을 없애고 실무 업무시간을 50% 단축시키는 실전 AI 지식 허브." 
+          content="월 2만 원 챗GPT를 5명의 가상 부사수로 굴려 주당 8.5시간을 회수하고 내 본업의 가치를 10배로 올리는 실전 AI 레버리지 지식 허브." 
         />
         <link 
           rel="stylesheet" 
@@ -38,7 +38,7 @@ export default function RootLayout({
         {/* 상단 띠배너 (토스 스타일 슬림 인포 바) */}
         <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
           <span className="text-[#3182f6] font-bold mr-2">✦ 2026 무료 배포</span>
-          <span>챗GPT·Claude 중복 결제 방지! <b>'AI 구독료 다이어트 체크시트'</b> 무료 증정</span>
+          <span>챗GPT 1000% 뽕뽑기! <b>'AI 성장 로드맵 & 프롬프트 치트키 30선'</b> 무료 증정</span>
           <a href="#lead-magnet" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
             다운받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
           </a>
@@ -64,22 +64,22 @@ export default function RootLayout({
 
             {/* 네비게이션 */}
             <nav className="hidden md:flex items-center gap-7 text-[14px] font-semibold text-[#4e5968]">
-              <a href="#calculator" className="hover:text-[#3182f6] transition-colors flex items-center gap-1">
-                <Calculator size={16} weight="duotone" className="text-[#3182f6]" />
-                구독료 계산기
+              <a href="#roadmap" className="hover:text-[#3182f6] transition-colors flex items-center gap-1">
+                <Target size={16} weight="duotone" className="text-[#3182f6]" />
+                성장 로드맵
+              </a>
+              <a href="#diff-viewer" className="hover:text-[#3182f6] transition-colors">
+                프롬프트 DIFF
               </a>
               <a href="#solutions" className="hover:text-[#3182f6] transition-colors">
-                구독료 뽕뽑기
+                실전 솔루션
               </a>
               <a href="#lessons" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-amber-600">
                 <Flame size={16} weight="fill" className="text-amber-500" />
                 실패 복기록
               </a>
-              <a href="#columns" className="hover:text-[#3182f6] transition-colors">
-                실무 칼럼
-              </a>
               <a href="#faq" className="hover:text-[#3182f6] transition-colors">
-                자주 묻는 질문
+                FAQ
               </a>
             </nav>
 
@@ -90,7 +90,7 @@ export default function RootLayout({
                 className="toss-button-primary px-4 py-2 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm"
               >
                 <DownloadSimple size={16} weight="bold" />
-                <span>무료 가이드북 받기</span>
+                <span>무료 워크북 받기</span>
               </a>
             </div>
           </div>
@@ -116,11 +116,11 @@ export default function RootLayout({
                   </span>
                 </div>
                 <p className="text-[#4e5968] leading-relaxed text-xs">
-                  aizaler는 뜬구름 잡는 강의가 아닙니다. 실제 1인 기업으로 프로덕트를 직접 운영하며 매달 나가는 인프라 비용과 AI 구독료를 철저히 검증해 밝혀낸 실전 AI 레버리지 지식 허브입니다.
+                  aizaler는 이론만 말하는 강사가 아닙니다. 실제 1인 기업으로 프로덕트를 직접 운영하며 매달 나가는 인프라 비용과 AI 구독료를 철저히 검증해 밝혀낸 실전 AI 레버리지 지식 허브입니다.
                 </p>
                 <div className="text-[11px] text-[#8b95a1] space-y-1">
                   <p>운영사: 브라운임팩트랩스 (Brown Impact Labs) | 대표 포트폴리오: 라이브 프로덕트 A, B, C 운영</p>
-                  <p>본 사이트의 모든 수치는 실제 데이터베이스 로그와 실측 비용을 기반으로 제작되었습니다.</p>
+                  <p>본 사이트의 모든 수치는 실제 데이터베이스 로그와 실측 데이터를 기반으로 제작되었습니다.</p>
                 </div>
               </div>
 
