@@ -164,15 +164,6 @@ export default function RootLayout({
                     <span>Instagram</span>
                     <ArrowUpRight size={12} />
                   </a>
-                  <a
-                    href="https://brownimpactlabs.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f2f4f6] text-[#4e5968] hover:text-[#191f28] transition-colors text-xs font-semibold"
-                  >
-                    <span>Brown Impact Labs HQ</span>
-                    <ArrowUpRight size={12} />
-                  </a>
                 </div>
               </div>
             </div>
