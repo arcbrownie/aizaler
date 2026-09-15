@@ -54,6 +54,10 @@ export default function Home() {
 
   const faqs = [
     {
+      q: '시중의 마케팅 강의나 AI 강의와는 구체적으로 무엇이 다른가요?',
+      a: '다른 강의는 "조회수를 터뜨려라", "프롬프트를 복사해라" 같은 표면적인 팁만 이야기합니다. 하지만 aizaler는 대중 밈으로 조회수 20만이 터졌을 때 왜 계정 품질 점수가 강등되어 유입이 -92% 폭락하는지(알고리즘 숙취), 왜 광고 소재와 랜딩페이지 첫 문장이 1:1로 일치해야만 결제율 8.6%가 나오는지 등 "다른 곳에서는 절대 알려주지 않는 423만 뷰 실측 데이터와 실전 금기"를 낱낱이 공개합니다.'
+    },
+    {
       q: '공기업과 해외 주재원을 퇴사하고 1인 개발을 시작하신 이유가 무엇인가요?',
       a: '정년과 급여가 보장되는 안락한 테두리였지만, 거대한 조직의 톱니바퀴로 남는 대신 오직 내 이름과 내 손으로 만든 제품으로 시장에서 가치를 증명하고 싶었습니다. 퇴사 후 야생에서 겪은 수많은 실패와 시행착오 끝에, 데이터와 엔지니어링으로 생존하는 1인 비즈니스 파이프라인을 완성했습니다.'
     },
@@ -78,19 +82,19 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           {/* 좌측: 강력한 서사 & 실측 제안 (7열) */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
               <RocketLaunch size={14} weight="duotone" />
-              <span>META CERTIFIED MEDIA PLANNING PROFESSIONAL · 1인 빌더 오픈 랩</span>
+              <span>다른 곳에서는 절대 알려주지 않는 실측 데이터 · META CERTIFIED MEDIA PLANNING PRO</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-[48px] font-black text-[#191f28] leading-[1.2] tracking-tight">
-              공기업·해외 주재원을 나와 1인 개발로 생존한,<br />
-              <span className="text-[#3182f6] underline decoration-[#3182f6]/30">Meta 공인 전문가</span>의 실전 성장 기록.
+              시중 강의에서는 절대 알려주지 않는,<br />
+              <span className="text-[#3182f6] underline decoration-[#3182f6]/30">진짜 돈이 되는</span> 메타 알고리즘과 1인 창업의 진실.
             </h1>
 
             <p className="text-base sm:text-lg text-[#4e5968] leading-relaxed max-w-xl font-normal">
-              이론만 가르치는 강의 대신, <b>Meta Certified Media Planning Professional(메타 공인 미디어 플래닝 전문가)</b> 자격을 보유한 1인 창업가가 직접 내 돈을 태우며 검증한 실전 데이터입니다.<br />
-              조회수 20만이 터져도 결제가 0건인 이유를 밝혀내고, 내 상품을 살 '진짜 고객'에게만 광고를 도달시켜 <b>결제율 8.6%</b>를 만든 공식과 <b>월 $42 1인 인프라</b>를 공개합니다.
+              유튜브나 마케팅 강의는 "조회수만 터뜨리면 돈 번다"고 말하지만, 왜 조회수 20만이 터져도 결제는 4건뿐이고 5일간 계정 노출이 -92% 폭락하는지는 <b>절대 알려주지 않습니다.</b><br />
+              이론만 파는 강사 대신, <b>직접 내 돈 태워 423만 뷰를 까보고 검증한 Meta 공인 미디어 플래닝 전문가</b>가 감춰진 알고리즘 메커니즘과 <b>결제율 8.6% 실전 솔루션</b>을 가감 없이 공개합니다.
             </p>
 
             {/* CTA 버튼 세트 */}
@@ -103,11 +107,11 @@ export default function Home() {
                 <span>내가 받을 수 있는 솔루션 보기</span>
               </a>
               <a
-                href="#lead-magnet"
+                href="#untold-truth"
                 className="px-6 py-4 rounded-2xl bg-white border border-black/[0.08] text-[#191f28] text-sm sm:text-base font-bold text-center hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shadow-xs"
               >
-                <DownloadSimple size={18} weight="bold" className="text-[#3182f6]" />
-                <span>100% 무료 가이드북 받기 (PDF)</span>
+                <span>다른 데선 안 알려주는 4가지 진실 보기</span>
+                <ArrowRight size={16} weight="bold" />
               </a>
             </div>
 
@@ -196,7 +200,152 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 2. 내가 받을 수 있는 것 (WHAT YOU GET) ── */}
+      {/* ── 2. 다른 곳에서는 절대 알려주지 않는 4가지 실전 금기와 진실 ── */}
+      <section id="untold-truth" className="toss-container space-y-8">
+        <div className="text-center space-y-2 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffebee] text-[#f04452] text-xs font-bold">
+            <Flame size={15} weight="fill" />
+            THE UNTOLD TRUTH · 대행사도 강사도 숨기는 진실
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-black text-[#191f28] tracking-tight">
+            시중 강의 100개를 들어도<br className="sm:hidden" />
+            <span className="text-[#3182f6]"> 다른 곳에서는 절대 알려주지 않는 것들</span>
+          </h2>
+          <p className="text-sm sm:text-base text-[#4e5968] leading-relaxed">
+            "조회수만 터뜨려라", "광고비 태워라" 같은 무책임한 훈계는 이제 그만 들으세요.<br className="hidden sm:inline" />
+            직접 사비로 메타 광고를 태우고 423만 뷰 결제 퍼널을 까보고서야 밝혀낸 날것 그대로의 실측 진실입니다.
+          </p>
+        </div>
+
+        {/* 4대 금기 카드 그리드 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* 금기 1: 20만 뷰 바이럴의 거짓말 */}
+          <div className="rounded-3xl bg-white border border-black/[0.08] p-6 sm:p-8 shadow-xs hover:border-[#f04452]/40 hover:shadow-md transition-all duration-200 space-y-5">
+            <div className="flex items-center justify-between">
+              <span className="px-2.5 py-1 rounded-full bg-rose-50 text-[#f04452] text-xs font-black">
+                실전 금기 01 · 알고리즘의 진실
+              </span>
+              <span className="text-xs font-mono font-bold text-rose-600">CVR 0.0019%의 참사</span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-black text-[#191f28] leading-snug">
+              "조회수 20만 터지면 대박 난다"는 거짓말
+            </h3>
+            <div className="space-y-3 text-xs sm:text-sm">
+              <div className="p-3.5 rounded-2xl bg-[#fff1f2] border border-[#fecdd3] text-[#9f1239] space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-xs">
+                  <span>❌ 시중 강의가 하는 말:</span>
+                </div>
+                <p className="leading-relaxed">
+                  "일단 대중적인 밈이나 직장인 사이다 썰로 10만, 20만 뷰 무조건 터뜨리세요. 노출만 되면 돈은 저절로 벌립니다!"
+                </p>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-[#e8f3ff] border border-[#bfdbfe] text-[#1e40af] space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-xs text-[#3182f6]">
+                  <span>⭕ 다른 데서 절대 안 알려주는 실측 진실:</span>
+                </div>
+                <p className="leading-relaxed">
+                  구매 의도 0%인 구경꾼 20만 명이 유입되면, 다음 날 올린 진짜 제품 글을 0.5초 만에 넘겨버립니다. 메타 추천 엔진은 계정 품질 점수(Quality Score)를 강등시키고 <b>5일간 유입이 -92% 폭락하는 잔혹한 '알고리즘 숙취'</b>를 남깁니다. 진짜 결제가 터지는 구간은 1,000~3,000뷰의 고순도 타깃 글(결제율 4.49%)입니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 금기 2: 메타 광고 클릭률(CTR)의 함정 */}
+          <div className="rounded-3xl bg-white border border-black/[0.08] p-6 sm:p-8 shadow-xs hover:border-[#3182f6]/40 hover:shadow-md transition-all duration-200 space-y-5">
+            <div className="flex items-center justify-between">
+              <span className="px-2.5 py-1 rounded-full bg-blue-50 text-[#3182f6] text-xs font-black">
+                실전 금기 02 · 메타 광고의 진실
+              </span>
+              <span className="text-xs font-mono font-bold text-[#3182f6]">실측 결제율 8.6%</span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-black text-[#191f28] leading-snug">
+              대행사도 쉬쉬하는 '클릭률(CTR)의 배신'
+            </h3>
+            <div className="space-y-3 text-xs sm:text-sm">
+              <div className="p-3.5 rounded-2xl bg-[#fff1f2] border border-[#fecdd3] text-[#9f1239] space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-xs">
+                  <span>❌ 마케팅 대행사가 하는 말:</span>
+                </div>
+                <p className="leading-relaxed">
+                  "광고 클릭률(CTR)이 4% 넘었으니 소재 대박 났습니다! 예산 증액해서 더 밀어붙이시죠!"
+                </p>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-[#e8f3ff] border border-[#bfdbfe] text-[#1e40af] space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-xs text-[#3182f6]">
+                  <span>⭕ 다른 데서 절대 안 알려주는 실측 진실:</span>
+                </div>
+                <p className="leading-relaxed">
+                  광고 소재(Creative)의 첫 장면이 랜딩페이지 첫 문장에서 1:1로 정확히 회수되지 않으면, 유저는 호기심만 채우고 1초 만에 이탈합니다. 광고와 랜딩페이지가 토씨 하나 틀리지 않고 맞아떨어지는 <b>'소오름 매칭'을 완성해야만 결제 전환율 8.6%</b>가 나옵니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 금기 3: 외주 개발비 2,000만 원의 허상 */}
+          <div className="rounded-3xl bg-white border border-black/[0.08] p-6 sm:p-8 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all duration-200 space-y-5">
+            <div className="flex items-center justify-between">
+              <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-black">
+                실전 금기 03 · 1인 테크의 진실
+              </span>
+              <span className="text-xs font-mono font-bold text-emerald-600">외주비 0원 / 월 $42</span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-black text-[#191f28] leading-snug">
+              "앱 만들려면 개발자 외주 맡겨라"는 착각
+            </h3>
+            <div className="space-y-3 text-xs sm:text-sm">
+              <div className="p-3.5 rounded-2xl bg-[#fff1f2] border border-[#fecdd3] text-[#9f1239] space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-xs">
+                  <span>❌ 외주 개발사 & 학원이 하는 말:</span>
+                </div>
+                <p className="leading-relaxed">
+                  "제대로 된 결제 웹서비스 만들려면 외주비 최소 2,000만 원 들거나, 코딩 기초부터 1년 배워야 합니다."
+                </p>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-[#e8f3ff] border border-[#bfdbfe] text-[#1e40af] space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-xs text-[#3182f6]">
+                  <span>⭕ 다른 데서 절대 안 알려주는 실측 진실:</span>
+                </div>
+                <p className="leading-relaxed">
+                  비개발자도 AI 코딩 도구(Cursor/Claude Code)와 Cloudflare Pages, 서버리스 DB를 결합하면 <b>3일 만에 상용 결제 웹서비스를 직접 런칭</b>할 수 있습니다. 수백만 원 서버비 없이 <b>월 $42(약 5만 원)로 수십만 트래픽</b>을 감당하는 1인 풀스택 아키텍처가 실존합니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 금기 4: 1일 1포스팅의 함정 */}
+          <div className="rounded-3xl bg-white border border-black/[0.08] p-6 sm:p-8 shadow-xs hover:border-amber-500/40 hover:shadow-md transition-all duration-200 space-y-5">
+            <div className="flex items-center justify-between">
+              <span className="px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-black">
+                실전 금기 04 · 계정 성장의 진실
+              </span>
+              <span className="text-xs font-mono font-bold text-amber-600">3초 팔로우 공식</span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-black text-[#191f28] leading-snug">
+              '매일 1일 1포스팅'이 오히려 계정을 죽이는 이유
+            </h3>
+            <div className="space-y-3 text-xs sm:text-sm">
+              <div className="p-3.5 rounded-2xl bg-[#fff1f2] border border-[#fecdd3] text-[#9f1239] space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-xs">
+                  <span>❌ SNS 인플루언서들이 하는 말:</span>
+                </div>
+                <p className="leading-relaxed">
+                  "포기하지 말고 매일 1일 1포스팅 올리세요! 꾸준함이 답이고 언젠가 알고리즘의 간택을 받습니다!"
+                </p>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-[#e8f3ff] border border-[#bfdbfe] text-[#1e40af] space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-xs text-[#3182f6]">
+                  <span>⭕ 다른 데서 절대 안 알려주는 실측 진실:</span>
+                </div>
+                <p className="leading-relaxed">
+                  프로필을 누른 방문자가 3초 만에 머무는 <b>상단 First 9개의 3대 기둥(전문성 증명 30% + 타깃 결핍 50% + 행동 유도 20%)</b> 공식이 없으면, 포스팅을 300개 올려도 방문자는 3초 만에 이탈합니다. 무의미한 양치기 포스팅은 계정 품질 점수만 깎아먹습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. 내가 받을 수 있는 것 (WHAT YOU GET) ── */}
       <section id="what-you-get" className="toss-container space-y-8">
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">

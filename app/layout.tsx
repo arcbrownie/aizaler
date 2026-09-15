@@ -44,10 +44,10 @@ export default function RootLayout({
           <>
             {/* 상단 띠배너 (토스 스타일 슬림 인포 바) */}
             <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
-              <span className="text-[#3182f6] font-bold mr-2">✦ Meta 공인 전문가 인증</span>
-              <span>423만 뷰 실측 DB! <b>'알고리즘 역주행 방지 & 고전환 메타 광고 가이드북'</b> 무료 증정</span>
+              <span className="text-[#3182f6] font-bold mr-2">✦ 시중 강의에서는 절대 알려주지 않는 실측 데이터</span>
+              <span>423만 뷰 전수 분석 기반 <b>'알고리즘 역주행 방지 & 고전환 메타 광고 가이드북'</b> 100% 무료 배포</span>
               <a href="#lead-magnet" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
-                다운받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
+                무료 다운받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
               </a>
             </div>
 
@@ -71,6 +71,10 @@ export default function RootLayout({
 
             {/* 네비게이션 */}
             <nav className="hidden lg:flex items-center gap-6 text-[14px] font-semibold text-[#4e5968]">
+              <a href="#untold-truth" className="hover:text-[#3182f6] transition-colors text-rose-600 font-bold flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
+                숨겨진 실측 진실
+              </a>
               <a href="#what-you-get" className="hover:text-[#3182f6] transition-colors text-slate-800 font-bold">
                 받을 수 있는 것
               </a>
