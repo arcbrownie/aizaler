@@ -33,6 +33,7 @@ import AlgorithmHangoverSimulator from '@/components/AlgorithmHangoverSimulator'
 import MetaAdsAngleMatrix from '@/components/MetaAdsAngleMatrix';
 import First9VectorDiagnoser from '@/components/First9VectorDiagnoser';
 import PromptDiffViewer from '@/components/PromptDiffViewer';
+import AIPrescriptionTrainer from '@/components/AIPrescriptionTrainer';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -54,8 +55,8 @@ export default function Home() {
 
   const faqs = [
     {
-      q: '시중의 마케팅 강의나 AI 강의와는 구체적으로 무엇이 다른가요?',
-      a: '다른 강의는 "조회수를 터뜨려라", "프롬프트를 복사해라" 같은 표면적인 팁만 이야기합니다. 하지만 aizaler는 대중 밈으로 조회수 20만이 터졌을 때 왜 계정 품질 점수가 강등되어 유입이 -92% 폭락하는지(알고리즘 숙취), 왜 광고 소재와 랜딩페이지 첫 문장이 1:1로 일치해야만 결제율 8.6%가 나오는지 등 "다른 곳에서는 절대 알려주지 않는 스레드 2개 계정(명사도 본계정+연애) 합산 500만 뷰 실측 데이터와 실전 금기"를 낱낱이 공개합니다.'
+      q: '시중의 마케팅 강의나 넘쳐나는 무료 자료들과는 구체적으로 무엇이 다른가요?',
+      a: '인터넷에 무료 자료, 팁, 프롬프트는 넘쳐나지만, 정작 "내 눈높이와 지금 내 상황에 무엇이 필요하고 오늘 당장 뭘 어떻게 해야 하는지" 알려주는 곳은 없습니다. aizaler는 단순 자료 창고가 아닙니다. 내 현재 단계(직장인/퇴사 준비/1인 창업)와 병목(노출 부진/결제 0원/기술 장벽)을 정밀 진단하고, 오늘 당장 30분 만에 실행할 수 있는 AI 훈련 루틴과 1:1 맞춤 처방전을 제공하는 실전 훈련소입니다.'
     },
     {
       q: '공기업과 해외 주재원을 퇴사하고 1인 개발을 시작하신 이유가 무엇인가요?',
@@ -83,35 +84,36 @@ export default function Home() {
           {/* 좌측: 강력한 서사 & 실측 제안 (7열) */}
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
-              <RocketLaunch size={14} weight="duotone" />
-              <span>다른 곳에서는 절대 알려주지 않는 실측 데이터 · META CERTIFIED MEDIA PLANNING PRO</span>
+              <Sparkle size={14} weight="fill" />
+              <span>내 상황 맞춤 AI 진단 & 실전 처방 훈련소 · META CERTIFIED MEDIA PLANNING PRO</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-[48px] font-black text-[#191f28] leading-[1.2] tracking-tight">
-              시중 강의에서는 절대 알려주지 않는,<br />
-              <span className="text-[#3182f6] underline decoration-[#3182f6]/30">진짜 돈이 되는</span> 메타 알고리즘과 1인 창업의 진실.
+              자료는 넘쳐나는데,<br />
+              내 상황엔 대체 뭘 어떻게 해야 할까?<br />
+              <span className="text-[#3182f6] underline decoration-[#3182f6]/30">내 눈높이에 맞춘</span> 1:1 AI 진단과 실전 처방.
             </h1>
 
             <p className="text-base sm:text-lg text-[#4e5968] leading-relaxed max-w-xl font-normal">
-              유튜브나 마케팅 강의는 "조회수만 터뜨리면 돈 번다"고 말하지만, 왜 조회수 20만이 터져도 결제는 4건뿐이고 5일간 계정 노출이 -92% 폭락하는지는 <b>절대 알려주지 않습니다.</b><br />
-              이론만 파는 강사 대신, <b>직접 내 돈 태워 스레드 2개 계정 합산 500만 뷰를 까보고 검증한 Meta 공인 미디어 플래닝 전문가</b>가 감춰진 알고리즘 메커니즘과 <b>결제율 8.6% 실전 솔루션</b>을 가감 없이 공개합니다.
+              인터넷에 굴러다니는 무료 자료와 프롬프트를 폴더에 쌓아만 두고 하나도 실행하지 못하셨나요?<br />
+              공기업·해외주재원 퇴사 후 1인 개발로 생존한 파운더이자 Meta 공인 전문가가, <b>당신의 현재 단계와 병목을 짚어내고 오늘 당장 실행할 30분 AI 훈련 루틴과 맞춤 처방전</b>을 드립니다.
             </p>
 
             {/* CTA 버튼 세트 */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <a
-                href="#what-you-get"
+                href="#ai-prescription"
                 className="toss-button-primary px-7 py-4 text-sm sm:text-base font-bold text-center flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
               >
-                <Package size={20} weight="bold" />
-                <span>내가 받을 수 있는 솔루션 보기</span>
+                <Lightning size={20} weight="fill" />
+                <span>내 상황 1분 진단 & 맞춤 처방받기</span>
               </a>
               <a
                 href="#lead-magnet"
                 className="px-6 py-4 rounded-2xl bg-white border border-black/[0.08] text-[#191f28] text-sm sm:text-base font-bold text-center hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shadow-xs"
               >
                 <DownloadSimple size={18} weight="bold" className="text-emerald-600" />
-                <span>100% 무료 실전자료 받기 (PDF)</span>
+                <span>100% 무료 맞춤 처방전 받기 (PDF)</span>
               </a>
             </div>
 
@@ -200,7 +202,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 2. 다른 곳에서는 절대 알려주지 않는 4가지 실전 금기와 진실 ── */}
+      {/* ── 2. 내 상황 맞춤 AI 진단 & 실전 처방 훈련기 ── */}
+      <section id="ai-prescription" className="toss-container">
+        <AIPrescriptionTrainer />
+      </section>
+
+      {/* ── 3. 다른 곳에서는 절대 알려주지 않는 4가지 실전 금기와 진실 ── */}
       <section id="untold-truth" className="toss-container space-y-8">
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffebee] text-[#f04452] text-xs font-bold">

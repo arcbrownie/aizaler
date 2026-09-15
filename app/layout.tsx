@@ -44,10 +44,10 @@ export default function RootLayout({
           <>
             {/* 상단 띠배너 (토스 스타일 슬림 인포 바) */}
             <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
-              <span className="text-[#3182f6] font-bold mr-2">✦ 스레드 500만 뷰 & 메타 광고 비법</span>
-              <span>어려운 용어 없이 바로 써먹는 10분 체크리스트 & 광고 세팅법 <b>100% 무료 자료 배포 중!</b></span>
-              <a href="#lead-magnet" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
-                무료 자료 받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
+              <span className="text-[#3182f6] font-bold mr-2">✦ 무료 자료는 많지만 내 상황엔 무엇을 해야 할까?</span>
+              <span>내 눈높이 맞춤 <b>AI 상황 진단 & 실전 처방 훈련</b> 100% 무료 제공!</span>
+              <a href="#ai-prescription" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
+                1분 진단 & 처방받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
               </a>
             </div>
 
@@ -70,7 +70,11 @@ export default function RootLayout({
             </Link>
 
             {/* 네비게이션 */}
-            <nav className="hidden lg:flex items-center gap-6 text-[14px] font-semibold text-[#4e5968]">
+            <nav className="hidden lg:flex items-center gap-5 text-[14px] font-semibold text-[#4e5968]">
+              <a href="#ai-prescription" className="hover:text-[#3182f6] transition-colors text-[#3182f6] font-bold flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#3182f6] animate-ping" />
+                AI 맞춤 처방
+              </a>
               <a href="#untold-truth" className="hover:text-[#3182f6] transition-colors text-rose-600 font-bold flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
                 숨겨진 실측 진실
