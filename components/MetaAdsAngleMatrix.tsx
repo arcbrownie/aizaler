@@ -35,8 +35,8 @@ interface AdAngle {
 const ANGLES: AdAngle[] = [
   {
     id: 'evidence',
-    name: '증거물 앵글 (keep_photo)',
-    badge: '★ 실측 1위 (최고 결제 CVR)',
+    name: '증거물 1:1 일치 (결제율 8.6% 압승)',
+    badge: '★ 실측 1위 (최고 결제율)',
     badgeBg: '#e8f3ff',
     badgeText: '#3182f6',
     inflow: 58,
@@ -53,39 +53,39 @@ const ANGLES: AdAngle[] = [
   },
   {
     id: 'curiosity',
-    name: '궁금증 앵글 (timing)',
-    badge: '최대 유입 볼륨 (상단 퍼널)',
+    name: '단순 호기심 유입 (결제율 0.8% 저조)',
+    badge: '유입만 많음 (결제 저조)',
     badgeBg: '#fef3c7',
     badgeText: '#b45309',
     inflow: 377,
-    signups: 303,
+    signups: 24,
     paidOrders: 3,
     cvr: '0.8%',
-    cvrColor: '#f59e0b',
-    adHook: '그 사람과 언제 다시 연락이 닿을지',
-    adCopy: '노력해서 되는 시기가 있고, 기다려야 풀리는 시기가 있습니다. 그 사람의 시계는 지금 몇 시일까요?',
-    landingHeadline: '다시 연결되는 시기에는 분명한 전조 증상이 있습니다.',
-    landingSubcopy: '막연히 기다리지 마세요. 두 사람의 기질이 맞물려 대화가 풀리는 최적의 시점을 확인하세요.',
-    matchScore: '75% (호기심 기반)',
-    analysis: '유입 모수(377명)는 압도적이나 결제 급성도가 낮아 결제 전환율은 0.8%에 그침. 신규 구매용보다는 리타게팅 모수를 쌓는 상단 퍼널로 운용해야 효율 극대화.'
+    cvrColor: '#f04452',
+    adHook: '그 사람, 언제쯤 연락 올까요?',
+    adCopy: '기다림에 지친 밤, 굳이 먼저 연락하지 마세요. 상대가 연락할 수밖에 없는 결정적 타이밍이 있습니다.',
+    landingHeadline: '상대의 행동 패턴으로 읽는 재회 타이밍 분석',
+    landingSubcopy: '단순 감정이 아닌 행동 데이터로 상대방의 연락 심리를 진단합니다.',
+    matchScore: '30% (일반적 정보 불일치)',
+    analysis: '궁금증으로 유입은 폭발(377명)했으나, 랜딩 첫 화면이 추상적이어서 유저가 "내가 누른 그 내용이 아니네?"라며 94% 이탈. 결국 광고비만 날린 참사.'
   },
   {
-    id: 'mismatch',
-    name: '라우팅 누수 (content 없음)',
-    badge: '광고비 누수 참사',
-    badgeBg: '#fee2e2',
-    badgeText: '#dc2626',
-    inflow: 58,
-    signups: 0,
-    paidOrders: 0,
-    cvr: '0.0%',
-    cvrColor: '#dc2626',
-    adHook: '사주로 알아보는 연애 운명',
-    adCopy: '지금 당신의 인연 흐름을 점검해 보세요.',
-    landingHeadline: '안녕하세요, 종합 운세 서비스입니다.',
-    landingSubcopy: '다양한 운세와 궁합 풀이를 지금 바로 시작해 보세요.',
-    matchScore: '0% (소오름 전멸)',
-    analysis: '광고 소재의 앵글과 무관하게 일반 메인 홈으로 떨어진 경우. 유저는 자신이 클릭한 맥락이 사라지자마자 1초 만에 뒤로가기를 눌러 58명 전원 이탈, 결제 0건.'
+    id: 'cause',
+    name: '원인 분석 앵글 (결제율 1.8% 보통)',
+    badge: '일반적인 수준 (보통)',
+    badgeBg: '#f2f4f6',
+    badgeText: '#4e5968',
+    inflow: 112,
+    signups: 9,
+    paidOrders: 2,
+    cvr: '1.8%',
+    cvrColor: '#8b95a1',
+    adHook: '왜 그 사람은 마지막에 차가웠을까?',
+    adCopy: '갑작스러운 이별 뒤에 숨겨진 회피 성향의 진실. 그 사람이 침묵을 택한 진짜 이유를 알려드립니다.',
+    landingHeadline: '회피형 애착 유형 정밀 분석 리포트',
+    landingSubcopy: '심리학 기반 4대 애착 유형 진단 도구로 상대의 침묵 이유를 분석합니다.',
+    matchScore: '65% (개념적 일치)',
+    analysis: '카피와 랜딩이 논리적으로는 맞지만 "충격적 씬(Scene)"의 연결이 없어 유저의 구매 충동을 강하게 당기지 못함.'
   }
 ];
 
@@ -99,15 +99,15 @@ export default function MetaAdsAngleMatrix() {
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
           <Target size={14} weight="duotone" />
-          <span>PERFORMANCE ADS LAB</span>
+          <span>META CERTIFIED MEDIA PLANNING PROFESSIONAL 실측</span>
         </div>
         <h2 className="text-2xl sm:text-4xl font-black text-[#191f28] tracking-tight leading-tight">
-          메타 광고 14일 실측:<br />
-          궁금증(0.8%) vs 증거물(8.6%) 소오름 매칭
+          메타 공인 전문가가 직접 돈 태워 검증한<br />
+          광고 ↔ 랜딩 1:1 일치 공식 (결제율 8.6%)
         </h2>
         <p className="text-[#4e5968] text-sm sm:text-base leading-relaxed">
-          "궁금증은 유입을 만들고, 증거물은 결제를 만든다."<br />
-          광고 장면 ↔ 랜딩 첫 카드의 1:1 회수가 만들어낸 결제 전환율 8.6%의 실측 엔지니어링입니다.
+          "단순 호기심은 클릭만 낭비하고, 확실한 증거물이 지갑을 엽니다."<br />
+          광고에서 본 첫 화면과 랜딩페이지 첫 카드가 100% 똑같이 일치할 때, 고객은 이탈하지 않고 결제합니다.
         </p>
       </div>
 

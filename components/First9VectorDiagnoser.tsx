@@ -34,15 +34,15 @@ export default function First9VectorDiagnoser() {
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
           <GridFour size={14} weight="duotone" />
-          <span>ALGORITHM VECTOR ENGINE</span>
+          <span>PROFILE OPTIMIZATION & RECOVERY LAB</span>
         </div>
         <h2 className="text-2xl sm:text-4xl font-black text-[#191f28] tracking-tight leading-tight">
-          First 9 텍스트 임베딩 순도와<br />
-          3초 프로필 팔로우 전환 공식
+          프로필을 누른 사람이 3초 만에 팔로우하는<br />
+          '첫 9개 게시물' 3대 기둥 공식
         </h2>
         <p className="text-[#4e5968] text-sm sm:text-base leading-relaxed">
-          Sentence-BERT 모델이 내 계정의 카테고리를 판정하는 첫 9개 피드의 벡터 순도와,<br className="hidden sm:inline" />
-          피드가 오염되었을 때 10분 만에 좌표를 되돌리는 '관심 없음' 5연타 알고리즘 위세척 프로토콜입니다.
+          소셜 알고리즘은 내 최근 게시물 9개를 읽고 계정의 정체성과 타겟 독자를 판정합니다.<br className="hidden sm:inline" />
+          엉뚱한 구경꾼 유입을 막고 진짜 구매 고객만 모으는 피드 설계법과, 망가진 피드를 10분 만에 되살리는 계정 정상화 매뉴얼입니다.
         </p>
       </div>
 
@@ -58,7 +58,7 @@ export default function First9VectorDiagnoser() {
             }`}
           >
             <GridFour size={16} weight="bold" />
-            <span>3초 팔로우 3-Pillar 그리드 공식</span>
+            <span>3초 팔로우 부르는 3대 기둥 피드 공식</span>
           </button>
           <button
             onClick={() => setActiveTab('pumping')}
@@ -69,7 +69,7 @@ export default function First9VectorDiagnoser() {
             }`}
           >
             <Sliders size={16} weight="bold" />
-            <span>'관심 없음' 5연타 알고리즘 위세척</span>
+            <span>엉뚱한 유입 차단하는 10분 계정 정상화</span>
           </button>
         </div>
       </div>

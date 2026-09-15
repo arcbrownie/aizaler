@@ -50,7 +50,7 @@ GROUP BY p.post_id, p.title, p.views;
 ---------+-------------+---------------------
  207,709 |           4 |              0.0019  <-- 51,927뷰당 1건 결제 참사
 */`,
-    verdict: '비즈니스 구매 의도와 무관한 직장인 썰로 메타 DLRM 추천 풀이 오염됨. 다음 날 올린 코어 프로덕트 글이 0.5초 만에 스킵당하며 계정 품질 점수(Quality Score) 강등 및 노출 셧다운.'
+    verdict: '재미 위주의 밈으로 조회수는 폭발했지만, 내 상품을 살 사람이 아닌 단순 구경꾼만 대거 유입되었습니다. 알고리즘이 계정의 타겟을 엉뚱한 군집으로 오판하여 다음 날 올린 핵심 글이 외면당했고, 5일간 노출이 -92% 급락하는 알고리즘 역주행(숙취 현상)이 발생했습니다.'
   } : {
     badge: '고순도 버티컬 글 (황금 스위트 스팟)',
     badgeColor: '#10b981',
@@ -88,7 +88,7 @@ ORDER BY avg_cvr_pct DESC;
  5,000 ~ 10,000뷰 |        121 |     7,200 |        3.10
  10,000뷰 이상   |        111 |    22,431 |        2.38  <-- 허수 급증으로 최저치
 */`,
-    verdict: '코어 타깃의 지적 도파민과 결핍을 정확히 자극한 고순도 콘텐츠. 메타 Sentence-BERT가 [High-Intent Professional] 클러스터에 계정을 안착시켜 안정적 결제 발생.'
+    verdict: '내 상품이 꼭 필요한 타겟 독자의 결핍을 정확히 자극한 고순도 글입니다. 알고리즘이 [구매 의도가 높은 전문직] 군집에 계정을 정확히 매칭하여, 1,895뷰만으로도 85건의 유료 결제가 안정적으로 발생했습니다.'
   };
 
   return (
@@ -97,15 +97,15 @@ ORDER BY avg_cvr_pct DESC;
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
           <Database size={14} weight="duotone" />
-          <span>REVERSE ENGINEERING LAB</span>
+          <span>DATABASE REVERSE ENGINEERING</span>
         </div>
         <h2 className="text-2xl sm:text-4xl font-black text-[#191f28] tracking-tight leading-tight">
-          20만 뷰 바이럴의 저주와<br />
-          메타 DLRM 알고리즘 숙취 실측 시뮬레이터
+          조회수 20만 터져도 결제 0건인 이유와<br />
+          알고리즘 역주행 실측 시뮬레이터
         </h2>
         <p className="text-[#4e5968] text-sm sm:text-base leading-relaxed">
-          "조회수는 허영(Vanity)이고, 리드는 현실(Sanity)이며, 결제만이 현금(Cash)이다."<br />
-          실제 423만 뷰, 695편 전수 DB 로그를 대조해 밝혀낸 소셜 알고리즘의 진실입니다.
+          "조회수는 착시이고, 진짜 내 고객의 결제만이 진실입니다."<br />
+          실제 423만 뷰 695편의 결제 로그를 분석해, 대중 밈 바이럴이 왜 계정을 망가뜨리고 소수 고순도 유입이 폭발적 매출을 만드는지 비교해 보세요.
         </p>
       </div>
 
@@ -121,7 +121,7 @@ ORDER BY avg_cvr_pct DESC;
             }`}
           >
             <Flame size={16} weight="fill" />
-            <span>20.7만 뷰 직장 썰 (허수 바이럴 참사)</span>
+            <span>20.7만 뷰 직장 썰 (재미 위주 대중 밈 참사)</span>
           </button>
           <button
             onClick={() => setSelectedCase('sweetspot')}
@@ -132,7 +132,7 @@ ORDER BY avg_cvr_pct DESC;
             }`}
           >
             <Sparkle size={16} weight="duotone" />
-            <span>1,895뷰 고순도 글 (황금 스위트 스팟)</span>
+            <span>1,895뷰 고순도 글 (진짜 고객 도달 스위트스팟)</span>
           </button>
         </div>
       </div>

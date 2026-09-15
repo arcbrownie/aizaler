@@ -25,10 +25,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth">
       <head>
-        <title>aizaler.kr | 1인 빌더의 메타 알고리즘 역공학 & 실전 그로스 엔지니어링</title>
+        <title>aizaler.kr | Meta Certified 전문가의 실전 그로스 & 1인 빌더 스튜디오</title>
         <meta 
           name="description" 
-          content="공기업·해외주재원 퇴사 후 1인 개발 도전. 423만 뷰 695편 전수 DB 로그 분석, 메타 알고리즘(DLRM) 역공학과 메타 광고 실측 전환율 8.6% 소오름 매칭 공식 공개." 
+          content="공기업·해외주재원 퇴사 후 1인 개발 도전. Meta Certified Media Planning Professional 자격과 423만 뷰 실측 데이터로 검증한 소셜 알고리즘 역공학 및 광고 결제율 8.6% 공식 공개." 
         />
         <link 
           rel="stylesheet" 
@@ -44,8 +44,8 @@ export default function RootLayout({
           <>
             {/* 상단 띠배너 (토스 스타일 슬림 인포 바) */}
             <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
-              <span className="text-[#3182f6] font-bold mr-2">✦ 2026 무료 배포</span>
-              <span>423만 뷰 실측 DB! <b>'메타 Two-Tower 오염 진단 SQL 쿼리북'</b> 무료 증정</span>
+              <span className="text-[#3182f6] font-bold mr-2">✦ Meta 공인 전문가 인증</span>
+              <span>423만 뷰 실측 DB! <b>'알고리즘 역주행 방지 & 고전환 메타 광고 가이드북'</b> 무료 증정</span>
               <a href="#lead-magnet" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
                 다운받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
               </a>
@@ -103,7 +103,7 @@ export default function RootLayout({
                 className="toss-button-primary px-4 py-2 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm"
               >
                 <DownloadSimple size={16} weight="bold" />
-                <span>무료 쿼리북 받기</span>
+                <span>무료 가이드북 받기</span>
               </a>
             </div>
           </div>
@@ -122,15 +122,15 @@ export default function RootLayout({
                 <div className="flex items-center gap-2">
                   <span className="text-base font-black text-[#191f28]">aizaler.kr</span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#e8f3ff] text-[#3182f6]">
-                    AI Native
+                    Meta Certified Pro
                   </span>
                 </div>
                 <p className="text-[#4e5968] leading-relaxed text-xs">
-                  aizaler는 이론만 말하는 강사가 아닙니다. 남들이 선망하던 공기업과 해외 주재원 생활을 마치고 1인 개발에 도전해 살아남은 솔로프리너의 실제 생존 기록이자, 423만 뷰 DB 로그와 실측 전환 데이터로 검증된 실전 그로스 엔지니어링 지식 허브입니다.
+                  aizaler는 이론만 말하는 학원이 아닙니다. 공기업·해외 주재원을 거쳐 1인 개발에 도전한 창업자이자, <b>Meta Certified Media Planning Professional(메타 공인 미디어 플래닝 전문가)</b>로서 423만 뷰 DB 로그와 실측 결제 데이터로 검증된 실전 솔루션만을 제공합니다.
                 </p>
                 <div className="text-[11px] text-[#8b95a1] space-y-1">
                   <p>운영사: 브라운임팩트랩스 (Brown Impact Labs) | 대표 포트폴리오: 라이브 프로덕트 A, B, C 운영</p>
-                  <p>본 사이트의 모든 수치는 실제 데이터베이스 로그와 실측 데이터를 기반으로 제작되었습니다.</p>
+                  <p>자격: Meta Certified Media Planning Professional 보유 | 실측 데이터베이스 기반</p>
                 </div>
               </div>
 

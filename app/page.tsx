@@ -79,17 +79,17 @@ export default function Home() {
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
               <RocketLaunch size={14} weight="duotone" />
-              <span>FOUNDER STORY & GROWTH ENGINEERING</span>
+              <span>META CERTIFIED MEDIA PLANNING PROFESSIONAL · 1인 빌더 오픈 랩</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-[50px] font-black text-[#191f28] leading-[1.2] tracking-tight">
-              남들이 선망하던 공기업과 해외 주재원을 박차고 나와,<br />
-              <span className="text-[#3182f6] underline decoration-[#3182f6]/30">1인 개발 솔로프리너</span>로<br />
-              생존하기까지의 날것의 실측 기록.
+            <h1 className="text-3xl sm:text-5xl lg:text-[48px] font-black text-[#191f28] leading-[1.2] tracking-tight">
+              공기업·해외 주재원을 나와 1인 개발로 생존한,<br />
+              <span className="text-[#3182f6] underline decoration-[#3182f6]/30">Meta 공인 전문가</span>의 실전 성장 기록.
             </h1>
 
             <p className="text-base sm:text-lg text-[#4e5968] leading-relaxed max-w-xl font-normal">
-              퇴사 후 마주한 20만 뷰 4건 결제의 참사, 48회 셧다운의 절망을 넘어 — 실제 <b>423만 뷰 DB 결제 로그</b>와 메타 API를 뜯어내어 규명한 소셜 알고리즘 역공학, <b>결제 CVR 8.6% 소오름 매칭</b>, 그리고 <b>월 $42 1인 인프라 아키텍처</b>를 공개합니다.
+              이론만 가르치는 강의 대신, <b>Meta Certified Media Planning Professional(메타 공인 미디어 플래닝 전문가)</b> 자격을 보유한 1인 창업가가 직접 내 돈을 태우며 검증한 실전 데이터입니다.<br />
+              조회수 20만이 터져도 결제가 0건인 이유를 밝혀내고, 내 상품을 살 '진짜 고객'에게만 광고를 도달시켜 <b>결제율 8.6%</b>를 만든 공식과 <b>월 $42 1인 인프라</b>를 공개합니다.
             </p>
 
             {/* CTA 버튼 세트 */}
@@ -110,19 +110,25 @@ export default function Home() {
               </a>
             </div>
 
-            {/* 신뢰 지표 3열 칩 (Double-Bezel) */}
-            <div className="pt-4 grid grid-cols-3 gap-2 sm:gap-4 max-w-lg border-t border-black/[0.05]">
+            {/* 신뢰 지표 4열 칩 (Double-Bezel) */}
+            <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-xl border-t border-black/[0.05]">
               <div className="space-y-0.5">
-                <div className="text-lg sm:text-2xl font-black text-[#3182f6] font-mono tabular-nums">
-                  4,230,000+
+                <div className="text-sm sm:text-base font-black text-[#3182f6]">
+                  Meta Certified
                 </div>
-                <div className="text-[11px] text-[#8b95a1] font-medium">소셜 뷰 전수 DB 로그</div>
+                <div className="text-[11px] text-[#8b95a1] font-medium">공인 전문가 자격</div>
               </div>
               <div className="space-y-0.5">
                 <div className="text-lg sm:text-2xl font-black text-[#191f28] font-mono tabular-nums">
+                  4,230,000+
+                </div>
+                <div className="text-[11px] text-[#8b95a1] font-medium">실측 결제 DB 로그</div>
+              </div>
+              <div className="space-y-0.5">
+                <div className="text-lg sm:text-2xl font-black text-rose-600 font-mono tabular-nums">
                   8.6%
                 </div>
-                <div className="text-[11px] text-[#8b95a1] font-medium">메타 광고 최고 결제율</div>
+                <div className="text-[11px] text-[#8b95a1] font-medium">메타 광고 실측 결제율</div>
               </div>
               <div className="space-y-0.5">
                 <div className="text-lg sm:text-2xl font-black text-emerald-600 font-mono tabular-nums">
@@ -167,16 +173,17 @@ export default function Home() {
                       현역 빌더
                     </span>
                   </div>
-                  <div className="text-xs text-[#191f28] space-y-1">
-                    <div className="font-bold">✓ 공기업·주재원 퇴사 후 실제 겪은 실패·생존 복기록</div>
-                    <div className="text-emerald-700 font-semibold">✓ PostgreSQL 결제 테이블 & 메타 Graph API 실측</div>
-                    <div className="text-[#3182f6] font-semibold">✓ 오늘도 코드를 치고 광고비를 방어하는 오픈 랩</div>
+                  <div className="text-xs text-[#191f28] space-y-1.5">
+                    <div className="font-bold text-[#191f28]">✓ 공기업·주재원 퇴사 후 야생에서 생존한 1인 창업가</div>
+                    <div className="text-[#3182f6] font-bold">✓ Meta Certified Media Planning Professional (공인 자격)</div>
+                    <div className="text-emerald-700 font-semibold">✓ 423만 뷰 결제 DB 전수 분석 & 광고 결제율 8.6% 달성</div>
+                    <div className="text-[#4e5968] font-semibold">✓ 오늘도 직접 코딩하고 서비스를 굴리는 현역 빌더</div>
                   </div>
                 </div>
 
                 <div className="pt-2 text-center">
                   <a
-                    href="#founder-story"
+                    href="#origin-story"
                     className="inline-flex items-center gap-1 text-xs font-bold text-[#3182f6] hover:underline"
                   >
                     창업자의 4단계 서사 타임라인 바로보기 <ArrowRight size={14} weight="bold" />
@@ -274,7 +281,7 @@ export default function Home() {
               실전 그로스 & 엔지니어링 솔루션
             </h2>
             <p className="text-[#4e5968] text-sm">
-              423만 뷰 DB 로그와 메타 광고 실측 데이터에서 검증된 실전 바이블과 시스템 가이드입니다.
+              Meta 공인 미디어 플래닝 전문가가 423만 뷰 실측 데이터로 검증한 실전 가이드와 1인 인프라 툴킷입니다.
             </p>
           </div>
 
@@ -441,24 +448,24 @@ export default function Home() {
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-black text-white leading-tight">
-              '메타 Two-Tower 오염 진단 SQL 쿼리북'을 무료로 받으세요
+              '알고리즘 역주행 방지 & 고전환 메타 광고 가이드북'을 무료로 받으세요
             </h2>
 
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-              지금 이메일을 입력하시면, 423만 뷰 로그를 분석한 'DLRM 알고리즘 숙취 진단 쿼리 10선'과 'First 9 벡터 정화 프로토콜 PDF'를 즉시 보내드립니다.
+              지금 이메일을 입력하시면, Meta 공인 전문가가 423만 뷰 실측 로그를 분석해 만든 '알고리즘 정상화 10분 체크리스트'와 '고전환 광고 세팅 템플릿(PDF)'을 즉시 보내드립니다.
             </p>
 
             {isDownloaded ? (
               <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-sm font-bold flex items-center gap-2">
                 <CheckCircle size={20} weight="fill" />
-                입력하신 이메일로 SQL 쿼리북과 프로토콜 발송이 완료되었습니다! (스팸함도 확인해 주세요)
+                입력하신 이메일로 무료 가이드북과 체크리스트 발송이 완료되었습니다! (스팸함도 확인해 주세요)
               </div>
             ) : (
               <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2 max-w-md">
                 <input
                   type="email"
                   required
-                  placeholder="쿼리북을 받을 이메일 주소"
+                  placeholder="가이드북을 받을 이메일 주소"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   className="px-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 text-sm outline-none focus:border-[#3182f6] flex-1"
