@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   rank: number;
   badge: 'BEST' | 'FREE' | 'HOT' | '선착순' | 'NEW';
-  category: '실전 그로스 바이블' | '무료 리포트 & 가이드' | '14일 액션 챌린지' | '1:1 프라이빗 전략';
+  category: '실전 그로스 바이블' | '100% 무료 자료집' | '14일 액션 챌린지' | '1:1 프라이빗 전략';
   title: string;
   tagline: string;
   description: string;
@@ -43,22 +43,22 @@ export const PRODUCTS: Product[] = [
     id: '2',
     rank: 2,
     badge: 'FREE',
-    category: '무료 리포트 & 가이드',
-    title: '알고리즘 역주행 자가진단 체크리스트 & 3초 팔로우 가이드북 (100% 무료)',
-    tagline: '내 계정이 왜 엉뚱한 사람에게 노출되는지 10분 만에 진단하고 되살리는 무료 리포트',
-    description: '내 글이 왜 스킵당하는지, 어떤 글이 계정에 독이 되는지 감으로 짐작하지 마세요. 실제 조회수 대비 유료 결제 전환율을 분석한 실전 퍼널 성과표와 프로필 상단 9개 피드 점검 체크리스트를 100% 무료 배포합니다.',
+    category: '100% 무료 자료집',
+    title: '스레드 500만 뷰 계정 정상화 & 메타 광고 세팅 실전 무료 자료집 (PDF)',
+    tagline: '어려운 IT 용어나 쿼리 몰라도 OK! 내 계정을 10분 만에 살려내는 실전 무료 자료',
+    description: '어려운 코딩이나 복잡한 데이터 분석 몰라도 괜찮습니다. 내 글이 왜 스킵당하는지, 어떤 글이 계정을 망치는지 10분 만에 바로잡는 실전 체크리스트와 광고 세팅법을 담은 100% 무료 자료집을 즉시 보내드립니다.',
     originalPrice: 39000,
     discountRate: 100,
     salePrice: 0,
-    monthlyPrice: '100% 무료 즉시 다운로드',
+    monthlyPrice: '100% 무료 자료 즉시 받기',
     features: [
       '조회수 대비 결제 전환율(CVR) 실측 퍼널 분석 성과표',
       '대중 밈 바이럴로 인한 알고리즘 역주행 자가진단 프로토콜',
       '3초 만에 팔로우를 부르는 First 9 3-Pillar 배치도 템플릿',
       '엉뚱한 밈 노출을 10분 만에 청소하는 관심 없음 5연타 매뉴얼'
     ],
-    target: '데이터 기반으로 소셜 채널과 매출 파이프라인을 점검하고 싶은 모든 테크 빌더',
-    highlightProof: '다운로드 즉시 내 계정과 캠페인에 그대로 대입해 사용 가능한 체크리스트',
+    target: '복잡한 이론 대신 당장 써먹을 수 있는 무료 자료가 필요한 1인 창업가, 크리에이터',
+    highlightProof: '이메일 입력 즉시 1초 만에 PDF 무료 자료 발송',
     accentColor: '#10b981',
   },
   {

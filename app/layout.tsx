@@ -44,10 +44,10 @@ export default function RootLayout({
           <>
             {/* 상단 띠배너 (토스 스타일 슬림 인포 바) */}
             <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
-              <span className="text-[#3182f6] font-bold mr-2">✦ 시중 강의에서는 절대 알려주지 않는 실측 데이터</span>
-              <span>스레드 2개 계정 합산 500만 뷰 전수 분석 기반 <b>'알고리즘 역주행 방지 & 고전환 메타 광고 가이드북'</b> 100% 무료 배포</span>
+              <span className="text-[#3182f6] font-bold mr-2">✦ 스레드 500만 뷰 & 메타 광고 비법</span>
+              <span>어려운 용어 없이 바로 써먹는 10분 체크리스트 & 광고 세팅법 <b>100% 무료 자료 배포 중!</b></span>
               <a href="#lead-magnet" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
-                무료 다운받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
+                무료 자료 받기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
               </a>
             </div>
 
@@ -107,7 +107,7 @@ export default function RootLayout({
                 className="toss-button-primary px-4 py-2 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm"
               >
                 <DownloadSimple size={16} weight="bold" />
-                <span>무료 가이드북 받기</span>
+                <span>무료 자료 받기</span>
               </a>
             </div>
           </div>

@@ -40,7 +40,7 @@ export default function Home() {
   const [emailInput, setEmailInput] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
 
-  const categories = ['전체', '실전 그로스 바이블', '무료 리포트 & 가이드', '1:1 프라이빗 전략'];
+  const categories = ['전체', '실전 그로스 바이블', '100% 무료 자료집', '1:1 프라이빗 전략'];
 
   const filteredProducts = selectedCategory === '전체'
     ? PRODUCTS
@@ -107,11 +107,11 @@ export default function Home() {
                 <span>내가 받을 수 있는 솔루션 보기</span>
               </a>
               <a
-                href="#untold-truth"
+                href="#lead-magnet"
                 className="px-6 py-4 rounded-2xl bg-white border border-black/[0.08] text-[#191f28] text-sm sm:text-base font-bold text-center hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 shadow-xs"
               >
-                <span>다른 데선 안 알려주는 4가지 진실 보기</span>
-                <ArrowRight size={16} weight="bold" />
+                <DownloadSimple size={18} weight="bold" className="text-emerald-600" />
+                <span>100% 무료 실전자료 받기 (PDF)</span>
               </a>
             </div>
 
@@ -362,25 +362,25 @@ export default function Home() {
 
         {/* 3대 핵심 산출물 카드 그리드 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* 1. 100% 무료 즉시 발송 가이드 */}
+          {/* 1. 100% 무료 즉시 발송 자료 */}
           <div className="rounded-3xl bg-white border border-black/[0.08] p-6 sm:p-7 shadow-xs hover:border-[#3182f6]/40 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-black">
-                  100% 무료 다운로드
+                  100% 무료 자료집
                 </span>
                 <span className="text-[11px] text-[#8b95a1] font-mono">PDF 즉시 발송</span>
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-[#191f28] leading-snug">
-                알고리즘 역주행 자가진단 & 고전환 메타 광고 가이드북
+                스레드 500만 뷰 계정 정상화 & 메타 광고 실전 무료 자료집
               </h3>
               <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-                조회수는 터지는데 결제가 0건인 이유를 10분 만에 진단하고, 계정 품질 점수(Quality Score)를 되살리는 실전 체크리스트를 무료로 드립니다.
+                어려운 쿼리나 복잡한 통계 몰라도 괜찮습니다! 조회수는 터지는데 결제가 0건인 내 계정을 10분 만에 진단하고 살려내는 실전 무료 자료(PDF)를 즉시 보내드립니다.
               </p>
               <ul className="space-y-2 text-xs text-[#4e5968] pt-2 border-t border-black/[0.04]">
                 <li className="flex items-start gap-2">
                   <CheckCircle size={15} weight="fill" className="text-emerald-500 shrink-0 mt-0.5" />
-                  <span>알고리즘 역주행 방지 10분 정상화 매뉴얼</span>
+                  <span>알고리즘 역주행 방지 10분 정상화 체크리스트</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle size={15} weight="fill" className="text-emerald-500 shrink-0 mt-0.5" />
@@ -388,7 +388,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle size={15} weight="fill" className="text-emerald-500 shrink-0 mt-0.5" />
-                  <span>메타 광고 ↔ 랜딩 1:1 일치(소오름 매칭) 성과표</span>
+                  <span>메타 광고 ↔ 랜딩 1:1 일치(소오름 매칭) 세팅 가이드</span>
                 </li>
               </ul>
             </div>
@@ -397,7 +397,7 @@ export default function Home() {
               className="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm text-center flex items-center justify-center gap-1.5 transition-colors shadow-xs"
             >
               <DownloadSimple size={16} weight="bold" />
-              <span>무료 가이드북 즉시 받기</span>
+              <span>무료 자료 즉시 받기</span>
             </a>
           </div>
 
@@ -730,28 +730,28 @@ export default function Home() {
           <div className="max-w-2xl space-y-6 relative z-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">
               <DownloadSimple size={14} weight="bold" />
-              100% 무료 즉시 발송
+              100% 무료 실전자료 즉시 발송
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-black text-white leading-tight">
-              '알고리즘 역주행 방지 & 고전환 메타 광고 가이드북'을 무료로 받으세요
+              스레드 500만 뷰 & 메타 광고 실전 비법<br className="hidden sm:inline" /> '무료 자료'를 즉시 받으세요
             </h2>
 
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-              지금 이메일을 입력하시면, Meta 공인 전문가가 스레드 2개 계정 합산 500만 뷰 실측 로그를 분석해 만든 '알고리즘 정상화 10분 체크리스트'와 '고전환 광고 세팅 템플릿(PDF)'을 즉시 보내드립니다.
+              어려운 IT 용어나 쿼리, 통계 몰라도 괜찮습니다. 지금 이메일만 입력하시면, 내 계정 살리는 '10분 정상화 체크리스트'와 '돈 버는 메타 광고 세팅법' 무료 자료집(PDF)을 1초 만에 바로 보내드립니다.
             </p>
 
             {isDownloaded ? (
               <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-sm font-bold flex items-center gap-2">
                 <CheckCircle size={20} weight="fill" />
-                입력하신 이메일로 무료 가이드북과 체크리스트 발송이 완료되었습니다! (스팸함도 확인해 주세요)
+                입력하신 이메일로 무료 자료집과 체크리스트 발송이 완료되었습니다! (스팸함도 확인해 주세요)
               </div>
             ) : (
               <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2 max-w-md">
                 <input
                   type="email"
                   required
-                  placeholder="가이드북을 받을 이메일 주소"
+                  placeholder="무료 자료를 받을 이메일 주소"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   className="px-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 text-sm outline-none focus:border-[#3182f6] flex-1"
@@ -761,7 +761,7 @@ export default function Home() {
                   className="toss-button-primary px-6 py-3.5 text-sm font-bold shadow-md shrink-0 flex items-center justify-center gap-1.5"
                 >
                   <DownloadSimple size={16} weight="bold" />
-                  무료 받기
+                  무료 자료 받기
                 </button>
               </form>
             )}
