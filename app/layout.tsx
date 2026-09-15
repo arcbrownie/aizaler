@@ -31,7 +31,7 @@ export default function RootLayout({
           rel="stylesheet" 
           as="style" 
           crossOrigin="anonymous" 
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" 
+          href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/variable/complete/WantedSansVariable.min.css" 
         />
       </head>
       <body className="bg-[#f2f4f6] text-[#191f28] min-h-screen flex flex-col antialiased">

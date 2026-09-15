@@ -195,3 +195,4 @@ export default function ProductDetailView({ id }: Props) {
     </div>
   );
 }
+
