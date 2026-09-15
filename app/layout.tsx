@@ -71,26 +71,26 @@ export default function RootLayout({
 
             {/* 네비게이션 */}
             <nav className="hidden lg:flex items-center gap-6 text-[14px] font-semibold text-[#4e5968]">
-              <a href="#origin-story" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-slate-800">
-                <Sparkle size={15} weight="fill" className="text-amber-500" />
-                창업자 스토리
+              <a href="#what-you-get" className="hover:text-[#3182f6] transition-colors text-slate-800 font-bold">
+                받을 수 있는 것
+              </a>
+              <a href="#solutions" className="hover:text-[#3182f6] transition-colors">
+                실전 솔루션
               </a>
               <a href="#algorithm" className="hover:text-[#3182f6] transition-colors">
-                알고리즘 역공학
+                알고리즘 진단
               </a>
               <a href="#meta-ads" className="hover:text-[#3182f6] transition-colors">
                 메타 광고 실측
-              </a>
-              <a href="#first-9" className="hover:text-[#3182f6] transition-colors">
-                First 9 벡터
               </a>
               <Link href="/career" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-[#3182f6] font-bold">
                 커리어 전략
                 <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#e8f3ff] text-[#3182f6] font-mono">NEW</span>
               </Link>
-              <a href="#solutions" className="hover:text-[#3182f6] transition-colors">
-                실전 솔루션
-              </a>
+              <Link href="/about" className="hover:text-[#3182f6] transition-colors flex items-center gap-1">
+                <Sparkle size={15} weight="fill" className="text-amber-500" />
+                창업자 스토리
+              </Link>
               <a href="#faq" className="hover:text-[#3182f6] transition-colors">
                 FAQ
               </a>
