@@ -23,7 +23,7 @@ export const PRODUCTS: Product[] = [
     badge: 'BEST',
     category: '실전 그로스 바이블',
     title: '메타 알고리즘 실전 바이블: 조회수 20만 터져도 결제 0건인 이유와 황금 고객 도달 공식',
-    tagline: 'Meta 공인 미디어 플래닝 전문가가 423만 뷰 실측 분석으로 밝혀낸 소셜 알고리즘 실전서',
+    tagline: 'Meta 공인 미디어 플래닝 전문가가 스레드 2개 계정(명사도 본계정+연애) 합산 500만 뷰 실측 분석으로 밝혀낸 소셜 알고리즘 실전서',
     description: '조회수 20만이 터졌는데 왜 유료 결제는 4건뿐이었을까요? 뜬구름 잡는 마케팅 이론을 찢고, 실제 695편 포스트 전수 데이터와 결제 로그를 대조해 밝혀낸 메타 알고리즘의 추천 원리와 1,000~3,000뷰의 황금 스위트 스팟, 그리고 계정 역주행 시 10분 만에 되살리는 정상화 프로토콜을 집대성했습니다.',
     originalPrice: 129000,
     discountRate: 62,
@@ -36,7 +36,7 @@ export const PRODUCTS: Product[] = [
       '계정 건강 자동 진단 도구(threads-health.ts) 소스코드 제공'
     ],
     target: '조회수만 터지고 실제 매출이 안 나와 답답한 1인 창업가, 퍼포먼스 마케터, 인디해커',
-    highlightProof: 'Meta Certified Media Planning Pro 자격 보유 & 423만 뷰 실측 분석 검증',
+    highlightProof: 'Meta Certified Media Planning Pro 자격 보유 & 스레드 500만 뷰 실측 분석 검증',
     accentColor: '#3182f6',
   },
   {

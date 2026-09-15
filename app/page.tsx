@@ -55,7 +55,7 @@ export default function Home() {
   const faqs = [
     {
       q: '시중의 마케팅 강의나 AI 강의와는 구체적으로 무엇이 다른가요?',
-      a: '다른 강의는 "조회수를 터뜨려라", "프롬프트를 복사해라" 같은 표면적인 팁만 이야기합니다. 하지만 aizaler는 대중 밈으로 조회수 20만이 터졌을 때 왜 계정 품질 점수가 강등되어 유입이 -92% 폭락하는지(알고리즘 숙취), 왜 광고 소재와 랜딩페이지 첫 문장이 1:1로 일치해야만 결제율 8.6%가 나오는지 등 "다른 곳에서는 절대 알려주지 않는 423만 뷰 실측 데이터와 실전 금기"를 낱낱이 공개합니다.'
+      a: '다른 강의는 "조회수를 터뜨려라", "프롬프트를 복사해라" 같은 표면적인 팁만 이야기합니다. 하지만 aizaler는 대중 밈으로 조회수 20만이 터졌을 때 왜 계정 품질 점수가 강등되어 유입이 -92% 폭락하는지(알고리즘 숙취), 왜 광고 소재와 랜딩페이지 첫 문장이 1:1로 일치해야만 결제율 8.6%가 나오는지 등 "다른 곳에서는 절대 알려주지 않는 스레드 2개 계정(명사도 본계정+연애) 합산 500만 뷰 실측 데이터와 실전 금기"를 낱낱이 공개합니다.'
     },
     {
       q: '공기업과 해외 주재원을 퇴사하고 1인 개발을 시작하신 이유가 무엇인가요?',
@@ -94,7 +94,7 @@ export default function Home() {
 
             <p className="text-base sm:text-lg text-[#4e5968] leading-relaxed max-w-xl font-normal">
               유튜브나 마케팅 강의는 "조회수만 터뜨리면 돈 번다"고 말하지만, 왜 조회수 20만이 터져도 결제는 4건뿐이고 5일간 계정 노출이 -92% 폭락하는지는 <b>절대 알려주지 않습니다.</b><br />
-              이론만 파는 강사 대신, <b>직접 내 돈 태워 423만 뷰를 까보고 검증한 Meta 공인 미디어 플래닝 전문가</b>가 감춰진 알고리즘 메커니즘과 <b>결제율 8.6% 실전 솔루션</b>을 가감 없이 공개합니다.
+              이론만 파는 강사 대신, <b>직접 내 돈 태워 스레드 2개 계정 합산 500만 뷰를 까보고 검증한 Meta 공인 미디어 플래닝 전문가</b>가 감춰진 알고리즘 메커니즘과 <b>결제율 8.6% 실전 솔루션</b>을 가감 없이 공개합니다.
             </p>
 
             {/* CTA 버튼 세트 */}
@@ -181,7 +181,7 @@ export default function Home() {
                   <div className="text-xs text-[#191f28] space-y-1.5">
                     <div className="font-bold text-[#191f28]">✓ 공기업·주재원 퇴사 후 야생에서 생존한 1인 창업가</div>
                     <div className="text-[#3182f6] font-bold">✓ Meta Certified Media Planning Professional (공인 자격)</div>
-                    <div className="text-emerald-700 font-semibold">✓ 423만 뷰 퍼널 데이터 전수 분석 & 광고 결제율 8.6% 달성</div>
+                    <div className="text-emerald-700 font-semibold">✓ 스레드 2개 계정 합산 500만 뷰 전수 분석 & 광고 결제율 8.6% 달성</div>
                     <div className="text-[#4e5968] font-semibold">✓ 오늘도 직접 코딩하고 서비스를 굴리는 현역 빌더</div>
                   </div>
                 </div>
@@ -213,7 +213,7 @@ export default function Home() {
           </h2>
           <p className="text-sm sm:text-base text-[#4e5968] leading-relaxed">
             "조회수만 터뜨려라", "광고비 태워라" 같은 무책임한 훈계는 이제 그만 들으세요.<br className="hidden sm:inline" />
-            직접 사비로 메타 광고를 태우고 423만 뷰 결제 퍼널을 까보고서야 밝혀낸 날것 그대로의 실측 진실입니다.
+            직접 사비로 메타 광고를 태우고 스레드 2개 계정(명사도 본계정 + 연애 계정) 합산 500만 뷰 결제 퍼널을 까보고서야 밝혀낸 날것 그대로의 실측 진실입니다.
           </p>
         </div>
 
@@ -417,7 +417,7 @@ export default function Home() {
                 메타 알고리즘 바이블 & 월 $42 1인 풀스택 템플릿
               </h3>
               <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-                423만 뷰 결제 퍼널 전수 분석으로 증명된 소오름 매칭 공식(결제율 8.6%)과 외주 개발비 2,000만 원을 아끼는 서버리스 소스코드를 제공합니다.
+                스레드 2개 계정 합산 500만 뷰 결제 퍼널 전수 분석으로 증명된 소오름 매칭 공식(결제율 8.6%)과 외주 개발비 2,000만 원을 아끼는 서버리스 소스코드를 제공합니다.
               </p>
               <ul className="space-y-2 text-xs text-[#4e5968] pt-2 border-t border-black/[0.04]">
                 <li className="flex items-start gap-2">
@@ -495,7 +495,7 @@ export default function Home() {
               실전 그로스 & 엔지니어링 솔루션
             </h2>
             <p className="text-[#4e5968] text-sm">
-              Meta 공인 미디어 플래닝 전문가가 423만 뷰 실측 데이터로 검증한 실전 가이드와 1인 인프라 툴킷입니다.
+              Meta 공인 미디어 플래닝 전문가가 스레드 2개 계정 합산 500만 뷰 실측 데이터로 검증한 실전 가이드와 1인 인프라 툴킷입니다.
             </p>
           </div>
 
@@ -738,7 +738,7 @@ export default function Home() {
             </h2>
 
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-              지금 이메일을 입력하시면, Meta 공인 전문가가 423만 뷰 실측 로그를 분석해 만든 '알고리즘 정상화 10분 체크리스트'와 '고전환 광고 세팅 템플릿(PDF)'을 즉시 보내드립니다.
+              지금 이메일을 입력하시면, Meta 공인 전문가가 스레드 2개 계정 합산 500만 뷰 실측 로그를 분석해 만든 '알고리즘 정상화 10분 체크리스트'와 '고전환 광고 세팅 템플릿(PDF)'을 즉시 보내드립니다.
             </p>
 
             {isDownloaded ? (

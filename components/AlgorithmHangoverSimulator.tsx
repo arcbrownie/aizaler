@@ -93,7 +93,7 @@ export default function AlgorithmHangoverSimulator() {
         </h2>
         <p className="text-[#4e5968] text-sm sm:text-base leading-relaxed">
           "조회수는 착시이고, 진짜 내 고객의 결제만이 진실입니다."<br />
-          실제 423만 뷰 695편의 결제 로그를 분석해, 대중 밈 바이럴이 왜 계정을 망가뜨리고 소수 고순도 유입이 폭발적 매출을 만드는지 비교해 보세요.
+          실제 스레드 2개 계정(명사도 본계정 + 연애 계정) 합산 500만 뷰 695편의 결제 로그를 분석해, 대중 밈 바이럴이 왜 계정을 망가뜨리고 소수 고순도 유입이 폭발적 매출을 만드는지 비교해 보세요.
         </p>
       </div>
 

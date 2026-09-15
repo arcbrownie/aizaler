@@ -51,7 +51,7 @@ export default function AboutPage() {
             </div>
             <div className="px-3.5 py-2 rounded-xl bg-white border border-black/[0.08] shadow-xs text-xs font-bold text-[#191f28] flex items-center gap-1.5">
               <TrendUp size={16} weight="bold" className="text-emerald-500" />
-              <span>4,230,000+ 뷰 실측 분석 데이터</span>
+              <span>스레드 2개 계정 5,000,000+ 뷰 실측 분석</span>
             </div>
             <div className="px-3.5 py-2 rounded-xl bg-white border border-black/[0.08] shadow-xs text-xs font-bold text-[#191f28] flex items-center gap-1.5">
               <Sparkle size={16} weight="fill" className="text-amber-500" />
@@ -87,7 +87,7 @@ export default function AboutPage() {
                 내 돈 태워 검증한 데이터만 말합니다
               </h3>
               <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-                해외 아티클을 번역해 "퇴사 후 AI로 월 1,000만 원"을 외치는 허상 강의를 거부합니다. 직접 사비로 메타 광고를 집행하고, 423만 뷰와 결제 퍼널을 대조해 증명된 실측 데이터만 공유합니다.
+                해외 아티클을 번역해 "퇴사 후 AI로 월 1,000만 원"을 외치는 허상 강의를 거부합니다. 직접 사비로 메타 광고를 집행하고, 스레드 2개 계정(명사도 본계정 + 연애 계정) 합산 500만 뷰와 결제 퍼널을 대조해 증명된 실측 데이터만 공유합니다.
               </p>
             </div>
 
@@ -150,3 +150,4 @@ export default function AboutPage() {
     </div>
   );
 }
+
