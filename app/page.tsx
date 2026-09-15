@@ -193,7 +193,7 @@ export default function Home() {
                     href="/about"
                     className="inline-flex items-center gap-1 text-xs font-bold text-[#3182f6] hover:underline"
                   >
-                    공기업·주재원 퇴사 및 1인 개발 생존 서사 전문 읽기 <ArrowRight size={14} weight="bold" />
+                    aizaler 스튜디오 철학 & 사이트 소개 보기 <ArrowRight size={14} weight="bold" />
                   </Link>
                 </div>
               </div>
@@ -785,21 +785,21 @@ export default function Home() {
         <div className="p-8 sm:p-10 rounded-3xl bg-white border border-black/[0.08] shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2.5 max-w-2xl">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
-              <UserCheck size={14} weight="fill" />
-              <span>ABOUT THE FOUNDER · 파운더의 실전 기록</span>
+              <Sparkle size={14} weight="fill" />
+              <span>ABOUT AIZALER · 사이트 및 스튜디오 소개</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-[#191f28] leading-snug">
-              공기업과 해외 주재원을 나와, 1인 개발로 생존하기까지
+              이론만 파는 강사 대신, 직접 제품과 데이터로 생존하는 1인 빌더 스튜디오
             </h3>
             <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-              정년과 급여가 보장되던 안락한 테두리를 떠나 야생에서 수많은 실패와 시행착오 끝에, Meta Certified Media Planning Professional 공인 자격을 취득하고 4개 프로덕트를 직접 굴리기까지의 4단계 서사를 확인해 보세요.
+              정년과 급여가 보장되던 공기업·해외주재원을 나와 야생에서 4개 프로덕트를 직접 굴리기까지. aizaler 스튜디오의 실전 철학과 1인 테크 운영 방식을 확인해 보세요.
             </p>
           </div>
           <Link
             href="/about"
             className="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#191f28] text-white hover:bg-black font-bold text-xs sm:text-sm transition-all shadow-sm"
           >
-            <span>창업자 4단계 서사 전문 읽기</span>
+            <span>사이트 소개 전문 보기</span>
             <ArrowRight size={16} weight="bold" />
           </Link>
         </div>

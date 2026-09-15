@@ -29,8 +29,8 @@ export default function AboutPage() {
           </Link>
 
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold mx-auto">
-            <UserCheck size={16} weight="fill" />
-            <span>FOUNDER STORY · 1인 빌더의 실전 기록</span>
+            <Sparkle size={16} weight="fill" />
+            <span>ABOUT AIZALER · 사이트 및 스튜디오 소개</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black text-[#191f28] tracking-tight leading-tight">
