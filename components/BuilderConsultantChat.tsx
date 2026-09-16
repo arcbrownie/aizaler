@@ -16,11 +16,11 @@ interface BuilderConsultantChatProps {
 }
 
 const QUICK_PROMPTS = [
-  { text: '아이디어는 있는데 BM 기획이 막막해요', step: 1, icon: LightbulbFilament },
-  { text: 'Aside 24h 자율 리서치 & 정본 AI가 필요해요', step: 2, icon: Cpu },
-  { text: '광고 조회수는 나오는데 결제 전환이 안 돼요', step: 3, icon: Target },
-  { text: '외주비 없이 혼자 상용 웹을 띄우고 싶어요', step: 4, icon: RocketLaunch },
-  { text: '파운더와 1:1로 90일 실행 플랜을 세우고 싶어요', step: 5, icon: Crown },
+  { text: '💡 [Level 1] 아이디어는 있는데 시장성이 막막해요', step: 1, icon: LightbulbFilament },
+  { text: '⚡️ [Level 2] AI를 검색창처럼만 써서 실무에 안 쓰여요', step: 2, icon: Cpu },
+  { text: '🚀 [Level 3] 외주비 없이 직접 상용 웹을 띄우고 싶어요', step: 3, icon: RocketLaunch },
+  { text: '🎯 [Level 4] 웹은 있는데 방문자가 없고 결제가 안 돼요', step: 4, icon: Target },
+  { text: '👑 [Level 5] 퇴사/1인 기업 방향성을 1:1로 진단받고 싶어요', step: 5, icon: Crown },
 ];
 
 const TRACK_DETAILS: Record<number, {
@@ -31,39 +31,39 @@ const TRACK_DETAILS: Record<number, {
   actionText: string;
 }> = {
   1: {
-    name: 'TRACK 01. 시장 검증 & BM 기획',
-    deliverable: '검증된 BM 린 캔버스 1장 & 고객 결핍 검증표',
+    name: 'LEVEL 01. 시장 검증 & Aside 자율 리서치',
+    deliverable: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
     brickLabel: '블루 기초 블록',
     link: '#lead-magnet',
-    actionText: '기획 트랙 맞춤 가이드 받기'
+    actionText: '1단계 기획 가이드 받기'
   },
   2: {
-    name: 'TRACK 02. Aside 자율 리서치 & 정본 AI',
-    deliverable: 'Aside 24h 시장 감시 봇 & Anthropic 공식 XML 프롬프트',
+    name: 'LEVEL 02. 실리콘밸리 Claude 정본 AI 지능',
+    deliverable: 'Anthropic 공식 XML 프롬프트 템플릿 & 실무 AI 파이프라인',
     brickLabel: '딥 퍼플 지능 블록',
     link: '/product/aside-starter',
-    actionText: 'AI 지능 실전 킷 보기'
+    actionText: '2단계 AI 정본 킷 보기'
   },
   3: {
-    name: 'TRACK 03. 메타 고전환 퍼널 매칭',
-    deliverable: '광고 ↔ 랜딩 결속 CVR 20% 고전환 퍼널 시스템',
-    brickLabel: '레드 핫포인트 블록',
-    link: '/product/1',
-    actionText: '퍼널 트랙 실전서 보기'
-  },
-  4: {
-    name: 'TRACK 04. 외주비 0원 1인 상용 웹 런칭',
-    deliverable: '외주비 0원, 내 손으로 직접 띄운 상용 웹 1개 배포',
+    name: 'LEVEL 03. 외주비 0원 1인 상용 웹 런칭',
+    deliverable: '외주비 0원, 내 손으로 직접 띄운 상용 웹서비스 1개 배포',
     brickLabel: '퍼플➔화이트 런칭 블록',
     link: '/product/6',
-    actionText: '풀스택 런칭 트랙 보기'
+    actionText: '3단계 풀스택 런칭 킷 보기'
+  },
+  4: {
+    name: 'LEVEL 04. 메타 고전환 퍼널 & 소셜 트래픽',
+    deliverable: '스레드 알고리즘 & CVR 20% 고전환 퍼널 시스템',
+    brickLabel: '레드 핫포인트 블록',
+    link: '/product/1',
+    actionText: '4단계 퍼널 실전서 보기'
   },
   5: {
-    name: 'TRACK 05. 1:1 VIP 프라이빗 전략 마스터리',
+    name: 'LEVEL 05. 1인 비즈니스 마스터리 & 1:1 VIP',
     deliverable: '사전 질의서 기반 90일 실행 Action Blueprint',
     brickLabel: '순백 화이트 서밋 블록',
     link: '/career',
-    actionText: '1:1 전략 세션 신청하기'
+    actionText: '5단계 1:1 전략 세션 신청하기'
   }
 };
 
@@ -72,7 +72,7 @@ export default function BuilderConsultantChat({ onStepDiagnosed }: BuilderConsul
     {
       id: 'welcome',
       sender: 'ai',
-      text: '반갑습니다! 1인 빌더 스튜디오 aizaler의 AI 아키텍트입니다. 🧱✨\n\n무엇부터 시작해야 할지 막막하신가요? 아래 고민 칩을 탭하시거나 편하게 1줄로 적어주시면, 지금 당장 집중해야 할 손에 잡히는 목표 결과물(트랙)을 처방해 드립니다.',
+      text: '반갑습니다! 1인 빌더 스튜디오 aizaler의 AI 아키텍트입니다. 🧱✨\n\n수많은 정보 속에서 "지금 당장 내가 무엇부터 시작해야 하는지" 막막하신가요? 아래 고민 칩을 탭하시거나 편하게 1줄로 적어주시면, 5단계 커리큘럼 중 지금 당장 조립해야 할 레벨 블록을 처방해 드립니다.',
       timestamp: '지금'
     }
   ]);

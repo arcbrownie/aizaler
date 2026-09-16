@@ -62,61 +62,66 @@ export default function Home() {
 
   const steps = [
     {
-      track: 'TRACK 01',
-      title: '시장 검증 & 비즈니스 모델 기획',
-      summary: '코딩 문법을 외우기 전, 고객이 실제로 지갑을 여는 결핍과 현금 흐름 모델을 데이터로 검증합니다.',
-      outcome: '검증된 BM 린 캔버스 1장 & 고객 결핍 검증표',
-      tools: '1인 창업 필수 용어집 · 결핍 검증 체크리스트',
+      level: 'LEVEL 01',
+      title: '시장 검증 & Aside 24h 자율 리서치',
+      situation: '아이디어는 있지만 시장성이 있는지, 무엇부터 시작해야 할지 막막할 때',
+      summary: '코딩 문법을 외우기 전, 고객의 실제 결핍을 검증하고 Aside 24h 자율 브라우저로 시장과 경쟁사 데이터를 자동 수집합니다.',
+      outcome: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
+      tools: 'Aside 브라우저 템플릿 · 1인 창업 필수 용어집 · 결핍 검증 체크리스트',
       tag: 'FOUNDATION',
       color: '#2563eb',
       bgLight: 'bg-blue-50/70 border-blue-200/60',
       icon: LightbulbFilament,
-      actionText: '기획 트랙 무료 가이드 받기',
+      actionText: '1단계 무료 가이드 받기',
       actionLink: '#lead-magnet',
       isFree: true
     },
     {
-      track: 'TRACK 02',
-      title: 'Aside 24h 자율 리서치 & 정본 AI 지능',
-      summary: 'Aside 브라우저로 24시간 시장 트렌드를 자동 감시하고, Anthropic 공식 XML 구조화 프롬프트로 10배의 지능 레버리지를 장착합니다.',
-      outcome: 'Aside 24h 자율 시장 감시 봇 & Claude 공식 XML 프롬프트',
-      tools: 'Aside 브라우저 템플릿 · Claude 공식 XML 프롬프트',
+      level: 'LEVEL 02',
+      title: '실리콘밸리 Claude Academy 정본 AI 지능',
+      situation: 'AI를 단순한 검색창처럼만 써서 기획과 업무에 10배 레버리지가 안 날 때',
+      summary: 'Anthropic 본사의 공식 XML 구조화 프롬프트와 Gemini 대용량 컨텍스트로 내 사고력과 기획력을 10배 확장합니다.',
+      outcome: 'Anthropic 공식 XML 프롬프트 템플릿 & 실무 AI 파이프라인',
+      tools: 'Claude 공식 XML 프롬프트 · 3.5 Sonnet 최적화 템플릿',
       tag: 'INTELLIGENCE',
       color: '#7c3aed',
       bgLight: 'bg-purple-50/70 border-purple-200/60',
       icon: Cpu,
-      actionText: 'AI 지능 실전 킷 보기',
+      actionText: '2단계 AI 정본 킷 보기',
       actionLink: '/product/aside-starter'
     },
     {
-      track: 'TRACK 03',
-      title: '메타 고전환 퍼널 매칭',
-      summary: '광고 카피와 랜딩페이지 첫 문장을 1:1로 일치시켜 클릭한 고객의 구매 결정을 완성합니다.',
-      outcome: '광고 ↔ 랜딩 결속 CVR 20% 고전환 퍼널 시스템',
+      level: 'LEVEL 03',
+      title: '외주비 0원 1인 상용 웹 프로덕트 런칭',
+      situation: '외주 개발사 견적에 막혀 내 상용 서비스를 직접 띄우지 못할 때',
+      summary: 'Cursor, Claude Code, Supabase, Cloudflare를 레고처럼 조립해 코딩 문법 암기 없이 3일 만에 상용 웹을 배포합니다.',
+      outcome: '외주비 0원, 내 손으로 직접 띄운 상용 웹서비스 1개 라이브 배포',
+      tools: 'Cursor · Claude Code · Next.js 14 · Supabase · Cloudflare',
+      tag: 'LAUNCH',
+      color: '#9333ea',
+      bgLight: 'bg-purple-50/70 border-purple-200/60',
+      icon: RocketLaunch,
+      actionText: '3단계 풀스택 런칭 킷 보기',
+      actionLink: '/product/6'
+    },
+    {
+      level: 'LEVEL 04',
+      title: '메타 고전환 퍼널 & 소셜 트래픽',
+      situation: '제품은 띄웠는데 방문자가 없거나, 광고를 돌려도 결제 없이 다 이탈할 때',
+      summary: '스레드 500만 뷰 알고리즘으로 진성 타깃을 모으고, 광고 카피와 랜딩페이지 첫 문장을 1:1로 결속시켜 CVR 20% 퍼널을 완성합니다.',
+      outcome: '스레드 알고리즘 & CVR 20% 고전환 퍼널 시스템 & 첫 결제 발생',
       tools: '후킹 카피 프레임워크 · 메타 알고리즘 역설계 가이드',
       tag: 'HOTPOINT',
       color: '#f04452',
       bgLight: 'bg-rose-50/70 border-rose-200/60',
       icon: Target,
-      actionText: '퍼널 트랙 실전서 보기',
+      actionText: '4단계 퍼널 실전서 보기',
       actionLink: '/product/1'
     },
     {
-      track: 'TRACK 04',
-      title: '외주비 0원 1인 상용 웹 런칭',
-      summary: '외주 개발사 없이 Cursor, Supabase, Cloudflare를 결합해 3일 만에 상용 웹서비스를 직접 띄웁니다.',
-      outcome: '외주비 0원, 내 손으로 직접 띄운 상용 웹서비스 1개 라이브 배포',
-      tools: 'Next.js 14 · Supabase · Cloudflare · 런칭 보일러플레이트',
-      tag: 'LAUNCH',
-      color: '#9333ea',
-      bgLight: 'bg-purple-50/70 border-purple-200/60',
-      icon: RocketLaunch,
-      actionText: '풀스택 런칭 트랙 보기',
-      actionLink: '/product/6'
-    },
-    {
-      track: 'TRACK 05',
-      title: '1:1 VIP 프라이빗 비즈니스 전략 마스터리',
+      level: 'LEVEL 05',
+      title: '1인 비즈니스 마스터리 & 1:1 VIP 세션',
+      situation: '퇴사 갈림길이나 신사업 런칭에서 실패 비용을 아끼고 1인 기업으로 안착하고 싶을 때',
       summary: '야생에서 4개 프로덕트로 생존한 파운더가 50분간 1:1로 내 비즈니스의 생존율과 실행 우선순위를 설계합니다.',
       outcome: '사전 질의서 기반 90일 실행 Action Blueprint & 1:1 심층 처방',
       tools: '4개 서비스 생존 파운더 1:1 세션 (50분)',
@@ -124,7 +129,7 @@ export default function Home() {
       color: '#191f28',
       bgLight: 'bg-slate-50 border-slate-200/80',
       icon: Crown,
-      actionText: '1:1 전략 세션 신청하기',
+      actionText: '5단계 1:1 전략 세션 신청하기',
       actionLink: '/career'
     }
   ];
@@ -179,7 +184,7 @@ export default function Home() {
                   href="#roadmap"
                   className="px-5 py-3.5 rounded-2xl bg-white border border-black/[0.08] text-[#191f28] text-xs sm:text-sm font-bold hover:bg-gray-50 flex items-center gap-1.5 shadow-xs"
                 >
-                  <span>5대 성장 트랙 보기</span>
+                  <span>5단계 완주 커리큘럼 보기</span>
                   <ArrowRight size={14} weight="bold" />
                 </a>
               </div>
@@ -206,22 +211,22 @@ export default function Home() {
         <BuilderConsultantChat onStepDiagnosed={(step) => setDiagnosedStep(step)} />
       </section>
 
-      {/* ── 3. 손에 잡히는 결과물 중심 5대 빌더 트랙 (Solopreneur 벤치마크) ── */}
+      {/* ── 3. 아이디어부터 현금 흐름까지 5단계 완주 커리큘럼 ── */}
       <section id="roadmap" className="toss-container space-y-6 scroll-mt-14 max-w-3xl mx-auto">
         <div className="text-center space-y-1.5">
           <span className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
-            BUILDER GROWTH TRACKS
+            5-STEP BUILDER CURRICULUM
           </span>
           <h2 className="text-xl sm:text-3xl font-black text-[#191f28] tracking-tight">
-            손에 잡히는 결과물 중심 5대 빌더 트랙
+            아이디어부터 현금 흐름까지, 5단계 완주 커리큘럼
           </h2>
           <p className="text-xs sm:text-sm text-[#4e5968]">
-            어릴 때 레고를 조립하듯, 내 손에 쥐어지는 명확한 결과물을 차례대로 완성해 나갑니다.
+            무엇부터 시작해야 할지 헤매지 마세요. 내 상태에 맞는 레벨 블록에서 시작해 차례대로 쌓아 올립니다.
           </p>
         </div>
 
-        {/* 5개 트랙 카드 리스트 */}
-        <div className="space-y-3.5">
+        {/* 5개 레벨 커리큘럼 카드 리스트 */}
+        <div className="space-y-4">
           {steps.map((s, idx) => {
             const Icon = s.icon;
             return (
@@ -229,7 +234,7 @@ export default function Home() {
                 key={idx}
                 className="p-5 sm:p-6 rounded-2xl bg-white border border-black/[0.08] shadow-xs space-y-3 transition-all hover:border-[#3182f6]/40 hover:shadow-sm"
               >
-                {/* 상단 헤더: 아이콘, 트랙 태그, 타이틀, 액션 버튼 */}
+                {/* 상단 헤더: 아이콘, 레벨 태그, 타이틀, 액션 버튼 */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div
@@ -242,7 +247,7 @@ export default function Home() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] font-mono font-black text-[#8b95a1]">
-                          {s.track}
+                          {s.level}
                         </span>
                         <span
                           className="text-[9px] font-bold px-2 py-0.5 rounded-full"
@@ -266,11 +271,17 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* 결과물 강조 박스 (Builder Josh ASC 벤치마크) */}
+                {/* 상황 진단 뱃지 */}
+                <div className="text-[11px] text-[#4e5968] bg-[#f9fafb] px-3 py-1.5 rounded-lg border border-black/[0.03] flex items-center gap-1.5">
+                  <span className="font-bold text-[#8b95a1] shrink-0">📌 지금 내 상태:</span>
+                  <span className="truncate">{s.situation}</span>
+                </div>
+
+                {/* 완성 마일스톤 강조 박스 */}
                 <div className="p-3 rounded-xl bg-slate-50 border border-black/[0.04] space-y-1">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#191f28]">
                     <span className="text-amber-500">🎯</span>
-                    <span>완성 결과물:</span>
+                    <span>완성 마일스톤:</span>
                     <span className="text-[#3182f6] font-black">{s.outcome}</span>
                   </div>
                   <p className="text-xs text-[#4e5968] leading-relaxed">
