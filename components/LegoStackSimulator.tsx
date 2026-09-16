@@ -75,7 +75,7 @@ const BRICKS: LegoBrick[] = [
   {
     id: 3,
     name: '03. Claude Academy 정본 지능',
-    desc: '인스타 카더라 대신 실리콘밸리 본사의 XML 구조화 프롬프트를 딥 퍼플 지능 핵으로 장착합니다.',
+    desc: '실리콘밸리 Anthropic 본사의 정본 XML 구조화 프롬프트를 딥 퍼플 지능 핵으로 장착합니다.',
     stageName: '퍼플 지능',
     tag: 'INTELLIGENCE',
     badge: '정본 프롬프트',

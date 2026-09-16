@@ -6,45 +6,21 @@ import {
   Sparkle, 
   ArrowRight, 
   CheckCircle, 
-  TrendUp, 
   CaretDown, 
   DownloadSimple,
-  RocketLaunch,
-  Globe,
-  Crown
+  Crown,
+  LightbulbFilament,
+  Cpu,
+  Target,
+  RocketLaunch
 } from '@phosphor-icons/react';
 
-import { PRODUCTS } from '@/data/products';
 import LegoStackSimulator from '@/components/LegoStackSimulator';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [selectedMode, setSelectedMode] = useState<'daily' | 'traffic' | 'build'>('daily');
   const [emailInput, setEmailInput] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
-
-  const modeOptions = [
-    { 
-      id: 'daily', 
-      label: '1. Aside & 지능', 
-      desc: '탭 50개 검색 지옥 탈출: Claude Academy 정본 프롬프트 & 24h 자율 리서치', 
-      icon: Globe 
-    },
-    { 
-      id: 'traffic', 
-      label: '2. 트래픽 & 퍼널', 
-      desc: '허수 조회수 탈출: 광고 클릭을 이탈 없이 구매로 결속시키는 고전환 퍼널', 
-      icon: TrendUp 
-    },
-    { 
-      id: 'build', 
-      label: '3. 1인 제품 런칭', 
-      desc: '외주비 0원: Cursor + Supabase 기반 실결제 상용 웹서비스 런칭', 
-      icon: RocketLaunch 
-    },
-  ] as const;
-
-  const modeProducts = PRODUCTS.filter((p) => p.mode === selectedMode);
 
   const handleDownload = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,51 +28,113 @@ export default function Home() {
     setIsDownloaded(true);
   };
 
+  const steps = [
+    {
+      step: 'STEP 01',
+      title: '시장 검증 & 비즈니스 모델 기획',
+      summary: '고객의 실제 결핍과 지불 의사를 데이터로 검증하고 가치 제안을 설계합니다.',
+      tag: 'FOUNDATION',
+      color: '#2563eb',
+      bgLight: 'bg-blue-50/70 border-blue-200/60',
+      icon: LightbulbFilament,
+      actionText: '1인 창업 필수 용어집 & CVR 체크리스트 (무료)',
+      actionLink: '#lead-magnet',
+      isFree: true
+    },
+    {
+      step: 'STEP 02',
+      title: 'Claude Academy 정본 & 24h 자율 리서치',
+      summary: 'Anthropic 본사의 공식 XML 구조화 프롬프트와 Aside 브라우저 자율 감시를 장착합니다.',
+      tag: 'INTELLIGENCE',
+      color: '#7c3aed',
+      bgLight: 'bg-purple-50/70 border-purple-200/60',
+      icon: Cpu,
+      actionText: 'Aside & 정본 해설 킷 보기',
+      actionLink: '/product/aside-starter',
+      price: '29,000원'
+    },
+    {
+      step: 'STEP 03',
+      title: '메타 고전환 퍼널 매칭',
+      summary: '광고 카피와 랜딩페이지를 1:1로 일치시켜 클릭한 고객의 구매 결정을 완성합니다.',
+      tag: 'CONVERSION',
+      color: '#f04452',
+      bgLight: 'bg-rose-50/70 border-rose-200/60',
+      icon: Target,
+      actionText: '메타 알고리즘 실전서 보기',
+      actionLink: '/product/1',
+      price: '49,000원'
+    },
+    {
+      step: 'STEP 04',
+      title: '1인 풀스택 상용 웹서비스 런칭',
+      summary: 'Cursor, Supabase, 토스페이먼츠를 조립해 외주비 없이 실제 결제되는 웹서비스를 띄웁니다.',
+      tag: 'LAUNCH',
+      color: '#191f28',
+      bgLight: 'bg-slate-50 border-slate-200/80',
+      icon: RocketLaunch,
+      actionText: '1인 웹 런칭 보일러플레이트 보기',
+      actionLink: '/product/5',
+      price: '79,000원'
+    },
+    {
+      step: 'STEP 05',
+      title: '1:1 프라이빗 비즈니스 전략 세션',
+      summary: '야생에서 4개 프로덕트로 생존한 파운더가 50분간 1:1 맞춤 실행 Blueprint를 도출합니다.',
+      tag: 'VIP MENTORING',
+      color: '#d97706',
+      bgLight: 'bg-amber-50/70 border-amber-200/60',
+      icon: Crown,
+      actionText: '1:1 전략 세션 신청하기 (선착순)',
+      actionLink: '/career',
+      price: '매월 10팀 한정'
+    }
+  ];
+
   const faqs = [
     {
       q: '어릴 때 레고 좋아했던 사람을 위한 빌더 프로그램이란 무엇인가요?',
-      a: '벽돌 만드는 화학 공식을 몰라도 레고 블록만 있으면 거대한 성을 지을 수 있었습니다. 2026년의 AI 소프트웨어도 마찬가지입니다. 복잡한 코딩 문법이나 뜬구름 마케팅 이론을 0부터 외울 필요 없이, 검증된 AI 블록(Aside 브라우저, 정본 프롬프트, 인프라 보일러플레이트)을 조립해 내 제품과 현금 흐름을 만드는 1인 창작자로 성장하도록 돕는 프로그램입니다.'
+      a: '벽돌을 굽는 공식을 몰라도 레고 블록만 있으면 누구나 거대한 성을 지을 수 있었습니다. 복잡한 코딩을 처음부터 외우지 않고, 검증된 기획·지능·퍼널·인프라 블록을 조립해 내 상용 프로덕트와 현금 흐름을 만드는 1인 빌더 성장 트랙입니다.'
     },
     {
-      q: '시중의 챗GPT 강의나 프롬프트 모음집과는 구체적으로 무엇이 다른가요?',
-      a: '시중 강의는 얕은 인스타 카드뉴스를 짜깁기한 것이 대다수입니다. aizaler는 Anthropic 공식 Claude Academy와 Google Gemini 엔지니어링 정본(SSOT)을 직접 분석하여 실무에 바로 복붙 가능한 XML 구조화 템플릿과 Aside 24시간 자율 리서치 등 프로들의 실전 무기를 전수합니다.'
+      q: 'aizaler가 제공하는 AI 지능의 차별점은 무엇인가요?',
+      a: '실리콘밸리 Anthropic Claude Academy와 Google Gemini 공식 엔지니어링 문서(SSOT)를 분석해 실무에 바로 복붙 가능한 XML 구조화 템플릿과 Aside 브라우저 24시간 자율 리서치 환경을 제공합니다.'
     },
     {
-      q: '비개발자나 초보자도 1인 제품 런칭 트랙을 따라갈 수 있나요?',
-      a: '네, 외주 개발사에 수천만 원을 쓰지 않아도 Cursor, Supabase, Cloudflare를 레고처럼 조합하면 누구나 1인 풀스택 시스템을 구축할 수 있습니다. aizaler의 가이드와 템플릿은 실제 라이브 중인 상용 서비스 파이프라인 그대로 제공됩니다.'
-    },
+      q: '비개발자도 직접 상용 제품을 런칭할 수 있나요?',
+      a: '네. Cursor, Supabase, Cloudflare, 토스페이먼츠를 조립형 아키텍처로 조합해 외주비 없이 혼자서 결제 웹서비스를 띄우고 운영하는 실전 파이프라인을 전수합니다.'
+    }
   ];
 
   return (
-    <div className="space-y-10 sm:space-y-16 pt-3 sm:pt-6 pb-12">
-      {/* ── 1. 히어로 섹션 (Lego Builder Narrative) ── */}
+    <div className="space-y-12 sm:space-y-20 pt-4 sm:pt-8 pb-16">
+      {/* ── 1. 히어로 섹션 (Lego Builder Core Narrative) ── */}
       <section className="toss-container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center">
-          {/* 좌측: 레고 훅 & 1인 빌더 서사 */}
-          <div className="lg:col-span-7 space-y-3.5 sm:space-y-4 text-left">
+          {/* 좌측: 간결하고 당당한 우리만의 차별화 서사 */}
+          <div className="lg:col-span-7 space-y-4 text-left">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
               <Sparkle size={13} weight="fill" />
-              <span>레고처럼 조립하는 1인 AI 비즈니스</span>
+              <span>AI-NATIVE BUILDER STUDIO</span>
             </div>
 
             <h1 className="text-2xl sm:text-4xl lg:text-[42px] font-black text-[#191f28] leading-[1.25] tracking-tight">
               어릴 때 레고 좋아하셨나요?<br />
-              코딩 대신 <span className="text-[#3182f6] underline decoration-[#3182f6]/30">AI 블록을 조립하는</span> 1인 빌더.
+              <span className="text-[#3182f6]">AI 블록을 조립해</span> 내 제품을 띄우는 1인 빌더.
             </h1>
 
-            <p className="text-xs sm:text-base text-[#4e5968] leading-relaxed max-w-xl font-normal">
-              남들이 만든 AI 툴에 구독료만 내는 단순 소비자는 그만.<br className="hidden sm:inline" />
-              실리콘밸리 <b>Claude 정본 프롬프트</b>와 <b>Aside 24시간 자율 에이전트</b>를 조립해 외주비 0원으로 내 프로덕트를 직접 완성하세요.
+            <p className="text-sm sm:text-base text-[#4e5968] leading-relaxed max-w-xl font-normal">
+              실리콘밸리 <b>공식 정본 프롬프트</b>와 <b>24시간 자율 에이전트</b>를 결합해, 내 아이디어를 실제 작동하는 상용 웹서비스로 조립해내는 1인 빌더의 길을 함께합니다.
             </p>
 
-            {/* CTA 버튼 & 신뢰 텍스트 */}
+            {/* CTA 세트 */}
             <div className="space-y-3 pt-1">
               <div className="flex flex-wrap items-center gap-2.5">
                 <a
-                  href="#modes"
+                  href="#roadmap"
                   className="toss-button-primary px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:scale-95"
                 >
-                  <span>3대 빌더 모드 보기</span>
+                  <span>5단계 조립 로드맵 보기</span>
                   <ArrowRight size={14} weight="bold" />
                 </a>
                 <a
@@ -108,158 +146,159 @@ export default function Home() {
                 </a>
               </div>
 
-              {/* 신뢰 지표 한줄 */}
+              {/* 신뢰 지표 */}
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-[#8b95a1] pt-1">
                 <span>✓ Meta 공인 전문가</span>
-                <span>✓ Claude Academy 정본</span>
-                <span>✓ Aside 24h 리서치</span>
-                <span className="text-emerald-600 font-medium">✓ 외주비 0원 4개 라이브</span>
+                <span>✓ Claude Academy 공식 정본</span>
+                <span>✓ Aside 24h 자율 리서치</span>
+                <span className="text-emerald-600 font-medium">✓ 4개 상용 서비스 운영</span>
               </div>
             </div>
           </div>
 
-          {/* 우측: 컴팩트 3D 레고 빌더 시뮬레이터 */}
+          {/* 우측: 3D 레고 빌더 시뮬레이터 */}
           <div className="lg:col-span-5">
             <LegoStackSimulator />
           </div>
         </div>
       </section>
 
-      {/* ── 2. 3대 빌더 모드 & 핵심 솔루션 (스압 제로) ── */}
-      <section id="modes" className="toss-container space-y-4 sm:space-y-6 scroll-mt-14">
-        {/* 모드 선택 세그먼트 버튼 (3개) */}
-        <div className="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-white border border-black/[0.06] shadow-xs max-w-xl mx-auto">
-          {modeOptions.map((m) => {
-            const Icon = m.icon;
-            const isSelected = selectedMode === m.id;
-            return (
-              <button
-                key={m.id}
-                onClick={() => setSelectedMode(m.id)}
-                className={`py-2.5 px-2 rounded-xl text-center transition-all flex items-center justify-center gap-1.5 ${
-                  isSelected
-                    ? 'bg-[#191f28] text-white shadow-xs'
-                    : 'text-[#4e5968] hover:bg-gray-50 hover:text-[#191f28]'
-                }`}
-              >
-                <Icon size={15} weight={isSelected ? 'fill' : 'bold'} className={isSelected ? 'text-[#3182f6]' : 'text-[#8b95a1]'} />
-                <span className="font-bold text-xs sm:text-sm truncate">{m.label}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* 선택된 모드 1줄 요약 배너 */}
-        <div className="p-3.5 sm:p-4 rounded-2xl bg-[#e8f3ff]/60 border border-[#3182f6]/20 text-center max-w-xl mx-auto">
-          <p className="text-xs sm:text-sm font-bold text-[#191f28]">
-            {modeOptions.find((m) => m.id === selectedMode)?.desc}
+      {/* ── 2. 5단계 레고 조립 성장 로드맵 (백화점 느낌 탈피) ── */}
+      <section id="roadmap" className="toss-container space-y-6 scroll-mt-14 max-w-3xl mx-auto">
+        <div className="text-center space-y-1.5">
+          <span className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
+            BUILDER GROWTH ROADMAP
+          </span>
+          <h2 className="text-xl sm:text-3xl font-black text-[#191f28] tracking-tight">
+            1인 빌더로 완성되는 5단계 조립 로드맵
+          </h2>
+          <p className="text-xs sm:text-sm text-[#4e5968]">
+            단편적인 지식이 아닌, 아이디어 검증부터 실제 결제 프로덕트 런칭까지 차례대로 조립해 나갑니다.
           </p>
         </div>
 
-        {/* 해당 모드 추천 솔루션 카드 그리드 (간결) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 max-w-3xl mx-auto">
-          {modeProducts.map((p) => (
-            <div key={p.id} className="bezel-card-outer flex flex-col justify-between">
-              <div className="bezel-card-inner flex-1 flex flex-col justify-between p-4 sm:p-5 space-y-3">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-[#e8f3ff] text-[#3182f6]">
-                      {p.badge}
-                    </span>
-                    <span className="text-[11px] text-[#8b95a1] font-medium">{p.category}</span>
+        {/* 5개 단계 카드 리스트 */}
+        <div className="space-y-3">
+          {steps.map((s, idx) => {
+            const Icon = s.icon;
+            return (
+              <div
+                key={idx}
+                className="p-4 sm:p-5 rounded-2xl bg-white border border-black/[0.08] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 transition-all hover:border-[#3182f6]/40"
+              >
+                <div className="flex items-start gap-3 min-w-0">
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 text-white shadow-xs"
+                    style={{ backgroundColor: s.color }}
+                  >
+                    <Icon size={18} weight="bold" />
                   </div>
 
-                  <h3 className="text-sm sm:text-base font-black text-[#191f28] leading-snug">
-                    {p.title}
-                  </h3>
-                  <p className="text-xs text-[#4e5968] leading-relaxed line-clamp-2">
-                    {p.tagline}
-                  </p>
+                  <div className="space-y-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono font-black text-[#8b95a1]">
+                        {s.step}
+                      </span>
+                      <span
+                        className="text-[9px] font-bold px-2 py-0.5 rounded-full"
+                        style={{ color: s.color, backgroundColor: `${s.color}15` }}
+                      >
+                        {s.tag}
+                      </span>
+                    </div>
+
+                    <h3 className="text-sm sm:text-base font-black text-[#191f28] leading-snug truncate">
+                      {s.title}
+                    </h3>
+                    <p className="text-xs text-[#4e5968] leading-relaxed">
+                      {s.summary}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="pt-2 border-t border-black/[0.04] flex items-center justify-between gap-3">
-                  <div>
-                    <span className="text-base sm:text-lg font-black text-[#191f28] font-mono">
-                      {p.salePrice.toLocaleString()}원
+                {/* 액션 링크 */}
+                <div className="shrink-0 flex items-center justify-between sm:justify-end gap-2.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-black/[0.04]">
+                  {s.price && (
+                    <span className="text-xs font-bold text-[#8b95a1] font-mono sm:hidden">
+                      {s.price}
                     </span>
-                    {p.discountRate > 0 && (
-                      <span className="text-[11px] font-bold text-[#f04452] ml-1.5">
-                        {p.discountRate}% OFF
-                      </span>
-                    )}
-                  </div>
-
+                  )}
                   <Link
-                    href={`/product/${p.id}`}
-                    className="px-4 py-2 rounded-xl bg-[#f2f4f6] hover:bg-[#3182f6] hover:text-white text-[#191f28] text-xs font-bold transition-all shrink-0"
+                    href={s.actionLink}
+                    className="px-3.5 py-2 rounded-xl bg-[#f2f4f6] hover:bg-[#3182f6] hover:text-white text-[#191f28] text-xs font-bold transition-all flex items-center gap-1 shadow-xs"
                   >
-                    상세보기
+                    <span>{s.actionText}</span>
+                    <ArrowRight size={12} weight="bold" />
                   </Link>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
-      {/* ── 3. 1초 무료 가이드북 리드마그넷 (초단순) ── */}
+      {/* ── 3. 무료 실전 가이드북 리드마그넷 (간결 & 고전환) ── */}
       <section id="lead-magnet" className="toss-container">
-        <div className="p-5 sm:p-8 rounded-3xl bg-[#191f28] text-white max-w-3xl mx-auto shadow-lg">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#191f28] text-white max-w-3xl mx-auto shadow-xl">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-white text-[11px] font-bold">
               <DownloadSimple size={13} weight="bold" />
               <span>100% 무료 실전 가이드북 (PDF)</span>
             </div>
 
-            <h2 className="text-base sm:text-xl font-black text-white leading-tight">
+            <h2 className="text-lg sm:text-2xl font-black text-white leading-tight">
               1인 창업 필수 마케팅 용어집 & CVR 20% 퍼널 체크리스트
             </h2>
 
-            <p className="text-xs text-gray-300 leading-relaxed">
-              CAC, LTV, CVR 등 뜬구름 잡는 이론 대신, 내 상품에 결제 버튼 붙이고 전환율 20% 만드는 실전 공식만 담아 즉시 발송해 드립니다.
+            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-xl">
+              CAC, LTV, CVR의 실제 작동 원리와 내 상품에 결제 버튼을 붙여 전환율 20%를 만드는 실전 공식을 정리했습니다. 이메일을 입력하시면 즉시 전송됩니다.
             </p>
 
             {isDownloaded ? (
-              <div className="p-3 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold flex items-center gap-1.5">
-                <CheckCircle size={16} weight="fill" />
-                <span>입력하신 이메일로 가이드북이 발송되었습니다! (스팸함도 확인해 주세요)</span>
+              <div className="p-3.5 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-bold flex items-center gap-2">
+                <CheckCircle size={18} weight="fill" />
+                <span>입력하신 이메일로 가이드북이 전송되었습니다! (스팸함도 확인해 주세요)</span>
               </div>
             ) : (
-              <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2 pt-1">
+              <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2 pt-1 max-w-md">
                 <input
                   type="email"
                   required
-                  placeholder="무료 PDF를 받을 이메일 주소"
+                  placeholder="가이드북을 받을 이메일 주소"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
-                  className="px-3.5 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 text-xs outline-none focus:border-[#3182f6] flex-1"
+                  className="px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 text-xs sm:text-sm outline-none focus:border-[#3182f6] flex-1"
                 />
                 <button
                   type="submit"
-                  className="toss-button-primary px-4 py-2.5 text-xs font-bold shrink-0 flex items-center justify-center gap-1 shadow-sm"
+                  className="toss-button-primary px-5 py-2.5 text-xs sm:text-sm font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-sm"
                 >
                   <DownloadSimple size={14} weight="bold" />
-                  <span>1초 만에 무료 받기</span>
+                  <span>무료 받기</span>
                 </button>
               </form>
             )}
+
+            <p className="text-[10px] text-gray-400">
+              * 스팸 메일은 보내지 않으며 언제든 1클릭으로 구독 취소 가능합니다.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ── 4. VIP 1:1 프라이빗 세션 (컴팩트 카드) ── */}
+      {/* ── 4. VIP 1:1 프라이빗 세션 (신뢰와 품격) ── */}
       <section id="vip-session" className="toss-container">
-        <div className="p-5 sm:p-7 rounded-3xl bg-[#050A18] text-[#FAF6F0] max-w-3xl mx-auto border border-white/10 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-400">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#050A18] text-[#FAF6F0] max-w-3xl mx-auto border border-white/10 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div className="space-y-1.5 max-w-lg">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400">
               <Crown size={14} weight="fill" />
-              <span>VIP 1:1 MENTORING</span>
+              <span>VIP 1:1 PRIVATE SESSION</span>
             </div>
-            <h3 className="text-base sm:text-lg font-black text-white">
+            <h3 className="text-base sm:text-xl font-black text-white">
               혼자 조립하기 막막할 땐, 50분 1:1 맞춤 전략 세션
             </h3>
-            <p className="text-xs text-[#FAF6F0]/70">
-              공기업·주재원 퇴사 파운더 직강 · 내 상황 맞춤 90일 실행 Action Blueprint 처방
+            <p className="text-xs sm:text-sm text-[#FAF6F0]/70 leading-relaxed">
+              공기업과 해외 주재원을 나와 야생에서 4개 프로덕트로 생존한 파운더가, 사전 질의서를 바탕으로 내 비즈니스의 90일 실행 Action Blueprint를 처방합니다.
             </p>
           </div>
 
@@ -273,7 +312,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. 자주 묻는 질문 FAQ (핵심 3개) ── */}
+      {/* ── 5. 자주 묻는 질문 FAQ ── */}
       <section id="faq" className="toss-container space-y-3 max-w-2xl mx-auto">
         <div className="text-center space-y-1">
           <span className="text-[11px] font-bold text-[#3182f6]">FAQ</span>
@@ -310,7 +349,7 @@ export default function Home() {
 
                 {isOpen && (
                   <div className="px-3.5 pb-3.5 sm:px-4 sm:pb-4 pt-0">
-                    <p className="pt-2 border-t border-black/[0.04] text-xs text-[#4e5968] leading-relaxed">
+                    <p className="pt-2 border-t border-black/[0.05] text-xs text-[#4e5968] leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
@@ -320,13 +359,12 @@ export default function Home() {
           })}
         </div>
 
-        {/* 파운더 소개 링크 */}
         <div className="pt-2 text-center">
           <Link
             href="/about"
             className="inline-flex items-center gap-1 text-xs font-bold text-[#3182f6] hover:underline"
           >
-            aizaler 스튜디오 철학 & 파운더 이야기 보기 <ArrowRight size={13} weight="bold" />
+            aizaler 스튜디오 철학 & 파운더 소개 보기 <ArrowRight size={13} weight="bold" />
           </Link>
         </div>
       </section>
