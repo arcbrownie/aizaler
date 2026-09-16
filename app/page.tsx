@@ -16,12 +16,14 @@ import {
 } from '@phosphor-icons/react';
 
 import LegoStackSimulator from '@/components/LegoStackSimulator';
+import BuilderConsultantChat from '@/components/BuilderConsultantChat';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [emailInput, setEmailInput] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
   const [userStage, setUserStage] = useState<'idea' | 'traffic' | 'product'>('idea');
+  const [diagnosedStep, setDiagnosedStep] = useState<number | undefined>(undefined);
 
   const stageOptions = [
     { id: 'idea', label: '💡 아이디어 & BM 기획', short: '기획 단계' },
@@ -161,18 +163,18 @@ export default function Home() {
             <div className="space-y-3 pt-1">
               <div className="flex flex-wrap items-center gap-2.5">
                 <a
-                  href="#roadmap"
+                  href="#ai-chat"
                   className="toss-button-primary px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:scale-95"
                 >
-                  <span>5단계 조립 로드맵 보기</span>
-                  <ArrowRight size={14} weight="bold" />
+                  <Sparkle size={15} weight="fill" />
+                  <span>3초 AI 빌더 상담 시작하기</span>
                 </a>
                 <a
-                  href="#lead-magnet"
-                  className="px-5 py-3.5 rounded-xl bg-white border border-black/[0.08] text-[#191f28] text-xs sm:text-sm font-bold hover:bg-gray-50 flex items-center gap-1.5 shadow-xs"
+                  href="#roadmap"
+                  className="px-5 py-3.5 rounded-2xl bg-white border border-black/[0.08] text-[#191f28] text-xs sm:text-sm font-bold hover:bg-gray-50 flex items-center gap-1.5 shadow-xs"
                 >
-                  <DownloadSimple size={15} weight="bold" className="text-[#3182f6]" />
-                  <span>내게 맞는 시작점 추천받기</span>
+                  <span>5단계 로드맵 보기</span>
+                  <ArrowRight size={14} weight="bold" />
                 </a>
               </div>
 
@@ -186,14 +188,19 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 우측: 3D 레고 빌더 시뮬레이터 */}
+          {/* 우측: 3D 레고 빌더 시뮬레이터 (AI 진단과 실시간 연동) */}
           <div className="lg:col-span-5">
-            <LegoStackSimulator />
+            <LegoStackSimulator externalStep={diagnosedStep} />
           </div>
         </div>
       </section>
 
-      {/* ── 2. 5단계 레고 조립 성장 로드맵 ── */}
+      {/* ── 2. AI 빌더 실시간 진단 상담소 (Gemini Flash-Lite 획기적 대화형 UX) ── */}
+      <section id="ai-chat" className="toss-container scroll-mt-14">
+        <BuilderConsultantChat onStepDiagnosed={(step) => setDiagnosedStep(step)} />
+      </section>
+
+      {/* ── 3. 5단계 레고 조립 성장 로드맵 ── */}
       <section id="roadmap" className="toss-container space-y-6 scroll-mt-14 max-w-3xl mx-auto">
         <div className="text-center space-y-1.5">
           <span className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">

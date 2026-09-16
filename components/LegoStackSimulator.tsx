@@ -139,7 +139,11 @@ const BRICKS: LegoBrick[] = [
   }
 ];
 
-export default function LegoStackSimulator() {
+interface LegoStackSimulatorProps {
+  externalStep?: number;
+}
+
+export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorProps = {}) {
   const [visibleCount, setVisibleCount] = useState<number>(5);
   const [selectedStep, setSelectedStep] = useState<number>(4);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -194,6 +198,14 @@ export default function LegoStackSimulator() {
     }
     return () => clearTimeout(timer);
   }, [isPlaying, visibleCount]);
+
+  useEffect(() => {
+    if (externalStep && externalStep >= 1 && externalStep <= BRICKS.length) {
+      setSelectedStep(externalStep - 1);
+      setVisibleCount((prev) => Math.max(prev, externalStep));
+      playClickSound(externalStep);
+    }
+  }, [externalStep]);
 
   const handleNext = () => {
     setIsPlaying(false);
