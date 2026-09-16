@@ -14,7 +14,7 @@ export interface Lesson {
 export const LESSONS: Lesson[] = [
   {
     id: 'l1',
-    brand: '라이브 프로덕트 A (AI 운세·상담 버티컬)',
+    brand: '라이브 프로덕트 A (B2C 심리·성향 분석 버티컬)',
     category: '알고리즘 숙취 (The Hangover)',
     title: '20.7만 뷰 바이럴 참사 복기: 조회수가 폭발했는데 왜 결제는 4건뿐이었을까?',
     subtitle: '조회수 도파민에 취해 비즈니스 Intent가 없는 밈 바이럴을 태웠을 때 발생하는 대참사',

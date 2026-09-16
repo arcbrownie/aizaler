@@ -118,7 +118,7 @@ export default function RootLayout({
                       </span>
                     </div>
                     <p className="text-[#4e5968] leading-relaxed text-xs">
-                      aizaler는 이론만 말하는 학원이 아닙니다. 공기업·해외 주재원을 거쳐 1인 개발에 도전한 창업자이자, <b>Meta Certified Media Planning Professional(메타 공인 미디어 플래닝 전문가)</b>로서 스레드 2개 계정(명사도 본계정 + 연애) 합산 500만 뷰 실측 DB 로그와 결제 데이터로 검증된 실전 솔루션만을 제공합니다.
+                      aizaler는 이론만 말하는 학원이 아닙니다. 공기업·해외 주재원을 거쳐 1인 개발에 도전한 창업자이자, <b>Meta Certified Media Planning Professional(메타 공인 미디어 플래닝 전문가)</b>로서 스레드 2개 버티컬 계정 합산 500만 뷰 실측 DB 로그와 결제 데이터로 검증된 실전 솔루션만을 제공합니다.
                     </p>
                     <div className="text-[11px] text-[#8b95a1] space-y-1">
                       <p>운영사: 브라운임팩트랩스 (Brown Impact Labs) | 대표 포트폴리오: 라이브 프로덕트 A, B, C 운영</p>

@@ -301,7 +301,7 @@ export default function IntroducePageStarter({
               },
               {
                 title: '자동 웹 서비스 쇼케이스',
-                desc: '사주, 타로, 계산기 등 실용 웹 서비스를 단독 흐름으로 운영합니다.',
+                desc: '자가진단 테스트, 계산기, 자동 분석기 등 실용 웹 서비스를 단독 흐름으로 운영합니다.',
               },
             ].map((item, idx) => (
               <div key={idx} className="py-6 first:pt-0 last:pb-0 text-center">
