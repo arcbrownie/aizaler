@@ -16,19 +16,63 @@ interface BuilderConsultantChatProps {
 }
 
 const QUICK_PROMPTS = [
-  { text: '아이디어는 있는데 코딩 문법을 몰라요', step: 1, icon: LightbulbFilament },
-  { text: 'Claude 정본 프롬프트 & 24h 리서치가 필요해요', step: 2, icon: Cpu },
-  { text: '광고 조회수는 나오는데 결제 전환이 안 돼요', step: 3, icon: Target },
-  { text: '외주비 없이 혼자 상용 결제 웹을 띄우고 싶어요', step: 4, icon: RocketLaunch },
-  { text: '퇴사 후 1인 비즈니스 방향을 진단받고 싶어요', step: 5, icon: Crown },
+  { text: '아이디어는 있는데 BM 기획이 막막해요', step: 1, icon: LightbulbFilament },
+  { text: '광고 조회수는 나오는데 결제 전환이 안 돼요', step: 2, icon: Target },
+  { text: '실리콘밸리 Claude 정본 프롬프트가 필요해요', step: 3, icon: Cpu },
+  { text: 'Aside 24h 자율 리서치와 웹 런칭을 원해요', step: 4, icon: RocketLaunch },
+  { text: '파운더와 1:1로 90일 실행 플랜을 세우고 싶어요', step: 5, icon: Crown },
 ];
+
+const TRACK_DETAILS: Record<number, {
+  name: string;
+  deliverable: string;
+  brickLabel: string;
+  link: string;
+  actionText: string;
+}> = {
+  1: {
+    name: 'TRACK 01. 시장 검증 & BM 기획',
+    deliverable: '검증된 BM 린 캔버스 1장 & 고객 결핍 검증표',
+    brickLabel: '블루 기초 블록',
+    link: '#lead-magnet',
+    actionText: '기획 트랙 맞춤 가이드 받기'
+  },
+  2: {
+    name: 'TRACK 02. 메타 고전환 퍼널 매칭',
+    deliverable: '광고 ↔ 랜딩 결속 CVR 20% 고전환 퍼널 시스템',
+    brickLabel: '레드 핫포인트 블록',
+    link: '/product/1',
+    actionText: '퍼널 트랙 실전서 보기'
+  },
+  3: {
+    name: 'TRACK 03. Claude Academy 정본 AI 지능',
+    deliverable: 'Anthropic 공식 XML 구조화 프롬프트 시스템',
+    brickLabel: '딥 퍼플 지능 블록',
+    link: '/product/aside-starter',
+    actionText: 'AI 지능 실전 킷 보기'
+  },
+  4: {
+    name: 'TRACK 04. Aside 자율 리서치 & 풀스택 런칭',
+    deliverable: '24h 자율 시장 감시 & 토스 실결제 웹 1개 배포',
+    brickLabel: '퍼플➔화이트 런칭 블록',
+    link: '/product/5',
+    actionText: '풀스택 런칭 트랙 보기'
+  },
+  5: {
+    name: 'TRACK 05. 1:1 VIP 프라이빗 전략 마스터리',
+    deliverable: '사전 질의서 기반 90일 실행 Action Blueprint',
+    brickLabel: '순백 화이트 서밋 블록',
+    link: '/career',
+    actionText: '1:1 전략 세션 신청하기'
+  }
+};
 
 export default function BuilderConsultantChat({ onStepDiagnosed }: BuilderConsultantChatProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'welcome',
       sender: 'ai',
-      text: '반갑습니다! 1인 빌더 스튜디오 aizaler의 AI 아키텍트입니다. 🧱✨\n\n수많은 정보 속에서 무엇부터 시작할지 막막하신가요? 아래 고민 중 하나를 탭하시거나 편하게 1줄로 적어주시면, 5단계 로드맵 중 지금 당장 집중해야 할 실행 블록을 처방해 드립니다.',
+      text: '반갑습니다! 1인 빌더 스튜디오 aizaler의 AI 아키텍트입니다. 🧱✨\n\n무엇부터 시작해야 할지 막막하신가요? 아래 고민 칩을 탭하시거나 편하게 1줄로 적어주시면, 지금 당장 집중해야 할 손에 잡히는 목표 결과물(트랙)을 처방해 드립니다.',
       timestamp: '지금'
     }
   ]);
@@ -174,7 +218,7 @@ export default function BuilderConsultantChat({ onStepDiagnosed }: BuilderConsul
                 {m.step && (
                   <div className="mb-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#e8f3ff] text-[#3182f6] text-[10px] font-black border border-blue-200/50">
                     <Sparkle size={12} weight="fill" />
-                    <span>진단 완료: STEP 0{m.step} 블록 추천</span>
+                    <span>진단 완료: TRACK 0{m.step} 추천</span>
                   </div>
                 )}
                 <div className="whitespace-pre-wrap">{m.text}</div>
@@ -189,7 +233,7 @@ export default function BuilderConsultantChat({ onStepDiagnosed }: BuilderConsul
             <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-bounce" />
             <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-bounce [animation-delay:0.2s]" />
             <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-bounce [animation-delay:0.4s]" />
-            <span className="text-xs text-[#8b95a1] font-medium ml-1">AI가 비즈니스 블록을 처방 중입니다...</span>
+            <span className="text-xs text-[#8b95a1] font-medium ml-1">AI가 비즈니스 트랙과 결과물을 처방 중입니다...</span>
           </div>
         )}
         <div ref={messagesEndRef} />
@@ -223,23 +267,26 @@ export default function BuilderConsultantChat({ onStepDiagnosed }: BuilderConsul
       </form>
 
       {/* ── Prescribed Step Direct Action Card ── */}
-      {latestAiMessageWithStep && (
-        <div className="p-3.5 sm:p-4 rounded-2xl bg-[#e8f3ff]/70 border border-[#3182f6]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-300">
-          <div className="space-y-0.5">
-            <div className="text-[11px] font-bold text-[#3182f6] flex items-center gap-1">
+      {latestAiMessageWithStep && latestAiMessageWithStep.step && TRACK_DETAILS[latestAiMessageWithStep.step] && (
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#e8f3ff]/80 border border-[#3182f6]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-300">
+          <div className="space-y-1 min-w-0">
+            <div className="text-[11px] font-bold text-[#3182f6] flex items-center gap-1.5">
               <Sparkle size={13} weight="fill" />
-              <span>진단 결과 처방 블록 바로가기</span>
+              <span>진단 결과 처방: {TRACK_DETAILS[latestAiMessageWithStep.step].name} ({TRACK_DETAILS[latestAiMessageWithStep.step].brickLabel})</span>
             </div>
             <div className="text-xs sm:text-sm font-black text-[#191f28]">
-              상단 3D 레고 위젯에서 추천된 STEP 0{latestAiMessageWithStep.step} 블록이 결합되었습니다!
+              🎯 목표 결과물: {TRACK_DETAILS[latestAiMessageWithStep.step].deliverable}
             </div>
+            <p className="text-[11px] text-[#4e5968]">
+              상단 3D 레고 위젯에서 해당 블록이 활성화되었습니다. 지금 바로 손에 쥐어질 결과물을 확인해 보세요.
+            </p>
           </div>
 
           <a
-            href="#roadmap"
-            className="px-4 py-2 rounded-xl bg-[#3182f6] text-white text-xs font-bold hover:bg-[#1b64da] transition-all flex items-center justify-center gap-1 shrink-0 shadow-xs"
+            href={TRACK_DETAILS[latestAiMessageWithStep.step].link}
+            className="px-4 py-2.5 rounded-xl bg-[#3182f6] hover:bg-[#1b64da] text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 shadow-xs"
           >
-            <span>추천 로드맵 확인하기</span>
+            <span>{TRACK_DETAILS[latestAiMessageWithStep.step].actionText}</span>
             <ArrowRight size={13} weight="bold" />
           </a>
         </div>

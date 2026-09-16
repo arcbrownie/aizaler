@@ -425,7 +425,7 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
         <div className="space-y-0.5 min-w-0">
           <div className="flex items-center gap-1.5">
             <span className={`text-[9px] font-black px-2 py-0.5 rounded-full border uppercase tracking-wider ${activeBrick.badgeBg}`}>
-              STEP 0{activeBrick.id} · {activeBrick.stageName}
+              TRACK 0{activeBrick.id} · {activeBrick.stageName}
             </span>
           </div>
           <div className="text-xs sm:text-sm font-black text-[#191f28] truncate">

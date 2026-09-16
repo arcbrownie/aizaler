@@ -62,64 +62,70 @@ export default function Home() {
 
   const steps = [
     {
-      step: 'STEP 01',
+      track: 'TRACK 01',
       title: '시장 검증 & 비즈니스 모델 기획',
-      summary: '고객의 실제 결핍과 지불 의사를 데이터로 검증하고 가치 제안을 설계합니다.',
+      summary: '코딩 문법을 외우기 전, 고객이 실제로 지갑을 여는 결핍과 현금 흐름 모델을 데이터로 검증합니다.',
+      outcome: '검증된 BM 린 캔버스 1장 & 고객 결핍 검증표',
+      tools: '1인 창업 필수 용어집 · 결핍 검증 체크리스트',
       tag: 'FOUNDATION',
       color: '#2563eb',
       bgLight: 'bg-blue-50/70 border-blue-200/60',
       icon: LightbulbFilament,
-      actionText: '무엇부터 할지 모를 때: 맞춤 가이드 받기',
+      actionText: '기획 트랙 무료 가이드 받기',
       actionLink: '#lead-magnet',
       isFree: true
     },
     {
-      step: 'STEP 02',
-      title: 'Claude Academy 정본 & 24h 자율 리서치',
-      summary: 'Anthropic 본사의 공식 XML 구조화 프롬프트와 Aside 브라우저 자율 감시를 장착합니다.',
+      track: 'TRACK 02',
+      title: '메타 고전환 퍼널 매칭',
+      summary: '광고 카피와 랜딩페이지 첫 문장을 1:1로 일치시켜 클릭한 고객의 구매 결정을 완성합니다.',
+      outcome: '광고 ↔ 랜딩 결속 CVR 20% 고전환 퍼널 시스템',
+      tools: '후킹 카피 프레임워크 · 메타 알고리즘 역설계 가이드',
+      tag: 'HOTPOINT',
+      color: '#f04452',
+      bgLight: 'bg-rose-50/70 border-rose-200/60',
+      icon: Target,
+      actionText: '퍼널 트랙 실전서 보기',
+      actionLink: '/product/1'
+    },
+    {
+      track: 'TRACK 03',
+      title: '실리콘밸리 Claude Academy 정본 AI 지능',
+      summary: '실리콘밸리 Anthropic 본사의 정본 엔지니어링 문서(SSOT)를 기반으로 고성능 AI 파이프라인을 장착합니다.',
+      outcome: 'Anthropic 공식 XML 구조화 프롬프트 템플릿 & 지능 엔진',
+      tools: 'Claude 공식 XML 프롬프트 · 3.5 Sonnet 최적화 템플릿',
       tag: 'INTELLIGENCE',
       color: '#7c3aed',
       bgLight: 'bg-purple-50/70 border-purple-200/60',
       icon: Cpu,
-      actionText: 'Aside & 정본 해설 킷 보기',
-      actionLink: '/product/aside-starter',
-      price: '29,000원'
+      actionText: 'AI 지능 실전 킷 보기',
+      actionLink: '/product/aside-starter'
     },
     {
-      step: 'STEP 03',
-      title: '메타 고전환 퍼널 매칭',
-      summary: '광고 카피와 랜딩페이지를 1:1로 일치시켜 클릭한 고객의 구매 결정을 완성합니다.',
-      tag: 'CONVERSION',
-      color: '#f04452',
-      bgLight: 'bg-rose-50/70 border-rose-200/60',
-      icon: Target,
-      actionText: '메타 알고리즘 실전서 보기',
-      actionLink: '/product/1',
-      price: '49,000원'
-    },
-    {
-      step: 'STEP 04',
-      title: '1인 풀스택 상용 웹서비스 런칭',
-      summary: 'Cursor, Supabase, 토스페이먼츠를 조립해 외주비 없이 실제 결제되는 웹서비스를 띄웁니다.',
+      track: 'TRACK 04',
+      title: 'Aside 24h 자율 리서치 & 1인 풀스택 런칭',
+      summary: 'Aside 브라우저로 시장 트렌드를 24시간 자율 감시하고, Next.js와 Supabase로 상용 결제 웹을 띄웁니다.',
+      outcome: '24h 자율 시장 감시 봇 & 토스 실결제 풀스택 웹 1개 배포',
+      tools: 'Aside 템플릿 · Next.js 14 · Supabase · 토스페이먼츠',
       tag: 'LAUNCH',
+      color: '#9333ea',
+      bgLight: 'bg-purple-50/70 border-purple-200/60',
+      icon: RocketLaunch,
+      actionText: '풀스택 런칭 트랙 보기',
+      actionLink: '/product/5'
+    },
+    {
+      track: 'TRACK 05',
+      title: '1:1 VIP 프라이빗 비즈니스 전략 마스터리',
+      summary: '야생에서 4개 프로덕트로 생존한 파운더가 50분간 1:1로 내 비즈니스의 생존율과 실행 우선순위를 설계합니다.',
+      outcome: '사전 질의서 기반 90일 실행 Action Blueprint & 1:1 심층 처방',
+      tools: '4개 서비스 생존 파운더 1:1 세션 (50분)',
+      tag: 'SUMMIT MASTERY',
       color: '#191f28',
       bgLight: 'bg-slate-50 border-slate-200/80',
-      icon: RocketLaunch,
-      actionText: '1인 웹 런칭 보일러플레이트 보기',
-      actionLink: '/product/5',
-      price: '79,000원'
-    },
-    {
-      step: 'STEP 05',
-      title: '1:1 프라이빗 비즈니스 전략 세션',
-      summary: '야생에서 4개 프로덕트로 생존한 파운더가 50분간 1:1 맞춤 실행 Blueprint를 도출합니다.',
-      tag: 'VIP MENTORING',
-      color: '#d97706',
-      bgLight: 'bg-amber-50/70 border-amber-200/60',
       icon: Crown,
-      actionText: '1:1 전략 세션 신청하기 (선착순)',
-      actionLink: '/career',
-      price: '매월 10팀 한정'
+      actionText: '1:1 전략 세션 신청하기',
+      actionLink: '/career'
     }
   ];
 
@@ -167,13 +173,13 @@ export default function Home() {
                   className="toss-button-primary px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:scale-95"
                 >
                   <Sparkle size={15} weight="fill" />
-                  <span>3초 AI 빌더 상담 시작하기</span>
+                  <span>3초 AI 빌더 진단 시작하기</span>
                 </a>
                 <a
                   href="#roadmap"
                   className="px-5 py-3.5 rounded-2xl bg-white border border-black/[0.08] text-[#191f28] text-xs sm:text-sm font-bold hover:bg-gray-50 flex items-center gap-1.5 shadow-xs"
                 >
-                  <span>5단계 로드맵 보기</span>
+                  <span>5대 성장 트랙 보기</span>
                   <ArrowRight size={14} weight="bold" />
                 </a>
               </div>
@@ -200,73 +206,82 @@ export default function Home() {
         <BuilderConsultantChat onStepDiagnosed={(step) => setDiagnosedStep(step)} />
       </section>
 
-      {/* ── 3. 5단계 레고 조립 성장 로드맵 ── */}
+      {/* ── 3. 손에 잡히는 결과물 중심 5대 빌더 트랙 (Solopreneur 벤치마크) ── */}
       <section id="roadmap" className="toss-container space-y-6 scroll-mt-14 max-w-3xl mx-auto">
         <div className="text-center space-y-1.5">
           <span className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
-            BUILDER GROWTH ROADMAP
+            BUILDER GROWTH TRACKS
           </span>
           <h2 className="text-xl sm:text-3xl font-black text-[#191f28] tracking-tight">
-            1인 빌더로 완성되는 5단계 조립 로드맵
+            손에 잡히는 결과물 중심 5대 빌더 트랙
           </h2>
           <p className="text-xs sm:text-sm text-[#4e5968]">
-            단편적인 지식이 아닌, 아이디어 검증부터 실제 결제 프로덕트 런칭까지 차례대로 조립해 나갑니다.
+            어릴 때 레고를 조립하듯, 내 손에 쥐어지는 명확한 결과물을 차례대로 완성해 나갑니다.
           </p>
         </div>
 
-        {/* 5개 단계 카드 리스트 */}
-        <div className="space-y-3">
+        {/* 5개 트랙 카드 리스트 */}
+        <div className="space-y-3.5">
           {steps.map((s, idx) => {
             const Icon = s.icon;
             return (
               <div
                 key={idx}
-                className="p-4 sm:p-5 rounded-2xl bg-white border border-black/[0.08] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 transition-all hover:border-[#3182f6]/40"
+                className="p-5 sm:p-6 rounded-2xl bg-white border border-black/[0.08] shadow-xs space-y-3 transition-all hover:border-[#3182f6]/40 hover:shadow-sm"
               >
-                <div className="flex items-start gap-3 min-w-0">
-                  <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 text-white shadow-xs"
-                    style={{ backgroundColor: s.color }}
-                  >
-                    <Icon size={18} weight="bold" />
-                  </div>
-
-                  <div className="space-y-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-black text-[#8b95a1]">
-                        {s.step}
-                      </span>
-                      <span
-                        className="text-[9px] font-bold px-2 py-0.5 rounded-full"
-                        style={{ color: s.color, backgroundColor: `${s.color}15` }}
-                      >
-                        {s.tag}
-                      </span>
+                {/* 상단 헤더: 아이콘, 트랙 태그, 타이틀, 액션 버튼 */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-white shadow-xs"
+                      style={{ backgroundColor: s.color }}
+                    >
+                      <Icon size={20} weight="bold" />
                     </div>
 
-                    <h3 className="text-sm sm:text-base font-black text-[#191f28] leading-snug truncate">
-                      {s.title}
-                    </h3>
-                    <p className="text-xs text-[#4e5968] leading-relaxed">
-                      {s.summary}
-                    </p>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-mono font-black text-[#8b95a1]">
+                          {s.track}
+                        </span>
+                        <span
+                          className="text-[9px] font-bold px-2 py-0.5 rounded-full"
+                          style={{ color: s.color, backgroundColor: `${s.color}15` }}
+                        >
+                          {s.tag}
+                        </span>
+                      </div>
+                      <h3 className="text-base sm:text-lg font-black text-[#191f28] leading-snug">
+                        {s.title}
+                      </h3>
+                    </div>
                   </div>
-                </div>
 
-                {/* 액션 링크 */}
-                <div className="shrink-0 flex items-center justify-between sm:justify-end gap-2.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-black/[0.04]">
-                  {s.price && (
-                    <span className="text-xs font-bold text-[#8b95a1] font-mono sm:hidden">
-                      {s.price}
-                    </span>
-                  )}
                   <Link
                     href={s.actionLink}
-                    className="px-3.5 py-2 rounded-xl bg-[#f2f4f6] hover:bg-[#3182f6] hover:text-white text-[#191f28] text-xs font-bold transition-all flex items-center gap-1 shadow-xs"
+                    className="px-4 py-2 rounded-xl bg-[#f2f4f6] hover:bg-[#3182f6] hover:text-white text-[#191f28] text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-xs shrink-0 self-start sm:self-auto"
                   >
                     <span>{s.actionText}</span>
-                    <ArrowRight size={12} weight="bold" />
+                    <ArrowRight size={13} weight="bold" />
                   </Link>
+                </div>
+
+                {/* 결과물 강조 박스 (Builder Josh ASC 벤치마크) */}
+                <div className="p-3 rounded-xl bg-slate-50 border border-black/[0.04] space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#191f28]">
+                    <span className="text-amber-500">🎯</span>
+                    <span>완성 결과물:</span>
+                    <span className="text-[#3182f6] font-black">{s.outcome}</span>
+                  </div>
+                  <p className="text-xs text-[#4e5968] leading-relaxed">
+                    {s.summary}
+                  </p>
+                </div>
+
+                {/* 하단 장착 도구 */}
+                <div className="text-[11px] text-[#8b95a1] flex items-center gap-1">
+                  <span>🛠️ 장착 무기:</span>
+                  <span className="font-medium text-[#4e5968]">{s.tools}</span>
                 </div>
               </div>
             );
