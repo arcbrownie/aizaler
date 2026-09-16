@@ -39,6 +39,7 @@ import MetaAdsAngleMatrix from '@/components/MetaAdsAngleMatrix';
 import First9VectorDiagnoser from '@/components/First9VectorDiagnoser';
 import PromptDiffViewer from '@/components/PromptDiffViewer';
 import AIPrescriptionTrainer from '@/components/AIPrescriptionTrainer';
+import LegoStackSimulator from '@/components/LegoStackSimulator';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -156,12 +157,15 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 우측: 소비자 vs 빌더 패러다임 비교 카드 (5열) */}
-          <div className="lg:col-span-5">
+          {/* 우측: 3D 레고 빌더 시뮬레이터 & 빌더 마인드셋 (5열) */}
+          <div className="lg:col-span-5 space-y-4">
+            <LegoStackSimulator />
+
+            {/* AI 패러다임 비교 카드 (소비자 vs 1인 빌더) */}
             <div className="bezel-card-outer">
-              <div className="bezel-card-inner space-y-4">
-                <div className="flex items-center justify-between border-b border-black/[0.04] pb-3">
-                  <span className="text-xs font-bold text-[#8b95a1] uppercase tracking-wider">
+              <div className="bezel-card-inner space-y-3 p-4">
+                <div className="flex items-center justify-between border-b border-black/[0.04] pb-2">
+                  <span className="text-[11px] font-bold text-[#8b95a1] uppercase tracking-wider">
                     AI 패러다임의 극적인 차이
                   </span>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-[#3182f6]">
@@ -169,41 +173,29 @@ export default function Home() {
                   </span>
                 </div>
 
-                {/* 1단계: 단순 소비자 */}
-                <div className="p-4 rounded-2xl bg-[#f9fafb] border border-black/[0.04] space-y-1.5">
-                  <div className="text-xs font-bold text-[#8b95a1] flex items-center justify-between">
-                    <span>AI 단순 소비자 (Consumer)</span>
-                    <span className="text-red-500 font-bold">비용과 시간 낭비</span>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div className="p-3 rounded-xl bg-gray-50 border border-black/[0.04] space-y-1">
+                    <div className="font-bold text-gray-500 text-[11px]">AI 단순 소비자</div>
+                    <div className="text-[11px] text-[#4e5968] leading-tight">
+                      유료 구독료만 내며 단순 검색창에 방치 ➔ <b className="text-red-500">피로감 누적</b>
+                    </div>
                   </div>
-                  <div className="text-xs text-[#4e5968] leading-relaxed">
-                    매달 유료 구독료는 나가는데 단순 검색창으로만 방치 ➔ <b>결과물 없이 피로감만 누적</b>
-                  </div>
-                </div>
-
-                {/* 2단계: aizaler 1인 빌더 */}
-                <div className="p-4 rounded-2xl bg-[#e8f3ff]/70 border border-[#3182f6]/30 space-y-2 shadow-xs">
-                  <div className="text-xs font-bold text-[#3182f6] flex items-center justify-between">
-                    <span className="flex items-center gap-1.5">
-                      <Sparkle size={15} weight="duotone" /> aizaler 1인 빌더 (Builder)
-                    </span>
-                    <span className="bg-[#3182f6] text-white px-2 py-0.5 rounded-full text-[10px]">
-                      자생적 현금 흐름
-                    </span>
-                  </div>
-                  <div className="text-xs text-[#191f28] space-y-1.5">
-                    <div className="font-bold text-[#191f28]">✓ 코딩 암기 대신 검증된 AI 블록을 조립하는 감각</div>
-                    <div className="text-[#3182f6] font-bold">✓ Aside 브라우저로 24시간 리서치 & 정보 수집 자동화</div>
-                    <div className="text-emerald-700 font-semibold">✓ 뜬구름 마케팅 대신 실제 구매 고객을 모으는 검증된 퍼널</div>
-                    <div className="text-[#4e5968] font-semibold">✓ 외주비 0원으로 내 손으로 띄운 상용 웹서비스 소유</div>
+                  <div className="p-3 rounded-xl bg-[#e8f3ff]/70 border border-[#3182f6]/30 space-y-1 shadow-xs">
+                    <div className="font-bold text-[#3182f6] text-[11px] flex items-center gap-1">
+                      <Sparkle size={12} weight="fill" /> aizaler 1인 빌더
+                    </div>
+                    <div className="text-[11px] text-[#191f28] leading-tight font-medium">
+                      검증된 AI 블록을 딱딱 조립해 <b className="text-[#3182f6]">내 제품 & 현금 흐름 창출</b>
+                    </div>
                   </div>
                 </div>
 
-                <div className="pt-2 text-center">
+                <div className="pt-1 text-center">
                   <Link
                     href="/about"
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#3182f6] hover:underline"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-[#3182f6] hover:underline"
                   >
-                    aizaler 스튜디오 철학 & 사이트 소개 보기 <ArrowRight size={14} weight="bold" />
+                    aizaler 스튜디오 철학 & 사이트 소개 보기 <ArrowRight size={12} weight="bold" />
                   </Link>
                 </div>
               </div>
