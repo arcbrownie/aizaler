@@ -1,17 +1,17 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, ArrowCounterClockwise, Plus, SpeakerHigh, SpeakerSlash, Sparkle, TrendUp, RocketLaunch } from '@phosphor-icons/react';
+import { Play, ArrowCounterClockwise, Plus, SpeakerHigh, SpeakerSlash, Sparkle, Target, Cpu, Globe, Crown } from '@phosphor-icons/react';
 
 interface LegoBrick {
   id: number;
   name: string;
   desc: string;
   stageName: string;
-  stageIcon: React.ElementType;
+  stageBadge: string;
   tag: string;
   badge: string;
-  // 3-Phase Vibrant Growth Colors (Blue -> Green -> Gold)
+  // Palette: Blue -> Red(Point) -> Purple -> White
   bgTop: string;
   bgFront: string;
   bgRight: string;
@@ -19,6 +19,7 @@ interface LegoBrick {
   themeColor: string;
   textColor: string;
   badgeBg: string;
+  isWhiteBlock?: boolean;
   width: number;
   x: number;
   y: number;
@@ -27,110 +28,115 @@ interface LegoBrick {
 }
 
 const BRICKS: LegoBrick[] = [
-  // ── [1단계: Blue 계열 - 기획 & 지능 (시작)] ──
+  // ── [1. 블루 기저석 (Foundation)] ──
   {
     id: 1,
     name: '01. 아이디어 & BM 기획',
-    desc: '무작정 코딩부터 하지 않습니다. 고객의 결핍과 현금 흐름 모델을 탄탄한 블루 기초 블록으로 먼저 다집니다.',
-    stageName: '기획 & 지능',
-    stageIcon: Sparkle,
+    desc: '무작정 코딩 대신 고객의 결핍과 현금 흐름 모델을 탄탄한 토스 블루 기초석으로 단단히 조립합니다.',
+    stageName: '블루 기초',
+    stageBadge: 'BLUE BASE',
     tag: 'FOUNDATION',
     badge: 'BM 기획',
-    bgTop: 'bg-[#38bdf8]',
-    bgFront: 'bg-[#0284c7]',
-    bgRight: 'bg-[#0369a1]',
-    studColor: 'bg-[#7dd3fc] border-[#38bdf8]',
-    themeColor: '#0284c7',
-    textColor: 'text-sky-700',
-    badgeBg: 'bg-sky-50 text-sky-700 border-sky-200',
+    bgTop: 'bg-[#3b82f6]',
+    bgFront: 'bg-[#2563eb]',
+    bgRight: 'bg-[#1d4ed8]',
+    studColor: 'bg-[#60a5fa] border-[#3b82f6]',
+    themeColor: '#2563eb',
+    textColor: 'text-blue-700',
+    badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
     width: 220,
     x: 0,
     y: 80,
     studs: 6,
     icon: '💡'
   },
+
+  // ── [2. 레드 핫포인트 (Conversion & Funnel)] ──
   {
     id: 2,
-    name: '02. Claude Academy 정본 프롬프트',
-    desc: '인스타 카더라 대신 실리콘밸리 본사의 XML 구조화 프롬프트를 토스 로얄 블루 블록으로 단단히 얹습니다.',
-    stageName: '기획 & 지능',
-    stageIcon: Sparkle,
-    tag: 'INTELLIGENCE',
-    badge: '정본 프롬프트',
-    bgTop: 'bg-[#60a5fa]',
-    bgFront: 'bg-[#2563eb]',
-    bgRight: 'bg-[#1d4ed8]',
-    studColor: 'bg-[#93c5fd] border-[#60a5fa]',
-    themeColor: '#2563eb',
-    textColor: 'text-blue-700',
-    badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
+    name: '02. 메타 고전환 퍼널 매칭',
+    desc: '광고 클릭을 이탈 없이 구매로 직결시키는 강렬한 토스 코랄 레드 핫포인트! 허수 유입을 차단하고 전환을 폭발시킵니다.',
+    stageName: '레드 핫포인트',
+    stageBadge: 'RED ACCENT',
+    tag: 'CONVERSION',
+    badge: '고전환 퍼널',
+    bgTop: 'bg-[#ff6b7a]',
+    bgFront: 'bg-[#f04452]',
+    bgRight: 'bg-[#d6303f]',
+    studColor: 'bg-[#ffa1ab] border-[#ff6b7a]',
+    themeColor: '#f04452',
+    textColor: 'text-rose-700',
+    badgeBg: 'bg-rose-50 text-rose-700 border-rose-200',
     width: 190,
     x: -15,
     y: 38,
     studs: 5,
-    icon: '⚡'
+    icon: '🎯'
   },
 
-  // ── [2단계: Green 계열 - 트래픽 & 자동화 (성장)] ──
+  // ── [3. 딥 퍼플 AI 지능 (Deep Tech Intelligence)] ──
   {
     id: 3,
-    name: '03. Aside 브라우저 자율 리서치',
-    desc: '탭 50개 지옥 탈출: 24시간 인터넷을 돌아다니며 시장을 자동 감시하는 싱그러운 민트 에이전트 결합!',
-    stageName: '트래픽 & 성장',
-    stageIcon: TrendUp,
-    tag: 'AUTOMATION',
-    badge: 'Aside 24h',
-    bgTop: 'bg-[#34d399]',
-    bgFront: 'bg-[#059669]',
-    bgRight: 'bg-[#047857]',
-    studColor: 'bg-[#6ee7b7] border-[#34d399]',
-    themeColor: '#059669',
-    textColor: 'text-emerald-700',
-    badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    name: '03. Claude Academy 정본 지능',
+    desc: '인스타 카더라 대신 실리콘밸리 본사의 XML 구조화 프롬프트를 딥 퍼플 지능 핵으로 장착합니다.',
+    stageName: '퍼플 지능',
+    stageBadge: 'PURPLE AI',
+    tag: 'INTELLIGENCE',
+    badge: '정본 프롬프트',
+    bgTop: 'bg-[#8b5cf6]',
+    bgFront: 'bg-[#7c3aed]',
+    bgRight: 'bg-[#6d28d9]',
+    studColor: 'bg-[#a78bfa] border-[#8b5cf6]',
+    themeColor: '#7c3aed',
+    textColor: 'text-purple-700',
+    badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
     width: 160,
     x: 10,
     y: -4,
     studs: 4,
-    icon: '🌐'
+    icon: '⚡'
   },
+
+  // ── [4. 소프트 퍼플 자율 자동화 (Autonomous Flow)] ──
   {
     id: 4,
-    name: '04. 메타 고전환 퍼널 매칭',
-    desc: '광고 클릭을 이탈 없이 구매로 직결시키는 고전환 메시지 퍼널을 에메랄드 블록으로 견고하게 결속합니다.',
-    stageName: '트래픽 & 성장',
-    stageIcon: TrendUp,
-    tag: 'CONVERSION',
-    badge: '고전환 퍼널',
-    bgTop: 'bg-[#2dd4bf]',
-    bgFront: 'bg-[#0d9488]',
-    bgRight: 'bg-[#0f766e]',
-    studColor: 'bg-[#5eead4] border-[#2dd4bf]',
-    themeColor: '#0d9488',
-    textColor: 'text-teal-700',
-    badgeBg: 'bg-teal-50 text-teal-700 border-teal-200',
+    name: '04. Aside 브라우저 자율 리서치',
+    desc: '24시간 인터넷을 돌아다니며 시장을 감시하고 화이트 상용 런칭을 향해 데이터를 모으는 자율 에이전트 결합!',
+    stageName: '퍼플 ➔ 화이트',
+    stageBadge: 'FLOW',
+    tag: 'AUTONOMOUS',
+    badge: 'Aside 24h',
+    bgTop: 'bg-[#a855f7]',
+    bgFront: 'bg-[#9333ea]',
+    bgRight: 'bg-[#7e22ce]',
+    studColor: 'bg-[#c084fc] border-[#a855f7]',
+    themeColor: '#9333ea',
+    textColor: 'text-purple-700',
+    badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
     width: 130,
     x: -20,
     y: -46,
     studs: 3,
-    icon: '🎯'
+    icon: '🌐'
   },
 
-  // ── [3단계: Gold 계열 - 1인 프로덕트 런칭 (결실)] ──
+  // ── [5. 세라믹 퓨어 화이트 서밋 크라운 (White Launch)] ──
   {
     id: 5,
     name: '05. 1인 결제 프로덕트 완성!',
-    desc: '외주비 0원으로 내 손으로 직접 띄운 실제 돈 버는 웹서비스. 자생적 현금 흐름을 여는 눈부신 골드 크라운 👑',
-    stageName: '상용 런칭 결실',
-    stageIcon: RocketLaunch,
+    desc: '외주비 0원으로 내 손으로 직접 띄운 순백의 상용 웹서비스. 군더더기 없이 자생적 현금 흐름을 여는 서밋 크라운 👑',
+    stageName: '화이트 완성',
+    stageBadge: 'WHITE SUMMIT',
     tag: 'LAUNCH',
-    badge: '서밋 런칭',
-    bgTop: 'bg-[#fbbf24]',
-    bgFront: 'bg-[#d97706]',
-    bgRight: 'bg-[#b45309]',
-    studColor: 'bg-[#fde68a] border-[#fbbf24]',
-    themeColor: '#d97706',
-    textColor: 'text-amber-700',
-    badgeBg: 'bg-amber-50 text-amber-800 border-amber-300',
+    badge: '서밋 화이트',
+    bgTop: 'bg-[#ffffff]',
+    bgFront: 'bg-[#f8fafc]',
+    bgRight: 'bg-[#e2e8f0]',
+    studColor: 'bg-[#ffffff] border-[#cbd5e1]',
+    themeColor: '#475569',
+    textColor: 'text-slate-800',
+    badgeBg: 'bg-white text-slate-900 border-slate-300 shadow-xs',
+    isWhiteBlock: true,
     width: 95,
     x: -5,
     y: -88,
@@ -157,15 +163,15 @@ export default function LegoStackSimulator() {
       }
       const osc = audioCtxRef.current.createOscillator();
       const gain = audioCtxRef.current.createGain();
-      // Ascending pleasant chord frequencies
-      const notes = [261.63, 329.63, 392.00, 523.25, 659.25]; // C4, E4, G4, C5, E5
+      // Ascending musical progression
+      const notes = [261.63, 329.63, 392.00, 523.25, 659.25];
       const freq = notes[Math.min(step - 1, notes.length - 1)] || 440;
-      
+
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq * 1.5, audioCtxRef.current.currentTime);
+      osc.frequency.setValueAtTime(freq * 1.4, audioCtxRef.current.currentTime);
       osc.frequency.exponentialRampToValueAtTime(freq, audioCtxRef.current.currentTime + 0.08);
 
-      gain.gain.setValueAtTime(0.18, audioCtxRef.current.currentTime);
+      gain.gain.setValueAtTime(0.2, audioCtxRef.current.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtxRef.current.currentTime + 0.09);
 
       osc.connect(gain);
@@ -173,7 +179,7 @@ export default function LegoStackSimulator() {
       osc.start();
       osc.stop(audioCtxRef.current.currentTime + 0.09);
     } catch {
-      // Audio context restricted before user interaction
+      // Audio context may require user interaction
     }
   };
 
@@ -218,11 +224,10 @@ export default function LegoStackSimulator() {
   };
 
   const activeBrick = BRICKS[selectedStep];
-  const StageIcon = activeBrick.stageIcon;
 
   return (
     <div className="rounded-3xl bg-white text-[#191f28] p-6 sm:p-7 border border-black/[0.08] shadow-[0_12px_40px_rgba(0,0,0,0.06)] space-y-5">
-      {/* ── 1. 헤더: 레퍼런스 타이포그래피 & 성장 3단계 배지 ── */}
+      {/* ── 1. 헤더: 레퍼런스 타이포그래피 & 사운드 토글 ── */}
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="text-3xl sm:text-4xl font-black text-[#191f28] tracking-tight leading-none">
@@ -243,29 +248,29 @@ export default function LegoStackSimulator() {
         </button>
       </div>
 
-      {/* ── 2. 3단계 성장 로드맵 인디케이터 (Blue ➔ Green ➔ Gold) ── */}
+      {/* ── 2. 성장 컬러 인디케이터: [블루 기저] ➔ [레드 포인트] ➔ [퍼플 ➔ 화이트 런칭] ── */}
       <div className="grid grid-cols-3 gap-2 text-xs">
         <div className="p-2 rounded-xl bg-blue-50/70 border border-blue-200/60 flex items-center justify-center gap-1.5 font-bold text-[#2563eb]">
           <span className="w-2 h-2 rounded-full bg-[#2563eb]" />
-          <span>1. 기획 & 지능</span>
+          <span>1. 블루 기저석</span>
         </div>
-        <div className="p-2 rounded-xl bg-emerald-50/70 border border-emerald-200/60 flex items-center justify-center gap-1.5 font-bold text-[#059669]">
-          <span className="w-2 h-2 rounded-full bg-[#059669]" />
-          <span>2. 트래픽 & 성장</span>
+        <div className="p-2 rounded-xl bg-rose-50/70 border border-rose-200/60 flex items-center justify-center gap-1.5 font-bold text-[#f04452]">
+          <span className="w-2 h-2 rounded-full bg-[#f04452] animate-pulse" />
+          <span>2. 레드 핫포인트</span>
         </div>
-        <div className="p-2 rounded-xl bg-amber-50/70 border border-amber-200/60 flex items-center justify-center gap-1.5 font-bold text-[#d97706]">
-          <span className="w-2 h-2 rounded-full bg-[#d97706]" />
-          <span>3. 런칭 & 결실</span>
+        <div className="p-2 rounded-xl bg-gradient-to-r from-purple-50 to-gray-50 border border-purple-200/60 flex items-center justify-center gap-1.5 font-bold text-[#7c3aed]">
+          <span className="w-2 h-2 rounded-full bg-[#7c3aed]" />
+          <span>3. 퍼플 ➔ 화이트 런칭</span>
         </div>
       </div>
 
-      {/* ── 3. 밝고 화사한 스튜디오 3D 조립 스테이지 ── */}
-      <div className="relative w-full h-[270px] sm:h-[290px] flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-[#f8faff] via-[#f0f5ff] to-[#e8f0fe] border border-blue-100/60">
-        {/* 부드러운 스튜디오 접지 그림자 */}
+      {/* ── 3. 화사한 스튜디오 3D 조립 스테이지 ── */}
+      <div className="relative w-full h-[270px] sm:h-[290px] flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9] to-[#e2e8f0] border border-black/[0.06]">
+        {/* 접지 그림자 */}
         <div
-          className="absolute w-[260px] h-[130px] rounded-full opacity-35 blur-lg pointer-events-none"
+          className="absolute w-[260px] h-[130px] rounded-full opacity-30 blur-lg pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse, #3b82f6 0%, #64748b 40%, transparent 75%)',
+            background: 'radial-gradient(ellipse, #475569 0%, transparent 70%)',
             transform: 'translateY(85px)',
           }}
         />
@@ -278,7 +283,7 @@ export default function LegoStackSimulator() {
             transform: 'rotateX(24deg) rotateY(-28deg)',
           }}
         >
-          {/* 안정적인 인터로킹 레고 블록들 */}
+          {/* 차례로 결합되는 블록들 */}
           {BRICKS.slice(0, visibleCount).map((b, idx) => {
             const isLatest = idx === visibleCount - 1;
             const isSelected = selectedStep === idx;
@@ -305,7 +310,9 @@ export default function LegoStackSimulator() {
               >
                 {/* 상단면 (돌기 스터드 장착) */}
                 <div
-                  className={`absolute ${b.bgTop} rounded-[4px] flex items-center justify-around border-t border-l border-white/60 shadow-inner`}
+                  className={`absolute ${b.bgTop} rounded-[4px] flex items-center justify-around border-t border-l ${
+                    b.isWhiteBlock ? 'border-gray-200 shadow-md' : 'border-white/60 shadow-inner'
+                  }`}
                   style={{
                     width: `${b.width}px`,
                     height: '52px',
@@ -317,7 +324,9 @@ export default function LegoStackSimulator() {
                     return (
                       <div
                         key={sIdx}
-                        className={`absolute rounded-full ${b.studColor} shadow-xs border border-white/40`}
+                        className={`absolute rounded-full ${b.studColor} ${
+                          b.isWhiteBlock ? 'shadow-sm border border-gray-300' : 'shadow-xs border border-white/40'
+                        }`}
                         style={{
                           width: `${studSize}px`,
                           height: `${studSize}px`,
@@ -332,7 +341,11 @@ export default function LegoStackSimulator() {
 
                 {/* 정면 */}
                 <div
-                  className={`absolute ${b.bgFront} rounded-[4px] flex items-center justify-between px-3 text-[10px] font-black text-white border-t border-white/40 shadow-lg ${
+                  className={`absolute ${b.bgFront} rounded-[4px] flex items-center justify-between px-3 text-[10px] font-black border-t shadow-lg ${
+                    b.isWhiteBlock
+                      ? 'text-[#191f28] border-gray-200 ring-1 ring-black/[0.08]'
+                      : 'text-white border-white/40'
+                  } ${
                     isSelected ? 'ring-2 ring-white ring-offset-2 ring-offset-[#3182f6]' : ''
                   }`}
                   style={{
@@ -342,12 +355,16 @@ export default function LegoStackSimulator() {
                   }}
                 >
                   <span className="font-mono">#{b.id}</span>
-                  <span className="truncate text-[9px] opacity-95 tracking-wide">{b.tag}</span>
+                  <span className="truncate text-[9px] opacity-95 tracking-wide">
+                    {b.tag}
+                  </span>
                 </div>
 
                 {/* 우측면 (입체 음영) */}
                 <div
-                  className={`absolute ${b.bgRight} rounded-[4px] border-t border-white/20`}
+                  className={`absolute ${b.bgRight} rounded-[4px] border-t ${
+                    b.isWhiteBlock ? 'border-gray-300' : 'border-white/20'
+                  }`}
                   style={{
                     width: '52px',
                     height: '36px',
@@ -361,7 +378,7 @@ export default function LegoStackSimulator() {
         </div>
 
         {/* 조립 단계 칩 */}
-        <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-blue-200/60 text-[11px] font-bold text-[#191f28] shadow-xs flex items-center gap-1.5">
+        <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-black/[0.08] text-[11px] font-bold text-[#191f28] shadow-xs flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-pulse" />
           <span>성장 조립 {visibleCount} / {BRICKS.length}</span>
         </div>
@@ -399,7 +416,7 @@ export default function LegoStackSimulator() {
         })}
       </div>
 
-      {/* ── 5. 현재 선택된 성장 단계 상세 카드 ── */}
+      {/* ── 5. 현재 선택된 단계 상세 카드 (Toss Card Architecture) ── */}
       <div className="p-4 rounded-2xl bg-[#f9fafb] border border-black/[0.06] flex items-center justify-between gap-4 transition-all">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
@@ -419,7 +436,7 @@ export default function LegoStackSimulator() {
         </div>
       </div>
 
-      {/* ── 6. 조립 인터랙션 컨트롤 (자동 조립 / 다음 블록 / 리셋) ── */}
+      {/* ── 6. 컨트롤 (자동 조립 / 다음 블록 / 리셋) ── */}
       <div className="flex items-center justify-between gap-3 pt-1">
         <div className="flex items-center gap-2">
           <button
