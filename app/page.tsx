@@ -21,6 +21,36 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [emailInput, setEmailInput] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
+  const [userStage, setUserStage] = useState<'idea' | 'traffic' | 'product'>('idea');
+
+  const stageOptions = [
+    { id: 'idea', label: '💡 아이디어 & BM 기획', short: '기획 단계' },
+    { id: 'traffic', label: '🎯 트래픽 유입 & 퍼널', short: '퍼널 단계' },
+    { id: 'product', label: '🚀 1인 상용 웹 런칭', short: '런칭 단계' },
+  ] as const;
+
+  const stageRecommendations = {
+    idea: {
+      badge: 'BM 기획 맞춤 가이드',
+      title: '1인 창업 필수 비즈니스 용어집 & 고객 결핍 검증 체크리스트 (PDF)',
+      desc: '자료는 넘쳐나는데 어디서부터 시작할지 막막할 때: 내 아이디어가 실제 돈 버는 모델이 되는지 검증하는 첫 번째 블록입니다.',
+      buttonText: '기획 맞춤 가이드 무료 받기'
+    },
+    traffic: {
+      badge: '전환 퍼널 맞춤 가이드',
+      title: 'CVR 20% 고전환 퍼널 설계 & 메타 광고 매칭 가이드 (PDF)',
+      desc: '조회수 거품 없이, 내 상품을 살 진성 고객을 모으고 이탈 없이 결제로 연결하는 실전 퍼널 체크리스트입니다.',
+      buttonText: '퍼널 맞춤 가이드 무료 받기'
+    },
+    product: {
+      badge: '1인 런칭 맞춤 가이드',
+      title: '외주비 0원 1인 웹서비스 런칭 로드맵 & 인프라 체크리스트 (PDF)',
+      desc: '코딩 문법을 외우지 않고 Cursor와 Supabase를 조립해 실제 결제창을 띄우는 상용 런칭 가이드입니다.',
+      buttonText: '런칭 맞춤 가이드 무료 받기'
+    }
+  };
+
+  const currentRec = stageRecommendations[userStage];
 
   const handleDownload = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +67,7 @@ export default function Home() {
       color: '#2563eb',
       bgLight: 'bg-blue-50/70 border-blue-200/60',
       icon: LightbulbFilament,
-      actionText: '1인 창업 필수 용어집 & CVR 체크리스트 (무료)',
+      actionText: '무엇부터 할지 모를 때: 맞춤 가이드 받기',
       actionLink: '#lead-magnet',
       isFree: true
     },
@@ -142,7 +172,7 @@ export default function Home() {
                   className="px-5 py-3.5 rounded-xl bg-white border border-black/[0.08] text-[#191f28] text-xs sm:text-sm font-bold hover:bg-gray-50 flex items-center gap-1.5 shadow-xs"
                 >
                   <DownloadSimple size={15} weight="bold" className="text-[#3182f6]" />
-                  <span>무료 가이드북 받기</span>
+                  <span>내게 맞는 시작점 추천받기</span>
                 </a>
               </div>
 
@@ -163,7 +193,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 2. 5단계 레고 조립 성장 로드맵 (백화점 느낌 탈피) ── */}
+      {/* ── 2. 5단계 레고 조립 성장 로드맵 ── */}
       <section id="roadmap" className="toss-container space-y-6 scroll-mt-14 max-w-3xl mx-auto">
         <div className="text-center space-y-1.5">
           <span className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
@@ -237,52 +267,92 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3. 무료 실전 가이드북 리드마그넷 (간결 & 고전환) ── */}
-      <section id="lead-magnet" className="toss-container">
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#191f28] text-white max-w-3xl mx-auto shadow-xl">
-          <div className="space-y-3">
+      {/* ── 3. 상황 맞춤 추천 스타터 가이드 (무엇부터 할지 모를 때 맞춤 추천) ── */}
+      <section id="lead-magnet" className="toss-container scroll-mt-14">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#191f28] text-white max-w-3xl mx-auto shadow-xl space-y-4">
+          <div className="space-y-2">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-white text-[11px] font-bold">
-              <DownloadSimple size={13} weight="bold" />
-              <span>100% 무료 실전 가이드북 (PDF)</span>
+              <Sparkle size={13} weight="fill" className="text-amber-400" />
+              <span>내 상황 맞춤 추천 · 100% 무료 가이드북</span>
             </div>
 
             <h2 className="text-lg sm:text-2xl font-black text-white leading-tight">
-              1인 창업 필수 마케팅 용어집 & CVR 20% 퍼널 체크리스트
+              무엇부터 어떻게 해야 할지 모를 때,<br className="hidden sm:inline" /> 지금 내 단계에 꼭 맞는 첫걸음을 짚어드립니다
             </h2>
 
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-xl">
-              CAC, LTV, CVR의 실제 작동 원리와 내 상품에 결제 버튼을 붙여 전환율 20%를 만드는 실전 공식을 정리했습니다. 이메일을 입력하시면 즉시 전송됩니다.
-            </p>
-
-            {isDownloaded ? (
-              <div className="p-3.5 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-bold flex items-center gap-2">
-                <CheckCircle size={18} weight="fill" />
-                <span>입력하신 이메일로 가이드북이 전송되었습니다! (스팸함도 확인해 주세요)</span>
-              </div>
-            ) : (
-              <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2 pt-1 max-w-md">
-                <input
-                  type="email"
-                  required
-                  placeholder="가이드북을 받을 이메일 주소"
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                  className="px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 text-xs sm:text-sm outline-none focus:border-[#3182f6] flex-1"
-                />
-                <button
-                  type="submit"
-                  className="toss-button-primary px-5 py-2.5 text-xs sm:text-sm font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-sm"
-                >
-                  <DownloadSimple size={14} weight="bold" />
-                  <span>무료 받기</span>
-                </button>
-              </form>
-            )}
-
-            <p className="text-[10px] text-gray-400">
-              * 스팸 메일은 보내지 않으며 언제든 1클릭으로 구독 취소 가능합니다.
+              자료는 넘쳐나지만 정작 지금 내 상황에 필요한 실행 순서를 찾기는 어렵습니다. 현재 가장 고민되는 단계를 선택하시면 꼭 맞는 핵심 가이드(PDF)를 즉시 전송해 드립니다.
             </p>
           </div>
+
+          {/* 1-Click 상황 선택 칩 세트 */}
+          <div className="space-y-1.5 pt-1">
+            <div className="text-[11px] font-bold text-gray-400">
+              현재 내 상황을 선택해 주세요:
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              {stageOptions.map((opt) => {
+                const isSelected = userStage === opt.id;
+                return (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => setUserStage(opt.id)}
+                    className={`py-2.5 px-3 rounded-xl text-left text-xs font-bold transition-all border ${
+                      isSelected
+                        ? 'bg-[#3182f6] text-white border-[#3182f6] shadow-xs'
+                        : 'bg-white/5 hover:bg-white/10 text-gray-300 border-white/10'
+                    }`}
+                  >
+                    <span>{opt.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 선택된 단계의 맞춤 가이드 설명 박스 */}
+          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+            <div className="text-[11px] font-bold text-blue-400">
+              [추천] {currentRec.badge}
+            </div>
+            <div className="text-xs sm:text-sm font-black text-white">
+              {currentRec.title}
+            </div>
+            <p className="text-[11px] text-gray-300 leading-relaxed">
+              {currentRec.desc}
+            </p>
+          </div>
+
+          {/* 이메일 입력 및 전송 폼 */}
+          {isDownloaded ? (
+            <div className="p-3.5 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-bold flex items-center gap-2">
+              <CheckCircle size={18} weight="fill" />
+              <span>선택하신 맞춤 가이드북이 이메일로 전송되었습니다! (스팸함도 확인해 주세요)</span>
+            </div>
+          ) : (
+            <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2 pt-1 max-w-md">
+              <input
+                type="email"
+                required
+                placeholder="가이드북을 받을 이메일 주소"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                className="px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 text-xs sm:text-sm outline-none focus:border-[#3182f6] flex-1"
+              />
+              <button
+                type="submit"
+                className="toss-button-primary px-5 py-2.5 text-xs sm:text-sm font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-sm"
+              >
+                <DownloadSimple size={14} weight="bold" />
+                <span>{currentRec.buttonText}</span>
+              </button>
+            </form>
+          )}
+
+          <p className="text-[10px] text-gray-400">
+            * 스팸 메일은 보내지 않으며 언제든 1클릭으로 구독 취소 가능합니다.
+          </p>
         </div>
       </section>
 
