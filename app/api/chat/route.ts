@@ -78,9 +78,9 @@ export async function POST(req: Request) {
     let detectedStep = 1;
     let reply = '';
 
-    if (lower.includes('aside') || lower.includes('리서치') || lower.includes('프롬프트') || lower.includes('스킬') || lower.includes('skill') || lower.includes('git') || lower.includes('claude') || lower.includes('gpt') || lower.includes('mcp') || lower.includes('에이전트')) {
+    if (lower.includes('aside') || lower.includes('리서치') || lower.includes('프롬프트') || lower.includes('스킬') || lower.includes('skill') || lower.includes('git') || lower.includes('claude') || lower.includes('gpt') || lower.includes('mcp') || lower.includes('에이전트') || lower.includes('톤앤매너') || lower.includes('페르소나') || lower.includes('블로그') || lower.includes('글쓰기') || lower.includes('13년차')) {
       detectedStep = 2;
-      reply = `[추천 단계: LEVEL 02. Git 에이전트 스킬 & 자율 실행 파이프라인 (퍼플 지능)]\n지겨운 '프롬프트 잘 쓰는 법' 외우기는 이제 끝났습니다. Git에 공개된 검증된 에이전트 스킬(.skills)과 MCP(Model Context Protocol)를 장착하면 AI가 터미널과 에디터에서 스스로 도구를 쓰며 일합니다.\n\n🎯 달성 마일스톤: Git 오픈소스 에이전트 스킬셋(.skills) & MCP 자율 실행 파이프라인 장착`;
+      reply = `[추천 단계: LEVEL 02. Git 에이전트 스킬 & 자율 실행 파이프라인 (퍼플 지능)]\n'너는 13년차 마케터야' 같은 추상적인 프롬프트는 인터넷의 위키백과 평균값만 뱉어냅니다. 내 과거 글 3편으로 문체 DNA를 역공학 추출하고, 금지어 헌장을 세워 나만의 브랜드 보이스(.skills/brand-voice)를 에이전트에 영구 장착하세요.\n\n🎯 달성 마일스톤: Git 오픈소스 에이전트 스킬셋(.skills) & 내 브랜드 페르소나 역공학 파이프라인 장착`;
     } else if (lower.includes('코딩') || lower.includes('개발') || lower.includes('만들고') || lower.includes('웹') || lower.includes('서비스') || lower.includes('외주') || lower.includes('cursor') || lower.includes('supabase') || lower.includes('런칭')) {
       detectedStep = 3;
       reply = `[추천 단계: LEVEL 03. 외주비 0원 1인 상용 웹 런칭 (퍼플➔화이트)]\n외주 개발사에 수천만 원을 들일 필요가 전혀 없습니다. Cursor, Supabase, Cloudflare를 조립하면 1인 빌더도 3일 만에 상용 웹서비스를 직접 라이브 배포할 수 있습니다.\n\n🎯 달성 마일스톤: 외주비 0원, 내 손으로 직접 띄운 상용 웹서비스 1개 라이브 배포`;

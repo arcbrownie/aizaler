@@ -13,6 +13,18 @@ export interface Column {
 
 export const COLUMNS: Column[] = [
   {
+    id: 'c0',
+    slug: 'never-use-13yo-marketer-prompt-brand-voice',
+    title: '‘너는 13년차 마케팅 전문가야’... 아직도 이런 프롬프트 쓰시나요?',
+    subtitle: 'AI에게 내 톤앤매너·페르소나·문체를 역공학으로 추출하고 ‘영구 에이전트 보이스 자산(.skills)’으로 박제하는 3단계 정립법',
+    excerpt: 'AI에게 "너는 13년차 마케터야"라고 치는 순간, AI는 인터넷에 널린 수백만 건의 교과서적인 마케팅 백서와 위키백과 평균값을 불러옵니다. 영혼 없는 상투어 대신, 내 과거 글 3편으로 문체 DNA를 역공학 추출하고 ‘네거티브 룰(금지어)’을 설계해 나만의 자율 에이전트 보이스를 만드는 실전 시스템을 공개합니다.',
+    readTime: '7분 읽기',
+    date: '2026. 09. 16',
+    category: '에이전틱 엔지니어링',
+    views: 18920,
+    highlightTag: '브랜드 보이스 역공학',
+  },
+  {
     id: 'c1',
     slug: 'meta-algorithm-hangover-db-proof',
     title: '20만 뷰 터지고 결제 4건? 메타 추천 알고리즘의 ‘숙취’를 실측 퍼널로 증명함',

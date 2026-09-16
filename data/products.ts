@@ -33,6 +33,7 @@ export const PRODUCTS: Product[] = [
     monthlyPrice: '데일리 카톡 알림톡 30일 포함',
     features: [
       'Git 오픈소스 에이전트 스킬(.skills) 설치 및 실무 장착 가이드',
+      '‘너는 13년차 전문가야’를 대체하는 [내 글 3편 기반 톤앤매너·페르소나 역공학 프레임워크]',
       'MCP (Model Context Protocol)로 터미널/브라우저/로컬 파일을 AI에 직결하는 법',
       'Claude Code & Cursor 기반 자율 에이전트 실행 템플릿',
       '프롬프트 작성 피로를 없애는 시스템 컨텍스트 아키텍처'
