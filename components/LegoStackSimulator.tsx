@@ -49,14 +49,14 @@ const BRICKS: LegoBrick[] = [
     icon: '💡'
   },
 
-  // ── [2. 딥 퍼플 AI 지능: 실리콘밸리 공식 정본] ──
+  // ── [2. 딥 퍼플 AI 지능: Git 에이전트 스킬 & 자율 실행] ──
   {
     id: 2,
-    name: '02. 실리콘밸리 Claude 정본 AI 지능',
-    desc: '실리콘밸리 Anthropic 본사의 정본 XML 구조화 프롬프트와 Gemini 대용량 컨텍스트를 지능 핵으로 장착합니다.',
-    stageName: '퍼플 지능',
-    tag: 'INTELLIGENCE',
-    badge: '정본 AI 지능',
+    name: '02. Git 에이전트 스킬 & 자율 실행 파이프라인',
+    desc: '지겨운 프롬프트 복붙은 끝났습니다. Git 오픈소스 에이전트 스킬(.skills)과 MCP를 장착해 AI가 스스로 도구를 쓰고 자율 실행하게 만듭니다.',
+    stageName: '에이전트 스킬',
+    tag: 'AGENT SKILLS',
+    badge: 'Git 에이전트 스킬',
     bgTop: 'bg-[#8b5cf6]',
     bgFront: 'bg-[#7c3aed]',
     bgRight: 'bg-[#6d28d9]',

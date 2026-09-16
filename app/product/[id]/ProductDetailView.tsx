@@ -141,7 +141,7 @@ export default function ProductDetailView({ id }: Props) {
             <ShieldCheck size={22} weight="fill" className="text-[#3182f6] shrink-0" />
             <div>
               <span className="font-bold">100% 만족 보장 & 평생 소장: </span>
-              제공되는 모든 템플릿과 프롬프트, 소스코드는 상업적 사용이 가능하며 평생 업데이트를 지원합니다.
+              제공되는 모든 템플릿과 에이전트 스킬, 소스코드는 상업적 사용이 가능하며 평생 업데이트를 지원합니다.
             </div>
           </div>
         </section>

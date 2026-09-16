@@ -78,16 +78,16 @@ export default function Home() {
     },
     {
       level: 'LEVEL 02',
-      title: '실리콘밸리 Claude Academy 정본 AI 지능',
-      situation: 'AI를 단순한 검색창처럼만 써서 기획과 업무에 10배 레버리지가 안 날 때',
-      summary: 'Anthropic 본사의 공식 XML 구조화 프롬프트와 Gemini 대용량 컨텍스트로 내 사고력과 기획력을 10배 확장합니다.',
-      outcome: 'Anthropic 공식 XML 프롬프트 템플릿 & 실무 AI 파이프라인',
-      tools: 'Claude 공식 XML 프롬프트 · 3.5 Sonnet 최적화 템플릿',
-      tag: 'INTELLIGENCE',
+      title: 'Git 오픈소스 에이전트 스킬 & MCP 자율 실행',
+      situation: '지겨운 프롬프트 잘 쓰는 법 외우기 대신, 내 작업 환경에서 AI가 스스로 일하게 만들고 싶을 때',
+      summary: '매번 채팅창에 프롬프트를 일일이 복붙하는 시대는 끝났습니다. 이미 Git에 공개된 검증된 에이전트 스킬(.skills)과 MCP(Model Context Protocol)를 에디터/터미널에 장착해, AI가 나 대신 자율적으로 검색·리서치·코딩을 실행하게 만듭니다.',
+      outcome: 'Git 오픈소스 에이전트 스킬셋(.skills) & MCP 자율 실행 파이프라인 장착',
+      tools: 'Git 에이전트 스킬 (.skills) · MCP 도구 연동 · Claude Code & Cursor Rules',
+      tag: 'AGENT SKILLS',
       color: '#7c3aed',
       bgLight: 'bg-purple-50/70 border-purple-200/60',
       icon: Cpu,
-      actionText: '2단계 AI 정본 킷 보기',
+      actionText: '2단계 에이전트 스킬 킷 보기',
       actionLink: '/product/aside-starter'
     },
     {
@@ -140,8 +140,8 @@ export default function Home() {
       a: '벽돌을 굽는 공식을 몰라도 레고 블록만 있으면 누구나 거대한 성을 지을 수 있었습니다. 복잡한 코딩을 처음부터 외우지 않고, 검증된 기획·지능·퍼널·인프라 블록을 조립해 내 상용 프로덕트와 현금 흐름을 만드는 1인 빌더 성장 트랙입니다.'
     },
     {
-      q: 'aizaler가 제공하는 AI 지능의 차별점은 무엇인가요?',
-      a: '실리콘밸리 Anthropic Claude Academy와 Google Gemini 공식 엔지니어링 문서(SSOT)를 분석해 실무에 바로 복붙 가능한 XML 구조화 템플릿과 Aside 브라우저 24시간 자율 리서치 환경을 제공합니다.'
+      q: 'aizaler가 제공하는 AI 지능의 차별점은 무엇인가요? (프롬프트 강의와 다른가요?)',
+      a: '시중에 흔한 "프롬프트 잘 쓰는 법 50선" 같은 뜬구름 잡는 복붙 PDF는 다루지 않습니다. Git에 이미 공개된 검증된 오픈소스 에이전트 스킬(.skills)과 MCP(Model Context Protocol)를 에디터와 터미널에 직접 연결해, AI가 사람 대신 자율적으로 도구를 쓰며 결과물을 만들어내는 최신 실행 환경을 전수합니다.'
     },
     {
       q: '비개발자도 직접 상용 제품을 런칭할 수 있나요?',
@@ -167,7 +167,7 @@ export default function Home() {
             </h1>
 
             <p className="text-sm sm:text-base text-[#4e5968] leading-relaxed max-w-xl font-normal">
-              실리콘밸리 <b>공식 정본 프롬프트</b>와 <b>24시간 자율 에이전트</b>를 결합해, 내 아이디어를 실제 작동하는 상용 웹서비스로 조립해내는 1인 빌더의 길을 함께합니다.
+              지겨운 <b>프롬프트 복붙</b> 대신 <b>Git 오픈소스 에이전트 스킬(.skills)</b>과 <b>자율 실행 파이프라인</b>을 결합해, 내 아이디어를 실제 작동하는 상용 웹서비스로 조립해내는 1인 빌더의 길을 함께합니다.
             </p>
 
             {/* CTA 세트 */}
@@ -192,7 +192,7 @@ export default function Home() {
               {/* 신뢰 지표 */}
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-[#8b95a1] pt-1">
                 <span>✓ Meta 공인 전문가</span>
-                <span>✓ Claude Academy 공식 정본</span>
+                <span>✓ Git 에이전트 스킬(.skills) & MCP</span>
                 <span>✓ Aside 24h 자율 리서치</span>
                 <span className="text-emerald-600 font-medium">✓ 4개 상용 서비스 운영</span>
               </div>

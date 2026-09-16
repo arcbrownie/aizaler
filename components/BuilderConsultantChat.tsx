@@ -17,7 +17,7 @@ interface BuilderConsultantChatProps {
 
 const QUICK_PROMPTS = [
   { text: '💡 [Level 1] 아이디어는 있는데 시장성이 막막해요', step: 1, icon: LightbulbFilament },
-  { text: '⚡️ [Level 2] AI를 검색창처럼만 써서 실무에 안 쓰여요', step: 2, icon: Cpu },
+  { text: '⚡️ [Level 2] 프롬프트 복붙 지겹고 Git 에이전트 스킬로 자율 실행하고 싶어요', step: 2, icon: Cpu },
   { text: '🚀 [Level 3] 외주비 없이 직접 상용 웹을 띄우고 싶어요', step: 3, icon: RocketLaunch },
   { text: '🎯 [Level 4] 웹은 있는데 방문자가 없고 결제가 안 돼요', step: 4, icon: Target },
   { text: '👑 [Level 5] 퇴사/1인 기업 방향성을 1:1로 진단받고 싶어요', step: 5, icon: Crown },
@@ -38,11 +38,11 @@ const TRACK_DETAILS: Record<number, {
     actionText: '1단계 기획 가이드 받기'
   },
   2: {
-    name: 'LEVEL 02. 실리콘밸리 Claude 정본 AI 지능',
-    deliverable: 'Anthropic 공식 XML 프롬프트 템플릿 & 실무 AI 파이프라인',
-    brickLabel: '딥 퍼플 지능 블록',
+    name: 'LEVEL 02. Git 에이전트 스킬 & 자율 실행 파이프라인',
+    deliverable: 'Git 오픈소스 에이전트 스킬셋(.skills) & MCP 자율 실행 파이프라인',
+    brickLabel: '딥 퍼플 에이전트 블록',
     link: '/product/aside-starter',
-    actionText: '2단계 AI 정본 킷 보기'
+    actionText: '2단계 에이전트 스킬 킷 보기'
   },
   3: {
     name: 'LEVEL 03. 외주비 0원 1인 상용 웹 런칭',

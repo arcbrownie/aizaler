@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   rank: number;
   badge: 'BEST' | 'FREE' | 'HOT' | '선착순' | 'NEW';
-  category: 'Aside & 지능 레버리지' | '트래픽 & 퍼널 성장' | '1인 제품 런칭' | '1:1 프라이빗 전략';
+  category: '에이전트 스킬 & 지능 레버리지' | 'Aside & 지능 레버리지' | '트래픽 & 퍼널 성장' | '1인 제품 런칭' | '1:1 프라이빗 전략';
   mode: 'daily' | 'traffic' | 'build' | 'vip';
   title: string;
   tagline: string;
@@ -21,25 +21,25 @@ export const PRODUCTS: Product[] = [
   {
     id: 'aside-starter',
     rank: 1,
-    badge: 'NEW',
-    category: 'Aside & 지능 레버리지',
+    badge: 'BEST',
+    category: '에이전트 스킬 & 지능 레버리지',
     mode: 'daily',
-    title: 'Aside 브라우저 실전 마스터 & 글로벌 AI 정본 해설 킷',
-    tagline: 'Anthropic Claude Academy & Google Gemini 공식 엔지니어링 문서의 한국형 실전 조립법',
-    description: '시중의 얕은 인스타 카드뉴스 대신, 앤트로픽(Claude)과 구글(Gemini) 본사가 직접 만든 공식 교과서를 내 업무에 바로 복붙하는 레고 블록으로 정제했습니다. Aside 브라우저로 24시간 자동화하는 시장 리서치 세팅법과 매일 아침 카카오 알림톡 데일리 큐레이션을 함께 제공합니다.',
+    title: 'Git 오픈소스 에이전트 스킬(.skills) & MCP 자율 실행 마스터 킷',
+    tagline: '지겨운 프롬프트 복붙은 그만: Git에 공개된 검증된 에이전트 스킬과 MCP로 AI를 자율 실행시키는 실전 킷',
+    description: '시중의 얕은 "프롬프트 100선" PDF 대신, Git에 이미 공개된 검증된 에이전트 스킬(.skills)과 MCP(Model Context Protocol)를 내 개발 환경에 바로 꽂는 실전 조립법을 전수합니다. AI가 터미널과 에디터에서 스스로 도구를 쓰고 결과물을 완성하는 자율 워크플로우를 구축하세요.',
     originalPrice: 79000,
     discountRate: 63,
     salePrice: 29000,
     monthlyPrice: '데일리 카톡 알림톡 30일 포함',
     features: [
-      'Aside 브라우저 설치부터 24시간 자율 리서처 세팅 매뉴얼',
-      'Claude Academy 공인 정본: XML 태그 및 정밀 프롬프트 조립 템플릿',
-      '구글 Gemini 대용량 컨텍스트 기반 1권 분량 문서 실시간 분석법',
-      '출근길 1분 컷 카카오 알림톡 데일리 AI 트렌드 & 팁 30일 발송'
+      'Git 오픈소스 에이전트 스킬(.skills) 설치 및 실무 장착 가이드',
+      'MCP (Model Context Protocol)로 터미널/브라우저/로컬 파일을 AI에 직결하는 법',
+      'Claude Code & Cursor 기반 자율 에이전트 실행 템플릿',
+      '프롬프트 작성 피로를 없애는 시스템 컨텍스트 아키텍처'
     ],
-    target: '매달 AI 구독료는 내는데 단순 검색창으로만 써서 답답한 직장인, 기획자, 1인 사업가',
-    highlightProof: 'Anthropic & Google 공식 엔지니어링 도큐먼트 기반 검증',
-    accentColor: '#0ea5e9',
+    target: '매번 채팅창에 프롬프트 길게 치는 게 지겹고, AI가 알아서 일하는 자율 실행 파이프라인을 구축하고 싶은 1인 빌더',
+    highlightProof: 'Git 오픈소스 에이전트 스킬 및 Anthropic MCP 표준 규격 준수',
+    accentColor: '#7c3aed',
   },
   {
     id: '1',
@@ -126,7 +126,7 @@ export const PRODUCTS: Product[] = [
     features: [
       'Claude Code 설치 및 인증부터 실전 프로젝트 적용 50선',
       '반복 리팩토링 및 텍스트 일괄 변환 자동화 셸 스크립트',
-      '컨텍스트 윈도우 비용을 절감하는 프롬프트 최적화 기법'
+      '컨텍스트 윈도우 비용을 절감하는 토큰 및 에이전트 컨텍스트 최적화 기법'
     ],
     target: 'Cursor, Claude Code 등 최신 에이전트 도구로 생산성을 극한으로 올리고 싶은 빌더',
     highlightProof: '사내 전 프로덕트 개발 및 유지보수에 100% 실사용 중',

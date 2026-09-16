@@ -12,7 +12,7 @@ const SYSTEM_INSTRUCTION = `
 
 [aizaler 5단계 완주 커리큘럼 (Builder Curriculum)]
 - LEVEL 01 (블루 기초석): 시장 검증 & Aside 자율 리서치 (마일스톤: Aside 24h 시장 감시 봇 & BM 린 캔버스 1장)
-- LEVEL 02 (퍼플 지능): 실리콘밸리 Claude 정본 AI 지능 (마일스톤: Anthropic 공식 XML 프롬프트 템플릿 & 지능 파이프라인)
+- LEVEL 02 (퍼플 지능): Git 에이전트 스킬 & 자율 실행 파이프라인 (마일스톤: Git 오픈소스 에이전트 스킬셋(.skills) & MCP 자율 실행 파이프라인 장착)
 - LEVEL 03 (퍼플➔화이트): 외주비 0원 1인 상용 웹 런칭 (마일스톤: Cursor + Supabase + Cloudflare 상용 웹 1개 라이브 배포)
 - LEVEL 04 (레드 핫포인트): 메타 고전환 퍼널 & 소셜 트래픽 (마일스톤: 스레드 알고리즘 & CVR 20% 고전환 퍼널 시스템)
 - LEVEL 05 (순백 화이트): 1인 비즈니스 마스터리 & 1:1 VIP (마일스톤: 50분 심층 분석 & 90일 Action Blueprint 처방)
@@ -78,9 +78,9 @@ export async function POST(req: Request) {
     let detectedStep = 1;
     let reply = '';
 
-    if (lower.includes('aside') || lower.includes('리서치') || lower.includes('프롬프트') || lower.includes('claude') || lower.includes('gpt') || lower.includes('지능') || lower.includes('xml')) {
+    if (lower.includes('aside') || lower.includes('리서치') || lower.includes('프롬프트') || lower.includes('스킬') || lower.includes('skill') || lower.includes('git') || lower.includes('claude') || lower.includes('gpt') || lower.includes('mcp') || lower.includes('에이전트')) {
       detectedStep = 2;
-      reply = `[추천 단계: LEVEL 02. 실리콘밸리 Claude 정본 AI 지능 (퍼플 지능)]\n단순한 검색창 사용에서 벗어나, Anthropic 본사의 공식 XML 구조화 프롬프트와 컨텍스트 엔지니어링을 장착하세요.\n\n🎯 달성 마일스톤: 실리콘밸리 공식 XML 구조화 프롬프트 템플릿 & 기획/작성 10배 자동화 파이프라인`;
+      reply = `[추천 단계: LEVEL 02. Git 에이전트 스킬 & 자율 실행 파이프라인 (퍼플 지능)]\n지겨운 '프롬프트 잘 쓰는 법' 외우기는 이제 끝났습니다. Git에 공개된 검증된 에이전트 스킬(.skills)과 MCP(Model Context Protocol)를 장착하면 AI가 터미널과 에디터에서 스스로 도구를 쓰며 일합니다.\n\n🎯 달성 마일스톤: Git 오픈소스 에이전트 스킬셋(.skills) & MCP 자율 실행 파이프라인 장착`;
     } else if (lower.includes('코딩') || lower.includes('개발') || lower.includes('만들고') || lower.includes('웹') || lower.includes('서비스') || lower.includes('외주') || lower.includes('cursor') || lower.includes('supabase') || lower.includes('런칭')) {
       detectedStep = 3;
       reply = `[추천 단계: LEVEL 03. 외주비 0원 1인 상용 웹 런칭 (퍼플➔화이트)]\n외주 개발사에 수천만 원을 들일 필요가 전혀 없습니다. Cursor, Supabase, Cloudflare를 조립하면 1인 빌더도 3일 만에 상용 웹서비스를 직접 라이브 배포할 수 있습니다.\n\n🎯 달성 마일스톤: 외주비 0원, 내 손으로 직접 띄운 상용 웹서비스 1개 라이브 배포`;
