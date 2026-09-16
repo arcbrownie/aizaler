@@ -152,7 +152,7 @@ export default function AIPrescriptionTrainer() {
           steps: [
             '1일차: Claude Code를 활용해 Next.js 14 미니멀 랜딩페이지 UI 생성 (1시간)',
             '2일차: Cloudflare Pages 무료 정적 배포 파이프라인 연결 및 도메인 바인딩 (30분)',
-            '3일차: 토스페이먼츠 / 포트원 간편결제 모듈과 이메일 자동 발송 웹훅 연결 (1.5시간)'
+            '3일차: 간편결제 모듈 및 이메일 자동 발송 웹훅 연결 (1.5시간)'
           ],
           aiPromptSnippet: '"Next.js 14 App Router 기반으로, 1인 창업가가 월 $42 이하로 운영할 수 있는 서버리스 결제 완료 웹훅 처리 보일러플레이트 코드를 작성해줘."'
         },

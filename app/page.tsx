@@ -77,6 +77,19 @@ export default function Home() {
     },
     {
       track: 'TRACK 02',
+      title: 'Aside 24h 자율 리서치 & 정본 AI 지능',
+      summary: 'Aside 브라우저로 24시간 시장 트렌드를 자동 감시하고, Anthropic 공식 XML 구조화 프롬프트로 10배의 지능 레버리지를 장착합니다.',
+      outcome: 'Aside 24h 자율 시장 감시 봇 & Claude 공식 XML 프롬프트',
+      tools: 'Aside 브라우저 템플릿 · Claude 공식 XML 프롬프트',
+      tag: 'INTELLIGENCE',
+      color: '#7c3aed',
+      bgLight: 'bg-purple-50/70 border-purple-200/60',
+      icon: Cpu,
+      actionText: 'AI 지능 실전 킷 보기',
+      actionLink: '/product/aside-starter'
+    },
+    {
+      track: 'TRACK 03',
       title: '메타 고전환 퍼널 매칭',
       summary: '광고 카피와 랜딩페이지 첫 문장을 1:1로 일치시켜 클릭한 고객의 구매 결정을 완성합니다.',
       outcome: '광고 ↔ 랜딩 결속 CVR 20% 고전환 퍼널 시스템',
@@ -89,30 +102,17 @@ export default function Home() {
       actionLink: '/product/1'
     },
     {
-      track: 'TRACK 03',
-      title: '실리콘밸리 Claude Academy 정본 AI 지능',
-      summary: '실리콘밸리 Anthropic 본사의 정본 엔지니어링 문서(SSOT)를 기반으로 고성능 AI 파이프라인을 장착합니다.',
-      outcome: 'Anthropic 공식 XML 구조화 프롬프트 템플릿 & 지능 엔진',
-      tools: 'Claude 공식 XML 프롬프트 · 3.5 Sonnet 최적화 템플릿',
-      tag: 'INTELLIGENCE',
-      color: '#7c3aed',
-      bgLight: 'bg-purple-50/70 border-purple-200/60',
-      icon: Cpu,
-      actionText: 'AI 지능 실전 킷 보기',
-      actionLink: '/product/aside-starter'
-    },
-    {
       track: 'TRACK 04',
-      title: 'Aside 24h 자율 리서치 & 1인 풀스택 런칭',
-      summary: 'Aside 브라우저로 시장 트렌드를 24시간 자율 감시하고, Next.js와 Supabase로 상용 결제 웹을 띄웁니다.',
-      outcome: '24h 자율 시장 감시 봇 & 토스 실결제 풀스택 웹 1개 배포',
-      tools: 'Aside 템플릿 · Next.js 14 · Supabase · 토스페이먼츠',
+      title: '외주비 0원 1인 상용 웹 런칭',
+      summary: '외주 개발사 없이 Cursor, Supabase, Cloudflare를 결합해 3일 만에 상용 웹서비스를 직접 띄웁니다.',
+      outcome: '외주비 0원, 내 손으로 직접 띄운 상용 웹서비스 1개 라이브 배포',
+      tools: 'Next.js 14 · Supabase · Cloudflare · 런칭 보일러플레이트',
       tag: 'LAUNCH',
       color: '#9333ea',
       bgLight: 'bg-purple-50/70 border-purple-200/60',
       icon: RocketLaunch,
       actionText: '풀스택 런칭 트랙 보기',
-      actionLink: '/product/5'
+      actionLink: '/product/6'
     },
     {
       track: 'TRACK 05',
@@ -140,7 +140,7 @@ export default function Home() {
     },
     {
       q: '비개발자도 직접 상용 제품을 런칭할 수 있나요?',
-      a: '네. Cursor, Supabase, Cloudflare, 토스페이먼츠를 조립형 아키텍처로 조합해 외주비 없이 혼자서 결제 웹서비스를 띄우고 운영하는 실전 파이프라인을 전수합니다.'
+      a: '네. Cursor, Supabase, Cloudflare, 간편결제 모듈을 조립형 아키텍처로 조합해 외주비 없이 혼자서 결제 웹서비스를 띄우고 운영하는 실전 파이프라인을 전수합니다.'
     }
   ];
 

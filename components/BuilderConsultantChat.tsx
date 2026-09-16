@@ -17,9 +17,9 @@ interface BuilderConsultantChatProps {
 
 const QUICK_PROMPTS = [
   { text: '아이디어는 있는데 BM 기획이 막막해요', step: 1, icon: LightbulbFilament },
-  { text: '광고 조회수는 나오는데 결제 전환이 안 돼요', step: 2, icon: Target },
-  { text: '실리콘밸리 Claude 정본 프롬프트가 필요해요', step: 3, icon: Cpu },
-  { text: 'Aside 24h 자율 리서치와 웹 런칭을 원해요', step: 4, icon: RocketLaunch },
+  { text: 'Aside 24h 자율 리서치 & 정본 AI가 필요해요', step: 2, icon: Cpu },
+  { text: '광고 조회수는 나오는데 결제 전환이 안 돼요', step: 3, icon: Target },
+  { text: '외주비 없이 혼자 상용 웹을 띄우고 싶어요', step: 4, icon: RocketLaunch },
   { text: '파운더와 1:1로 90일 실행 플랜을 세우고 싶어요', step: 5, icon: Crown },
 ];
 
@@ -38,24 +38,24 @@ const TRACK_DETAILS: Record<number, {
     actionText: '기획 트랙 맞춤 가이드 받기'
   },
   2: {
-    name: 'TRACK 02. 메타 고전환 퍼널 매칭',
+    name: 'TRACK 02. Aside 자율 리서치 & 정본 AI',
+    deliverable: 'Aside 24h 시장 감시 봇 & Anthropic 공식 XML 프롬프트',
+    brickLabel: '딥 퍼플 지능 블록',
+    link: '/product/aside-starter',
+    actionText: 'AI 지능 실전 킷 보기'
+  },
+  3: {
+    name: 'TRACK 03. 메타 고전환 퍼널 매칭',
     deliverable: '광고 ↔ 랜딩 결속 CVR 20% 고전환 퍼널 시스템',
     brickLabel: '레드 핫포인트 블록',
     link: '/product/1',
     actionText: '퍼널 트랙 실전서 보기'
   },
-  3: {
-    name: 'TRACK 03. Claude Academy 정본 AI 지능',
-    deliverable: 'Anthropic 공식 XML 구조화 프롬프트 시스템',
-    brickLabel: '딥 퍼플 지능 블록',
-    link: '/product/aside-starter',
-    actionText: 'AI 지능 실전 킷 보기'
-  },
   4: {
-    name: 'TRACK 04. Aside 자율 리서치 & 풀스택 런칭',
-    deliverable: '24h 자율 시장 감시 & 토스 실결제 웹 1개 배포',
+    name: 'TRACK 04. 외주비 0원 1인 상용 웹 런칭',
+    deliverable: '외주비 0원, 내 손으로 직접 띄운 상용 웹 1개 배포',
     brickLabel: '퍼플➔화이트 런칭 블록',
-    link: '/product/5',
+    link: '/product/6',
     actionText: '풀스택 런칭 트랙 보기'
   },
   5: {
@@ -294,3 +294,4 @@ export default function BuilderConsultantChat({ onStepDiagnosed }: BuilderConsul
     </div>
   );
 }
+

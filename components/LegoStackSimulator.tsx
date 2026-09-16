@@ -31,7 +31,7 @@ const BRICKS: LegoBrick[] = [
   {
     id: 1,
     name: '01. 아이디어 & BM 기획',
-    desc: '무작정 코딩 대신 고객의 결핍과 현금 흐름 모델을 탄탄한 토스 블루 기초석으로 조립합니다.',
+    desc: '무작정 코딩 대신 고객의 실제 결핍과 현금 흐름 모델을 탄탄한 블루 기초석으로 조립합니다.',
     stageName: '블루 기초',
     tag: 'FOUNDATION',
     badge: 'BM 기획',
@@ -49,11 +49,33 @@ const BRICKS: LegoBrick[] = [
     icon: '💡'
   },
 
-  // ── [2. 레드 핫포인트] ──
+  // ── [2. 딥 퍼플 AI 지능 & 자율 리서치] ──
   {
     id: 2,
-    name: '02. 메타 고전환 퍼널 매칭',
-    desc: '광고 클릭을 이탈 없이 구매로 직결시키는 강렬한 토스 코랄 레드 핫포인트! 이탈을 막고 전환을 극대화합니다.',
+    name: '02. Aside 자율 리서치 & 정본 AI',
+    desc: 'Aside 브라우저로 24시간 시장을 자동 감시하고 Anthropic 정본 XML 프롬프트를 딥 퍼플 지능 핵으로 장착합니다.',
+    stageName: '퍼플 지능',
+    tag: 'INTELLIGENCE',
+    badge: 'Aside & 정본 AI',
+    bgTop: 'bg-[#8b5cf6]',
+    bgFront: 'bg-[#7c3aed]',
+    bgRight: 'bg-[#6d28d9]',
+    studColor: 'bg-[#a78bfa] border-[#8b5cf6]',
+    themeColor: '#7c3aed',
+    textColor: 'text-purple-700',
+    badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
+    width: 170,
+    x: -12,
+    y: 35,
+    studs: 5,
+    icon: '⚡'
+  },
+
+  // ── [3. 레드 핫포인트 퍼널] ──
+  {
+    id: 3,
+    name: '03. 메타 고전환 퍼널 매칭',
+    desc: '광고 클릭을 이탈 없이 구매로 직결시키는 강렬한 코랄 레드 핫포인트! 이탈을 막고 전환을 극대화합니다.',
     stageName: '레드 핫포인트',
     tag: 'CONVERSION',
     badge: '고전환 퍼널',
@@ -64,43 +86,21 @@ const BRICKS: LegoBrick[] = [
     themeColor: '#f04452',
     textColor: 'text-rose-700',
     badgeBg: 'bg-rose-50 text-rose-700 border-rose-200',
-    width: 170,
-    x: -12,
-    y: 35,
-    studs: 5,
-    icon: '🎯'
-  },
-
-  // ── [3. 딥 퍼플 AI 지능] ──
-  {
-    id: 3,
-    name: '03. Claude Academy 정본 지능',
-    desc: '실리콘밸리 Anthropic 본사의 정본 XML 구조화 프롬프트를 딥 퍼플 지능 핵으로 장착합니다.',
-    stageName: '퍼플 지능',
-    tag: 'INTELLIGENCE',
-    badge: '정본 프롬프트',
-    bgTop: 'bg-[#8b5cf6]',
-    bgFront: 'bg-[#7c3aed]',
-    bgRight: 'bg-[#6d28d9]',
-    studColor: 'bg-[#a78bfa] border-[#8b5cf6]',
-    themeColor: '#7c3aed',
-    textColor: 'text-purple-700',
-    badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
     width: 140,
     x: 8,
     y: 0,
     studs: 4,
-    icon: '⚡'
+    icon: '🎯'
   },
 
-  // ── [4. 소프트 퍼플 자율 자동화] ──
+  // ── [4. 소프트 퍼플 ➔ 화이트 런칭] ──
   {
     id: 4,
-    name: '04. Aside 브라우저 자율 리서치',
-    desc: '24시간 웹을 자동 탐색하며 시장 정보를 수집해 순백의 런칭으로 연결하는 에이전트 결합!',
+    name: '04. 외주비 0원 1인 상용 웹 런칭',
+    desc: 'Cursor, Supabase, Cloudflare를 결합해 외주 개발비 없이 3일 만에 상용 웹서비스를 직접 띄웁니다.',
     stageName: '퍼플 ➔ 화이트',
-    tag: 'AUTONOMOUS',
-    badge: 'Aside 24h',
+    tag: 'LAUNCH',
+    badge: '풀스택 런칭',
     bgTop: 'bg-[#a855f7]',
     bgFront: 'bg-[#9333ea]',
     bgRight: 'bg-[#7e22ce]',
@@ -112,16 +112,16 @@ const BRICKS: LegoBrick[] = [
     x: -15,
     y: -35,
     studs: 3,
-    icon: '🌐'
+    icon: '🚀'
   },
 
   // ── [5. 세라믹 퓨어 화이트 서밋 크라운] ──
   {
     id: 5,
-    name: '05. 1인 결제 프로덕트 완성!',
-    desc: '외주비 0원으로 내 손으로 직접 띄운 순백의 상용 웹서비스. 군더더기 없이 자생적 현금 흐름을 여는 서밋 크라운 👑',
+    name: '05. 1인 비즈니스 마스터리 & 1:1 VIP',
+    desc: '4개 프로덕트로 생존한 파운더와 50분간 1:1 맞춤 Action Blueprint 도출. 자생적 현금 흐름을 여는 서밋 크라운 👑',
     stageName: '화이트 완성',
-    tag: 'LAUNCH',
+    tag: 'VIP MASTERY',
     badge: '서밋 화이트',
     bgTop: 'bg-[#ffffff]',
     bgFront: 'bg-[#f8fafc]',
@@ -425,7 +425,7 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
         <div className="space-y-0.5 min-w-0">
           <div className="flex items-center gap-1.5">
             <span className={`text-[9px] font-black px-2 py-0.5 rounded-full border uppercase tracking-wider ${activeBrick.badgeBg}`}>
-              TRACK 0{activeBrick.id} · {activeBrick.stageName}
+              STEP 0{activeBrick.id} · {activeBrick.stageName}
             </span>
           </div>
           <div className="text-xs sm:text-sm font-black text-[#191f28] truncate">
