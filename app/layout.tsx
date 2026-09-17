@@ -42,10 +42,10 @@ export default function RootLayout({
           <>
             {/* 상단 띠배너 (애플 스타일 슬림 인포 바) */}
             <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
-              <span className="text-[#3182f6] font-bold mr-2">✦ 1인 빌더를 위한 3주 완주 스프린트</span>
-              <span>코딩 문법 대신 AI 블록을 조립해 내 제품을 띄우는 <b>1인 빌더 파이프라인</b></span>
-              <a href="#hero-diagnostic" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
-                내 맞춤 블록 3초 진단하기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
+              <span className="text-[#3182f6] font-bold mr-2">✦ 3주 빌더 스프린트 1기 모집</span>
+              <span>코딩 문법 대신 AI 블록을 조립해 내 제품을 띄우는 <b>1인 빌더 크루</b></span>
+              <a href="#step-1" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
+                목표 트랙 선택하기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
               </a>
             </div>
 
@@ -67,24 +67,24 @@ export default function RootLayout({
                   </div>
                 </Link>
 
-                {/* 네비게이션: 3주 스프린트, 인터랙티브 랩, 1:1 VIP, 소개 */}
+                {/* 네비게이션: 3단계 플로우 연동 */}
                 <nav className="hidden lg:flex items-center gap-6 text-[14px] font-semibold text-[#4e5968]">
-                  <a href="#hero-diagnostic" className="hover:text-[#3182f6] transition-colors text-[#3182f6] font-bold flex items-center gap-1.5">
+                  <a href="#step-1" className="hover:text-[#3182f6] transition-colors text-[#3182f6] font-bold flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#3182f6] animate-pulse" />
-                    맞춤 블록 진단
+                    STEP 1. 목표 선택
                   </a>
-                  <a href="#sprint" className="hover:text-[#3182f6] transition-colors">
-                    3주 스프린트
+                  <a href="#step-2" className="hover:text-[#3182f6] transition-colors">
+                    STEP 2. 3주 여정
                   </a>
-                  <a href="#lab" className="hover:text-[#3182f6] transition-colors">
-                    인터랙티브 랩
+                  <a href="#step-3" className="hover:text-[#3182f6] transition-colors">
+                    STEP 3. 크루 신청
                   </a>
                   <Link href="/career" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-[#3182f6] font-bold">
-                    1:1 프라이빗 세션
+                    1:1 VIP 세션
                     <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#e8f3ff] text-[#3182f6] font-mono">VIP</span>
                   </Link>
                   <Link href="/about" className="hover:text-[#3182f6] transition-colors flex items-center gap-1">
-                    사이트 소개
+                    소개
                   </Link>
                   <a href="#faq" className="hover:text-[#3182f6] transition-colors">
                     FAQ
@@ -94,11 +94,11 @@ export default function RootLayout({
                 {/* 우측 3초 진단 CTA */}
                 <div className="flex items-center gap-3">
                   <a
-                    href="#hero-diagnostic"
+                    href="#step-1"
                     className="toss-button-primary px-4 py-2 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:scale-95"
                   >
                     <Sparkle size={15} weight="fill" />
-                    <span>3초 진단하기</span>
+                    <span>목표 선택하기</span>
                   </a>
                 </div>
               </div>
