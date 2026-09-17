@@ -13,6 +13,18 @@ export interface Column {
 
 export const COLUMNS: Column[] = [
   {
+    id: 'c-hook',
+    slug: 'threads-hook-collection-myth-structure-reverse-engineering',
+    title: '‘훅 자료집 100선’만 보셨나요? 왜 당신의 스레드는 안 터지는지 그 구조를 까드립니다',
+    subtitle: '시중 훅 템플릿 복붙이 메타 알고리즘에서 ‘소음’으로 버려지는 이유와, 500만 뷰를 터뜨린 3단계 체류 시간 구조학',
+    excerpt: '수많은 크리에이터가 "훅 자료집 50선", "바이럴 첫 문장 템플릿"을 저장해 두고 첫 줄에 복붙합니다. 하지만 결과는 조회수 100따리. 왜일까요? 메타 추천 알고리즘(Sentence-BERT & LASER)은 첫 문장의 자극성보다 "첫 줄과 둘째 줄 사이의 체류 시간(Dwell Time)"과 "첫 문장과 본문의 1:1 결속도"를 봅니다. 500만 뷰 실측 DB에서 추출한 3단계 훅 구조학을 그대로 공개합니다.',
+    readTime: '6분 읽기',
+    date: '2026. 09. 17',
+    category: '스레드 알고리즘 구조학',
+    views: 24180,
+    highlightTag: '스레드 500만 뷰 실측',
+  },
+  {
     id: 'c0',
     slug: 'never-use-13yo-marketer-prompt-brand-voice',
     title: '‘너는 13년차 마케팅 전문가야’... 아직도 이런 프롬프트 쓰시나요?',

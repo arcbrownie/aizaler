@@ -72,16 +72,16 @@ export default function Home() {
     },
     {
       step: 4,
-      label: '🎯 트래픽과 첫 결제 만들기',
-      short: '퍼널 & 첫 결제',
+      label: '🎯 훅 자료집 써도 안 터져요',
+      short: '스레드 훅 구조학',
       icon: Target,
       tag: 'LEVEL 04 · CONVERSION',
       color: '#f04452',
       bgTag: 'bg-rose-50 text-rose-700 border-rose-200',
-      title: '메타 고전환 퍼널 & 소셜 트래픽',
-      summary: '스레드 500만 뷰 알고리즘과 카피 1:1 결속 퍼널로 클릭을 이탈 없는 유료 결제로 전환합니다.',
-      outcome: '스레드 알고리즘 & CVR 8.6%+ 고전환 퍼널 & 첫 유료 결제',
-      tools: '후킹 카피 프레임워크 · 메타 알고리즘 역설계 가이드'
+      title: '스레드 500만 뷰 훅 구조학 & 고전환 퍼널',
+      summary: '시중 훅 템플릿 복붙을 멈추고, 500만 뷰 실측 DB로 검증된 체류 시간 10배 견인 구조와 첫 문장 1:1 결속 퍼널을 장착합니다.',
+      outcome: '스레드 500만 뷰 훅 구조도 & CVR 8.6%+ 고전환 퍼널',
+      tools: '3단계 체류 시간 구조도 · 첫 문장 1:1 결속 프레임워크 · 메타 역공학 가이드'
     },
   ];
 
@@ -124,12 +124,12 @@ export default function Home() {
     },
     {
       week: 'WEEK 03',
-      title: '메타 고전환 퍼널 & 첫 유료 결제',
-      highlight: '조회수 거품 없이 진짜 매출로 결속',
-      desc: '스레드 500만 뷰 알고리즘으로 진성 타깃을 모으고, 광고 카피와 첫 문장을 1:1로 결속시켜 CVR 8.6%+ 고전환 퍼널과 첫 현금 흐름을 만듭니다.',
+      title: '스레드 훅 구조학 & 첫 유료 결제',
+      highlight: '‘훅 자료집’ 복붙 대신 체류 시간 구조 설계',
+      desc: '‘훅 자료집’만 모아두고 써봤자 알고리즘은 소음으로 거릅니다. 500만 뷰 실측 DB로 왜 터지는지 알고리즘 구조를 해부하고, 첫 문장과 상세페이지를 1:1로 결속시켜 CVR 8.6%+ 고전환 퍼널을 완성합니다.',
       deliverables: [
-        '스레드 바이럴 카피 프레임워크',
-        'CVR 8.6%+ 랜딩페이지 퍼널',
+        '스레드 3단계 체류 시간 구조도',
+        '첫 문장 1:1 결속 카피 프레임워크',
         '첫 번째 실제 유료 결제 발생'
       ],
       tag: 'LEVEL 04',
@@ -503,35 +503,60 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. Single Focused Free Starter Kit (Decluttered & Clean) ── */}
+      {/* ── 5. 스레드 훅 구조학 리포트 무료 스타터 킷 ── */}
       <section id="starter-kit" className="toss-container scroll-mt-20">
-        <div className="apple-glass rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto border border-white/80 shadow-[0_20px_50px_rgba(0,0,0,0.04)] space-y-6">
-          <div className="space-y-2 text-center">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#3182f6] text-xs font-bold">
-              <DownloadSimple size={13} weight="bold" />
-              <span>100% 무료 스타터 킷</span>
+        <div className="apple-glass rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto border border-white/80 shadow-[0_20px_50px_rgba(0,0,0,0.04)] space-y-7">
+          <div className="space-y-3 text-center">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-[#f04452] text-xs font-bold border border-rose-200/60">
+              <Sparkle size={13} weight="fill" />
+              <span>100% 무료 배포 · 스레드 500만 뷰 실측 역공학</span>
             </div>
 
-            <h2 className="text-xl sm:text-3xl font-black text-[#191f28] tracking-tight leading-tight">
-              어디서부터 시작해야 할지 모를 때.
+            <h2 className="text-2xl sm:text-4xl font-black text-[#191f28] tracking-tight leading-tight">
+              ‘훅 자료집’만 보셨나요?<br />
+              <span className="text-[#3182f6]">왜 안 터지는지, 그 숨겨진 구조</span>를 알려드립니다.
             </h2>
 
-            <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed max-w-lg mx-auto">
-              1인 창업 필수 비즈니스 용어집과 고객 결핍 검증 체크리스트(PDF)를 이메일로 즉시 받아보세요.
+            <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed max-w-xl mx-auto">
+              시중에 굴러다니는 훅 100선 복붙은 메타 알고리즘이 소음(Noise)으로 거릅니다.<br className="hidden sm:inline" />
+              스레드 2개 계정 500만 뷰 실측 DB와 Meta 공인 전문가가 증명한 <b>[체류 시간 10배 견인 구조 & 첫 문장 1:1 결속 리포트 (PDF)]</b>를 이메일로 즉시 보내드립니다.
             </p>
+          </div>
+
+          {/* 훅 복붙 vs 구조 역공학 직관 비교 카드 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+            <div className="p-4 rounded-2xl bg-gray-50/90 border border-black/[0.05] space-y-1.5">
+              <div className="text-[11px] font-bold text-gray-500 flex items-center gap-1.5">
+                <span>❌</span>
+                <span>단순 훅 복붙 (왜 안 터지는가)</span>
+              </div>
+              <p className="text-xs text-[#4e5968] leading-relaxed">
+                인터넷에서 긁어온 자극적인 첫 문장 ➔ 본문 들어가자마자 뻔한 교과서 내용 ➔ <b>체류 시간 1.8초 이탈</b> ➔ 알고리즘 추천 피드 노출 중단
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-blue-50/80 border border-blue-200/60 space-y-1.5">
+              <div className="text-[11px] font-bold text-[#3182f6] flex items-center gap-1.5">
+                <span>💎</span>
+                <span>구조 역공학 (왜 터지는가)</span>
+              </div>
+              <p className="text-xs text-[#191f28] leading-relaxed">
+                인지 부조화 첫 문장 ➔ 스크롤을 멈추는 실측 데이터 ➔ 논쟁적 댓글 결속 ➔ <b>체류 시간 18.4초 (10배 견인)</b> ➔ 메타 추천 피드 폭발
+              </p>
+            </div>
           </div>
 
           {isDownloaded ? (
             <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 text-center">
               <CheckCircle size={20} weight="fill" className="text-emerald-600 shrink-0" />
-              <span>스타터 킷이 이메일로 발송되었습니다. (스팸 메일함도 확인해 주세요)</span>
+              <span>[스레드 훅 구조학 리포트(PDF)]가 이메일로 발송되었습니다. (스팸 메일함도 확인해 주세요)</span>
             </div>
           ) : (
             <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2.5 max-w-md mx-auto">
               <input
                 type="email"
                 required
-                placeholder="스타터 킷을 받을 이메일 주소"
+                placeholder="리포트를 받을 이메일 주소"
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 className="px-4 py-3 rounded-xl bg-white border border-black/[0.1] text-xs sm:text-sm text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6] flex-1 shadow-xs"
@@ -541,7 +566,7 @@ export default function Home() {
                 className="toss-button-primary px-6 py-3 text-xs sm:text-sm font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-xs"
               >
                 <DownloadSimple size={15} weight="bold" />
-                <span>무료로 받기</span>
+                <span>구조 해부서 무료 받기</span>
               </button>
             </form>
           )}

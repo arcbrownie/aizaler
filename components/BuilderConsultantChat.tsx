@@ -19,7 +19,7 @@ const QUICK_PROMPTS = [
   { text: '💡 [Level 1] 아이디어는 있는데 시장성이 막막해요', step: 1, icon: LightbulbFilament },
   { text: '⚡️ [Level 2] 프롬프트 복붙 지겹고 Git 에이전트 스킬로 자율 실행하고 싶어요', step: 2, icon: Cpu },
   { text: '🚀 [Level 3] 외주비 없이 직접 상용 웹을 띄우고 싶어요', step: 3, icon: RocketLaunch },
-  { text: '🎯 [Level 4] 웹은 있는데 방문자가 없고 결제가 안 돼요', step: 4, icon: Target },
+  { text: '🎯 [Level 4] 훅 자료집을 따라 써도 스레드가 안 터지고 결제가 안 돼요', step: 4, icon: Target },
   { text: '👑 [Level 5] 퇴사/1인 기업 방향성을 1:1로 진단받고 싶어요', step: 5, icon: Crown },
 ];
 
@@ -34,29 +34,29 @@ const TRACK_DETAILS: Record<number, {
     name: 'LEVEL 01. 시장 검증 & Aside 자율 리서치',
     deliverable: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
     brickLabel: '블루 기초 블록',
-    link: '#lead-magnet',
+    link: '#starter-kit',
     actionText: '1단계 기획 가이드 받기'
   },
   2: {
     name: 'LEVEL 02. Git 에이전트 스킬 & 자율 실행 파이프라인',
     deliverable: 'Git 오픈소스 에이전트 스킬셋(.skills) & MCP 자율 실행 파이프라인',
     brickLabel: '딥 퍼플 에이전트 블록',
-    link: '/product/aside-starter',
-    actionText: '2단계 에이전트 스킬 킷 보기'
+    link: '#sprint',
+    actionText: '2단계 에이전트 스킬 보기'
   },
   3: {
     name: 'LEVEL 03. 외주비 0원 1인 상용 웹 런칭',
     deliverable: '외주비 0원, 내 손으로 직접 띄운 상용 웹서비스 1개 배포',
     brickLabel: '퍼플➔화이트 런칭 블록',
-    link: '/product/6',
-    actionText: '3단계 풀스택 런칭 킷 보기'
+    link: '#sprint',
+    actionText: '3단계 풀스택 런칭 보기'
   },
   4: {
-    name: 'LEVEL 04. 메타 고전환 퍼널 & 소셜 트래픽',
-    deliverable: '스레드 알고리즘 & CVR 20% 고전환 퍼널 시스템',
+    name: 'LEVEL 04. 스레드 훅 구조학 & 고전환 퍼널',
+    deliverable: '스레드 500만 뷰 훅 구조도 & CVR 8.6%+ 고전환 퍼널 시스템',
     brickLabel: '레드 핫포인트 블록',
-    link: '/product/1',
-    actionText: '4단계 퍼널 실전서 보기'
+    link: '#starter-kit',
+    actionText: '스레드 훅 구조 해부서 받기'
   },
   5: {
     name: 'LEVEL 05. 1인 비즈니스 마스터리 & 1:1 VIP',
