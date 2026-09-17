@@ -12,7 +12,12 @@ import {
   LightbulbFilament,
   Cpu,
   Target,
-  RocketLaunch
+  RocketLaunch,
+  ShieldCheck,
+  TrendUp,
+  Cube,
+  Medal,
+  Play
 } from '@phosphor-icons/react';
 
 import LegoStackSimulator from '@/components/LegoStackSimulator';
@@ -20,394 +25,552 @@ import BuilderConsultantChat from '@/components/BuilderConsultantChat';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [activeStep, setActiveStep] = useState<number>(1);
   const [emailInput, setEmailInput] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
-  const [userStage, setUserStage] = useState<'idea' | 'traffic' | 'product'>('idea');
-  const [diagnosedStep, setDiagnosedStep] = useState<number | undefined>(undefined);
 
-  const stageOptions = [
-    { id: 'idea', label: '💡 아이디어 & BM 기획', short: '기획 단계' },
-    { id: 'traffic', label: '🎯 트래픽 유입 & 퍼널', short: '퍼널 단계' },
-    { id: 'product', label: '🚀 1인 상용 웹 런칭', short: '런칭 단계' },
-  ] as const;
-
-  const stageRecommendations = {
-    idea: {
-      badge: 'BM 기획 맞춤 가이드',
-      title: '1인 창업 필수 비즈니스 용어집 & 고객 결핍 검증 체크리스트 (PDF)',
-      desc: '자료는 넘쳐나는데 어디서부터 시작할지 막막할 때: 내 아이디어가 실제 돈 버는 모델이 되는지 검증하는 첫 번째 블록입니다.',
-      buttonText: '기획 맞춤 가이드 무료 받기'
+  // 1-Tap Quick Diagnostic Options (Apple Intelligence Style)
+  const diagnosticPills = [
+    {
+      step: 1,
+      label: '💡 아이디어 검증이 막막해요',
+      short: '기획 & 리서치',
+      icon: LightbulbFilament,
+      tag: 'LEVEL 01 · FOUNDATION',
+      color: '#2563eb',
+      bgTag: 'bg-blue-50 text-blue-700 border-blue-200',
+      title: '시장 검증 & Aside 24h 자율 리서치',
+      summary: '코딩을 시작하기 전, 고객 결핍을 검증하고 Aside 브라우저로 시장 데이터를 자동 수집합니다.',
+      outcome: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
+      tools: 'Aside 브라우저 · 1인 창업 용어집 · 결핍 검증 체크리스트'
     },
-    traffic: {
-      badge: '전환 퍼널 맞춤 가이드',
-      title: 'CVR 20% 고전환 퍼널 설계 & 메타 광고 매칭 가이드 (PDF)',
-      desc: '조회수 거품 없이, 내 상품을 살 진성 고객을 모으고 이탈 없이 결제로 연결하는 실전 퍼널 체크리스트입니다.',
-      buttonText: '퍼널 맞춤 가이드 무료 받기'
+    {
+      step: 2,
+      label: '⚡️ 프롬프트 복붙 대신 에이전트 스킬',
+      short: 'Git 에이전트 스킬',
+      icon: Cpu,
+      tag: 'LEVEL 02 · AGENT SKILLS',
+      color: '#7c3aed',
+      bgTag: 'bg-purple-50 text-purple-700 border-purple-200',
+      title: 'Git 오픈소스 에이전트 스킬 & MCP 자율 실행',
+      summary: '지겨운 프롬프트 암기 대신, Git에 검증된 에이전트 스킬(.skills)을 연동해 AI가 자율 실행하게 만듭니다.',
+      outcome: 'Git 오픈소스 에이전트 스킬셋(.skills) & 자율 실행 파이프라인',
+      tools: 'Git .skills 규격 · MCP 프로토콜 · Claude Code & Cursor Rules'
     },
-    product: {
-      badge: '1인 런칭 맞춤 가이드',
-      title: '외주비 0원 1인 웹서비스 런칭 로드맵 & 인프라 체크리스트 (PDF)',
-      desc: '코딩 문법을 외우지 않고 Cursor와 Supabase를 조립해 실제 결제창을 띄우는 상용 런칭 가이드입니다.',
-      buttonText: '런칭 맞춤 가이드 무료 받기'
-    }
-  };
+    {
+      step: 3,
+      label: '🚀 외주비 0원으로 상용 웹 배포',
+      short: '1인 상용 웹 런칭',
+      icon: RocketLaunch,
+      tag: 'LEVEL 03 · LAUNCH',
+      color: '#9333ea',
+      bgTag: 'bg-purple-50 text-purple-700 border-purple-200',
+      title: '외주비 0원 1인 상용 웹 프로덕트 런칭',
+      summary: 'Cursor와 Supabase를 조립해 코딩 문법 외우지 않고 3일 만에 실제 결제창을 라이브 배포합니다.',
+      outcome: '외주비 0원, 내 도메인으로 작동하는 실제 상용 웹서비스 1개 배포',
+      tools: 'Cursor · Claude Code · Next.js 14 · Supabase · Cloudflare'
+    },
+    {
+      step: 4,
+      label: '🎯 트래픽과 첫 결제 만들기',
+      short: '퍼널 & 첫 결제',
+      icon: Target,
+      tag: 'LEVEL 04 · CONVERSION',
+      color: '#f04452',
+      bgTag: 'bg-rose-50 text-rose-700 border-rose-200',
+      title: '메타 고전환 퍼널 & 소셜 트래픽',
+      summary: '스레드 500만 뷰 알고리즘과 카피 1:1 결속 퍼널로 클릭을 이탈 없는 유료 결제로 전환합니다.',
+      outcome: '스레드 알고리즘 & CVR 8.6%+ 고전환 퍼널 & 첫 유료 결제',
+      tools: '후킹 카피 프레임워크 · 메타 알고리즘 역설계 가이드'
+    },
+  ];
 
-  const currentRec = stageRecommendations[userStage];
+  const currentDiagnostic = diagnosticPills.find((p) => p.step === activeStep) || diagnosticPills[0];
 
   const handleDownload = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!emailInput) return;
+    if (!emailInput.trim()) return;
     setIsDownloaded(true);
   };
 
-  const steps = [
+  const sprintWeeks = [
     {
-      level: 'LEVEL 01',
-      title: '시장 검증 & Aside 24h 자율 리서치',
-      situation: '아이디어는 있지만 시장성이 있는지, 무엇부터 시작해야 할지 막막할 때',
-      summary: '코딩 문법을 외우기 전, 고객의 실제 결핍을 검증하고 Aside 24h 자율 브라우저로 시장과 경쟁사 데이터를 자동 수집합니다.',
-      outcome: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
-      tools: 'Aside 브라우저 템플릿 · 1인 창업 필수 용어집 · 결핍 검증 체크리스트',
-      tag: 'FOUNDATION',
-      color: '#2563eb',
-      bgLight: 'bg-blue-50/70 border-blue-200/60',
-      icon: LightbulbFilament,
-      actionText: '1단계 무료 가이드 받기',
-      actionLink: '#lead-magnet',
-      isFree: true
+      week: 'WEEK 01',
+      title: '시장 검증 & Git 에이전트 스킬',
+      highlight: '아이디어에서 AI 자율 실행 환경까지',
+      desc: '고객 결핍 검증과 Aside 24h 자율 리서치로 시장성을 증명하고, Git 오픈소스 에이전트 스킬(.skills)을 장착해 AI가 스스로 일하게 만듭니다.',
+      deliverables: [
+        'Aside 24h 시장 감시 봇',
+        '검증된 BM 린 캔버스 1장',
+        'Git 에이전트 스킬(.skills) 환경'
+      ],
+      tag: 'LEVEL 01 + 02',
+      accent: '#2563eb',
+      bgAccent: 'from-blue-500/10 via-blue-500/5 to-transparent'
     },
     {
-      level: 'LEVEL 02',
-      title: 'Git 오픈소스 에이전트 스킬 & MCP 자율 실행',
-      situation: '지겨운 프롬프트 잘 쓰는 법 외우기 대신, 내 작업 환경에서 AI가 스스로 일하게 만들고 싶을 때',
-      summary: '매번 채팅창에 프롬프트를 일일이 복붙하는 시대는 끝났습니다. 이미 Git에 공개된 검증된 에이전트 스킬(.skills)과 MCP(Model Context Protocol)를 에디터/터미널에 장착해, AI가 나 대신 자율적으로 검색·리서치·코딩을 실행하게 만듭니다.',
-      outcome: 'Git 오픈소스 에이전트 스킬셋(.skills) & MCP 자율 실행 파이프라인 장착',
-      tools: 'Git 에이전트 스킬 (.skills) · MCP 도구 연동 · Claude Code & Cursor Rules',
-      tag: 'AGENT SKILLS',
-      color: '#7c3aed',
-      bgLight: 'bg-purple-50/70 border-purple-200/60',
-      icon: Cpu,
-      actionText: '2단계 에이전트 스킬 킷 보기',
-      actionLink: '/product/aside-starter'
+      week: 'WEEK 02',
+      title: '외주비 0원 상용 웹 프로덕트 런칭',
+      highlight: '내 손으로 띄우는 실제 결제 웹',
+      desc: 'Cursor, Claude Code, Supabase, Cloudflare를 레고처럼 조립해 코딩 문법 암기 없이 실제 결제가 연동된 상용 웹을 라이브 배포합니다.',
+      deliverables: [
+        '외주비 0원 상용 배포 웹 1개',
+        'Supabase 실시간 DB 연동',
+        'PG 결제창 및 회원 시스템'
+      ],
+      tag: 'LEVEL 03',
+      accent: '#7c3aed',
+      bgAccent: 'from-purple-500/10 via-purple-500/5 to-transparent'
     },
     {
-      level: 'LEVEL 03',
-      title: '외주비 0원 1인 상용 웹 프로덕트 런칭',
-      situation: '외주 개발사 견적에 막혀 내 상용 서비스를 직접 띄우지 못할 때',
-      summary: 'Cursor, Claude Code, Supabase, Cloudflare를 레고처럼 조립해 코딩 문법 암기 없이 3일 만에 상용 웹을 배포합니다.',
-      outcome: '외주비 0원, 내 손으로 직접 띄운 상용 웹서비스 1개 라이브 배포',
-      tools: 'Cursor · Claude Code · Next.js 14 · Supabase · Cloudflare',
-      tag: 'LAUNCH',
-      color: '#9333ea',
-      bgLight: 'bg-purple-50/70 border-purple-200/60',
-      icon: RocketLaunch,
-      actionText: '3단계 풀스택 런칭 킷 보기',
-      actionLink: '/product/6'
+      week: 'WEEK 03',
+      title: '메타 고전환 퍼널 & 첫 유료 결제',
+      highlight: '조회수 거품 없이 진짜 매출로 결속',
+      desc: '스레드 500만 뷰 알고리즘으로 진성 타깃을 모으고, 광고 카피와 첫 문장을 1:1로 결속시켜 CVR 8.6%+ 고전환 퍼널과 첫 현금 흐름을 만듭니다.',
+      deliverables: [
+        '스레드 바이럴 카피 프레임워크',
+        'CVR 8.6%+ 랜딩페이지 퍼널',
+        '첫 번째 실제 유료 결제 발생'
+      ],
+      tag: 'LEVEL 04',
+      accent: '#f04452',
+      bgAccent: 'from-rose-500/10 via-rose-500/5 to-transparent'
+    }
+  ];
+
+  const proofMetrics = [
+    {
+      value: '5,000,000+',
+      label: '누적 뷰수 실측 데이터',
+      sub: '스레드 2개 계정 실측 DB'
     },
     {
-      level: 'LEVEL 04',
-      title: '메타 고전환 퍼널 & 소셜 트래픽',
-      situation: '제품은 띄웠는데 방문자가 없거나, 광고를 돌려도 결제 없이 다 이탈할 때',
-      summary: '스레드 500만 뷰 알고리즘으로 진성 타깃을 모으고, 광고 카피와 랜딩페이지 첫 문장을 1:1로 결속시켜 CVR 20% 퍼널을 완성합니다.',
-      outcome: '스레드 알고리즘 & CVR 20% 고전환 퍼널 시스템 & 첫 결제 발생',
-      tools: '후킹 카피 프레임워크 · 메타 알고리즘 역설계 가이드',
-      tag: 'HOTPOINT',
-      color: '#f04452',
-      bgLight: 'bg-rose-50/70 border-rose-200/60',
-      icon: Target,
-      actionText: '4단계 퍼널 실전서 보기',
-      actionLink: '/product/1'
+      value: 'Meta Certified',
+      label: '글로벌 공인 전문가',
+      sub: 'Media Planning Professional'
     },
     {
-      level: 'LEVEL 05',
-      title: '1인 비즈니스 마스터리 & 1:1 VIP 세션',
-      situation: '퇴사 갈림길이나 신사업 런칭에서 실패 비용을 아끼고 1인 기업으로 안착하고 싶을 때',
-      summary: '야생에서 4개 프로덕트로 생존한 파운더가 50분간 1:1로 내 비즈니스의 생존율과 실행 우선순위를 설계합니다.',
-      outcome: '사전 질의서 기반 90일 실행 Action Blueprint & 1:1 심층 처방',
-      tools: '4개 서비스 생존 파운더 1:1 세션 (50분)',
-      tag: 'SUMMIT MASTERY',
-      color: '#191f28',
-      bgLight: 'bg-slate-50 border-slate-200/80',
-      icon: Crown,
-      actionText: '5단계 1:1 전략 세션 신청하기',
-      actionLink: '/career'
+      value: '월 $42',
+      label: '운영 인프라 비용',
+      sub: '4개 상용 서비스 실운영 기준'
+    },
+    {
+      value: '8.6%',
+      label: '실측 구매 전환율',
+      sub: '메타 광고 1:1 결속 퍼널'
     }
   ];
 
   const faqs = [
     {
       q: '어릴 때 레고 좋아했던 사람을 위한 빌더 프로그램이란 무엇인가요?',
-      a: '벽돌을 굽는 공식을 몰라도 레고 블록만 있으면 누구나 거대한 성을 지을 수 있었습니다. 복잡한 코딩을 처음부터 외우지 않고, 검증된 기획·지능·퍼널·인프라 블록을 조립해 내 상용 프로덕트와 현금 흐름을 만드는 1인 빌더 성장 트랙입니다.'
+      a: '벽돌을 굽는 화학 공식을 몰라도 레고 블록만 있으면 누구나 거대한 성을 지을 수 있었습니다. 복잡한 코딩 문법을 밑바닥부터 외우지 않고, 검증된 기획·지능·퍼널·인프라 블록을 조립해 내 상용 프로덕트와 현금 흐름을 만드는 1인 빌더 성장 트랙입니다.'
     },
     {
-      q: 'aizaler가 제공하는 AI 지능의 차별점은 무엇인가요? (프롬프트 강의와 다른가요?)',
-      a: '시중에 흔한 "프롬프트 잘 쓰는 법 50선" 같은 뜬구름 잡는 복붙 PDF는 다루지 않습니다. Git에 이미 공개된 검증된 오픈소스 에이전트 스킬(.skills)과 MCP(Model Context Protocol)를 에디터와 터미널에 직접 연결해, AI가 사람 대신 자율적으로 도구를 쓰며 결과물을 만들어내는 최신 실행 환경을 전수합니다.'
+      q: 'aizaler가 제공하는 AI 지능은 시중 프롬프트 강의와 무엇이 다른가요?',
+      a: '시중에 흔한 "프롬프트 잘 쓰는 법 50선" 같은 뜬구름 잡는 복붙 자료는 다루지 않습니다. Git에 이미 공개된 검증된 오픈소스 에이전트 스킬(.skills)과 MCP(Model Context Protocol)를 에디터와 터미널에 직접 연결해, AI가 사람 대신 자율적으로 도구를 쓰며 결과물을 만들어내는 최신 실행 환경을 전수합니다.'
     },
     {
-      q: '비개발자도 직접 상용 제품을 런칭할 수 있나요?',
-      a: '네. Cursor, Supabase, Cloudflare, 간편결제 모듈을 조립형 아키텍처로 조합해 외주비 없이 혼자서 결제 웹서비스를 띄우고 운영하는 실전 파이프라인을 전수합니다.'
+      q: '비개발자도 정말 3주 만에 상용 제품을 런칭할 수 있나요?',
+      a: '네. Cursor, Supabase, Cloudflare, 간편결제 모듈을 조립형 아키텍처로 조합해 외주비 없이 혼자서 결제 웹서비스를 띄우고 운영하는 실전 파이프라인을 1:1 눈높이로 전수합니다.'
     }
   ];
 
   return (
-    <div className="space-y-12 sm:space-y-20 pt-4 sm:pt-8 pb-16">
-      {/* ── 1. 히어로 섹션 (Lego Builder Core Narrative) ── */}
-      <section className="toss-container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center">
-          {/* 좌측: 간결하고 당당한 우리만의 차별화 서사 */}
-          <div className="lg:col-span-7 space-y-4 text-left">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
-              <Sparkle size={13} weight="fill" />
-              <span>AI-NATIVE BUILDER STUDIO</span>
-            </div>
+    <div className="relative overflow-hidden space-y-20 sm:space-y-32 pt-6 sm:pt-12 pb-24">
+      {/* ── Ambient Apple Iridescent Glow Mesh ── */}
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] sm:w-[900px] h-[500px] bg-gradient-to-tr from-blue-400/15 via-purple-400/15 to-rose-400/10 blur-[130px] rounded-full pointer-events-none -z-10 animate-apple-glow" />
+      <div className="absolute top-[800px] right-0 w-[500px] h-[500px] bg-purple-400/10 blur-[140px] rounded-full pointer-events-none -z-10" />
 
-            <h1 className="text-2xl sm:text-4xl lg:text-[42px] font-black text-[#191f28] leading-[1.25] tracking-tight">
-              어릴 때 레고 좋아하셨나요?<br />
-              <span className="text-[#3182f6]">AI 블록을 조립해</span> 내 제품을 띄우는 1인 빌더.
-            </h1>
-
-            <p className="text-sm sm:text-base text-[#4e5968] leading-relaxed max-w-xl font-normal">
-              지겨운 <b>프롬프트 복붙</b> 대신 <b>Git 오픈소스 에이전트 스킬(.skills)</b>과 <b>자율 실행 파이프라인</b>을 결합해, 내 아이디어를 실제 작동하는 상용 웹서비스로 조립해내는 1인 빌더의 길을 함께합니다.
-            </p>
-
-            {/* CTA 세트 */}
-            <div className="space-y-3 pt-1">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <a
-                  href="#ai-chat"
-                  className="toss-button-primary px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:scale-95"
-                >
-                  <Sparkle size={15} weight="fill" />
-                  <span>3초 AI 빌더 진단 시작하기</span>
-                </a>
-                <a
-                  href="#roadmap"
-                  className="px-5 py-3.5 rounded-2xl bg-white border border-black/[0.08] text-[#191f28] text-xs sm:text-sm font-bold hover:bg-gray-50 flex items-center gap-1.5 shadow-xs"
-                >
-                  <span>5단계 완주 커리큘럼 보기</span>
-                  <ArrowRight size={14} weight="bold" />
-                </a>
-              </div>
-
-              {/* 신뢰 지표 */}
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-[#8b95a1] pt-1">
-                <span>✓ Meta 공인 전문가</span>
-                <span>✓ Git 에이전트 스킬(.skills) & MCP</span>
-                <span>✓ Aside 24h 자율 리서치</span>
-                <span className="text-emerald-600 font-medium">✓ 4개 상용 서비스 운영</span>
-              </div>
-            </div>
+      {/* ── 1. Apple-Grade Hero Section (Spacious, Breathless & Interactive) ── */}
+      <section className="toss-container text-center space-y-8 sm:space-y-12">
+        {/* Confident Minimal Header */}
+        <div className="space-y-4 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full apple-glass text-[#191f28] text-xs font-bold shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-pulse" />
+            <span className="tracking-wide">1인 빌더를 위한 3주 완주 스프린트</span>
           </div>
 
-          {/* 우측: 3D 레고 빌더 시뮬레이터 (AI 진단과 실시간 연동) */}
-          <div className="lg:col-span-5">
-            <LegoStackSimulator externalStep={diagnosedStep} />
-          </div>
-        </div>
-      </section>
+          <h1 className="text-3xl sm:text-5xl lg:text-[58px] font-black text-[#191f28] leading-[1.18] tracking-tight">
+            조립하면, 시작됩니다.
+          </h1>
 
-      {/* ── 2. AI 빌더 실시간 진단 상담소 (Gemini Flash-Lite 획기적 대화형 UX) ── */}
-      <section id="ai-chat" className="toss-container scroll-mt-14">
-        <BuilderConsultantChat onStepDiagnosed={(step) => setDiagnosedStep(step)} />
-      </section>
-
-      {/* ── 3. 아이디어부터 현금 흐름까지 5단계 완주 커리큘럼 ── */}
-      <section id="roadmap" className="toss-container space-y-6 scroll-mt-14 max-w-3xl mx-auto">
-        <div className="text-center space-y-1.5">
-          <span className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
-            5-STEP BUILDER CURRICULUM
-          </span>
-          <h2 className="text-xl sm:text-3xl font-black text-[#191f28] tracking-tight">
-            아이디어부터 현금 흐름까지, 5단계 완주 커리큘럼
-          </h2>
-          <p className="text-xs sm:text-sm text-[#4e5968]">
-            무엇부터 시작해야 할지 헤매지 마세요. 내 상태에 맞는 레벨 블록에서 시작해 차례대로 쌓아 올립니다.
+          <p className="text-base sm:text-xl text-[#4e5968] font-medium leading-relaxed max-w-2xl mx-auto">
+            코딩 문법을 외우지 마세요. AI 블록을 조립해<br className="hidden sm:inline" />
+            <span className="text-[#191f28] font-bold"> 3주 만에 내 상용 제품을 띄우는 1인 빌더의 길.</span>
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <a
+              href="#hero-diagnostic"
+              className="toss-button-primary px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-sm active:scale-95"
+            >
+              <Sparkle size={16} weight="fill" />
+              <span>3초 맞춤 블록 진단하기</span>
+            </a>
+            <a
+              href="#sprint"
+              className="px-6 py-3.5 rounded-2xl bg-white/90 hover:bg-white text-[#191f28] text-xs sm:text-sm font-bold border border-black/[0.08] flex items-center gap-2 shadow-xs transition-all hover:border-black/20"
+            >
+              <span>3주 스프린트 여정 살펴보기</span>
+              <ArrowRight size={14} weight="bold" />
+            </a>
+          </div>
         </div>
 
-        {/* 5개 레벨 커리큘럼 카드 리스트 */}
-        <div className="space-y-4">
-          {steps.map((s, idx) => {
-            const Icon = s.icon;
-            return (
-              <div
-                key={idx}
-                className="p-5 sm:p-6 rounded-2xl bg-white border border-black/[0.08] shadow-xs space-y-3 transition-all hover:border-[#3182f6]/40 hover:shadow-sm"
-              >
-                {/* 상단 헤더: 아이콘, 레벨 태그, 타이틀, 액션 버튼 */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-white shadow-xs"
-                      style={{ backgroundColor: s.color }}
-                    >
-                      <Icon size={20} weight="bold" />
-                    </div>
-
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono font-black text-[#8b95a1]">
-                          {s.level}
-                        </span>
-                        <span
-                          className="text-[9px] font-bold px-2 py-0.5 rounded-full"
-                          style={{ color: s.color, backgroundColor: `${s.color}15` }}
-                        >
-                          {s.tag}
-                        </span>
-                      </div>
-                      <h3 className="text-base sm:text-lg font-black text-[#191f28] leading-snug">
-                        {s.title}
-                      </h3>
-                    </div>
+        {/* ── Interactive Centerpiece: Apple Intelligence Diagnostic Bar + Live 3D Link ── */}
+        <div id="hero-diagnostic" className="scroll-mt-24 max-w-4xl mx-auto">
+          <div className="apple-glass rounded-3xl p-5 sm:p-8 border border-white/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] space-y-6 text-left">
+            {/* Capsule Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-black/[0.05] pb-4">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#3182f6] to-[#7c3aed] text-white flex items-center justify-center shadow-xs">
+                  <Cube size={18} weight="bold" />
+                </div>
+                <div>
+                  <div className="text-xs sm:text-sm font-black text-[#191f28]">
+                    지금 내 상황에 꼭 맞는 1개의 블록 찾기
                   </div>
-
-                  <Link
-                    href={s.actionLink}
-                    className="px-4 py-2 rounded-xl bg-[#f2f4f6] hover:bg-[#3182f6] hover:text-white text-[#191f28] text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-xs shrink-0 self-start sm:self-auto"
-                  >
-                    <span>{s.actionText}</span>
-                    <ArrowRight size={13} weight="bold" />
-                  </Link>
-                </div>
-
-                {/* 상황 진단 뱃지 */}
-                <div className="text-[11px] text-[#4e5968] bg-[#f9fafb] px-3 py-1.5 rounded-lg border border-black/[0.03] flex items-center gap-1.5">
-                  <span className="font-bold text-[#8b95a1] shrink-0">📌 지금 내 상태:</span>
-                  <span className="truncate">{s.situation}</span>
-                </div>
-
-                {/* 완성 마일스톤 강조 박스 */}
-                <div className="p-3 rounded-xl bg-slate-50 border border-black/[0.04] space-y-1">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#191f28]">
-                    <span className="text-amber-500">🎯</span>
-                    <span>완성 마일스톤:</span>
-                    <span className="text-[#3182f6] font-black">{s.outcome}</span>
+                  <div className="text-[11px] text-[#8b95a1]">
+                    고민되는 단계를 1-탭하면 해당 블록과 실시간 처방이 활성화됩니다.
                   </div>
-                  <p className="text-xs text-[#4e5968] leading-relaxed">
-                    {s.summary}
-                  </p>
-                </div>
-
-                {/* 하단 장착 도구 */}
-                <div className="text-[11px] text-[#8b95a1] flex items-center gap-1">
-                  <span>🛠️ 장착 무기:</span>
-                  <span className="font-medium text-[#4e5968]">{s.tools}</span>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </section>
 
-      {/* ── 3. 상황 맞춤 추천 스타터 가이드 (무엇부터 할지 모를 때 맞춤 추천) ── */}
-      <section id="lead-magnet" className="toss-container scroll-mt-14">
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#191f28] text-white max-w-3xl mx-auto shadow-xl space-y-4">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-white text-[11px] font-bold">
-              <Sparkle size={13} weight="fill" className="text-amber-400" />
-              <span>내 상황 맞춤 추천 · 100% 무료 가이드북</span>
+              <span className="text-[11px] font-bold text-[#3182f6] bg-blue-50/80 px-2.5 py-1 rounded-full border border-blue-200/50 self-start sm:self-auto">
+                실시간 3D 조립 연동 중
+              </span>
             </div>
 
-            <h2 className="text-lg sm:text-2xl font-black text-white leading-tight">
-              무엇부터 어떻게 해야 할지 모를 때,<br className="hidden sm:inline" /> 지금 내 단계에 꼭 맞는 첫걸음을 짚어드립니다
-            </h2>
-
-            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-xl">
-              자료는 넘쳐나지만 정작 지금 내 상황에 필요한 실행 순서를 찾기는 어렵습니다. 현재 가장 고민되는 단계를 선택하시면 꼭 맞는 핵심 가이드(PDF)를 즉시 전송해 드립니다.
-            </p>
-          </div>
-
-          {/* 1-Click 상황 선택 칩 세트 */}
-          <div className="space-y-1.5 pt-1">
-            <div className="text-[11px] font-bold text-gray-400">
-              현재 내 상황을 선택해 주세요:
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              {stageOptions.map((opt) => {
-                const isSelected = userStage === opt.id;
+            {/* 1-Tap Silky Diagnostic Pills */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+              {diagnosticPills.map((pill) => {
+                const isSelected = activeStep === pill.step;
+                const Icon = pill.icon;
                 return (
                   <button
-                    key={opt.id}
+                    key={pill.step}
                     type="button"
-                    onClick={() => setUserStage(opt.id)}
-                    className={`py-2.5 px-3 rounded-xl text-left text-xs font-bold transition-all border ${
+                    onClick={() => setActiveStep(pill.step)}
+                    className={`p-3 rounded-2xl text-left transition-all border flex flex-col justify-between gap-2.5 active:scale-[0.98] ${
                       isSelected
-                        ? 'bg-[#3182f6] text-white border-[#3182f6] shadow-xs'
-                        : 'bg-white/5 hover:bg-white/10 text-gray-300 border-white/10'
+                        ? 'bg-[#191f28] text-white border-[#191f28] shadow-md -translate-y-0.5'
+                        : 'bg-white/80 hover:bg-white text-[#4e5968] border-black/[0.06] hover:border-black/15'
                     }`}
                   >
-                    <span>{opt.label}</span>
+                    <div className="flex items-center justify-between">
+                      <span className={`text-[10px] font-mono font-black ${isSelected ? 'text-gray-300' : 'text-[#8b95a1]'}`}>
+                        0{pill.step}
+                      </span>
+                      <div
+                        className="w-6 h-6 rounded-lg flex items-center justify-center text-xs"
+                        style={{
+                          backgroundColor: isSelected ? 'rgba(255,255,255,0.15)' : `${pill.color}15`,
+                          color: isSelected ? '#ffffff' : pill.color
+                        }}
+                      >
+                        <Icon size={14} weight="bold" />
+                      </div>
+                    </div>
+                    <div className={`text-xs font-bold leading-snug ${isSelected ? 'text-white' : 'text-[#191f28]'}`}>
+                      {pill.short}
+                    </div>
                   </button>
                 );
               })}
             </div>
+
+            {/* Live Synchronized Prescription Card (Apple Glass Minimalist Surface) */}
+            <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-white/90 to-gray-50/90 border border-black/[0.06] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-5 transition-all">
+              <div className="space-y-2 max-w-xl">
+                <div className="flex items-center gap-2">
+                  <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-full border ${currentDiagnostic.bgTag}`}>
+                    {currentDiagnostic.tag}
+                  </span>
+                  <span className="text-[11px] text-[#8b95a1] font-medium">추천 블록</span>
+                </div>
+
+                <div className="text-base sm:text-lg font-black text-[#191f28]">
+                  {currentDiagnostic.title}
+                </div>
+
+                <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
+                  {currentDiagnostic.summary}
+                </p>
+
+                <div className="pt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+                  <div className="text-[#191f28] font-bold flex items-center gap-1.5">
+                    <span className="text-amber-500">🎯</span>
+                    <span>손에 쥐는 결과물:</span>
+                    <span className="text-[#3182f6] font-black">{currentDiagnostic.outcome}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="shrink-0 flex flex-col sm:flex-row md:flex-col gap-2">
+                <a
+                  href="#sprint"
+                  className="px-5 py-3 rounded-xl bg-[#3182f6] hover:bg-[#1b64da] text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
+                >
+                  <span>3주 스프린트에서 확인</span>
+                  <ArrowRight size={13} weight="bold" />
+                </a>
+                <a
+                  href="#starter-kit"
+                  className="px-4 py-2.5 rounded-xl bg-white hover:bg-gray-50 text-[#191f28] border border-black/[0.08] text-xs font-bold transition-all flex items-center justify-center gap-1.5 text-center shadow-xs"
+                >
+                  <DownloadSimple size={14} weight="bold" />
+                  <span>스타터 킷 무료 받기</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2. Apple Keynote Stat Strip (Numbers that Speak for Themselves) ── */}
+      <section className="toss-container">
+        <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-white/80 shadow-xs">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-black/[0.06]">
+            {proofMetrics.map((stat, idx) => (
+              <div key={idx} className={`pt-4 sm:pt-0 ${idx > 0 ? 'sm:pl-6 lg:pl-8' : ''} text-center sm:text-left space-y-1`}>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#191f28] tracking-tight tabular-nums">
+                  {stat.value}
+                </div>
+                <div className="text-xs sm:text-sm font-bold text-[#191f28]">
+                  {stat.label}
+                </div>
+                <div className="text-[11px] text-[#8b95a1]">
+                  {stat.sub}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. 3-Week Sprint Journey (Unified Progression, NOT a Sales Catalog!) ── */}
+      <section id="sprint" className="toss-container scroll-mt-20 space-y-10 sm:space-y-14">
+        <div className="text-center space-y-3 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
+            <Sparkle size={13} weight="fill" />
+            <span>3-WEEK SPRINT ARCHITECTURE</span>
           </div>
 
-          {/* 선택된 단계의 맞춤 가이드 설명 박스 */}
-          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-            <div className="text-[11px] font-bold text-blue-400">
-              [추천] {currentRec.badge}
+          <h2 className="text-2xl sm:text-4xl font-black text-[#191f28] tracking-tight leading-tight">
+            3주 만에 완성하는 1인 빌더 파이프라인.
+          </h2>
+
+          <p className="text-xs sm:text-base text-[#4e5968] leading-relaxed font-normal">
+            무작정 수많은 강의를 듣지 마세요. 매주 1개의 동작하는 레고 블록을 직접 완성합니다.
+          </p>
+        </div>
+
+        {/* 3-Week Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {sprintWeeks.map((w, idx) => (
+            <div
+              key={idx}
+              className="apple-glass rounded-3xl p-6 sm:p-7 border border-white/90 shadow-sm flex flex-col justify-between space-y-6 hover:shadow-md transition-all group"
+            >
+              <div className="space-y-4">
+                {/* Top Badge */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-black tracking-wider text-[#8b95a1]">
+                    {w.week}
+                  </span>
+                  <span
+                    className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                    style={{ color: w.accent, backgroundColor: `${w.accent}15` }}
+                  >
+                    {w.tag}
+                  </span>
+                </div>
+
+                {/* Title & Highlight */}
+                <div className="space-y-1">
+                  <h3 className="text-lg sm:text-xl font-black text-[#191f28] leading-snug group-hover:text-[#3182f6] transition-colors">
+                    {w.title}
+                  </h3>
+                  <div className="text-xs font-bold text-[#8b95a1]">
+                    {w.highlight}
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
+                  {w.desc}
+                </p>
+              </div>
+
+              {/* Hand-held Deliverables Box */}
+              <div className="pt-4 border-t border-black/[0.05] space-y-2">
+                <div className="text-[11px] font-bold text-[#191f28] flex items-center gap-1.5">
+                  <CheckCircle size={13} weight="fill" className="text-emerald-500" />
+                  <span>손에 쥐는 마일스톤</span>
+                </div>
+                <div className="space-y-1">
+                  {w.deliverables.map((item, dIdx) => (
+                    <div key={dIdx} className="text-xs text-[#4e5968] flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-slate-400" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="text-xs sm:text-sm font-black text-white">
-              {currentRec.title}
+          ))}
+        </div>
+
+        {/* ── 🏆 완주자 특별 리워드: 실물 화이트 서밋 브릭 & 기념품 (User's Core Idea!) ── */}
+        <div className="rounded-3xl bg-gradient-to-br from-[#191f28] via-[#0f172a] to-[#020617] text-white p-6 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden">
+          {/* Subtle Ambient Light in Card */}
+          <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-amber-400/15 via-blue-500/10 to-transparent blur-3xl pointer-events-none" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-amber-300 text-xs font-bold shadow-xs">
+                <Medal size={14} weight="fill" className="text-amber-400" />
+                <span>SPRINT FINISHER REWARD</span>
+              </div>
+
+              <h3 className="text-xl sm:text-3xl font-black text-white leading-tight">
+                3주 스프린트 완주자에게만 드리는<br className="hidden sm:inline" />
+                책상 위 실물 트로피, <span className="text-amber-300">‘화이트 서밋 크라운 브릭’</span>
+              </h3>
+
+              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal max-w-2xl">
+                끝까지 손으로 조립해낸 1인 빌더의 용기는 증명되어야 합니다. 3주 과정을 완주한 모든 빌더에게는 책상 위에 당당히 올려둘 수 있는 <b>실물 세라믹 화이트 브릭 트로피</b>와 <b>공식 시리얼 넘버 각인 인증 뱃지</b>, 그리고 <b>파운더와의 50분 1:1 전략 세션 권한</b>이 수여됩니다.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-gray-300 pt-2">
+                <span className="flex items-center gap-1.5 text-amber-200 font-bold">
+                  ✓ 실물 화이트 브릭 수여
+                </span>
+                <span className="flex items-center gap-1.5 text-blue-200 font-bold">
+                  ✓ 공식 빌더 인증 뱃지
+                </span>
+                <span className="flex items-center gap-1.5 text-emerald-200 font-bold">
+                  ✓ 파운더 1:1 세션 특권
+                </span>
+              </div>
             </div>
-            <p className="text-[11px] text-gray-300 leading-relaxed">
-              {currentRec.desc}
+
+            <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-white/5 border border-white/10 text-center space-y-3">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-white via-slate-100 to-slate-300 text-[#191f28] flex items-center justify-center shadow-lg text-3xl font-black ring-4 ring-amber-400/30">
+                👑
+              </div>
+              <div>
+                <div className="text-xs font-mono font-bold text-amber-300 uppercase tracking-widest">
+                  SERIAL NO. #AIZALER-001
+                </div>
+                <div className="text-sm font-black text-white mt-0.5">
+                  White Summit Brick
+                </div>
+              </div>
+              <div className="text-[11px] text-gray-400 leading-tight">
+                자생적 현금 흐름을 여는 빌더의 증표
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Interactive Lab: 3D Lego Simulator & Live AI Architect Chat ── */}
+      <section id="lab" className="toss-container scroll-mt-20 space-y-8">
+        <div className="text-center space-y-2 max-w-xl mx-auto">
+          <span className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
+            INTERACTIVE BUILDER LAB
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black text-[#191f28] tracking-tight">
+            직접 눌러보고, 조립해 보세요.
+          </h2>
+          <p className="text-xs sm:text-sm text-[#4e5968]">
+            3D 공간에서 레고 블록을 쌓아 올리거나, AI 아키텍트에게 내 현재 병목을 물어보세요.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+          {/* Left: 3D Lego Stack Simulator */}
+          <div className="lg:col-span-6">
+            <LegoStackSimulator externalStep={activeStep} />
+          </div>
+
+          {/* Right: AI Builder Consultant Chat */}
+          <div className="lg:col-span-6">
+            <BuilderConsultantChat onStepDiagnosed={(step) => setActiveStep(step)} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. Single Focused Free Starter Kit (Decluttered & Clean) ── */}
+      <section id="starter-kit" className="toss-container scroll-mt-20">
+        <div className="apple-glass rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto border border-white/80 shadow-[0_20px_50px_rgba(0,0,0,0.04)] space-y-6">
+          <div className="space-y-2 text-center">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#3182f6] text-xs font-bold">
+              <DownloadSimple size={13} weight="bold" />
+              <span>100% 무료 스타터 킷</span>
+            </div>
+
+            <h2 className="text-xl sm:text-3xl font-black text-[#191f28] tracking-tight leading-tight">
+              어디서부터 시작해야 할지 모를 때.
+            </h2>
+
+            <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed max-w-lg mx-auto">
+              1인 창업 필수 비즈니스 용어집과 고객 결핍 검증 체크리스트(PDF)를 이메일로 즉시 받아보세요.
             </p>
           </div>
 
-          {/* 이메일 입력 및 전송 폼 */}
           {isDownloaded ? (
-            <div className="p-3.5 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-bold flex items-center gap-2">
-              <CheckCircle size={18} weight="fill" />
-              <span>선택하신 맞춤 가이드북이 이메일로 전송되었습니다! (스팸함도 확인해 주세요)</span>
+            <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 text-center">
+              <CheckCircle size={20} weight="fill" className="text-emerald-600 shrink-0" />
+              <span>스타터 킷이 이메일로 발송되었습니다. (스팸 메일함도 확인해 주세요)</span>
             </div>
           ) : (
-            <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2 pt-1 max-w-md">
+            <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2.5 max-w-md mx-auto">
               <input
                 type="email"
                 required
-                placeholder="가이드북을 받을 이메일 주소"
+                placeholder="스타터 킷을 받을 이메일 주소"
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
-                className="px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 text-xs sm:text-sm outline-none focus:border-[#3182f6] flex-1"
+                className="px-4 py-3 rounded-xl bg-white border border-black/[0.1] text-xs sm:text-sm text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6] flex-1 shadow-xs"
               />
               <button
                 type="submit"
-                className="toss-button-primary px-5 py-2.5 text-xs sm:text-sm font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-sm"
+                className="toss-button-primary px-6 py-3 text-xs sm:text-sm font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-xs"
               >
-                <DownloadSimple size={14} weight="bold" />
-                <span>{currentRec.buttonText}</span>
+                <DownloadSimple size={15} weight="bold" />
+                <span>무료로 받기</span>
               </button>
             </form>
           )}
 
-          <p className="text-[10px] text-gray-400">
-            * 스팸 메일은 보내지 않으며 언제든 1클릭으로 구독 취소 가능합니다.
+          <p className="text-[11px] text-[#8b95a1] text-center">
+            * 광고 스팸은 절대 보내지 않으며 언제든 1클릭으로 구독 해제할 수 있습니다.
           </p>
         </div>
       </section>
 
-      {/* ── 4. VIP 1:1 프라이빗 세션 (신뢰와 품격) ── */}
-      <section id="vip-session" className="toss-container">
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#050A18] text-[#FAF6F0] max-w-3xl mx-auto border border-white/10 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+      {/* ── 6. VIP 1:1 Private Session (Quiet Luxury) ── */}
+      <section className="toss-container">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#050A18] text-[#FAF6F0] max-w-3xl mx-auto border border-white/10 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="space-y-1.5 max-w-lg">
             <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400">
               <Crown size={14} weight="fill" />
-              <span>VIP 1:1 PRIVATE SESSION</span>
+              <span>VIP 1:1 PRIVATE STRATEGY SESSION</span>
             </div>
             <h3 className="text-base sm:text-xl font-black text-white">
               혼자 조립하기 막막할 땐, 50분 1:1 맞춤 전략 세션
             </h3>
-            <p className="text-xs sm:text-sm text-[#FAF6F0]/70 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#FAF6F0]/70 leading-relaxed font-normal">
               공기업과 해외 주재원을 나와 야생에서 4개 프로덕트로 생존한 파운더가, 사전 질의서를 바탕으로 내 비즈니스의 90일 실행 Action Blueprint를 처방합니다.
             </p>
           </div>
 
           <Link
             href="/career"
-            className="shrink-0 inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-white text-[#050A18] hover:bg-gray-100 text-xs font-bold transition-all shadow-sm"
+            className="shrink-0 inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-white text-[#050A18] hover:bg-gray-100 text-xs font-bold transition-all shadow-sm active:scale-95"
           >
             <span>세션 신청하기</span>
             <ArrowRight size={13} weight="bold" />
@@ -415,34 +578,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. 자주 묻는 질문 FAQ ── */}
-      <section id="faq" className="toss-container space-y-3 max-w-2xl mx-auto">
+      {/* ── 7. Concise FAQ (Apple Clean Accordion) ── */}
+      <section id="faq" className="toss-container scroll-mt-20 space-y-4 max-w-2xl mx-auto">
         <div className="text-center space-y-1">
-          <span className="text-[11px] font-bold text-[#3182f6]">FAQ</span>
-          <h2 className="text-lg sm:text-xl font-black text-[#191f28]">자주 묻는 질문</h2>
+          <span className="text-xs font-bold text-[#3182f6]">FAQ</span>
+          <h2 className="text-lg sm:text-2xl font-black text-[#191f28]">자주 묻는 질문</h2>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           {faqs.map((faq, idx) => {
             const isOpen = openFaq === idx;
             return (
               <div
                 key={idx}
-                className="rounded-xl overflow-hidden bg-white border border-black/[0.08]"
+                className="apple-glass rounded-2xl overflow-hidden border border-black/[0.06]"
               >
                 <button
                   type="button"
                   onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full p-3.5 sm:p-4 flex items-center justify-between text-left transition-colors hover:bg-slate-50/50"
+                  className="w-full p-4 sm:p-5 flex items-center justify-between text-left transition-colors hover:bg-white/50"
                 >
-                  <div className="flex items-start gap-2.5 pr-2">
+                  <div className="flex items-start gap-3 pr-2">
                     <span className="text-xs font-black text-[#3182f6]">Q.</span>
                     <span className="font-bold text-xs sm:text-sm text-[#191f28] leading-snug">
                       {faq.q}
                     </span>
                   </div>
                   <CaretDown
-                    size={14}
+                    size={15}
                     weight="bold"
                     className={`transition-transform duration-200 shrink-0 text-[#8b95a1] ${
                       isOpen ? 'rotate-180 text-[#3182f6]' : ''
@@ -451,8 +614,8 @@ export default function Home() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-3.5 pb-3.5 sm:px-4 sm:pb-4 pt-0">
-                    <p className="pt-2 border-t border-black/[0.05] text-xs text-[#4e5968] leading-relaxed">
+                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0">
+                    <p className="pt-3 border-t border-black/[0.05] text-xs sm:text-sm text-[#4e5968] leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
@@ -462,10 +625,10 @@ export default function Home() {
           })}
         </div>
 
-        <div className="pt-2 text-center">
+        <div className="pt-3 text-center">
           <Link
             href="/about"
-            className="inline-flex items-center gap-1 text-xs font-bold text-[#3182f6] hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3182f6] hover:underline"
           >
             aizaler 스튜디오 철학 & 파운더 소개 보기 <ArrowRight size={13} weight="bold" />
           </Link>

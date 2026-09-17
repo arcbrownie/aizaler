@@ -40,17 +40,17 @@ export default function RootLayout({
           children
         ) : (
           <>
-            {/* 상단 띠배너 (토스 스타일 슬림 인포 바) */}
+            {/* 상단 띠배너 (애플 스타일 슬림 인포 바) */}
             <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
-              <span className="text-[#3182f6] font-bold mr-2">✦ 어릴 때 레고 좋아하셨나요?</span>
-              <span>코딩 없이 AI 블록을 조립해 내 제품을 띄우는 <b>1인 빌더 성장 프로그램</b></span>
-              <a href="#ai-prescription" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
-                내 빌더 레벨 1분 진단하기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
+              <span className="text-[#3182f6] font-bold mr-2">✦ 1인 빌더를 위한 3주 완주 스프린트</span>
+              <span>코딩 문법 대신 AI 블록을 조립해 내 제품을 띄우는 <b>1인 빌더 파이프라인</b></span>
+              <a href="#hero-diagnostic" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
+                내 맞춤 블록 3초 진단하기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
               </a>
             </div>
 
             {/* 메인 헤더 (모던 미니멀 & 클린 GNB) */}
-            <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-black/[0.04]">
+            <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-black/[0.04]">
               <div className="toss-container h-16 flex items-center justify-between gap-6">
                 {/* 좌측 로고 */}
                 <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
@@ -67,14 +67,17 @@ export default function RootLayout({
                   </div>
                 </Link>
 
-                {/* 네비게이션: 3대 모드 및 1:1 VIP 연동 */}
+                {/* 네비게이션: 3주 스프린트, 인터랙티브 랩, 1:1 VIP, 소개 */}
                 <nav className="hidden lg:flex items-center gap-6 text-[14px] font-semibold text-[#4e5968]">
-                  <a href="#ai-prescription" className="hover:text-[#3182f6] transition-colors text-[#3182f6] font-bold flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#3182f6] animate-ping" />
-                    빌더 진단
+                  <a href="#hero-diagnostic" className="hover:text-[#3182f6] transition-colors text-[#3182f6] font-bold flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3182f6] animate-pulse" />
+                    맞춤 블록 진단
                   </a>
-                  <a href="#modes" className="hover:text-[#3182f6] transition-colors">
-                    3대 빌더 모드
+                  <a href="#sprint" className="hover:text-[#3182f6] transition-colors">
+                    3주 스프린트
+                  </a>
+                  <a href="#lab" className="hover:text-[#3182f6] transition-colors">
+                    인터랙티브 랩
                   </a>
                   <Link href="/career" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-[#3182f6] font-bold">
                     1:1 프라이빗 세션
@@ -88,14 +91,14 @@ export default function RootLayout({
                   </a>
                 </nav>
 
-                {/* 우측 무료 가이드 CTA */}
+                {/* 우측 3초 진단 CTA */}
                 <div className="flex items-center gap-3">
                   <a
-                    href="#lead-magnet"
-                    className="toss-button-primary px-4 py-2 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm"
+                    href="#hero-diagnostic"
+                    className="toss-button-primary px-4 py-2 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:scale-95"
                   >
-                    <DownloadSimple size={16} weight="bold" />
-                    <span>무료 가이드 받기</span>
+                    <Sparkle size={15} weight="fill" />
+                    <span>3초 진단하기</span>
                   </a>
                 </div>
               </div>
