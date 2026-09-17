@@ -13,11 +13,9 @@ import {
   Cpu,
   Target,
   RocketLaunch,
-  ShieldCheck,
-  TrendUp,
   Cube,
   Medal,
-  Play
+  Check
 } from '@phosphor-icons/react';
 
 import LegoStackSimulator from '@/components/LegoStackSimulator';
@@ -25,118 +23,90 @@ import BuilderConsultantChat from '@/components/BuilderConsultantChat';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [activeStep, setActiveStep] = useState<number>(1);
+  const [selectedGoalId, setSelectedGoalId] = useState<'launch' | 'revenue' | 'validate'>('launch');
   const [emailInput, setEmailInput] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
 
-  // 1-Tap Quick Diagnostic Options (Apple Intelligence Style)
-  const diagnosticPills = [
+  // ── 3대 단 하나의 목표 (방문자가 직접 선택하는 목표 지향 구조) ──
+  const GOALS = [
     {
-      step: 1,
-      label: '💡 아이디어 검증이 막막해요',
-      short: '기획 & 리서치',
-      icon: LightbulbFilament,
-      tag: 'LEVEL 01 · FOUNDATION',
-      color: '#2563eb',
-      bgTag: 'bg-blue-50 text-blue-700 border-blue-200',
-      title: '시장 검증 & Aside 24h 자율 리서치',
-      summary: '코딩을 시작하기 전, 고객 결핍을 검증하고 Aside 브라우저로 시장 데이터를 자동 수집합니다.',
-      outcome: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
-      tools: 'Aside 브라우저 · 1인 창업 용어집 · 결핍 검증 체크리스트'
-    },
-    {
-      step: 2,
-      label: '⚡️ 프롬프트 복붙 대신 에이전트 스킬',
-      short: 'Git 에이전트 스킬',
-      icon: Cpu,
-      tag: 'LEVEL 02 · AGENT SKILLS',
-      color: '#7c3aed',
-      bgTag: 'bg-purple-50 text-purple-700 border-purple-200',
-      title: 'Git 오픈소스 에이전트 스킬 & MCP 자율 실행',
-      summary: '지겨운 프롬프트 암기 대신, Git에 검증된 에이전트 스킬(.skills)을 연동해 AI가 자율 실행하게 만듭니다.',
-      outcome: 'Git 오픈소스 에이전트 스킬셋(.skills) & 자율 실행 파이프라인',
-      tools: 'Git .skills 규격 · MCP 프로토콜 · Claude Code & Cursor Rules'
-    },
-    {
-      step: 3,
-      label: '🚀 외주비 0원으로 상용 웹 배포',
-      short: '1인 상용 웹 런칭',
+      id: 'launch' as const,
+      emoji: '🚀',
       icon: RocketLaunch,
-      tag: 'LEVEL 03 · LAUNCH',
-      color: '#9333ea',
+      step: 3, // Links to Lego Level 3
+      title: '외주비 0원으로 내 상용 웹 띄우기',
+      short: '외주비 0원 런칭',
+      badge: 'GOAL 01 · 런칭 트랙',
+      tagline: '외주 견적 수천만 원 대신, 내 손으로 직접 결제되는 상용 웹서비스를 배포합니다.',
+      targetWho: '비개발자, 아이디어는 있지만 개발 외주비에 가로막힌 1인 빌더',
+      deliverable: '외주비 0원, 내 도메인으로 작동하는 실제 상용 결제 웹서비스 1개 라이브 배포',
+      tools: 'Cursor · Claude Code · Next.js 14 · Supabase · Cloudflare',
+      accentColor: '#9333ea',
       bgTag: 'bg-purple-50 text-purple-700 border-purple-200',
-      title: '외주비 0원 1인 상용 웹 프로덕트 런칭',
-      summary: 'Cursor와 Supabase를 조립해 코딩 문법 외우지 않고 3일 만에 실제 결제창을 라이브 배포합니다.',
-      outcome: '외주비 0원, 내 도메인으로 작동하는 실제 상용 웹서비스 1개 배포',
-      tools: 'Cursor · Claude Code · Next.js 14 · Supabase · Cloudflare'
+      weeks: [
+        { week: '1주차', action: 'Cursor + Supabase 조립 및 DB 아키텍처 셋업' },
+        { week: '2주차', action: 'Next.js 14 기반 반응형 상용 웹서비스 라이브 배포' },
+        { week: '3주차', action: 'PG 결제창 및 간편결제 모듈 100% 연동 완료' }
+      ],
+      leadMagnetTitle: '외주비 0원 1인 상용 웹 배포 아키텍처 로드맵 (PDF)',
+      leadMagnetDesc: '코딩 문법을 외우지 않고 Cursor와 Supabase를 조립해 내 손으로 실제 결제창을 띄우는 상용 런칭 가이드입니다.',
+      buttonText: '외주비 0원 런칭 가이드 무료 받기'
     },
     {
-      step: 4,
-      label: '🎯 훅 자료집 써도 안 터져요',
-      short: '스레드 훅 구조학',
+      id: 'revenue' as const,
+      emoji: '💰',
       icon: Target,
-      tag: 'LEVEL 04 · CONVERSION',
-      color: '#f04452',
+      step: 4, // Links to Lego Level 4
+      title: '스레드 훅 구조로 첫 유료 결제 만들기',
+      short: '첫 유료 결제 발생',
+      badge: 'GOAL 02 · 수익 트랙',
+      tagline: '‘훅 자료집’ 복붙은 끝. 500만 뷰 실측 체류 시간 구조로 첫 유료 고객을 만듭니다.',
+      targetWho: '제품/아이템은 있지만 트래픽이 없거나 결제로 안 이어지는 빌더',
+      deliverable: '스레드 500만 뷰 훅 구조도 & CVR 8.6%+ 고전환 결제 퍼널 & 첫 실제 유료 결제',
+      tools: '3단계 체류 시간 구조도 · 첫 문장 1:1 결속 프레임워크 · 메타 역공학 가이드',
+      accentColor: '#f04452',
       bgTag: 'bg-rose-50 text-rose-700 border-rose-200',
-      title: '스레드 500만 뷰 훅 구조학 & 고전환 퍼널',
-      summary: '시중 훅 템플릿 복붙을 멈추고, 500만 뷰 실측 DB로 검증된 체류 시간 10배 견인 구조와 첫 문장 1:1 결속 퍼널을 장착합니다.',
-      outcome: '스레드 500만 뷰 훅 구조도 & CVR 8.6%+ 고전환 퍼널',
-      tools: '3단계 체류 시간 구조도 · 첫 문장 1:1 결속 프레임워크 · 메타 역공학 가이드'
+      weeks: [
+        { week: '1주차', action: '스레드 500만 뷰 실측 체류 시간 10배 견인 훅 설계' },
+        { week: '2주차', action: '광고/피드 첫 문장과 상세페이지 1:1 결속 퍼널 완성' },
+        { week: '3주차', action: '첫 번째 실제 고객 유료 결제 알림 수신' }
+      ],
+      leadMagnetTitle: '‘훅 자료집’만 보셨나요? 왜 안 터지는지 그 구조를 알려드립니다 (PDF)',
+      leadMagnetDesc: '시중에 굴러다니는 훅 100선 복붙 대신, 스레드 500만 뷰 실측 DB로 검증한 체류 시간 10배 견인 구조 리포트입니다.',
+      buttonText: '스레드 훅 구조 해부서 무료 받기'
     },
+    {
+      id: 'validate' as const,
+      emoji: '💡',
+      icon: LightbulbFilament,
+      step: 1, // Links to Lego Level 1
+      title: '내 아이디어의 시장 결핍 & BM 검증하기',
+      short: '시장 결핍 & BM 검증',
+      badge: 'GOAL 03 · 기획 트랙',
+      tagline: '무작정 만들기 전에, Aside 24h 자율 감시 봇으로 결핍과 돈 버는 모델을 증명합니다.',
+      targetWho: '아이디어는 넘치는데 어디서부터 시작해야 할지 막막한 예비 창업자',
+      deliverable: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
+      tools: 'Aside 24h 자율 브라우저 · 1인 창업 필수 용어집 · 결핍 검증 체크리스트',
+      accentColor: '#2563eb',
+      bgTag: 'bg-blue-50 text-blue-700 border-blue-200',
+      weeks: [
+        { week: '1주차', action: '고객 결핍 발굴 및 PPF(Product-Person Fit) 분석' },
+        { week: '2주차', action: 'Aside 24h 브라우저로 경쟁사 데이터 자동 수집' },
+        { week: '3주차', action: '실제 돈 버는 모델이 담긴 린 캔버스 1장 완성' }
+      ],
+      leadMagnetTitle: '1인 창업 필수 용어집 & 고객 결핍 검증 린 캔버스 (PDF)',
+      leadMagnetDesc: '내 아이디어가 실제 시장에서 돈이 되는지 검증하는 첫 번째 비즈니스 체크리스트입니다.',
+      buttonText: '기획 & 검증 가이드 무료 받기'
+    }
   ];
 
-  const currentDiagnostic = diagnosticPills.find((p) => p.step === activeStep) || diagnosticPills[0];
+  const currentGoal = GOALS.find((g) => g.id === selectedGoalId) || GOALS[0];
 
   const handleDownload = (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailInput.trim()) return;
     setIsDownloaded(true);
   };
-
-  const sprintWeeks = [
-    {
-      week: 'WEEK 01',
-      title: '시장 검증 & Git 에이전트 스킬',
-      highlight: '아이디어에서 AI 자율 실행 환경까지',
-      desc: '고객 결핍 검증과 Aside 24h 자율 리서치로 시장성을 증명하고, Git 오픈소스 에이전트 스킬(.skills)을 장착해 AI가 스스로 일하게 만듭니다.',
-      deliverables: [
-        'Aside 24h 시장 감시 봇',
-        '검증된 BM 린 캔버스 1장',
-        'Git 에이전트 스킬(.skills) 환경'
-      ],
-      tag: 'LEVEL 01 + 02',
-      accent: '#2563eb',
-      bgAccent: 'from-blue-500/10 via-blue-500/5 to-transparent'
-    },
-    {
-      week: 'WEEK 02',
-      title: '외주비 0원 상용 웹 프로덕트 런칭',
-      highlight: '내 손으로 띄우는 실제 결제 웹',
-      desc: 'Cursor, Claude Code, Supabase, Cloudflare를 레고처럼 조립해 코딩 문법 암기 없이 실제 결제가 연동된 상용 웹을 라이브 배포합니다.',
-      deliverables: [
-        '외주비 0원 상용 배포 웹 1개',
-        'Supabase 실시간 DB 연동',
-        'PG 결제창 및 회원 시스템'
-      ],
-      tag: 'LEVEL 03',
-      accent: '#7c3aed',
-      bgAccent: 'from-purple-500/10 via-purple-500/5 to-transparent'
-    },
-    {
-      week: 'WEEK 03',
-      title: '스레드 훅 구조학 & 첫 유료 결제',
-      highlight: '‘훅 자료집’ 복붙 대신 체류 시간 구조 설계',
-      desc: '‘훅 자료집’만 모아두고 써봤자 알고리즘은 소음으로 거릅니다. 500만 뷰 실측 DB로 왜 터지는지 알고리즘 구조를 해부하고, 첫 문장과 상세페이지를 1:1로 결속시켜 CVR 8.6%+ 고전환 퍼널을 완성합니다.',
-      deliverables: [
-        '스레드 3단계 체류 시간 구조도',
-        '첫 문장 1:1 결속 카피 프레임워크',
-        '첫 번째 실제 유료 결제 발생'
-      ],
-      tag: 'LEVEL 04',
-      accent: '#f04452',
-      bgAccent: 'from-rose-500/10 via-rose-500/5 to-transparent'
-    }
-  ];
 
   const proofMetrics = [
     {
@@ -182,145 +152,139 @@ export default function Home() {
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] sm:w-[900px] h-[500px] bg-gradient-to-tr from-blue-400/15 via-purple-400/15 to-rose-400/10 blur-[130px] rounded-full pointer-events-none -z-10 animate-apple-glow" />
       <div className="absolute top-[800px] right-0 w-[500px] h-[500px] bg-purple-400/10 blur-[140px] rounded-full pointer-events-none -z-10" />
 
-      {/* ── 1. Apple-Grade Hero Section (Spacious, Breathless & Interactive) ── */}
+      {/* ── 1. Apple Hero: "이번 3주, 당신이 달성할 단 하나의 목표는?" ── */}
       <section className="toss-container text-center space-y-8 sm:space-y-12">
-        {/* Confident Minimal Header */}
         <div className="space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full apple-glass text-[#191f28] text-xs font-bold shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-pulse" />
-            <span className="tracking-wide">1인 빌더를 위한 3주 완주 스프린트</span>
+            <span className="tracking-wide">1인 빌더를 위한 3주 목표 달성 스프린트</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-[58px] font-black text-[#191f28] leading-[1.18] tracking-tight">
-            조립하면, 시작됩니다.
+          <h1 className="text-3xl sm:text-5xl lg:text-[56px] font-black text-[#191f28] leading-[1.18] tracking-tight">
+            이번 3주, 당신이 달성할<br className="hidden sm:inline" /> 단 하나의 목표는?
           </h1>
 
           <p className="text-base sm:text-xl text-[#4e5968] font-medium leading-relaxed max-w-2xl mx-auto">
-            코딩 문법을 외우지 마세요. AI 블록을 조립해<br className="hidden sm:inline" />
-            <span className="text-[#191f28] font-bold"> 3주 만에 내 상용 제품을 띄우는 1인 빌더의 길.</span>
+            무작정 강의만 듣는 공부는 끝났습니다.<br className="hidden sm:inline" />
+            <span className="text-[#191f28] font-bold">목표를 정하면, 3주 만에 반드시 달성하게 만듭니다.</span>
           </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <a
-              href="#hero-diagnostic"
-              className="toss-button-primary px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-sm active:scale-95"
-            >
-              <Sparkle size={16} weight="fill" />
-              <span>3초 맞춤 블록 진단하기</span>
-            </a>
-            <a
-              href="#sprint"
-              className="px-6 py-3.5 rounded-2xl bg-white/90 hover:bg-white text-[#191f28] text-xs sm:text-sm font-bold border border-black/[0.08] flex items-center gap-2 shadow-xs transition-all hover:border-black/20"
-            >
-              <span>3주 스프린트 여정 살펴보기</span>
-              <ArrowRight size={14} weight="bold" />
-            </a>
-          </div>
         </div>
 
-        {/* ── Interactive Centerpiece: Apple Intelligence Diagnostic Bar + Live 3D Link ── */}
-        <div id="hero-diagnostic" className="scroll-mt-24 max-w-4xl mx-auto">
-          <div className="apple-glass rounded-3xl p-5 sm:p-8 border border-white/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] space-y-6 text-left">
-            {/* Capsule Header */}
+        {/* ── Interactive Goal Selector (Visitor Selects Their Goal) ── */}
+        <div id="hero-goal" className="scroll-mt-24 max-w-4xl mx-auto space-y-6">
+          <span id="hero-diagnostic" className="scroll-mt-24 block" />
+          <div className="text-center space-y-1">
+            <div className="text-xs font-mono font-black text-[#8b95a1] uppercase tracking-wider">
+              STEP 01. 달성할 목표를 1개 선택하세요
+            </div>
+          </div>
+
+          {/* 3대 핵심 목표 선택 카드 세트 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-left">
+            {GOALS.map((goal) => {
+              const isSelected = selectedGoalId === goal.id;
+              const Icon = goal.icon;
+              return (
+                <button
+                  key={goal.id}
+                  type="button"
+                  onClick={() => setSelectedGoalId(goal.id)}
+                  className={`p-5 rounded-3xl transition-all border flex flex-col justify-between gap-4 text-left active:scale-[0.98] ${
+                    isSelected
+                      ? 'bg-[#191f28] text-white border-[#191f28] shadow-xl -translate-y-1 ring-2 ring-[#3182f6]/50'
+                      : 'apple-glass hover:bg-white text-[#4e5968] border-white/80 hover:border-black/15 shadow-sm'
+                  }`}
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <span className={`text-[10px] font-mono font-black tracking-wider ${isSelected ? 'text-gray-400' : 'text-[#8b95a1]'}`}>
+                      {goal.badge}
+                    </span>
+                    <div
+                      className="w-8 h-8 rounded-xl flex items-center justify-center text-sm shadow-xs"
+                      style={{
+                        backgroundColor: isSelected ? 'rgba(255,255,255,0.15)' : `${goal.accentColor}15`,
+                        color: isSelected ? '#ffffff' : goal.accentColor
+                      }}
+                    >
+                      <Icon size={18} weight="bold" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <h3 className={`text-base sm:text-lg font-black leading-snug ${isSelected ? 'text-white' : 'text-[#191f28]'}`}>
+                      {goal.title}
+                    </h3>
+                    <p className={`text-xs leading-relaxed ${isSelected ? 'text-gray-300' : 'text-[#4e5968]'}`}>
+                      {goal.tagline}
+                    </p>
+                  </div>
+
+                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] font-bold">
+                    <span className={isSelected ? 'text-blue-300' : 'text-[#3182f6]'}>
+                      {isSelected ? '✓ 선택된 목표' : '이 목표 선택하기'}
+                    </span>
+                    <span className={`text-[10px] ${isSelected ? 'text-gray-400' : 'text-[#8b95a1]'}`}>
+                      3주 완주 트랙 →
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* ── 선택된 목표 맞춤형 처방 보드 (Apple Glass Interactive Surface) ── */}
+          <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-white/90 shadow-[0_20px_50px_rgba(0,0,0,0.05)] text-left space-y-6 animate-in fade-in duration-300">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-black/[0.05] pb-4">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#3182f6] to-[#7c3aed] text-white flex items-center justify-center shadow-xs">
-                  <Cube size={18} weight="bold" />
-                </div>
+                <span className="text-2xl">{currentGoal.emoji}</span>
                 <div>
-                  <div className="text-xs sm:text-sm font-black text-[#191f28]">
-                    지금 내 상황에 꼭 맞는 1개의 블록 찾기
+                  <div className="text-xs font-mono font-bold text-[#3182f6]">
+                    선택하신 목표 맞춤 3주 플랜
                   </div>
-                  <div className="text-[11px] text-[#8b95a1]">
-                    고민되는 단계를 1-탭하면 해당 블록과 실시간 처방이 활성화됩니다.
-                  </div>
+                  <h2 className="text-base sm:text-xl font-black text-[#191f28]">
+                    {currentGoal.title}
+                  </h2>
                 </div>
               </div>
 
-              <span className="text-[11px] font-bold text-[#3182f6] bg-blue-50/80 px-2.5 py-1 rounded-full border border-blue-200/50 self-start sm:self-auto">
-                실시간 3D 조립 연동 중
+              <span className={`text-[11px] font-black px-3 py-1 rounded-full border self-start sm:self-auto ${currentGoal.bgTag}`}>
+                {currentGoal.badge}
               </span>
             </div>
 
-            {/* 1-Tap Silky Diagnostic Pills */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-              {diagnosticPills.map((pill) => {
-                const isSelected = activeStep === pill.step;
-                const Icon = pill.icon;
-                return (
-                  <button
-                    key={pill.step}
-                    type="button"
-                    onClick={() => setActiveStep(pill.step)}
-                    className={`p-3 rounded-2xl text-left transition-all border flex flex-col justify-between gap-2.5 active:scale-[0.98] ${
-                      isSelected
-                        ? 'bg-[#191f28] text-white border-[#191f28] shadow-md -translate-y-0.5'
-                        : 'bg-white/80 hover:bg-white text-[#4e5968] border-black/[0.06] hover:border-black/15'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className={`text-[10px] font-mono font-black ${isSelected ? 'text-gray-300' : 'text-[#8b95a1]'}`}>
-                        0{pill.step}
-                      </span>
-                      <div
-                        className="w-6 h-6 rounded-lg flex items-center justify-center text-xs"
-                        style={{
-                          backgroundColor: isSelected ? 'rgba(255,255,255,0.15)' : `${pill.color}15`,
-                          color: isSelected ? '#ffffff' : pill.color
-                        }}
-                      >
-                        <Icon size={14} weight="bold" />
-                      </div>
-                    </div>
-                    <div className={`text-xs font-bold leading-snug ${isSelected ? 'text-white' : 'text-[#191f28]'}`}>
-                      {pill.short}
-                    </div>
-                  </button>
-                );
-              })}
+            {/* 3주간의 액션 마일스톤 단계 */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {currentGoal.weeks.map((w, idx) => (
+                <div key={idx} className="p-4 rounded-2xl bg-white/80 border border-black/[0.05] space-y-1">
+                  <div className="text-[10px] font-mono font-black text-[#3182f6]">
+                    {w.week}
+                  </div>
+                  <div className="text-xs font-bold text-[#191f28] leading-snug">
+                    {w.action}
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Live Synchronized Prescription Card (Apple Glass Minimalist Surface) */}
-            <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-white/90 to-gray-50/90 border border-black/[0.06] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-5 transition-all">
-              <div className="space-y-2 max-w-xl">
-                <div className="flex items-center gap-2">
-                  <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-full border ${currentDiagnostic.bgTag}`}>
-                    {currentDiagnostic.tag}
-                  </span>
-                  <span className="text-[11px] text-[#8b95a1] font-medium">추천 블록</span>
+            {/* 최종 결과물 강조 & 즉각 액션 버튼 */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="text-[11px] font-bold text-amber-300 flex items-center gap-1.5">
+                  <Sparkle size={13} weight="fill" />
+                  <span>3주 후 내 손에 쥐어지는 단 하나의 결과물</span>
                 </div>
-
-                <div className="text-base sm:text-lg font-black text-[#191f28]">
-                  {currentDiagnostic.title}
-                </div>
-
-                <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-                  {currentDiagnostic.summary}
-                </p>
-
-                <div className="pt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
-                  <div className="text-[#191f28] font-bold flex items-center gap-1.5">
-                    <span className="text-amber-500">🎯</span>
-                    <span>손에 쥐는 결과물:</span>
-                    <span className="text-[#3182f6] font-black">{currentDiagnostic.outcome}</span>
-                  </div>
+                <div className="text-sm sm:text-base font-black text-white">
+                  🎯 {currentGoal.deliverable}
                 </div>
               </div>
 
-              <div className="shrink-0 flex flex-col sm:flex-row md:flex-col gap-2">
-                <a
-                  href="#sprint"
-                  className="px-5 py-3 rounded-xl bg-[#3182f6] hover:bg-[#1b64da] text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
-                >
-                  <span>3주 스프린트에서 확인</span>
-                  <ArrowRight size={13} weight="bold" />
-                </a>
+              <div className="shrink-0 flex items-center gap-2">
                 <a
                   href="#starter-kit"
-                  className="px-4 py-2.5 rounded-xl bg-white hover:bg-gray-50 text-[#191f28] border border-black/[0.08] text-xs font-bold transition-all flex items-center justify-center gap-1.5 text-center shadow-xs"
+                  className="px-5 py-3 rounded-xl bg-[#3182f6] hover:bg-[#1b64da] text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm active:scale-95 text-center"
                 >
                   <DownloadSimple size={14} weight="bold" />
-                  <span>스타터 킷 무료 받기</span>
+                  <span>이 목표 가이드 무료 받기</span>
                 </a>
               </div>
             </div>
@@ -358,73 +322,97 @@ export default function Home() {
           </div>
 
           <h2 className="text-2xl sm:text-4xl font-black text-[#191f28] tracking-tight leading-tight">
-            3주 만에 완성하는 1인 빌더 파이프라인.
+            어떤 목표를 선택해도,<br className="hidden sm:inline" /> 3주 만에 블록을 완성합니다.
           </h2>
 
           <p className="text-xs sm:text-base text-[#4e5968] leading-relaxed font-normal">
-            무작정 수많은 강의를 듣지 마세요. 매주 1개의 동작하는 레고 블록을 직접 완성합니다.
+            장황한 코딩 강의 대신, 매주 1개의 동작하는 블록을 내 손으로 직접 쌓아 올립니다.
           </p>
         </div>
 
         {/* 3-Week Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {sprintWeeks.map((w, idx) => (
-            <div
-              key={idx}
-              className="apple-glass rounded-3xl p-6 sm:p-7 border border-white/90 shadow-sm flex flex-col justify-between space-y-6 hover:shadow-md transition-all group"
-            >
-              <div className="space-y-4">
-                {/* Top Badge */}
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-black tracking-wider text-[#8b95a1]">
-                    {w.week}
-                  </span>
-                  <span
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                    style={{ color: w.accent, backgroundColor: `${w.accent}15` }}
-                  >
-                    {w.tag}
-                  </span>
-                </div>
-
-                {/* Title & Highlight */}
-                <div className="space-y-1">
-                  <h3 className="text-lg sm:text-xl font-black text-[#191f28] leading-snug group-hover:text-[#3182f6] transition-colors">
-                    {w.title}
-                  </h3>
-                  <div className="text-xs font-bold text-[#8b95a1]">
-                    {w.highlight}
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-                  {w.desc}
-                </p>
+          <div className="apple-glass rounded-3xl p-6 sm:p-7 border border-white/90 shadow-sm flex flex-col justify-between space-y-6 hover:shadow-md transition-all group">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-black tracking-wider text-[#8b95a1]">WEEK 01</span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700">기획 & 에이전트</span>
               </div>
-
-              {/* Hand-held Deliverables Box */}
-              <div className="pt-4 border-t border-black/[0.05] space-y-2">
-                <div className="text-[11px] font-bold text-[#191f28] flex items-center gap-1.5">
-                  <CheckCircle size={13} weight="fill" className="text-emerald-500" />
-                  <span>손에 쥐는 마일스톤</span>
-                </div>
-                <div className="space-y-1">
-                  {w.deliverables.map((item, dIdx) => (
-                    <div key={dIdx} className="text-xs text-[#4e5968] flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-slate-400" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="space-y-1">
+                <h3 className="text-lg sm:text-xl font-black text-[#191f28] group-hover:text-[#3182f6] transition-colors">
+                  시장 검증 & Git 에이전트 스킬
+                </h3>
+                <div className="text-xs font-bold text-[#8b95a1]">아이디어에서 AI 자율 실행 환경까지</div>
               </div>
+              <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
+                고객 결핍 검증과 Aside 24h 자율 리서치로 시장성을 증명하고, Git 오픈소스 에이전트 스킬(.skills)을 장착해 AI가 스스로 일하게 만듭니다.
+              </p>
             </div>
-          ))}
+            <div className="pt-4 border-t border-black/[0.05] space-y-1 text-xs text-[#4e5968]">
+              <div className="text-[11px] font-bold text-[#191f28] mb-1.5 flex items-center gap-1.5">
+                <CheckCircle size={13} weight="fill" className="text-emerald-500" /> 손에 쥐는 마일스톤
+              </div>
+              <div>• Aside 24h 시장 감시 봇</div>
+              <div>• 검증된 BM 린 캔버스 1장</div>
+              <div>• Git 에이전트 스킬(.skills) 환경</div>
+            </div>
+          </div>
+
+          <div className="apple-glass rounded-3xl p-6 sm:p-7 border border-white/90 shadow-sm flex flex-col justify-between space-y-6 hover:shadow-md transition-all group">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-black tracking-wider text-[#8b95a1]">WEEK 02</span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 text-purple-700">상용 웹 런칭</span>
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-lg sm:text-xl font-black text-[#191f28] group-hover:text-[#3182f6] transition-colors">
+                  외주비 0원 상용 웹 프로덕트 런칭
+                </h3>
+                <div className="text-xs font-bold text-[#8b95a1]">내 손으로 띄우는 실제 결제 웹</div>
+              </div>
+              <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
+                Cursor, Claude Code, Supabase, Cloudflare를 레고처럼 조립해 코딩 문법 암기 없이 실제 결제가 연동된 상용 웹을 라이브 배포합니다.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-black/[0.05] space-y-1 text-xs text-[#4e5968]">
+              <div className="text-[11px] font-bold text-[#191f28] mb-1.5 flex items-center gap-1.5">
+                <CheckCircle size={13} weight="fill" className="text-emerald-500" /> 손에 쥐는 마일스톤
+              </div>
+              <div>• 외주비 0원 상용 배포 웹 1개</div>
+              <div>• Supabase 실시간 DB 연동</div>
+              <div>• PG 결제창 및 회원 시스템</div>
+            </div>
+          </div>
+
+          <div className="apple-glass rounded-3xl p-6 sm:p-7 border border-white/90 shadow-sm flex flex-col justify-between space-y-6 hover:shadow-md transition-all group">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-black tracking-wider text-[#8b95a1]">WEEK 03</span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700">전환 & 결제</span>
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-lg sm:text-xl font-black text-[#191f28] group-hover:text-[#3182f6] transition-colors">
+                  스레드 훅 구조학 & 첫 유료 결제
+                </h3>
+                <div className="text-xs font-bold text-[#8b95a1]">‘훅 자료집’ 복붙 대신 체류 시간 구조 설계</div>
+              </div>
+              <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
+                ‘훅 자료집’만 모아두고 써봤자 알고리즘은 소음으로 거릅니다. 500만 뷰 실측 DB로 왜 터지는지 알고리즘 구조를 해부하고 첫 결제를 완성합니다.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-black/[0.05] space-y-1 text-xs text-[#4e5968]">
+              <div className="text-[11px] font-bold text-[#191f28] mb-1.5 flex items-center gap-1.5">
+                <CheckCircle size={13} weight="fill" className="text-emerald-500" /> 손에 쥐는 마일스톤
+              </div>
+              <div>• 스레드 3단계 체류 시간 구조도</div>
+              <div>• 첫 문장 1:1 결속 카피 프레임워크</div>
+              <div>• 첫 번째 실제 유료 결제 발생</div>
+            </div>
+          </div>
         </div>
 
-        {/* ── 🏆 완주자 특별 리워드: 실물 화이트 서밋 브릭 & 기념품 (User's Core Idea!) ── */}
+        {/* ── 🏆 완주자 특별 리워드: 실물 화이트 서밋 브릭 & 기념품 ── */}
         <div className="rounded-3xl bg-gradient-to-br from-[#191f28] via-[#0f172a] to-[#020617] text-white p-6 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden">
-          {/* Subtle Ambient Light in Card */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-amber-400/15 via-blue-500/10 to-transparent blur-3xl pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
@@ -440,7 +428,7 @@ export default function Home() {
               </h3>
 
               <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal max-w-2xl">
-                끝까지 손으로 조립해낸 1인 빌더의 용기는 증명되어야 합니다. 3주 과정을 완주한 모든 빌더에게는 책상 위에 당당히 올려둘 수 있는 <b>실물 세라믹 화이트 브릭 트로피</b>와 <b>공식 시리얼 넘버 각인 인증 뱃지</b>, 그리고 <b>파운더와의 50분 1:1 전략 세션 권한</b>이 수여됩니다.
+                어떤 목표를 선택했든, 3주 과정을 완주한 모든 빌더에게는 책상 위에 당당히 올려둘 수 있는 <b>실물 세라믹 화이트 브릭 트로피</b>와 <b>공식 시리얼 넘버 각인 인증 뱃지</b>, 그리고 <b>파운더와의 50분 1:1 전략 세션 권한</b>이 수여됩니다.
               </p>
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-gray-300 pt-2">
@@ -491,72 +479,80 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-          {/* Left: 3D Lego Stack Simulator */}
           <div className="lg:col-span-6">
-            <LegoStackSimulator externalStep={activeStep} />
+            <LegoStackSimulator externalStep={currentGoal.step} />
           </div>
 
-          {/* Right: AI Builder Consultant Chat */}
           <div className="lg:col-span-6">
-            <BuilderConsultantChat onStepDiagnosed={(step) => setActiveStep(step)} />
+            <BuilderConsultantChat onStepDiagnosed={() => {}} />
           </div>
         </div>
       </section>
 
-      {/* ── 5. 스레드 훅 구조학 리포트 무료 스타터 킷 ── */}
+      {/* ── 5. 선택된 목표 맞춤 무료 가이드북 / 스타터 킷 ── */}
       <section id="starter-kit" className="toss-container scroll-mt-20">
         <div className="apple-glass rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto border border-white/80 shadow-[0_20px_50px_rgba(0,0,0,0.04)] space-y-7">
           <div className="space-y-3 text-center">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-[#f04452] text-xs font-bold border border-rose-200/60">
               <Sparkle size={13} weight="fill" />
-              <span>100% 무료 배포 · 스레드 500만 뷰 실측 역공학</span>
+              <span>100% 무료 배포 · {currentGoal.badge}</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-black text-[#191f28] tracking-tight leading-tight">
-              ‘훅 자료집’만 보셨나요?<br />
-              <span className="text-[#3182f6]">왜 안 터지는지, 그 숨겨진 구조</span>를 알려드립니다.
+              {currentGoal.id === 'revenue' ? (
+                <>
+                  ‘훅 자료집’만 보셨나요?<br />
+                  <span className="text-[#3182f6]">왜 안 터지는지, 그 숨겨진 구조</span>를 알려드립니다.
+                </>
+              ) : (
+                <>
+                  {currentGoal.title},<br />
+                  <span className="text-[#3182f6]">시작할 준비가 되셨나요?</span>
+                </>
+              )}
             </h2>
 
             <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed max-w-xl mx-auto">
-              시중에 굴러다니는 훅 100선 복붙은 메타 알고리즘이 소음(Noise)으로 거릅니다.<br className="hidden sm:inline" />
-              스레드 2개 계정 500만 뷰 실측 DB와 Meta 공인 전문가가 증명한 <b>[체류 시간 10배 견인 구조 & 첫 문장 1:1 결속 리포트 (PDF)]</b>를 이메일로 즉시 보내드립니다.
+              {currentGoal.leadMagnetDesc}
             </p>
           </div>
 
-          {/* 훅 복붙 vs 구조 역공학 직관 비교 카드 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-            <div className="p-4 rounded-2xl bg-gray-50/90 border border-black/[0.05] space-y-1.5">
-              <div className="text-[11px] font-bold text-gray-500 flex items-center gap-1.5">
-                <span>❌</span>
-                <span>단순 훅 복붙 (왜 안 터지는가)</span>
+          {/* 스레드 훅 목표일 경우 직관 비교 카드 노출 */}
+          {currentGoal.id === 'revenue' && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+              <div className="p-4 rounded-2xl bg-gray-50/90 border border-black/[0.05] space-y-1.5">
+                <div className="text-[11px] font-bold text-gray-500 flex items-center gap-1.5">
+                  <span>❌</span>
+                  <span>단순 훅 복붙 (왜 안 터지는가)</span>
+                </div>
+                <p className="text-xs text-[#4e5968] leading-relaxed">
+                  인터넷에서 긁어온 자극적인 첫 문장 ➔ 본문 들어가자마자 뻔한 교과서 내용 ➔ <b>체류 시간 1.8초 이탈</b> ➔ 알고리즘 추천 피드 노출 중단
+                </p>
               </div>
-              <p className="text-xs text-[#4e5968] leading-relaxed">
-                인터넷에서 긁어온 자극적인 첫 문장 ➔ 본문 들어가자마자 뻔한 교과서 내용 ➔ <b>체류 시간 1.8초 이탈</b> ➔ 알고리즘 추천 피드 노출 중단
-              </p>
-            </div>
 
-            <div className="p-4 rounded-2xl bg-blue-50/80 border border-blue-200/60 space-y-1.5">
-              <div className="text-[11px] font-bold text-[#3182f6] flex items-center gap-1.5">
-                <span>💎</span>
-                <span>구조 역공학 (왜 터지는가)</span>
+              <div className="p-4 rounded-2xl bg-blue-50/80 border border-blue-200/60 space-y-1.5">
+                <div className="text-[11px] font-bold text-[#3182f6] flex items-center gap-1.5">
+                  <span>💎</span>
+                  <span>구조 역공학 (왜 터지는가)</span>
+                </div>
+                <p className="text-xs text-[#191f28] leading-relaxed">
+                  인지 부조화 첫 문장 ➔ 스크롤을 멈추는 실측 데이터 ➔ 논쟁적 댓글 결속 ➔ <b>체류 시간 18.4초 (10배 견인)</b> ➔ 메타 추천 피드 폭발
+                </p>
               </div>
-              <p className="text-xs text-[#191f28] leading-relaxed">
-                인지 부조화 첫 문장 ➔ 스크롤을 멈추는 실측 데이터 ➔ 논쟁적 댓글 결속 ➔ <b>체류 시간 18.4초 (10배 견인)</b> ➔ 메타 추천 피드 폭발
-              </p>
             </div>
-          </div>
+          )}
 
           {isDownloaded ? (
             <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 text-center">
               <CheckCircle size={20} weight="fill" className="text-emerald-600 shrink-0" />
-              <span>[스레드 훅 구조학 리포트(PDF)]가 이메일로 발송되었습니다. (스팸 메일함도 확인해 주세요)</span>
+              <span>[{currentGoal.leadMagnetTitle}]이 이메일로 발송되었습니다. (스팸 메일함도 확인해 주세요)</span>
             </div>
           ) : (
             <form onSubmit={handleDownload} className="flex flex-col sm:flex-row gap-2.5 max-w-md mx-auto">
               <input
                 type="email"
                 required
-                placeholder="리포트를 받을 이메일 주소"
+                placeholder="가이드북을 받을 이메일 주소"
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 className="px-4 py-3 rounded-xl bg-white border border-black/[0.1] text-xs sm:text-sm text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6] flex-1 shadow-xs"
@@ -566,7 +562,7 @@ export default function Home() {
                 className="toss-button-primary px-6 py-3 text-xs sm:text-sm font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-xs"
               >
                 <DownloadSimple size={15} weight="bold" />
-                <span>구조 해부서 무료 받기</span>
+                <span>무료 가이드 받기</span>
               </button>
             </form>
           )}
