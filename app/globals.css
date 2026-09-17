@@ -186,4 +186,75 @@
   pointer-events: none;
 }
 
+/* ── Athletic Running Crew & Editorial Guild Styling ── */
+.athletic-canvas {
+  background-color: #080c14;
+  color: #f8fafc;
+}
+
+.athletic-card {
+  background: rgba(18, 24, 38, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.athletic-card:hover {
+  border-color: rgba(204, 255, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px -8px rgba(204, 255, 0, 0.12);
+}
+
+.athletic-card-active {
+  background: rgba(22, 30, 46, 0.9);
+  border: 1px solid #ccff00;
+  box-shadow: 0 0 35px -5px rgba(204, 255, 0, 0.25), 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+}
+
+.athletic-btn-volt {
+  background-color: #ccff00;
+  color: #080c14;
+  font-weight: 800;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.athletic-btn-volt:hover {
+  background-color: #d9ff3f;
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px -4px rgba(204, 255, 0, 0.55);
+}
+
+.athletic-btn-volt:active {
+  transform: scale(0.98);
+}
+
+.athletic-badge-volt {
+  background: rgba(204, 255, 0, 0.12);
+  color: #ccff00;
+  border: 1px solid rgba(204, 255, 0, 0.3);
+}
+
+.athletic-badge-orange {
+  background: rgba(255, 85, 0, 0.12);
+  color: #ff6b22;
+  border: 1px solid rgba(255, 85, 0, 0.3);
+}
+
+.athletic-badge-blue {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.grid-track-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.split-line-glow {
+  background: linear-gradient(90deg, transparent, rgba(204, 255, 0, 0.5), transparent);
+}
+
+
 

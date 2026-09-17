@@ -35,70 +35,76 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/variable/complete/WantedSansVariable.min.css" 
         />
       </head>
-      <body className={`${isCareerPage ? 'bg-[#050A18] text-[#FAF6F0]' : 'bg-[#f2f4f6] text-[#191f28]'} min-h-screen flex flex-col antialiased`}>
+      <body className={`${isCareerPage ? 'bg-[#050A18] text-[#FAF6F0]' : 'bg-[#080C14] text-[#F8FAFC]'} min-h-screen flex flex-col antialiased selection:bg-[#CCFF00] selection:text-[#080C14]`}>
         {isCareerPage ? (
           children
         ) : (
           <>
-            {/* 상단 띠배너 (애플 스타일 슬림 인포 바) */}
-            <div className="bg-[#191f28] text-white text-xs py-2 px-4 text-center font-medium">
-              <span className="text-[#3182f6] font-bold mr-2">✦ 3주 빌더 스프린트 1기 모집</span>
-              <span>코딩 문법 대신 AI 블록을 조립해 내 제품을 띄우는 <b>1인 빌더 크루</b></span>
-              <a href="#step-1" className="inline-flex items-center ml-2 text-blue-400 font-bold hover:underline">
-                목표 트랙 선택하기 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
+            {/* 🏃 상단 띠배너: 러닝크루 공식 알림 스트립 */}
+            <div className="bg-[#0D1322] border-b border-white/[0.06] text-xs py-2 px-4 text-center font-medium text-gray-300 flex items-center justify-center gap-2">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-black athletic-badge-volt">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] animate-ping" />
+                CREW 01 RECRUITING
+              </span>
+              <span className="hidden sm:inline text-gray-400">|</span>
+              <span className="text-gray-200">
+                AI FOMO에서 탈출해, 3주 만에 내 제품의 첫 결승선을 넘는 <b>온라인 빌더 러닝크루 1기</b>
+              </span>
+              <a href="#courses" className="inline-flex items-center text-[#CCFF00] font-bold hover:underline ml-1">
+                코스 확인 <ArrowUpRight size={12} weight="bold" className="ml-0.5" />
               </a>
             </div>
 
-            {/* 메인 헤더 (모던 미니멀 & 클린 GNB) */}
-            <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-black/[0.04]">
+            {/* 메인 헤더: 다크 미니멀 & 에슬레틱 GNB */}
+            <header className="sticky top-0 z-40 bg-[#080C14]/80 backdrop-blur-xl border-b border-white/[0.08]">
               <div className="toss-container h-16 flex items-center justify-between gap-6">
                 {/* 좌측 로고 */}
                 <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-                  <div className="w-8 h-8 rounded-xl bg-[#3182f6] flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
-                    <TerminalWindow size={20} weight="duotone" className="text-white" />
+                  <div className="w-8 h-8 rounded-xl bg-[#CCFF00] text-[#080C14] flex items-center justify-center font-black shadow-sm group-hover:scale-105 transition-transform">
+                    <TerminalWindow size={20} weight="fill" />
                   </div>
                   <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl font-black tracking-tight text-[#191f28]">
-                      aizaler<span className="text-[#3182f6]">.kr</span>
+                    <span className="text-xl font-black tracking-tight text-white">
+                      aizaler<span className="text-[#CCFF00]">.kr</span>
                     </span>
-                    <span className="text-[11px] font-semibold text-[#8b95a1] hidden sm:inline">
-                      1인 AI 빌더 스튜디오
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-gray-400 hidden sm:inline px-1.5 py-0.5 rounded bg-white/[0.05] border border-white/[0.08]">
+                      BUILDER RUNNING CLUB
                     </span>
                   </div>
                 </Link>
 
-                {/* 네비게이션: 3단계 플로우 연동 */}
-                <nav className="hidden lg:flex items-center gap-6 text-[14px] font-semibold text-[#4e5968]">
-                  <a href="#step-1" className="hover:text-[#3182f6] transition-colors text-[#3182f6] font-bold flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#3182f6] animate-pulse" />
-                    STEP 1. 목표 선택
+                {/* 네비게이션: 러닝크루 플로우 연동 */}
+                <nav className="hidden lg:flex items-center gap-6 text-[13px] font-medium text-gray-300">
+                  <a href="#courses" className="hover:text-[#CCFF00] transition-colors flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
+                    러닝 코스 (5K·10K·HALF)
                   </a>
-                  <a href="#step-2" className="hover:text-[#3182f6] transition-colors">
-                    STEP 2. 3주 여정
+                  <a href="#pacing" className="hover:text-[#CCFF00] transition-colors">
+                    3주 페이싱 & 트로피
                   </a>
-                  <a href="#step-3" className="hover:text-[#3182f6] transition-colors">
-                    STEP 3. 크루 신청
+                  <a href="#action" className="hover:text-[#CCFF00] transition-colors">
+                    크루 합류 (15명 한정)
                   </a>
-                  <Link href="/career" className="hover:text-[#3182f6] transition-colors flex items-center gap-1 text-[#3182f6] font-bold">
-                    1:1 VIP 세션
-                    <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#e8f3ff] text-[#3182f6] font-mono">VIP</span>
+                  <a href="#lab" className="hover:text-[#CCFF00] transition-colors">
+                    트레이닝 랩
+                  </a>
+                  <Link href="/career" className="hover:text-[#CCFF00] transition-colors flex items-center gap-1 text-amber-300 font-semibold">
+                    1:1 VIP 페이서
+                    <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 font-mono">1:1</span>
                   </Link>
-                  <Link href="/about" className="hover:text-[#3182f6] transition-colors flex items-center gap-1">
-                    소개
+                  <Link href="/about" className="hover:text-gray-200 text-gray-400 transition-colors">
+                    스튜디오 철학
                   </Link>
-                  <a href="#faq" className="hover:text-[#3182f6] transition-colors">
-                    FAQ
-                  </a>
                 </nav>
 
-                {/* 우측 3초 진단 CTA */}
+                {/* 우측 액션 CTA */}
                 <div className="flex items-center gap-3">
                   <a
-                    href="#step-1"
-                    className="toss-button-primary px-4 py-2 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:scale-95"
+                    href="#courses"
+                    className="athletic-btn-volt px-4 py-2 text-xs font-black rounded-xl flex items-center gap-1.5 shadow-sm active:scale-95"
                   >
-                    <Sparkle size={15} weight="fill" />
-                    <span>목표 선택하기</span>
+                    <Sparkle size={14} weight="fill" />
+                    <span>러닝 코스 선택</span>
                   </a>
                 </div>
               </div>
@@ -109,58 +115,61 @@ export default function RootLayout({
               {children}
             </main>
 
-            {/* 신뢰 기반 푸터 */}
-            <footer className="border-t border-black/[0.04] bg-white text-[#8b95a1] text-xs py-14">
+            {/* 신뢰 기반 프리미엄 다크 푸터 */}
+            <footer className="border-t border-white/[0.08] bg-[#05080F] text-gray-400 text-xs py-16">
               <div className="toss-container space-y-8">
                 <div className="flex flex-col md:flex-row justify-between gap-8">
-                  <div className="space-y-2.5 max-w-md">
+                  <div className="space-y-3 max-w-md">
                     <div className="flex items-center gap-2">
-                      <span className="text-base font-black text-[#191f28]">aizaler.kr</span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#e8f3ff] text-[#3182f6]">
+                      <span className="text-base font-black text-white">aizaler.kr</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
                         Meta Certified Pro
                       </span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full athletic-badge-volt">
+                        RUNNING GUILD
+                      </span>
                     </div>
-                    <p className="text-[#4e5968] leading-relaxed text-xs">
-                      aizaler는 이론만 말하는 학원이 아닙니다. 공기업·해외 주재원을 거쳐 1인 개발에 도전한 창업자이자, <b>Meta Certified Media Planning Professional(메타 공인 미디어 플래닝 전문가)</b>로서 스레드 2개 버티컬 계정 합산 500만 뷰 실측 DB 로그와 결제 데이터로 검증된 실전 솔루션만을 제공합니다.
+                    <p className="text-gray-400 leading-relaxed text-xs">
+                      aizaler는 이론만 읊는 흔한 인강 사이트가 아닙니다. 공기업·해외 주재원을 거쳐 1인 개발에 도전한 창업자이자, <b>Meta Certified Media Planning Professional(메타 공인 미디어 플래닝 전문가)</b>로서 스레드 2개 버티컬 계정 합산 500만 뷰 실측 로그와 실제 결제 데이터로 검증된 실전 솔루션만을 나눕니다.
                     </p>
-                    <div className="text-[11px] text-[#8b95a1] space-y-1">
-                      <p>운영사: 브라운임팩트랩스 (Brown Impact Labs) | 대표 포트폴리오: 라이브 프로덕트 A, B, C 운영</p>
+                    <div className="text-[11px] text-gray-500 space-y-1 font-mono">
+                      <p>운영사: 브라운임팩트랩스 (Brown Impact Labs) | 대표 포트폴리오: 라이브 프로덕트 운영</p>
                       <p>자격: Meta Certified Media Planning Professional 보유 | 실측 데이터베이스 기반</p>
                     </div>
                   </div>
 
-                  {/* 공식 소셜 링크 (HQ 직접 링크 제거) */}
+                  {/* 공식 소셜 링크 */}
                   <div className="space-y-2.5">
-                    <h4 className="text-[#191f28] font-bold text-xs">공식 채널</h4>
+                    <h4 className="text-white font-bold text-xs tracking-wider uppercase">Official Community</h4>
                     <div className="flex flex-wrap gap-2">
                       <a
                         href="https://threads.net/@aizaler.kr"
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f2f4f6] text-[#4e5968] hover:text-[#3182f6] transition-colors text-xs font-semibold"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.1] text-gray-300 hover:text-[#CCFF00] hover:border-[#CCFF00]/40 transition-colors text-xs font-semibold"
                       >
-                        <span>Threads</span>
+                        <span>Threads @aizaler.kr</span>
                         <ArrowUpRight size={12} />
                       </a>
                       <a
                         href="https://instagram.com/aizaler.kr"
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#f2f4f6] text-[#4e5968] hover:text-pink-600 transition-colors text-xs font-semibold"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.1] text-gray-300 hover:text-pink-400 hover:border-pink-500/40 transition-colors text-xs font-semibold"
                       >
-                        <span>Instagram</span>
+                        <span>Instagram @aizaler.kr</span>
                         <ArrowUpRight size={12} />
                       </a>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-black/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#8b95a1]">
+                <div className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-gray-500">
                   <p>© 2026 aizaler.kr. All rights reserved. Powered by Brown Impact Labs.</p>
                   <div className="flex gap-4">
-                    <span className="hover:text-[#4e5968] cursor-pointer">개인정보처리방침</span>
-                    <span className="hover:text-[#4e5968] cursor-pointer">이용약관</span>
-                    <span className="hover:text-[#4e5968] cursor-pointer">환불규정</span>
+                    <span className="hover:text-gray-300 cursor-pointer">개인정보처리방침</span>
+                    <span className="hover:text-gray-300 cursor-pointer">이용약관</span>
+                    <span className="hover:text-gray-300 cursor-pointer">환불규정</span>
                   </div>
                 </div>
               </div>

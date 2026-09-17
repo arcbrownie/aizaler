@@ -12,11 +12,11 @@ import {
   LightbulbFilament,
   Target,
   RocketLaunch,
-  Medal,
   Users,
-  Check,
   X,
-  PaperPlaneTilt
+  PaperPlaneTilt,
+  FlagCheckered,
+  Timer
 } from '@phosphor-icons/react';
 
 import LegoStackSimulator from '@/components/LegoStackSimulator';
@@ -36,47 +36,49 @@ export default function Home() {
   const [crewItemGoal, setCrewItemGoal] = useState('');
   const [crewSubmitted, setCrewSubmitted] = useState(false);
 
-  // ── 3대 트랙별 명확한 목표 & 차등 가격 (군더더기 없는 압축 정의) ──
-  const TRACKS = [
+  // ── 3대 러닝 코스 (거리별 페이스 & 레이스 넘버) ──
+  const COURSES = [
     {
       id: 'validate' as const,
+      bib: 'BIB #5K',
       stepNum: 1,
       legoStep: 1,
       icon: LightbulbFilament,
-      title: '기획 & BM 검증 트랙',
-      sub: '아이디어의 시장 결핍을 증명하고 린 캔버스 완성',
+      courseLabel: '5K COURSE',
+      title: '기획 & 결핍 검증 코스',
+      sub: '가장 가벼운 첫 랩타임: 고객 결핍 발굴과 BM 린 캔버스 1장 완주',
       price: '29,000원',
       originalPrice: '59,000원',
-      badge: 'TRACK 01',
-      tag: 'FOUNDATION',
-      color: '#2563eb',
-      bgTag: 'bg-blue-50 text-blue-700 border-blue-200',
+      badge: 'PACE 01 · FOUNDATION',
+      color: '#3B82F6',
+      badgeStyle: 'athletic-badge-blue',
       milestones: [
-        '1주차: 고객 결핍 발굴 & PPF(Product-Person Fit) 분석',
-        '2주차: Aside 24h 자율 브라우저로 경쟁사 데이터 자동 수집',
-        '3주차: 실제 돈 버는 모델이 담긴 BM 린 캔버스 1장 완성'
+        'Week 01 Split: 고객 결핍 발굴 & PPF(Product-Person Fit) 분석',
+        'Week 02 Split: Aside 24h 자율 브라우저로 경쟁사 데이터 자동 수집',
+        'Week 03 Finish: 실제 돈 버는 모델이 담긴 BM 린 캔버스 1장 완주'
       ],
       deliverable: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
       guideTitle: '1인 창업 필수 용어집 & 고객 결핍 검증 린 캔버스 (PDF)',
-      guideDesc: '내 아이디어가 실제 시장에서 돈이 되는지 검증하는 체크리스트입니다.'
+      guideDesc: '내 아이디어가 실제 시장에서 돈이 되는지 30초 만에 판별하는 검증 체크리스트입니다.'
     },
     {
       id: 'launch' as const,
+      bib: 'BIB #10K',
       stepNum: 2,
       legoStep: 3,
       icon: RocketLaunch,
-      title: '외주비 0원 런칭 트랙',
-      sub: '코딩 문법 암기 없이 내 손으로 실제 상용 웹 배포',
+      courseLabel: '10K COURSE',
+      title: '외주비 0원 런칭 배포 코스',
+      sub: '내 손으로 만드는 실전 자신감: Cursor + Supabase 상용 웹 라이브 배포',
       price: '59,000원',
       originalPrice: '119,000원',
-      badge: 'TRACK 02',
-      tag: 'LAUNCH',
-      color: '#9333ea',
-      bgTag: 'bg-purple-50 text-purple-700 border-purple-200',
+      badge: 'PACE 02 · BUILD & DEPLOY',
+      color: '#CCFF00',
+      badgeStyle: 'athletic-badge-volt',
       milestones: [
-        '1주차: Cursor + Supabase 조립 & 실시간 DB 아키텍처 셋업',
-        '2주차: Next.js 14 기반 반응형 웹서비스 라이브 배포',
-        '3주차: PG 결제창 및 간편결제 모듈 100% 연동 완료'
+        'Week 01 Split: Cursor + Supabase 조립 & 실시간 DB 아키텍처 셋업',
+        'Week 02 Split: Next.js 14 기반 반응형 웹서비스 라이브 배포',
+        'Week 03 Finish: PG 결제창 및 간편결제 모듈 100% 연동 완료'
       ],
       deliverable: '외주비 0원, 내 도메인으로 작동하는 실제 상용 결제 웹 1개 라이브 배포',
       guideTitle: '외주비 0원 1인 상용 웹 배포 아키텍처 로드맵 (PDF)',
@@ -84,22 +86,23 @@ export default function Home() {
     },
     {
       id: 'revenue' as const,
+      bib: 'BIB #HALF',
       stepNum: 3,
       legoStep: 4,
       icon: Target,
-      title: '메타 알고리즘 & 첫 결제 트랙',
-      sub: '메타 추천 알고리즘의 이해와 첫 유료 결제 발생',
+      courseLabel: 'HALF MARATHON',
+      title: '메타 알고리즘 & 첫 결제 코스',
+      sub: '페이스메이커와 함께 결승선 돌파: 스레드 500만 뷰 훅 & 첫 유료 결제',
       price: '89,000원',
       originalPrice: '179,000원',
-      badge: 'TRACK 03 ★인기',
-      tag: 'CONVERSION',
-      color: '#f04452',
-      bgTag: 'bg-rose-50 text-rose-700 border-rose-200',
+      badge: 'PACE 03 · ★인기 코스',
+      color: '#FF5500',
+      badgeStyle: 'athletic-badge-orange',
       isPopular: true,
       milestones: [
-        '1주차: 메타 추천 알고리즘(Sentence-BERT)과 체류 시간 10배 훅 설계',
-        '2주차: 광고/피드 첫 문장과 상세페이지 1:1 결속 퍼널 완성',
-        '3주차: 첫 번째 실제 고객 유료 결제 알림 수신'
+        'Week 01 Split: 메타 추천 알고리즘(Sentence-BERT)과 체류 시간 10배 훅 설계',
+        'Week 02 Split: 광고/피드 첫 문장과 상세페이지 1:1 결속 퍼널 완성',
+        'Week 03 Finish: 첫 번째 실제 고객 유료 결제 알림 수신 (결승선 돌파)'
       ],
       deliverable: '스레드 500만 뷰 훅 구조도 & CVR 8.6%+ 고전환 결제 퍼널 & 첫 실제 결제',
       guideTitle: '‘훅 자료집’만 보셨나요? 왜 안 터지는지 그 구조를 알려드립니다 (PDF)',
@@ -107,7 +110,7 @@ export default function Home() {
     }
   ];
 
-  const currentTrack = TRACKS.find((t) => t.id === selectedTrackId) || TRACKS[2];
+  const currentTrack = COURSES.find((t) => t.id === selectedTrackId) || COURSES[2];
 
   const handleDownload = (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,78 +130,89 @@ export default function Home() {
     setCrewSubmitted(true);
   };
 
-  const proofMetrics = [
-    { value: '5,000,000+', label: '누적 뷰수 실측 데이터', sub: '스레드 2개 계정 실측 DB' },
+  const proofTelemetry = [
+    { value: '5,000,000+', label: '누적 뷰수 실측 데이터', sub: '스레드 2개 계정 실측 DB 로그' },
     { value: 'Meta Certified', label: '글로벌 공인 전문가', sub: 'Media Planning Professional' },
-    { value: '월 $42', label: '운영 인프라 비용', sub: '4개 상용 서비스 실운영 기준' },
-    { value: '8.6%', label: '실측 구매 전환율', sub: '메타 광고 1:1 결속 퍼널' }
+    { value: '월 $42', label: '초경량 인프라 비용', sub: '4개 상용 서비스 실운영 기준' },
+    { value: '8.6%', label: '실측 구매 전환율 (CVR)', sub: '메타 광고 1:1 결속 퍼널' }
   ];
 
   const faqs = [
     {
-      q: '어릴 때 레고 좋아했던 사람을 위한 빌더 프로그램이란 무엇인가요?',
-      a: '벽돌을 굽는 화학 공식을 몰라도 레고 블록만 있으면 거대한 성을 지을 수 있었습니다. 복잡한 코딩을 처음부터 외우지 않고, 검증된 기획·지능·퍼널·인프라 블록을 조립해 내 상용 프로덕트와 현금 흐름을 만드는 1인 빌더 성장 트랙입니다.'
+      q: '어릴 때 레고 좋아했던 사람을 위한 AI 빌더 러닝크루란 무엇인가요?',
+      a: '벽돌을 굽는 화학 공식을 몰라도 레고 블록만 있으면 거대한 성을 지을 수 있었습니다. 복잡한 코딩 문법을 밑바닥부터 외우지 않고, 검증된 기획·지능·퍼널·인프라 블록을 조립해 내 제품과 첫 현금 흐름을 만드는 온라인 빌더 러닝크루입니다. 혼자 뛰면 작심삼일이지만, 크루와 함께 달리면 3주 만에 첫 결승선을 넘습니다.'
+    },
+    {
+      q: 'AI FOMO가 심한데, 비개발자도 정말 3주 만에 내 손으로 제품을 띄우고 자신감을 얻을 수 있나요?',
+      a: '네. 수많은 AI 툴 소식에 불안해하며 툴만 모으는 상태에서 벗어나는 유일한 방법은 "내 손으로 끝까지 완주해보는 경험"입니다. Cursor, Supabase, Cloudflare, 간편결제 모듈을 조립형 파이프라인으로 연결해, 외주 개발비 0원으로 내 도메인에 결제창을 띄우는 압도적인 실전 자신감을 얻게 됩니다.'
     },
     {
       q: 'aizaler의 메타 알고리즘과 AI 지능은 시중 강의와 무엇이 다른가요?',
       a: '뜬구름 잡는 복붙 자료는 다루지 않습니다. Meta 공인 미디어 플래닝 전문가가 해부한 Sentence-BERT 텍스트 임베딩, 체류 시간(Dwell Time) 가중치 등 실제 알고리즘의 동작 구조를 역공학해 내 손으로 라이브 배포하고 첫 결제를 뚫는 실전만을 다룹니다.'
-    },
-    {
-      q: '비개발자도 정말 3주 만에 상용 제품을 런칭할 수 있나요?',
-      a: '네. Cursor, Supabase, Cloudflare, 간편결제 모듈을 조립형 아키텍처로 조합해 외주비 없이 혼자서 결제 웹서비스를 띄우고 운영하는 실전 파이프라인을 1:1 눈높이로 전수합니다.'
     }
   ];
 
   return (
-    <div className="relative overflow-hidden space-y-16 sm:space-y-24 pt-6 sm:pt-10 pb-20">
-      {/* ── Ambient Background Mesh ── */}
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] sm:w-[900px] h-[500px] bg-gradient-to-tr from-blue-400/15 via-purple-400/15 to-rose-400/10 blur-[130px] rounded-full pointer-events-none -z-10 animate-apple-glow" />
+    <div className="relative overflow-hidden space-y-20 sm:space-y-28 pt-8 sm:pt-14 pb-24 text-white">
+      {/* ── Ambient Athletic Aura Grid ── */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] grid-track-bg pointer-events-none -z-10 opacity-30" />
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] sm:w-[950px] h-[550px] bg-gradient-to-tr from-blue-600/15 via-[#CCFF00]/10 to-orange-500/10 blur-[140px] rounded-full pointer-events-none -z-10 animate-apple-glow" />
 
       {/* ══════════════════════════════════════════════════════
-          [HERO] 임팩트 있는 메인 헤드라인 & 키노트 실측 지표
+          [HERO] AI FOMO 탈출 & 3주 결승선 완주 헤드라인
       ══════════════════════════════════════════════════════ */}
-      <section className="toss-container text-center space-y-6 sm:space-y-8">
-        <div className="space-y-3.5 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full apple-glass text-[#191f28] text-xs font-bold shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-pulse" />
-            <span>함께 성장하는 3주 빌더 크루 1기 모집</span>
+      <section className="toss-container text-center space-y-7 sm:space-y-9 max-w-4xl mx-auto">
+        <div className="space-y-4 max-w-3xl mx-auto">
+          {/* Running Crew Status Pill */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.1] text-xs font-mono font-bold shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-pulse" />
+            <span className="text-[#CCFF00]">ONLINE AI BUILDER RUNNING CREW</span>
+            <span className="text-gray-500">|</span>
+            <span className="text-gray-300">1기 15명 한정 모집</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-black text-[#191f28] leading-[1.18] tracking-tight">
-            조립하면, 3주 만에<br className="hidden sm:inline" /> 내 제품이 뜹니다.
+          {/* Main Keynote Punchline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-[58px] font-black leading-[1.12] tracking-tighter text-white">
+            AI FOMO에서 탈출해,<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#CCFF00] to-emerald-400">
+              3주 만에 첫 결승선
+            </span>을 넘습니다.
           </h1>
 
-          <p className="text-base sm:text-lg text-[#4e5968] font-medium leading-relaxed max-w-xl mx-auto">
-            외로운 강의 공부는 끝났습니다. 목표를 정하면,<br className="hidden sm:inline" />
-            <span className="text-[#191f28] font-bold">동료들과 함께 만들고 첫 유료 결제까지 완주합니다.</span>
+          <p className="text-base sm:text-lg text-gray-300 font-medium leading-relaxed max-w-2xl mx-auto">
+            남들의 AI 성공담에 불안해하며 툴만 모으던 시간은 끝났습니다.<br className="hidden sm:inline" />
+            복잡한 코딩 대신 AI 블록을 조립해 <span className="text-white font-black underline decoration-[#CCFF00] decoration-2 underline-offset-4">내 손으로 직접 만드는 실전 자신감</span>을 얻고,
+            런칭과 첫 결제까지 페이스메이커와 함께 완주하세요.
           </p>
 
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+          <div className="pt-3 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="#step-1"
-              className="toss-button-primary px-6 py-3.5 text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:scale-95"
+              href="#courses"
+              className="athletic-btn-volt px-7 py-4 text-xs sm:text-sm font-black rounded-2xl flex items-center gap-2 shadow-lg active:scale-95 tracking-wide"
             >
-              <span>목표 트랙 선택하기 ↓</span>
+              <FlagCheckered size={18} weight="bold" />
+              <span>러닝 코스 선택하기 ↓</span>
             </a>
             <a
               href="#lab"
-              className="px-5 py-3.5 rounded-2xl bg-white text-[#191f28] text-xs sm:text-sm font-bold border border-black/[0.08] hover:bg-gray-50 flex items-center gap-1.5 shadow-xs"
+              className="px-6 py-4 rounded-2xl bg-white/[0.05] hover:bg-white/[0.09] text-white text-xs sm:text-sm font-bold border border-white/[0.1] flex items-center gap-2 transition-all shadow-xs"
             >
-              <span>3D 레고 랩 체험</span>
+              <Timer size={18} weight="bold" className="text-[#CCFF00]" />
+              <span>3D 트레이닝 랩 체험</span>
             </a>
           </div>
         </div>
 
-        {/* Apple Keynote Stat Strip */}
-        <div className="apple-glass rounded-3xl p-5 sm:p-7 max-w-4xl mx-auto border border-white/80 shadow-xs">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-black/[0.06]">
-            {proofMetrics.map((stat, idx) => (
-              <div key={idx} className={`pt-3 sm:pt-0 ${idx > 0 ? 'sm:pl-4 lg:pl-6' : ''} text-center sm:text-left space-y-0.5`}>
-                <div className="text-2xl sm:text-3xl font-black text-[#191f28] tracking-tight tabular-nums">
+        {/* Runner Telemetry Split HUD (Stat HUD) */}
+        <div className="athletic-card rounded-3xl p-6 sm:p-8 max-w-4xl mx-auto border border-white/[0.08] shadow-2xl relative">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-white/[0.08]">
+            {proofTelemetry.map((stat, idx) => (
+              <div key={idx} className={`pt-3 sm:pt-0 ${idx > 0 ? 'sm:pl-4 lg:pl-6' : ''} text-center sm:text-left space-y-1`}>
+                <div className="text-2xl sm:text-3xl font-black text-white tracking-tight tabular-nums font-mono">
                   {stat.value}
                 </div>
-                <div className="text-xs font-bold text-[#191f28]">{stat.label}</div>
-                <div className="text-[10px] text-[#8b95a1]">{stat.sub}</div>
+                <div className="text-xs font-bold text-gray-200">{stat.label}</div>
+                <div className="text-[10px] font-mono text-gray-400">{stat.sub}</div>
               </div>
             ))}
           </div>
@@ -206,24 +220,24 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          [STEP 1] 나의 목표와 트랙을 1-탭으로 선택
+          [STEP 1 / COURSE] 3대 러닝 코스 & 레이스 넘버(Bibs)
       ══════════════════════════════════════════════════════ */}
-      <section id="step-1" className="toss-container scroll-mt-20 space-y-6 max-w-4xl mx-auto">
-        <div className="text-center space-y-1.5">
-          <div className="text-xs font-mono font-black text-[#3182f6] uppercase tracking-wider">
-            STEP 01. GOAL & TRACK
+      <section id="courses" className="toss-container scroll-mt-24 space-y-8 max-w-4xl mx-auto">
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-black athletic-badge-volt">
+            <span>COURSE 01. SELECT YOUR PACE</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-[#191f28] tracking-tight">
-            이번 3주, 당신이 달성할 목표는?
+          <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+            이번 3주, 당신이 결승선을 넘을 코스는?
           </h2>
-          <p className="text-xs sm:text-sm text-[#4e5968]">
-            트랙을 탭하면 맞춤 3주 액션 플랜과 3D 레고 블록이 활성화됩니다.
+          <p className="text-xs sm:text-sm text-gray-400 max-w-lg mx-auto">
+            원하는 코스를 탭하면 3주 페이싱 마일스톤과 3D 트레이닝 블록이 즉시 동기화됩니다.
           </p>
         </div>
 
-        {/* 3대 트랙 선택 카드 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-left">
-          {TRACKS.map((t) => {
+        {/* 3대 레이스 빕 카드 그리드 */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+          {COURSES.map((t) => {
             const isSelected = selectedTrackId === t.id;
             const Icon = t.icon;
             return (
@@ -231,46 +245,55 @@ export default function Home() {
                 key={t.id}
                 type="button"
                 onClick={() => setSelectedTrackId(t.id)}
-                className={`p-5 rounded-3xl transition-all border flex flex-col justify-between gap-4 text-left active:scale-[0.98] ${
+                className={`p-6 rounded-3xl transition-all border flex flex-col justify-between gap-5 text-left relative overflow-hidden active:scale-[0.98] ${
                   isSelected
-                    ? 'bg-[#191f28] text-white border-[#191f28] shadow-xl -translate-y-1 ring-2 ring-[#3182f6]/60'
-                    : 'apple-glass hover:bg-white text-[#4e5968] border-white/80 hover:border-black/15 shadow-sm'
+                    ? 'athletic-card-active'
+                    : 'athletic-card hover:border-white/20'
                 }`}
               >
+                {/* Upper Bib Header */}
                 <div className="flex items-center justify-between w-full">
-                  <span className={`text-[10px] font-mono font-black tracking-wider ${isSelected ? 'text-gray-400' : 'text-[#8b95a1]'}`}>
-                    {t.badge}
+                  <span className="text-[11px] font-mono font-black tracking-widest text-gray-400">
+                    {t.bib}
                   </span>
                   <div
-                    className="w-8 h-8 rounded-xl flex items-center justify-center text-sm"
+                    className="w-9 h-9 rounded-xl flex items-center justify-center text-sm"
                     style={{
-                      backgroundColor: isSelected ? 'rgba(255,255,255,0.15)' : `${t.color}15`,
-                      color: isSelected ? '#ffffff' : t.color
+                      backgroundColor: isSelected ? '#CCFF00' : 'rgba(255,255,255,0.06)',
+                      color: isSelected ? '#080C14' : t.color
                     }}
                   >
-                    <Icon size={18} weight="bold" />
+                    <Icon size={20} weight="bold" />
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <h3 className={`text-base font-black leading-snug ${isSelected ? 'text-white' : 'text-[#191f28]'}`}>
+                {/* Course Title & Description */}
+                <div className="space-y-1.5">
+                  <div className="text-[10px] font-mono font-bold tracking-wider text-gray-400 uppercase">
+                    {t.courseLabel}
+                  </div>
+                  <h3 className="text-lg font-black leading-snug text-white">
                     {t.title}
                   </h3>
-                  <p className={`text-xs leading-relaxed ${isSelected ? 'text-gray-300' : 'text-[#4e5968]'}`}>
+                  <p className="text-xs leading-relaxed text-gray-300">
                     {t.sub}
                   </p>
                 </div>
 
-                {/* 가격 표시 */}
-                <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                {/* Pricing & Earlybird Tag */}
+                <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] text-gray-400 line-through mr-1">{t.originalPrice}</span>
-                    <span className={`text-sm sm:text-base font-black ${isSelected ? 'text-amber-300' : 'text-[#191f28]'}`}>
+                    <span className="text-[11px] text-gray-500 line-through mr-1 font-mono">
+                      {t.originalPrice}
+                    </span>
+                    <span className={`text-base sm:text-lg font-black font-mono ${
+                      isSelected ? 'text-[#CCFF00]' : 'text-white'
+                    }`}>
                       {t.price}
                     </span>
                   </div>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                    isSelected ? 'bg-white/15 text-white' : 'bg-rose-50 text-[#f04452]'
+                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${
+                    isSelected ? 'bg-[#CCFF00] text-[#080C14]' : 'bg-white/[0.08] text-gray-300'
                   }`}>
                     1기 얼리버드
                   </span>
@@ -282,30 +305,38 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          [STEP 2] 선택된 목표의 3주 완주 여정 + 완주 트로피
+          [STEP 2 / PACING] 3주 페이싱 맵 & 피니셔 메달 쇼케이스
       ══════════════════════════════════════════════════════ */}
-      <section id="step-2" className="toss-container scroll-mt-20 space-y-6 max-w-4xl mx-auto">
-        <div className="apple-glass rounded-3xl p-6 sm:p-8 border border-white/90 shadow-sm space-y-6 text-left">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/[0.05] pb-4">
+      <section id="pacing" className="toss-container scroll-mt-24 space-y-6 max-w-4xl mx-auto">
+        <div className="athletic-card rounded-3xl p-6 sm:p-9 border border-white/[0.08] shadow-xl space-y-7 text-left relative overflow-hidden">
+          {/* Subtle Top Glow Line */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] split-line-glow" />
+
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.08] pb-5">
             <div>
-              <div className="text-xs font-mono font-bold text-[#3182f6]">STEP 02. 3-WEEK JOURNEY</div>
-              <h3 className="text-lg sm:text-xl font-black text-[#191f28]">
-                [{currentTrack.title}] 3주간 완성하는 블록
+              <div className="text-xs font-mono font-bold text-[#CCFF00]">COURSE 02. 3-WEEK PACING MAP</div>
+              <h3 className="text-xl sm:text-2xl font-black text-white">
+                [{currentTrack.title}] 3주간 돌파하는 스플릿 구간
               </h3>
             </div>
-            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border self-start sm:self-auto ${currentTrack.bgTag}`}>
+            <span className="text-[11px] font-mono font-bold px-3 py-1 rounded-full athletic-badge-volt self-start sm:self-auto">
               참가비 {currentTrack.price}
             </span>
           </div>
 
-          {/* 주차별 마일스톤 3단계 */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* 주차별 마일스톤 스플릿 타임 (Week 01 ~ 03) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
             {currentTrack.milestones.map((item, idx) => (
-              <div key={idx} className="p-4 rounded-2xl bg-white/80 border border-black/[0.05] space-y-1">
-                <div className="text-[10px] font-mono font-black text-[#3182f6]">
-                  WEEK 0{idx + 1}
+              <div key={idx} className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1.5 hover:border-white/20 transition-all">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono font-black text-[#CCFF00]">
+                    SPLIT 0{idx + 1}
+                  </span>
+                  <span className="text-[9px] font-mono text-gray-500 uppercase">
+                    {idx === 2 ? 'FINISH LINE' : `WEEK 0${idx + 1}`}
+                  </span>
                 </div>
-                <div className="text-xs font-bold text-[#191f28] leading-snug">
+                <div className="text-xs font-bold text-gray-200 leading-snug">
                   {item.split(': ')[1] || item}
                 </div>
               </div>
@@ -313,87 +344,103 @@ export default function Home() {
           </div>
 
           {/* 최종 결과물 강조 바 */}
-          <div className="p-4 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-950/60 via-slate-900 to-emerald-950/40 border border-white/[0.1] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="space-y-0.5">
-              <div className="text-[10px] font-bold text-amber-300">🎯 3주 완주 후 내 손에 쥐어지는 결과물:</div>
-              <div className="text-xs sm:text-sm font-black text-white">{currentTrack.deliverable}</div>
+              <div className="text-[10px] font-mono font-bold text-[#CCFF00]">
+                🎯 결승선 통과 시 내 손에 쥐어지는 결과물:
+              </div>
+              <div className="text-xs sm:text-sm font-black text-white">
+                {currentTrack.deliverable}
+              </div>
             </div>
-            <span className="text-[11px] font-mono text-emerald-400 shrink-0">✓ 100% 라이브 배포 보장</span>
+            <span className="text-[11px] font-mono text-emerald-400 shrink-0 font-bold">
+              ✓ 100% 라이브 완주 보장
+            </span>
           </div>
 
-          {/* 완주 트로피 미니 카드 */}
-          <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-300/40 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white text-[#191f28] flex items-center justify-center text-xl shadow-xs shrink-0 ring-2 ring-amber-400/30">
+          {/* 👑 피니셔 메달 쇼케이스: 실물 화이트 서밋 크라운 브릭 */}
+          <div className="p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-400/5 to-transparent border border-amber-400/30 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-300 to-amber-500 text-black flex items-center justify-center text-2xl shadow-lg shrink-0 font-black">
               👑
             </div>
-            <div className="space-y-0.5 text-xs">
-              <div className="font-black text-[#191f28]">3주 완주 크루 특권: 실물 ‘화이트 서밋 크라운 브릭’ 수여</div>
-              <div className="text-[#4e5968] text-[11px]">책상 위에 당당히 올려둘 수 있는 실물 세라믹 트로피와 시리얼 뱃지를 드립니다.</div>
+            <div className="space-y-1 text-xs">
+              <div className="font-black text-white text-sm flex items-center gap-2">
+                <span>3주 완주 러너 특권: 실물 ‘화이트 서밋 크라운 브릭’ 피니셔 트로피</span>
+                <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40">
+                  LIMITED TROPHY
+                </span>
+              </div>
+              <div className="text-gray-300 leading-relaxed text-xs">
+                마라톤 완주 메달처럼, 책상 위에 당당히 올려둘 수 있는 실물 세라믹 트로피와 고유 시리얼 넘버 뱃지를 자택으로 직배송해 드립니다.
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          [STEP 3] 지금 바로 시작하기: 크루 신청 or 무료 가이드
+          [STEP 3 / ACTION] 크루 합류 or 무료 스타터 킷
       ══════════════════════════════════════════════════════ */}
-      <section id="step-3" className="toss-container scroll-mt-20 max-w-4xl mx-auto space-y-6">
-        <div className="text-center space-y-1.5">
-          <div className="text-xs font-mono font-black text-[#3182f6] uppercase tracking-wider">
-            STEP 03. TAKE ACTION
+      <section id="action" className="toss-container scroll-mt-24 max-w-4xl mx-auto space-y-8">
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-black athletic-badge-volt">
+            <span>COURSE 03. TAKE ACTION & CROSS THE LINE</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-[#191f28] tracking-tight">
-            지금 시작하는 두 가지 방법
+          <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+            결승선을 향해 출발하는 두 가지 방법
           </h2>
+          <p className="text-xs sm:text-sm text-gray-400">
+            크루원들과 함께 달릴 수도 있고, 무료 스타터 리포트로 먼저 페이스를 가늠해볼 수도 있습니다.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-          {/* 옵션 A: 1기 크루 즉시 참가 */}
-          <div className="apple-glass rounded-3xl p-6 border border-[#3182f6]/40 shadow-sm flex flex-col justify-between space-y-5 bg-gradient-to-br from-white to-blue-50/40">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 text-[#3182f6] text-[10px] font-black">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-left">
+          {/* 옵션 1: 1기 러닝크루 즉시 참가 */}
+          <div className="athletic-card rounded-3xl p-7 border border-[#CCFF00]/40 shadow-xl flex flex-col justify-between space-y-6 bg-gradient-to-br from-[#121826] to-[#1a2337]">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full athletic-badge-volt text-[10px] font-mono font-black">
                 <Users size={12} weight="fill" />
-                <span>옵션 1 · 함께 완주하기</span>
+                <span>OPTION 01 · 1기 러닝크루 참가 (15명 한정)</span>
               </div>
-              <h3 className="text-lg font-black text-[#191f28]">
-                1기 크루 참가 신청 ({currentTrack.price})
+              <h3 className="text-xl font-black text-white">
+                1기 러닝크루 참가 신청 ({currentTrack.price})
               </h3>
-              <p className="text-xs text-[#4e5968] leading-relaxed">
-                3주간 매주 블록을 인증하고, 서로의 첫 고객이 되어주며 완주하는 소수 정예(15명 한정) 크루입니다.
+              <p className="text-xs text-gray-300 leading-relaxed">
+                3주간 매주 블록을 인증하고, 페이스메이커 가이드를 받으며 서로의 첫 고객이 되어주는 소수 정예(15명 한정) 빌더 러닝크루입니다.
               </p>
             </div>
 
             <button
               type="button"
               onClick={() => openCrewModal(currentTrack.id)}
-              className="w-full py-3.5 rounded-xl bg-[#3182f6] hover:bg-[#1b64da] text-white text-xs font-black transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
+              className="w-full py-4 rounded-xl athletic-btn-volt text-xs font-black transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95"
             >
-              <span>{currentTrack.title} 크루 신청 ({currentTrack.price})</span>
-              <ArrowRight size={13} weight="bold" />
+              <span>{currentTrack.title} 크루 참가 신청 ({currentTrack.price})</span>
+              <ArrowRight size={14} weight="bold" />
             </button>
           </div>
 
-          {/* 옵션 B: 가이드북 무료 먼저 받기 */}
-          <div className="apple-glass rounded-3xl p-6 border border-white/80 shadow-sm flex flex-col justify-between space-y-5">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gray-100 text-[#4e5968] text-[10px] font-black">
+          {/* 옵션 2: 가이드북 무료 먼저 받기 */}
+          <div className="athletic-card rounded-3xl p-7 border border-white/[0.08] shadow-lg flex flex-col justify-between space-y-6">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.06] text-gray-300 text-[10px] font-mono font-bold">
                 <DownloadSimple size={12} weight="bold" />
-                <span>옵션 2 · 무료 스타터 킷</span>
+                <span>OPTION 02 · 러너 무료 스타터 킷</span>
               </div>
-              <h3 className="text-lg font-black text-[#191f28]">
+              <h3 className="text-xl font-black text-white">
                 {currentTrack.id === 'revenue'
                   ? '‘훅 자료집’만 보셨나요? 구조 해부서 (PDF)'
                   : `${currentTrack.title} 가이드북 (PDF)`}
               </h3>
-              <p className="text-xs text-[#4e5968] leading-relaxed">
+              <p className="text-xs text-gray-400 leading-relaxed">
                 {currentTrack.guideDesc}
               </p>
             </div>
 
             {isDownloaded ? (
-              <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center justify-center gap-1.5">
-                <CheckCircle size={16} weight="fill" className="text-emerald-600" />
-                <span>가이드북이 이메일로 발송되었습니다!</span>
+              <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold flex items-center justify-center gap-2 font-mono">
+                <CheckCircle size={18} weight="fill" />
+                <span>가이드북이 이메일로 즉시 발송되었습니다!</span>
               </div>
             ) : (
               <form onSubmit={handleDownload} className="flex gap-2">
@@ -403,11 +450,11 @@ export default function Home() {
                   placeholder="이메일 주소 입력"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
-                  className="px-3 py-2.5 rounded-xl bg-white border border-black/[0.1] text-xs text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6] flex-1"
+                  className="px-4 py-3 rounded-xl bg-white/[0.05] border border-white/[0.1] text-xs text-white placeholder-gray-500 outline-none focus:border-[#CCFF00] flex-1 font-mono"
                 />
                 <button
                   type="submit"
-                  className="px-4 py-2.5 rounded-xl bg-[#191f28] hover:bg-black text-white text-xs font-bold shrink-0 transition-all"
+                  className="px-5 py-3 rounded-xl bg-white text-[#080C14] hover:bg-gray-100 text-xs font-black shrink-0 transition-all active:scale-95"
                 >
                   무료 받기
                 </button>
@@ -416,35 +463,40 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 👑 VIP 1:1 세션 미니 배너 */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#050A18] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2.5">
-            <Crown size={18} weight="fill" className="text-amber-400 shrink-0" />
+        {/* 👑 VIP 1:1 페이서 세션 배너 */}
+        <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#0E1526] via-[#151F38] to-[#0A0E1A] border border-amber-400/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+          <div className="flex items-center gap-3">
+            <Crown size={22} weight="fill" className="text-amber-400 shrink-0" />
             <div>
-              <span className="font-bold text-amber-300 mr-2">VIP 1:1 세션:</span>
-              <span className="text-gray-300">파운더와 50분간 90일 실행 Action Blueprint를 처방받고 싶다면</span>
+              <span className="font-black text-amber-300 text-sm mr-2">VIP 1:1 파운더 페이스메이킹:</span>
+              <span className="text-gray-300">
+                Meta Certified 파운더와 50분간 1:1로 90일 실행 Action Blueprint를 직접 처방받고 싶다면
+              </span>
             </div>
           </div>
           <Link
             href="/career"
-            className="px-4 py-2 rounded-xl bg-white text-[#050A18] hover:bg-gray-100 font-bold shrink-0 text-center"
+            className="px-5 py-2.5 rounded-xl bg-amber-400 text-black hover:bg-amber-300 font-black shrink-0 text-center transition-colors"
           >
-            VIP 세션 보기 →
+            VIP 세션 신청 →
           </Link>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          [인터랙티브 랩] 3D 레고 시뮬레이터 & AI 아키텍트 상담
+          [TRAINING LAB] 3D 레고 시뮬레이터 & AI 아키텍트 상담
       ══════════════════════════════════════════════════════ */}
-      <section id="lab" className="toss-container scroll-mt-20 space-y-6 max-w-4xl mx-auto">
-        <div className="text-center space-y-1">
-          <span className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
-            INTERACTIVE BUILDER LAB
-          </span>
-          <h2 className="text-xl sm:text-2xl font-black text-[#191f28]">
+      <section id="lab" className="toss-container scroll-mt-24 space-y-8 max-w-4xl mx-auto">
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-black athletic-badge-volt">
+            <span>BUILDER TRAINING LAB</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-black text-white">
             3D 공간에서 직접 조립해 보세요
           </h2>
+          <p className="text-xs sm:text-sm text-gray-400">
+            복잡한 코딩을 암기하는 대신, 검증된 블록을 조립하는 방식을 시뮬레이션할 수 있습니다.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -458,38 +510,40 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          [FAQ] 자주 묻는 질문
+          [FAQ] 러닝크루 자주 묻는 질문
       ══════════════════════════════════════════════════════ */}
-      <section id="faq" className="toss-container scroll-mt-20 space-y-4 max-w-2xl mx-auto">
-        <div className="text-center space-y-1">
-          <span className="text-xs font-bold text-[#3182f6]">FAQ</span>
-          <h2 className="text-lg sm:text-2xl font-black text-[#191f28]">자주 묻는 질문</h2>
+      <section id="faq" className="toss-container scroll-mt-24 space-y-6 max-w-3xl mx-auto">
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-black text-[#CCFF00]">
+            <span>RUNNER FAQ</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-black text-white">자주 묻는 질문</h2>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {faqs.map((faq, idx) => {
             const isOpen = openFaq === idx;
             return (
-              <div key={idx} className="apple-glass rounded-2xl overflow-hidden border border-black/[0.06]">
+              <div key={idx} className="athletic-card rounded-2xl overflow-hidden border border-white/[0.08]">
                 <button
                   type="button"
                   onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full p-4 sm:p-5 flex items-center justify-between text-left transition-colors hover:bg-white/50"
+                  className="w-full p-5 flex items-center justify-between text-left transition-colors hover:bg-white/[0.03]"
                 >
                   <div className="flex items-start gap-3 pr-2">
-                    <span className="text-xs font-black text-[#3182f6]">Q.</span>
-                    <span className="font-bold text-xs sm:text-sm text-[#191f28] leading-snug">{faq.q}</span>
+                    <span className="text-xs font-mono font-black text-[#CCFF00]">Q.</span>
+                    <span className="font-bold text-xs sm:text-sm text-white leading-snug">{faq.q}</span>
                   </div>
                   <CaretDown
-                    size={15}
+                    size={16}
                     weight="bold"
-                    className={`transition-transform duration-200 shrink-0 text-[#8b95a1] ${isOpen ? 'rotate-180 text-[#3182f6]' : ''}`}
+                    className={`transition-transform duration-200 shrink-0 text-gray-400 ${isOpen ? 'rotate-180 text-[#CCFF00]' : ''}`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0">
-                    <p className="pt-3 border-t border-black/[0.05] text-xs sm:text-sm text-[#4e5968] leading-relaxed">
+                  <div className="px-5 pb-5 pt-0">
+                    <p className="pt-3 border-t border-white/[0.06] text-xs sm:text-sm text-gray-300 leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
@@ -499,103 +553,103 @@ export default function Home() {
           })}
         </div>
 
-        <div className="pt-2 text-center">
-          <Link href="/about" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3182f6] hover:underline">
+        <div className="pt-3 text-center">
+          <Link href="/about" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#CCFF00] hover:underline">
             aizaler 스튜디오 철학 & 파운더 소개 보기 <ArrowRight size={13} weight="bold" />
           </Link>
         </div>
       </section>
 
-      {/* ── 1기 크루 참가 신청 모달 ── */}
+      {/* ── 1기 러닝크루 참가 신청 모달 (Dark Athletic Style) ── */}
       {isCrewModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="apple-glass rounded-3xl p-6 sm:p-8 max-w-lg w-full border border-white/80 shadow-2xl relative space-y-5 bg-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="athletic-card rounded-3xl p-7 sm:p-9 max-w-lg w-full border border-white/[0.15] shadow-2xl relative space-y-6 bg-[#0E1422] text-white">
             <button
               onClick={() => setIsCrewModalOpen(false)}
-              className="absolute top-5 right-5 p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-[#191f28] transition-colors"
+              className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/[0.1] text-gray-400 hover:text-white transition-colors"
             >
               <X size={18} weight="bold" />
             </button>
 
             <div className="space-y-1.5 text-left">
-              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 text-[11px] font-bold">
-                <Users size={13} weight="fill" className="text-amber-600" />
-                <span>3주 빌더 스프린트 1기 크루</span>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full athletic-badge-volt text-[11px] font-mono font-black">
+                <Users size={13} weight="fill" />
+                <span>1ST BATCH RUNNING CREW</span>
               </div>
-              <h3 className="text-xl font-black text-[#191f28]">
-                {TRACKS.find((t) => t.id === modalTrackId)?.title || '1기 크루'} 참가 신청
+              <h3 className="text-xl font-black text-white">
+                {COURSES.find((t) => t.id === modalTrackId)?.title || '1기 크루'} 참가 신청
               </h3>
-              <p className="text-xs text-[#4e5968]">
-                함께 3주간 블록을 조립하고 완주할 소수 정예 크루에 합류하세요.
+              <p className="text-xs text-gray-300">
+                함께 3주간 블록을 조립하고 완주할 소수 정예 러너에 합류하세요.
               </p>
             </div>
 
             {crewSubmitted ? (
-              <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2">
-                <CheckCircle size={36} weight="fill" className="text-emerald-600 mx-auto" />
-                <div className="text-base font-black text-emerald-900">
+              <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-2">
+                <CheckCircle size={36} weight="fill" className="text-emerald-400 mx-auto" />
+                <div className="text-base font-black text-white">
                   1기 크루 신청이 완료되었습니다!
                 </div>
-                <p className="text-xs text-emerald-700 leading-relaxed">
+                <p className="text-xs text-gray-300 leading-relaxed">
                   24시간 이내에 입력해 주신 연락처/이메일로 온보딩 가이드와 비공개 크루 채널 초대 링크를 전송해 드립니다.
                 </p>
                 <button
                   onClick={() => setIsCrewModalOpen(false)}
-                  className="mt-3 px-5 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold"
+                  className="mt-3 px-5 py-2.5 rounded-xl athletic-btn-volt text-xs font-black"
                 >
                   확인 완료
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleCrewSubmit} className="space-y-3.5 text-left">
-                <div className="p-3.5 rounded-2xl bg-gray-50 border border-black/[0.05] flex items-center justify-between text-xs">
-                  <span className="font-bold text-[#191f28]">신청 트랙:</span>
-                  <span className="font-black text-[#3182f6]">
-                    {TRACKS.find((t) => t.id === modalTrackId)?.title} ({TRACKS.find((t) => t.id === modalTrackId)?.price})
+              <form onSubmit={handleCrewSubmit} className="space-y-4 text-left">
+                <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between text-xs">
+                  <span className="font-bold text-gray-300">선택 코스:</span>
+                  <span className="font-black text-[#CCFF00] font-mono">
+                    {COURSES.find((t) => t.id === modalTrackId)?.title} ({COURSES.find((t) => t.id === modalTrackId)?.price})
                   </span>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-[#191f28]">성함 / 닉네임</label>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-gray-200">성함 / 러너 닉네임</label>
                   <input
                     type="text"
                     required
                     placeholder="홍길동"
                     value={crewName}
                     onChange={(e) => setCrewName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-black/[0.1] text-xs text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6]"
+                    className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/[0.1] text-xs text-white placeholder-gray-500 outline-none focus:border-[#CCFF00]"
                   />
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-[#191f28]">이메일 주소 (온보딩 및 채널 초대장 수신)</label>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-gray-200">이메일 주소 (온보딩 및 비공개 크루 채널 초대장)</label>
                   <input
                     type="email"
                     required
-                    placeholder="example@gmail.com"
+                    placeholder="runner@example.com"
                     value={crewContact}
                     onChange={(e) => setCrewContact(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-black/[0.1] text-xs text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6]"
+                    className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/[0.1] text-xs text-white placeholder-gray-500 outline-none focus:border-[#CCFF00] font-mono"
                   />
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-[#191f28]">이번 3주 동안 만들고 싶은 아이템 / 제품 한 줄 소개</label>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-gray-200">이번 3주 동안 만들고 싶은 아이템 / 목표 한 줄</label>
                   <input
                     type="text"
-                    placeholder="예: 비개발자용 업무 자동화 템플릿 웹서비스"
+                    placeholder="예: 비개발자용 업무 자동화 템플릿 웹서비스 배포"
                     value={crewItemGoal}
                     onChange={(e) => setCrewItemGoal(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-black/[0.1] text-xs text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6]"
+                    className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/[0.1] text-xs text-white placeholder-gray-500 outline-none focus:border-[#CCFF00]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl bg-[#3182f6] hover:bg-[#1b64da] text-white text-xs font-black transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95 mt-2"
+                  className="w-full py-4 rounded-xl athletic-btn-volt text-xs font-black transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95 mt-2"
                 >
-                  <PaperPlaneTilt size={15} weight="bold" />
-                  <span>1기 크루 참가 신청 완료하기</span>
+                  <PaperPlaneTilt size={16} weight="bold" />
+                  <span>1기 러닝크루 참가 신청 완료하기</span>
                 </button>
               </form>
             )}
