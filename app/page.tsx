@@ -10,12 +10,13 @@ import {
   DownloadSimple,
   Crown,
   LightbulbFilament,
-  Cpu,
   Target,
   RocketLaunch,
-  Cube,
   Medal,
-  Check
+  Users,
+  Check,
+  X,
+  PaperPlaneTilt
 } from '@phosphor-icons/react';
 
 import LegoStackSimulator from '@/components/LegoStackSimulator';
@@ -23,12 +24,46 @@ import BuilderConsultantChat from '@/components/BuilderConsultantChat';
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [selectedGoalId, setSelectedGoalId] = useState<'launch' | 'revenue' | 'validate'>('launch');
+  const [selectedGoalId, setSelectedGoalId] = useState<'launch' | 'revenue' | 'validate'>('revenue');
   const [emailInput, setEmailInput] = useState('');
   const [isDownloaded, setIsDownloaded] = useState(false);
 
-  // ── 3대 단 하나의 목표 (방문자가 직접 선택하는 목표 지향 구조) ──
+  // 1기 크루 참가 신청 모달 상태
+  const [isCrewModalOpen, setIsCrewModalOpen] = useState(false);
+  const [crewTrackId, setCrewTrackId] = useState<'launch' | 'revenue' | 'validate' | 'vip'>('revenue');
+  const [crewName, setCrewName] = useState('');
+  const [crewContact, setCrewContact] = useState('');
+  const [crewItemGoal, setCrewItemGoal] = useState('');
+  const [crewSubmitted, setCrewSubmitted] = useState(false);
+
+  // ── 3대 트랙별 차등화된 목표 & 크루 참가비 ──
   const GOALS = [
+    {
+      id: 'validate' as const,
+      emoji: '💡',
+      icon: LightbulbFilament,
+      step: 1, // Links to Lego Level 1
+      title: '내 아이디어의 시장 결핍 & BM 검증',
+      short: '기획 & 검증 트랙',
+      badge: 'TRACK 01 · 기획 트랙',
+      price: '29,000원',
+      originalPrice: '59,000원',
+      cohortLabel: '1기 얼리버드 50% 할인',
+      tagline: '무작정 만들기 전에, Aside 24h 자율 감시 봇으로 결핍과 돈 버는 모델을 증명합니다.',
+      targetWho: '아이디어는 넘치는데 어디서부터 시작해야 할지 막막한 예비 창업자',
+      deliverable: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
+      tools: 'Aside 24h 자율 브라우저 · 1인 창업 필수 용어집 · 결핍 검증 체크리스트',
+      accentColor: '#2563eb',
+      bgTag: 'bg-blue-50 text-blue-700 border-blue-200',
+      weeks: [
+        { week: '1주차', action: '고객 결핍 발굴 및 PPF(Product-Person Fit) 분석' },
+        { week: '2주차', action: 'Aside 24h 브라우저로 경쟁사 데이터 자동 수집' },
+        { week: '3주차', action: '실제 돈 버는 모델이 담긴 린 캔버스 1장 완성' }
+      ],
+      leadMagnetTitle: '1인 창업 필수 용어집 & 고객 결핍 검증 린 캔버스 (PDF)',
+      leadMagnetDesc: '내 아이디어가 실제 시장에서 돈이 되는지 검증하는 첫 번째 비즈니스 체크리스트입니다.',
+      buttonText: '기획 & 검증 가이드 무료 받기'
+    },
     {
       id: 'launch' as const,
       emoji: '🚀',
@@ -36,7 +71,10 @@ export default function Home() {
       step: 3, // Links to Lego Level 3
       title: '외주비 0원으로 내 상용 웹 띄우기',
       short: '외주비 0원 런칭',
-      badge: 'GOAL 01 · 런칭 트랙',
+      badge: 'TRACK 02 · 런칭 트랙',
+      price: '59,000원',
+      originalPrice: '119,000원',
+      cohortLabel: '1기 얼리버드 50% 할인',
       tagline: '외주 견적 수천만 원 대신, 내 손으로 직접 결제되는 상용 웹서비스를 배포합니다.',
       targetWho: '비개발자, 아이디어는 있지만 개발 외주비에 가로막힌 1인 빌더',
       deliverable: '외주비 0원, 내 도메인으로 작동하는 실제 상용 결제 웹서비스 1개 라이브 배포',
@@ -54,58 +92,50 @@ export default function Home() {
     },
     {
       id: 'revenue' as const,
-      emoji: '💰',
+      emoji: '🎯',
       icon: Target,
       step: 4, // Links to Lego Level 4
-      title: '스레드 훅 구조로 첫 유료 결제 만들기',
-      short: '첫 유료 결제 발생',
-      badge: 'GOAL 02 · 수익 트랙',
-      tagline: '‘훅 자료집’ 복붙은 끝. 500만 뷰 실측 체류 시간 구조로 첫 유료 고객을 만듭니다.',
+      title: '메타 알고리즘의 이해 & 첫 유료 결제',
+      short: '메타 알고리즘 & 수익 트랙',
+      badge: 'TRACK 03 · 수익 트랙 ★인기',
+      price: '89,000원',
+      originalPrice: '179,000원',
+      cohortLabel: '1기 얼리버드 50% 할인',
+      tagline: '‘훅 자료집’ 복붙은 끝. 메타 추천 알고리즘의 작동 원리를 이해하고 첫 유료 결제를 뚫습니다.',
       targetWho: '제품/아이템은 있지만 트래픽이 없거나 결제로 안 이어지는 빌더',
       deliverable: '스레드 500만 뷰 훅 구조도 & CVR 8.6%+ 고전환 결제 퍼널 & 첫 실제 유료 결제',
       tools: '3단계 체류 시간 구조도 · 첫 문장 1:1 결속 프레임워크 · 메타 역공학 가이드',
       accentColor: '#f04452',
       bgTag: 'bg-rose-50 text-rose-700 border-rose-200',
       weeks: [
-        { week: '1주차', action: '스레드 500만 뷰 실측 체류 시간 10배 견인 훅 설계' },
+        { week: '1주차', action: '메타 추천 알고리즘(Sentence-BERT)과 체류 시간 10배 훅 설계' },
         { week: '2주차', action: '광고/피드 첫 문장과 상세페이지 1:1 결속 퍼널 완성' },
         { week: '3주차', action: '첫 번째 실제 고객 유료 결제 알림 수신' }
       ],
       leadMagnetTitle: '‘훅 자료집’만 보셨나요? 왜 안 터지는지 그 구조를 알려드립니다 (PDF)',
-      leadMagnetDesc: '시중에 굴러다니는 훅 100선 복붙 대신, 스레드 500만 뷰 실측 DB로 검증한 체류 시간 10배 견인 구조 리포트입니다.',
+      leadMagnetDesc: '시중에 굴러다니는 훅 100선 복붙 대신, 메타 추천 알고리즘의 체류 시간 10배 견인 구조 리포트입니다.',
       buttonText: '스레드 훅 구조 해부서 무료 받기'
-    },
-    {
-      id: 'validate' as const,
-      emoji: '💡',
-      icon: LightbulbFilament,
-      step: 1, // Links to Lego Level 1
-      title: '내 아이디어의 시장 결핍 & BM 검증하기',
-      short: '시장 결핍 & BM 검증',
-      badge: 'GOAL 03 · 기획 트랙',
-      tagline: '무작정 만들기 전에, Aside 24h 자율 감시 봇으로 결핍과 돈 버는 모델을 증명합니다.',
-      targetWho: '아이디어는 넘치는데 어디서부터 시작해야 할지 막막한 예비 창업자',
-      deliverable: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
-      tools: 'Aside 24h 자율 브라우저 · 1인 창업 필수 용어집 · 결핍 검증 체크리스트',
-      accentColor: '#2563eb',
-      bgTag: 'bg-blue-50 text-blue-700 border-blue-200',
-      weeks: [
-        { week: '1주차', action: '고객 결핍 발굴 및 PPF(Product-Person Fit) 분석' },
-        { week: '2주차', action: 'Aside 24h 브라우저로 경쟁사 데이터 자동 수집' },
-        { week: '3주차', action: '실제 돈 버는 모델이 담긴 린 캔버스 1장 완성' }
-      ],
-      leadMagnetTitle: '1인 창업 필수 용어집 & 고객 결핍 검증 린 캔버스 (PDF)',
-      leadMagnetDesc: '내 아이디어가 실제 시장에서 돈이 되는지 검증하는 첫 번째 비즈니스 체크리스트입니다.',
-      buttonText: '기획 & 검증 가이드 무료 받기'
     }
   ];
 
-  const currentGoal = GOALS.find((g) => g.id === selectedGoalId) || GOALS[0];
+  const currentGoal = GOALS.find((g) => g.id === selectedGoalId) || GOALS[1];
 
   const handleDownload = (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailInput.trim()) return;
     setIsDownloaded(true);
+  };
+
+  const handleCrewSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!crewName.trim() || !crewContact.trim()) return;
+    setCrewSubmitted(true);
+  };
+
+  const openCrewModal = (trackId: 'launch' | 'revenue' | 'validate' | 'vip') => {
+    setCrewTrackId(trackId);
+    setCrewSubmitted(false);
+    setIsCrewModalOpen(true);
   };
 
   const proofMetrics = [
@@ -137,8 +167,8 @@ export default function Home() {
       a: '벽돌을 굽는 화학 공식을 몰라도 레고 블록만 있으면 누구나 거대한 성을 지을 수 있었습니다. 복잡한 코딩 문법을 밑바닥부터 외우지 않고, 검증된 기획·지능·퍼널·인프라 블록을 조립해 내 상용 프로덕트와 현금 흐름을 만드는 1인 빌더 성장 트랙입니다.'
     },
     {
-      q: 'aizaler가 제공하는 AI 지능은 시중 프롬프트 강의와 무엇이 다른가요?',
-      a: '시중에 흔한 "프롬프트 잘 쓰는 법 50선" 같은 뜬구름 잡는 복붙 자료는 다루지 않습니다. Git에 이미 공개된 검증된 오픈소스 에이전트 스킬(.skills)과 MCP(Model Context Protocol)를 에디터와 터미널에 직접 연결해, AI가 사람 대신 자율적으로 도구를 쓰며 결과물을 만들어내는 최신 실행 환경을 전수합니다.'
+      q: 'aizaler의 AI 지능 및 메타 알고리즘은 시중 강의와 무엇이 다른가요?',
+      a: '뜬구름 잡는 복붙 자료는 다루지 않습니다. Git 오픈소스 에이전트 스킬(.skills)과 메타 Sentence-BERT 텍스트 임베딩, 체류 시간(Dwell Time) 가중치 등 실제 알고리즘의 동작 구조를 역공학해 내 손으로 라이브 배포하고 첫 결제를 뚫는 실전만을 다룹니다.'
     },
     {
       q: '비개발자도 정말 3주 만에 상용 제품을 런칭할 수 있나요?',
@@ -157,7 +187,7 @@ export default function Home() {
         <div className="space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full apple-glass text-[#191f28] text-xs font-bold shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-pulse" />
-            <span className="tracking-wide">1인 빌더를 위한 3주 목표 달성 스프린트</span>
+            <span className="tracking-wide">함께 성장하는 3주 빌더 크루 1기 모집</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-[56px] font-black text-[#191f28] leading-[1.18] tracking-tight">
@@ -165,8 +195,8 @@ export default function Home() {
           </h1>
 
           <p className="text-base sm:text-xl text-[#4e5968] font-medium leading-relaxed max-w-2xl mx-auto">
-            무작정 강의만 듣는 공부는 끝났습니다.<br className="hidden sm:inline" />
-            <span className="text-[#191f28] font-bold">목표를 정하면, 3주 만에 반드시 달성하게 만듭니다.</span>
+            강의만 듣고 끝나는 외로운 공부는 그만두세요.<br className="hidden sm:inline" />
+            <span className="text-[#191f28] font-bold">목표를 정하면, 3주간 동료들과 함께 만들어냅니다.</span>
           </p>
         </div>
 
@@ -175,11 +205,11 @@ export default function Home() {
           <span id="hero-diagnostic" className="scroll-mt-24 block" />
           <div className="text-center space-y-1">
             <div className="text-xs font-mono font-black text-[#8b95a1] uppercase tracking-wider">
-              STEP 01. 달성할 목표를 1개 선택하세요
+              STEP 01. 달성할 목표와 참가 트랙을 선택하세요
             </div>
           </div>
 
-          {/* 3대 핵심 목표 선택 카드 세트 */}
+          {/* 3대 핵심 목표 선택 카드 세트 (가격 차등화 반영) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-left">
             {GOALS.map((goal) => {
               const isSelected = selectedGoalId === goal.id;
@@ -210,7 +240,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="space-y-1">
+                  <div className="space-y-1.5">
                     <h3 className={`text-base sm:text-lg font-black leading-snug ${isSelected ? 'text-white' : 'text-[#191f28]'}`}>
                       {goal.title}
                     </h3>
@@ -219,12 +249,20 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] font-bold">
-                    <span className={isSelected ? 'text-blue-300' : 'text-[#3182f6]'}>
-                      {isSelected ? '✓ 선택된 목표' : '이 목표 선택하기'}
-                    </span>
-                    <span className={`text-[10px] ${isSelected ? 'text-gray-400' : 'text-[#8b95a1]'}`}>
-                      3주 완주 트랙 →
+                  {/* 가격 및 얼리버드 뱃지 */}
+                  <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                    <div>
+                      <div className="text-[10px] text-gray-400 line-through">
+                        {goal.originalPrice}
+                      </div>
+                      <div className={`text-sm sm:text-base font-black ${isSelected ? 'text-amber-300' : 'text-[#191f28]'}`}>
+                        {goal.price}
+                      </div>
+                    </div>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      isSelected ? 'bg-white/15 text-white' : 'bg-rose-50 text-[#f04452]'
+                    }`}>
+                      {goal.cohortLabel}
                     </span>
                   </div>
                 </button>
@@ -242,7 +280,7 @@ export default function Home() {
                     선택하신 목표 맞춤 3주 플랜
                   </div>
                   <h2 className="text-base sm:text-xl font-black text-[#191f28]">
-                    {currentGoal.title}
+                    {currentGoal.title} (참가비 {currentGoal.price})
                   </h2>
                 </div>
               </div>
@@ -271,7 +309,7 @@ export default function Home() {
               <div className="space-y-1">
                 <div className="text-[11px] font-bold text-amber-300 flex items-center gap-1.5">
                   <Sparkle size={13} weight="fill" />
-                  <span>3주 후 내 손에 쥐어지는 단 하나의 결과물</span>
+                  <span>3주 완주 후 손에 쥐어지는 단 하나의 결과물</span>
                 </div>
                 <div className="text-sm sm:text-base font-black text-white">
                   🎯 {currentGoal.deliverable}
@@ -279,12 +317,19 @@ export default function Home() {
               </div>
 
               <div className="shrink-0 flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => openCrewModal(currentGoal.id)}
+                  className="px-5 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-[#191f28] text-xs font-black transition-all flex items-center gap-1.5 shadow-sm active:scale-95 text-center"
+                >
+                  <Users size={15} weight="bold" />
+                  <span>1기 크루 신청하기 ({currentGoal.price})</span>
+                </button>
                 <a
                   href="#starter-kit"
-                  className="px-5 py-3 rounded-xl bg-[#3182f6] hover:bg-[#1b64da] text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm active:scale-95 text-center"
+                  className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all border border-white/20 text-center"
                 >
-                  <DownloadSimple size={14} weight="bold" />
-                  <span>이 목표 가이드 무료 받기</span>
+                  <span>가이드 무료 받기</span>
                 </a>
               </div>
             </div>
@@ -313,7 +358,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3. 3-Week Sprint Journey (Unified Progression, NOT a Sales Catalog!) ── */}
+      {/* ── 3. 3-Week Sprint Architecture & Community ── */}
       <section id="sprint" className="toss-container scroll-mt-20 space-y-10 sm:space-y-14">
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
@@ -388,24 +433,24 @@ export default function Home() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono font-black tracking-wider text-[#8b95a1]">WEEK 03</span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700">전환 & 결제</span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700">메타 알고리즘</span>
               </div>
               <div className="space-y-1">
                 <h3 className="text-lg sm:text-xl font-black text-[#191f28] group-hover:text-[#3182f6] transition-colors">
-                  스레드 훅 구조학 & 첫 유료 결제
+                  메타 알고리즘의 이해 & 첫 유료 결제
                 </h3>
                 <div className="text-xs font-bold text-[#8b95a1]">‘훅 자료집’ 복붙 대신 체류 시간 구조 설계</div>
               </div>
               <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-                ‘훅 자료집’만 모아두고 써봤자 알고리즘은 소음으로 거릅니다. 500만 뷰 실측 DB로 왜 터지는지 알고리즘 구조를 해부하고 첫 결제를 완성합니다.
+                ‘훅 자료집’만 모아두고 써봤자 알고리즘은 소음으로 거릅니다. 메타 추천 알고리즘의 작동 원리를 이해하고 첫 결제를 완성합니다.
               </p>
             </div>
             <div className="pt-4 border-t border-black/[0.05] space-y-1 text-xs text-[#4e5968]">
               <div className="text-[11px] font-bold text-[#191f28] mb-1.5 flex items-center gap-1.5">
                 <CheckCircle size={13} weight="fill" className="text-emerald-500" /> 손에 쥐는 마일스톤
               </div>
+              <div>• 메타 Sentence-BERT 역공학 리포트</div>
               <div>• 스레드 3단계 체류 시간 구조도</div>
-              <div>• 첫 문장 1:1 결속 카피 프레임워크</div>
               <div>• 첫 번째 실제 유료 결제 발생</div>
             </div>
           </div>
@@ -428,7 +473,7 @@ export default function Home() {
               </h3>
 
               <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal max-w-2xl">
-                어떤 목표를 선택했든, 3주 과정을 완주한 모든 빌더에게는 책상 위에 당당히 올려둘 수 있는 <b>실물 세라믹 화이트 브릭 트로피</b>와 <b>공식 시리얼 넘버 각인 인증 뱃지</b>, 그리고 <b>파운더와의 50분 1:1 전략 세션 권한</b>이 수여됩니다.
+                어떤 트랙을 선택했든, 3주 과정을 완주한 모든 빌더에게는 책상 위에 당당히 올려둘 수 있는 <b>실물 세라믹 화이트 브릭 트로피</b>와 <b>공식 시리얼 넘버 각인 인증 뱃지</b>, 그리고 <b>파운더와의 50분 1:1 전략 세션 권한</b>이 수여됩니다.
               </p>
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-gray-300 pt-2">
@@ -464,7 +509,147 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 4. Interactive Lab: 3D Lego Simulator & Live AI Architect Chat ── */}
+      {/* ── 4. ✦ 함께 성장할 3주 스프린트 1기 빌더 크루 모집 (트랙별 차등 가격) ── */}
+      <section id="cohort" className="toss-container scroll-mt-20 space-y-10 sm:space-y-12">
+        <div className="text-center space-y-3 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-800 text-xs font-bold">
+            <Users size={14} weight="fill" className="text-amber-600" />
+            <span>함께 성장하는 3주 빌더 코호트</span>
+          </div>
+
+          <h2 className="text-2xl sm:text-4xl font-black text-[#191f28] tracking-tight leading-tight">
+            강의를 파는 곳이 아닙니다.<br />
+            3주간 함께 만들고 성장할 동료를 모읍니다.
+          </h2>
+
+          <p className="text-xs sm:text-base text-[#4e5968] leading-relaxed">
+            혼자 책상에 앉아 끙끙 앓지 마세요. 서로의 프로덕트 첫 고객이 되어주고, 매주 1개의 블록을 인증하며, 첫 유료 결제를 함께 축하하는 소수 정예 빌더 커뮤니티입니다.
+          </p>
+        </div>
+
+        {/* 3대 트랙별 차등 가격 카드 그리드 */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {GOALS.map((track) => (
+            <div
+              key={track.id}
+              className={`apple-glass rounded-3xl p-6 sm:p-7 border flex flex-col justify-between space-y-6 transition-all ${
+                track.id === 'revenue'
+                  ? 'ring-2 ring-[#f04452]/50 shadow-lg relative'
+                  : 'border-white/80 shadow-sm hover:shadow-md'
+              }`}
+            >
+              {track.id === 'revenue' && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#f04452] text-white text-[10px] font-black tracking-wider uppercase shadow-xs">
+                  ★ MOST POPULAR 크루
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-full border ${track.bgTag}`}>
+                    {track.badge}
+                  </span>
+                  <span className="text-xs font-mono font-bold text-gray-400">
+                    정원 15명 한정
+                  </span>
+                </div>
+
+                <div className="space-y-1">
+                  <h3 className="text-lg font-black text-[#191f28]">
+                    {track.title}
+                  </h3>
+                  <p className="text-xs text-[#4e5968] leading-relaxed">
+                    {track.tagline}
+                  </p>
+                </div>
+
+                {/* 가격 표시 */}
+                <div className="pt-2 border-t border-black/[0.05]">
+                  <div className="text-[11px] text-gray-400 line-through">
+                    정가 {track.originalPrice}
+                  </div>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-2xl sm:text-3xl font-black text-[#191f28]">
+                      {track.price}
+                    </span>
+                    <span className="text-[11px] font-bold text-[#f04452]">
+                      (1기 얼리버드)
+                    </span>
+                  </div>
+                </div>
+
+                {/* 포함 내역 체크리스트 */}
+                <div className="space-y-2 pt-2 border-t border-black/[0.05] text-xs text-[#4e5968]">
+                  <div className="font-bold text-[#191f28] flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle size={13} weight="fill" className="text-emerald-500" />
+                    크루 제공 혜택:
+                  </div>
+                  <div className="space-y-1 text-[11px]">
+                    <div className="flex items-center gap-1.5">
+                      <Check size={12} weight="bold" className="text-[#3182f6]" />
+                      <span>{track.deliverable.split('&')[0]}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Check size={12} weight="bold" className="text-[#3182f6]" />
+                      <span>3주 비공개 빌더 피어 리뷰 & QA</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Check size={12} weight="bold" className="text-[#3182f6]" />
+                      <span>완주 시 실물 화이트 서밋 브릭 수여</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => openCrewModal(track.id)}
+                className={`w-full py-3.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-xs ${
+                  track.id === 'revenue'
+                    ? 'bg-[#f04452] hover:bg-[#d6303f] text-white'
+                    : 'bg-[#191f28] hover:bg-black text-white'
+                }`}
+              >
+                <span>{track.short} 크루 참가하기</span>
+                <ArrowRight size={13} weight="bold" />
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* 👑 VIP All-in-One 코호트 옵션 */}
+        <div className="apple-glass rounded-3xl p-6 sm:p-8 max-w-5xl mx-auto border border-amber-300/40 bg-gradient-to-r from-amber-50/40 via-white to-orange-50/30 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
+          <div className="space-y-1.5 text-left">
+            <div className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-700">
+              <Crown size={14} weight="fill" className="text-amber-500" />
+              <span>ALL-IN-ONE VIP 크루 · 파운더 1:1 직강 포함</span>
+            </div>
+            <h3 className="text-base sm:text-xl font-black text-[#191f28]">
+              3개 트랙 전체 수강 + 파운더 50분 1:1 심층 전략 세션
+            </h3>
+            <p className="text-xs text-[#4e5968] leading-relaxed max-w-xl">
+              기획부터 외주비 0원 런칭, 메타 알고리즘 퍼널까지 전체를 아우르고 파운더와 1:1로 내 비즈니스의 90일 실행 Action Blueprint를 완성합니다.
+            </p>
+          </div>
+
+          <div className="shrink-0 flex flex-col sm:flex-row md:flex-col items-center gap-3">
+            <div className="text-right">
+              <div className="text-[10px] text-gray-400 line-through">정가 350,000원</div>
+              <div className="text-2xl font-black text-[#191f28]">189,000원</div>
+            </div>
+            <button
+              type="button"
+              onClick={() => openCrewModal('vip')}
+              className="px-6 py-3 rounded-xl bg-[#050A18] hover:bg-black text-white text-xs font-black transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+            >
+              <Crown size={13} weight="fill" className="text-amber-400" />
+              <span>VIP 크루 신청하기</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. Interactive Lab: 3D Lego Simulator & Live AI Architect Chat ── */}
       <section id="lab" className="toss-container scroll-mt-20 space-y-8">
         <div className="text-center space-y-2 max-w-xl mx-auto">
           <span className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
@@ -489,7 +674,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. 선택된 목표 맞춤 무료 가이드북 / 스타터 킷 ── */}
+      {/* ── 6. 선택된 목표 맞춤 무료 가이드북 / 스타터 킷 ── */}
       <section id="starter-kit" className="toss-container scroll-mt-20">
         <div className="apple-glass rounded-3xl p-6 sm:p-10 max-w-3xl mx-auto border border-white/80 shadow-[0_20px_50px_rgba(0,0,0,0.04)] space-y-7">
           <div className="space-y-3 text-center">
@@ -533,10 +718,10 @@ export default function Home() {
               <div className="p-4 rounded-2xl bg-blue-50/80 border border-blue-200/60 space-y-1.5">
                 <div className="text-[11px] font-bold text-[#3182f6] flex items-center gap-1.5">
                   <span>💎</span>
-                  <span>구조 역공학 (왜 터지는가)</span>
+                  <span>메타 알고리즘의 이해 (왜 터지는가)</span>
                 </div>
                 <p className="text-xs text-[#191f28] leading-relaxed">
-                  인지 부조화 첫 문장 ➔ 스크롤을 멈추는 실측 데이터 ➔ 논쟁적 댓글 결속 ➔ <b>체류 시간 18.4초 (10배 견인)</b> ➔ 메타 추천 피드 폭발
+                  Sentence-BERT 인지 부조화 첫 문장 ➔ 스크롤을 멈추는 실측 데이터 ➔ 논쟁적 댓글 결속 ➔ <b>체류 시간 18.4초 (10배 견인)</b> ➔ 메타 추천 피드 폭발
                 </p>
               </div>
             </div>
@@ -573,7 +758,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 6. VIP 1:1 Private Session (Quiet Luxury) ── */}
+      {/* ── 7. VIP 1:1 Private Session (Quiet Luxury) ── */}
       <section className="toss-container">
         <div className="p-6 sm:p-8 rounded-3xl bg-[#050A18] text-[#FAF6F0] max-w-3xl mx-auto border border-white/10 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="space-y-1.5 max-w-lg">
@@ -599,7 +784,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 7. Concise FAQ (Apple Clean Accordion) ── */}
+      {/* ── 8. Concise FAQ (Apple Clean Accordion) ── */}
       <section id="faq" className="toss-container scroll-mt-20 space-y-4 max-w-2xl mx-auto">
         <div className="text-center space-y-1">
           <span className="text-xs font-bold text-[#3182f6]">FAQ</span>
@@ -655,6 +840,108 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* ── 1기 빌더 크루 참가 신청 모달 ── */}
+      {isCrewModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="apple-glass rounded-3xl p-6 sm:p-8 max-w-lg w-full border border-white/80 shadow-2xl relative space-y-5 bg-white">
+            <button
+              onClick={() => setIsCrewModalOpen(false)}
+              className="absolute top-5 right-5 p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-[#191f28] transition-colors"
+            >
+              <X size={18} weight="bold" />
+            </button>
+
+            <div className="space-y-1.5 text-left">
+              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 text-[11px] font-bold">
+                <Users size={13} weight="fill" className="text-amber-600" />
+                <span>3주 빌더 스프린트 1기 크루</span>
+              </div>
+              <h3 className="text-xl font-black text-[#191f28]">
+                {crewTrackId === 'vip'
+                  ? 'ALL-IN-ONE VIP 크루 참가 신청'
+                  : `${GOALS.find((g) => g.id === crewTrackId)?.title} 참가 신청`}
+              </h3>
+              <p className="text-xs text-[#4e5968]">
+                함께 3주간 블록을 조립하고 완주할 소수 정예 크루에 합류하세요.
+              </p>
+            </div>
+
+            {crewSubmitted ? (
+              <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2">
+                <CheckCircle size={36} weight="fill" className="text-emerald-600 mx-auto" />
+                <div className="text-base font-black text-emerald-900">
+                  1기 크루 신청이 완료되었습니다!
+                </div>
+                <p className="text-xs text-emerald-700 leading-relaxed">
+                  24시간 이내에 입력해 주신 연락처/이메일로 <b>온보딩 가이드와 비공개 크루 채널 초대 링크</b>를 전송해 드립니다.
+                </p>
+                <button
+                  onClick={() => setIsCrewModalOpen(false)}
+                  className="mt-3 px-5 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold"
+                >
+                  확인 완료
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleCrewSubmit} className="space-y-3.5 text-left">
+                {/* 선택된 트랙 확인 박스 */}
+                <div className="p-3.5 rounded-2xl bg-gray-50 border border-black/[0.05] flex items-center justify-between text-xs">
+                  <span className="font-bold text-[#191f28]">신청 트랙:</span>
+                  <span className="font-black text-[#3182f6]">
+                    {crewTrackId === 'vip'
+                      ? 'ALL-IN-ONE VIP (189,000원)'
+                      : `${GOALS.find((g) => g.id === crewTrackId)?.short} (${GOALS.find((g) => g.id === crewTrackId)?.price})`}
+                  </span>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-[#191f28]">성함 / 닉네임</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="홍길동"
+                    value={crewName}
+                    onChange={(e) => setCrewName(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-black/[0.1] text-xs text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6]"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-[#191f28]">이메일 주소 (온보딩 및 채널 초대장 수신)</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="example@gmail.com"
+                    value={crewContact}
+                    onChange={(e) => setCrewContact(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-black/[0.1] text-xs text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6]"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-[#191f28]">이번 3주 동안 만들고 싶은 아이템 / 제품 한 줄 소개</label>
+                  <input
+                    type="text"
+                    placeholder="예: 비개발자용 업무 자동화 템플릿 웹서비스"
+                    value={crewItemGoal}
+                    onChange={(e) => setCrewItemGoal(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-black/[0.1] text-xs text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6]"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3.5 rounded-xl bg-[#3182f6] hover:bg-[#1b64da] text-white text-xs font-black transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95 mt-2"
+                >
+                  <PaperPlaneTilt size={15} weight="bold" />
+                  <span>1기 크루 참가 신청 완료하기</span>
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
