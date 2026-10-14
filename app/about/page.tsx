@@ -1,153 +1,91 @@
-'use client';
-
 import React from 'react';
+import FounderNarrativeTimeline from '../../components/FounderNarrativeTimeline';
 import Link from 'next/link';
-import {
-  Sparkle,
-  ArrowLeft,
-  CheckCircle,
-  DownloadSimple,
-  ShieldCheck,
-  TrendUp,
-  EnvelopeSimple,
-  ArrowRight,
-  UserCheck
-} from '@phosphor-icons/react';
-import FounderNarrativeTimeline from '@/components/FounderNarrativeTimeline';
+import { ArrowRight, Blocks, Compass, Flame, ShieldCheck } from 'lucide-react';
+
+export const metadata = {
+  title: '파운더 서사 | aizaler (에이잘러) — Duplo to Technic',
+  description:
+    '어릴 때 레고 좋아하던 빌더가 공기업·해외 주재원을 거쳐 나를 위한 AI 도구를 조립하고, 스레드 500만 뷰와 메타 광고로 홀로서기까지의 실제 기록.',
+};
 
 export default function AboutPage() {
   return (
-    <div className="space-y-16 sm:space-y-24 pt-8 sm:pt-14 pb-16">
-      {/* ── 1. About 상단 히어로 헤더 ── */}
-      <section className="toss-container">
-        <div className="max-w-3xl mx-auto space-y-6 text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4e5968] hover:text-[#3182f6] transition-colors mb-2"
-          >
-            <ArrowLeft size={14} weight="bold" /> 메인 홈으로 돌아가기
-          </Link>
-
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold mx-auto">
-            <Sparkle size={16} weight="fill" />
-            <span>ABOUT AIZALER · 사이트 및 스튜디오 소개</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-5xl font-black text-[#191f28] tracking-tight leading-tight">
-            공기업과 해외 주재원을 나와,<br />
-            1인 개발로 생존하기까지.
+    <div className="min-h-screen bg-[#070B14] text-white py-16 md:py-24 px-4 sm:px-6">
+      <div className="max-w-4xl mx-auto">
+        {/* Top Hero Intro */}
+        <div className="text-center mb-14">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-400/10 border border-amber-400/30 text-amber-300 rounded-full text-xs font-mono font-bold uppercase tracking-wider mb-5">
+            <Blocks className="w-4 h-4" />
+            ABOUT THE ARCHITECT · BROWN IMPACT LABS
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-[1.18] mb-6">
+            “어릴 적 레고를 조립하던 설렘 그대로,
+            <br />
+            <span className="text-gradient-gold">나를 위한 도구를 만들고 수익화합니다.”</span>
           </h1>
-
-          <p className="text-sm sm:text-lg text-[#4e5968] leading-relaxed max-w-2xl mx-auto">
-            정년과 급여가 보장되던 공기업, 남들이 선망하던 해외 주재원 생활을 마쳤습니다.<br className="hidden sm:inline" />
-            거대한 조직의 부품으로 머무는 대신, 오직 내 이름과 손으로 만든 제품으로 시장에서 가치를 증명하고자 야생에 뛰어들었습니다.
+          <p className="text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            화려한 투자 유치나 수십 명의 팀원 없이도 괜찮습니다.
+            <br className="hidden sm:inline" />
+            내 일상의 문제를 해결하는 작은 블록(Duplo)에서 출발해, 스레드 500만 뷰와 메타 광고(Classic)로 현금흐름을 만들고, 1인 기업 시스템(Technic)으로 독립한 모든 시행착오를 투명하게 공개합니다.
           </p>
-
-          {/* 핵심 자격 & 실측 데이터 뱃지 */}
-          <div className="flex flex-wrap justify-center items-center gap-3 pt-2">
-            <div className="px-3.5 py-2 rounded-xl bg-white border border-black/[0.08] shadow-xs text-xs font-bold text-[#191f28] flex items-center gap-1.5">
-              <ShieldCheck size={16} weight="fill" className="text-[#3182f6]" />
-              <span>Meta Certified Media Planning Professional</span>
-            </div>
-            <div className="px-3.5 py-2 rounded-xl bg-white border border-black/[0.08] shadow-xs text-xs font-bold text-[#191f28] flex items-center gap-1.5">
-              <TrendUp size={16} weight="bold" className="text-emerald-500" />
-              <span>스레드 2개 계정 5,000,000+ 뷰 실측 분석</span>
-            </div>
-            <div className="px-3.5 py-2 rounded-xl bg-white border border-black/[0.08] shadow-xs text-xs font-bold text-[#191f28] flex items-center gap-1.5">
-              <Sparkle size={16} weight="fill" className="text-amber-500" />
-              <span>월 $42 초경량 1인 인프라 운영</span>
-            </div>
-          </div>
         </div>
-      </section>
 
-      {/* ── 2. 4단계 창업자 오리진 서사 타임라인 ── */}
-      <section className="toss-container">
-        <FounderNarrativeTimeline />
-      </section>
-
-      {/* ── 3. 파운더의 3대 실전 철학 ── */}
-      <section className="toss-container">
-        <div className="max-w-4xl mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <div className="text-xs font-bold text-[#3182f6] uppercase tracking-wider">
-              PHILOSOPHY & PRINCIPLES
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#191f28]">
-              aizaler가 타협하지 않는 3대 실전 원칙
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-white border border-black/[0.08] shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#e8f3ff] text-[#3182f6] flex items-center justify-center font-black text-lg">
-                1
-              </div>
-              <h3 className="font-bold text-base text-[#191f28]">
-                내 돈 태워 검증한 데이터만 말합니다
-              </h3>
-              <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-                해외 아티클을 번역해 "퇴사 후 AI로 월 1,000만 원"을 외치는 허상 강의를 거부합니다. 직접 사비로 메타 광고를 집행하고, 스레드 2개 버티컬 계정 합산 500만 뷰와 결제 퍼널을 대조해 증명된 실측 데이터만 공유합니다.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-white border border-black/[0.08] shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#e8f3ff] text-[#3182f6] flex items-center justify-center font-black text-lg">
-                2
-              </div>
-              <h3 className="font-bold text-base text-[#191f28]">
-                PMF 이전에 PPF (Product-Person Fit)를 맞춥니다
-              </h3>
-              <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-                모두가 코딩을 배우고 거창한 웹서비스를 만들 필요는 없습니다. 1인 비즈니스의 최대 리스크는 파운더의 지침입니다. 내 본업·시간·성향에 딱 맞는 1개의 레고 블록(PPF)부터 조립해야 지치지 않고 오래가는 현금 흐름을 만듭니다.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-white border border-black/[0.08] shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#e8f3ff] text-[#3182f6] flex items-center justify-center font-black text-lg">
-                3
-              </div>
-              <h3 className="font-bold text-base text-[#191f28]">
-                외주비 0원, 월 $42 초경량 인프라로 생존합니다
-              </h3>
-              <p className="text-xs sm:text-sm text-[#4e5968] leading-relaxed">
-                수천만 원의 외주 개발비나 고비용 서버는 1인 창업의 적입니다. Cloudflare Pages와 서버리스 아키텍처를 결합해 월 5만 원 안팎으로 수십만 트래픽을 방어하는 초경량 엔지니어링을 지향합니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4. 다음 행동 유도 (CTA) ── */}
-      <section className="toss-container">
-        <div className="p-8 sm:p-12 rounded-3xl bg-[#191f28] text-white text-center space-y-6 max-w-3xl mx-auto shadow-xl">
-          <div className="space-y-2">
-            <h3 className="text-2xl sm:text-3xl font-black text-white">
-              지금 바로 내 비즈니스에 실전 솔루션을 적용해 보세요
-            </h3>
-            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-xl mx-auto">
-              100% 무료 가이드북부터 메타 알고리즘 바이블, 1:1 심층 커리어 의사결정 세션까지 필요한 솔루션을 지금 확인하세요.
+        {/* 3 Core Principles Banner */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+          <div className="technic-card rounded-2xl p-5 border border-emerald-500/30">
+            <div className="text-xs font-mono font-bold text-emerald-400 mb-1">01 · BUILD FOR SELF</div>
+            <h3 className="text-sm font-black text-white mb-1">나를 위한 도구에서 시작</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              명사도·맹모인사이트·칠구영어 모두 파운더 본인의 실제 필요를 해결하기 위해 조립한 프로덕트입니다.
             </p>
           </div>
+          <div className="technic-card rounded-2xl p-5 border border-blue-500/30">
+            <div className="text-xs font-mono font-bold text-blue-400 mb-1">02 · PROVEN GROWTH</div>
+            <h3 className="text-sm font-black text-white mb-1">스레드 500만 뷰 & 메타 인증</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              이론이 아닌 500만 뷰 실측 데이터와 Meta 공식 인증 미디어 플래닝 자격으로 검증된 퍼널만 다룹니다.
+            </p>
+          </div>
+          <div className="technic-card rounded-2xl p-5 border border-amber-400/30">
+            <div className="text-xs font-mono font-bold text-amber-400 mb-1">03 · PAY IT FORWARD</div>
+            <h3 className="text-sm font-black text-white mb-1">재능기부 + 자아실현 1:1 세션</h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              과거의 저처럼 퇴사와 홀로서기 사이에서 고민하는 직장인·빌더분들과 1:1로 진솔하게 로드맵을 짭니다.
+            </p>
+          </div>
+        </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+        {/* Timeline Component */}
+        <FounderNarrativeTimeline />
+
+        {/* Bottom CTA Card */}
+        <div className="mt-12 technic-card technic-card-gold rounded-[32px] p-8 sm:p-12 text-center border-2 border-amber-400/40">
+          <h3 className="text-2xl sm:text-3xl font-black text-white mb-3">
+            이제 당신만의 첫 번째 브릭을 올릴 차례입니다
+          </h3>
+          <p className="text-slate-300 text-xs sm:text-base mb-8 max-w-xl mx-auto leading-relaxed">
+            스레드·메타 광고 수익화 공략집부터 공기업·주재원 퇴사 파운더와의 1:1 커리어 & 빌더 의사결정 세션까지, 지금 내 단계에 맞는 블록을 선택하세요.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <Link
-              href="/#what-you-get"
-              className="w-full sm:w-auto toss-button-primary px-6 py-3.5 text-sm font-bold shadow-md flex items-center justify-center gap-1.5"
+              href="/#monetize"
+              className="w-full sm:w-auto px-7 py-4 rounded-2xl btn-classic-blue text-xs sm:text-sm flex items-center justify-center gap-2"
             >
-              <span>받을 수 있는 솔루션 전체보기</span>
-              <ArrowRight size={16} weight="bold" />
+              <Flame className="w-4 h-4" />
+              <span>스레드 500만 뷰 · 메타 수익화 브릭 보기</span>
             </Link>
             <Link
               href="/career"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white text-sm font-bold transition-all flex items-center justify-center gap-1.5"
+              className="w-full sm:w-auto px-7 py-4 rounded-2xl btn-technic-gold text-xs sm:text-sm flex items-center justify-center gap-2"
             >
-              <span>커리어 의사결정 세션 알아보기</span>
+              <Compass className="w-4 h-4" />
+              <span>1:1 커리어 & 빌더 의사결정 세션 신청</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
-

@@ -1,198 +1,352 @@
-'use client';
+'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { 
-  ArrowLeft, 
-  CheckCircle, 
-  Sparkle, 
-  ShieldCheck, 
-  Lightning, 
-  CreditCard
-} from '@phosphor-icons/react';
-import { PRODUCTS } from '@/data/products';
-import SectionConnector from '@/components/introduce/SectionConnector';
+import {
+  CheckCircle2,
+  ArrowLeft,
+  ShieldCheck,
+  Zap,
+  Sparkles,
+  Award,
+  Layers,
+  Clock,
+  HelpCircle,
+  X,
+  ArrowRight,
+  Compass,
+} from 'lucide-react';
+import { PRODUCTS, Product, BrickStage } from '../../../data/products';
 
-interface Props {
-  id: string;
-}
+export default function ProductDetailView({
+  id,
+  product: propProduct,
+}: {
+  id?: string;
+  product?: Product;
+}) {
+  const product = propProduct || PRODUCTS.find((p) => p.id === id) || PRODUCTS[0];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [buyerName, setBuyerName] = useState('');
+  const [buyerContact, setBuyerContact] = useState('');
+  const [buyerQuestion, setBuyerQuestion] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-export default function ProductDetailView({ id }: Props) {
-  const product = PRODUCTS.find((p) => p.id === id);
+  const getStageBadgeClass = (stage: BrickStage) => {
+    if (stage === 'DUPLO') return 'badge-duplo';
+    if (stage === 'CLASSIC') return 'badge-classic';
+    return 'badge-technic';
+  };
 
-  if (!product) {
-    notFound();
-  }
+  const handleOrder = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!buyerName.trim() || !buyerContact.trim()) return;
+    setSubmitted(true);
+  };
+
+  const discountRate = product.discountRate ?? 0;
 
   return (
-    <div className="bg-[#f2f4f6] min-h-screen py-10 sm:py-16 pb-32">
-      {/* 760px 오픈 단일 컬럼 메인 캔버스 */}
-      <div className="max-w-[760px] mx-auto px-4 sm:px-6 space-y-12 sm:space-y-16">
-        
-        {/* 상단 뒤로가기 */}
-        <div>
-          <Link
-            href="/#solutions"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#8b95a1] hover:text-[#3182f6] transition-colors"
-          >
-            <ArrowLeft size={16} weight="bold" /> 전체 솔루션 목록으로 돌아가기
-          </Link>
-        </div>
+    <div className="min-h-screen bg-[#070B14] text-white pb-28">
+      {/* Top Breadcrumb Bar */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-4 flex items-center justify-between">
+        <Link
+          href="/#catalog"
+          className="inline-flex items-center space-x-2 text-slate-400 hover:text-amber-300 font-bold text-xs sm:text-sm transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>전체 브릭 카탈로그로 돌아가기</span>
+        </Link>
+        <span className="text-xs font-mono text-slate-500">
+          BRICK MODULE #0{product.rank}
+        </span>
+      </div>
 
-        {/* ── 1. 히어로 섹션 (토스 스타일) ── */}
-        <section className="text-center space-y-5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#e8f3ff] text-[#3182f6] text-xs font-bold">
-            <Sparkle size={14} weight="duotone" />
-            {product.category} · {product.rank}위
+      {/* Main Content Container */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="technic-card rounded-[32px] p-6 sm:p-10 md:p-12 border border-white/15 mb-8">
+          {/* Badges */}
+          <div className="flex flex-wrap items-center gap-2.5 mb-6">
+            <span
+              className={`text-xs font-mono font-bold px-3.5 py-1.5 rounded-lg ${getStageBadgeClass(
+                product.brickStage
+              )}`}
+            >
+              {product.brickStageLabel}
+            </span>
+            {product.badge && (
+              <span className="px-3.5 py-1.5 rounded-lg bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-bold">
+                {product.badge}
+              </span>
+            )}
+            <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300 text-xs font-mono">
+              {product.category}
+            </span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-black text-[#191f28] leading-tight break-keep">
+          {/* Title & Subtitle */}
+          <h1 className="text-2xl sm:text-4xl font-black text-white leading-tight mb-4">
             {product.title}
           </h1>
-
-          <p className="text-sm sm:text-base text-[#4e5968] font-medium leading-relaxed break-keep">
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8">
             {product.tagline}
           </p>
 
-          {/* 가격 카드 */}
-          <div className="p-7 rounded-3xl bg-white border border-black/[0.04] text-center max-w-md mx-auto space-y-4 shadow-sm">
-            <div className="flex items-baseline justify-center gap-3">
-              <span className="text-3xl sm:text-4xl font-black text-[#191f28] font-mono">
-                {product.salePrice.toLocaleString()}원
-              </span>
-              <span className="text-sm text-[#8b95a1] line-through font-mono">
-                {product.originalPrice.toLocaleString()}원
-              </span>
-              <span className="text-xs font-extrabold px-2 py-0.5 rounded-full bg-[#ffebee] text-[#f04452]">
-                {product.discountRate}% OFF
-              </span>
-            </div>
-
-            {product.monthlyPrice && (
-              <div className="text-xs text-[#8b95a1] font-mono">
-                {product.monthlyPrice}
-              </div>
-            )}
-
-            <button className="w-full toss-button-primary py-4 text-sm sm:text-base shadow-md flex items-center justify-center gap-2">
-              <CreditCard size={18} weight="duotone" /> 지금 바로 신청하기
-            </button>
-            <p className="text-[11px] text-[#8b95a1]">
-              * 안전결제 및 즉시 슬랙 초대 / 다운로드 링크 발송
-            </p>
-          </div>
-        </section>
-
-        {/* 프로님 1px 수직 서사 커넥터 (토스 블루) */}
-        <SectionConnector accentColor="#3182f6" />
-
-        {/* ── 2. 핵심 공감 & 문제 제기 ── */}
-        <section className="text-center space-y-5">
-          <div className="inline-block px-3 py-1 rounded-full bg-white text-xs font-bold text-[#8b95a1] border border-black/[0.04]">
-            WHY THIS MATTERS
-          </div>
-          <h2 className="text-xl sm:text-3xl font-black text-[#191f28] tracking-tight break-keep">
-            "세상은 AI로 바뀐다는데, 왜 내 일은 그대로일까요?"
-          </h2>
-          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-black/[0.04] shadow-sm text-left text-sm sm:text-base text-[#4e5968] space-y-3 leading-relaxed">
-            <p>
-              매일 새로운 AI 도구가 쏟아지고 유튜브에서는 월 천만 원 자동 수익이라는 자극적인 영상이 넘쳐납니다. 하지만 정작 월 2만 원 구독료를 내고 챗GPT를 켜면, 이메일 몇 줄 영작하거나 요약시키는 것 외엔 할 수 있는 게 없습니다.
-            </p>
-            <p className="text-[#191f28] font-bold">
-              당신이 게으르거나 뒤처진 게 아닙니다. 도구를 내 '본업(직무와 커리어)'에 어떻게 연결해야 하는지, 그 실전 관점을 아무도 제대로 알려주지 않았기 때문입니다.
-            </p>
-            <p>
-              aizaler는 이론만 늘어놓는 강사가 아닙니다. 실제 1인 기업으로 프로덕트 4개를 띄우고, DB와 추천 알고리즘을 굴리며 체득한 **가장 군더더기 없는 실전 워크플로우**만을 전달합니다.
-            </p>
-          </div>
-        </section>
-
-        {/* 프로님 1px 수직 서사 커넥터 */}
-        <SectionConnector accentColor="#3182f6" />
-
-        {/* ── 3. 상세 커리큘럼 & 구성 혜택 ── */}
-        <section className="space-y-6">
-          <div className="text-center space-y-2">
-            <div className="inline-block px-3 py-1 rounded-full bg-white text-xs font-bold text-[#8b95a1] border border-black/[0.04]">
-              CURRICULUM & DELIVERABLES
-            </div>
-            <h2 className="text-xl sm:text-3xl font-black text-[#191f28] tracking-tight">
-              포함된 핵심 구성 및 혜택
-            </h2>
-          </div>
-
-          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-black/[0.04] shadow-sm space-y-4">
-            <h3 className="text-base sm:text-lg font-bold text-[#191f28] flex items-center gap-2">
-              <Lightning size={20} weight="duotone" className="text-[#3182f6]" />
-              {product.title} 제공 항목
-            </h3>
-            <ul className="space-y-3 text-xs sm:text-sm text-[#333d4b]">
-              {product.features.map((feat, i) => (
-                <li key={i} className="flex items-start gap-2.5">
-                  <CheckCircle size={18} weight="fill" className="text-[#3182f6] shrink-0 mt-0.5" />
-                  <span className="leading-relaxed">{feat}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="p-5 rounded-2xl bg-[#e8f3ff] border border-blue-100 text-xs sm:text-sm text-[#1b64da] flex items-center gap-3">
-            <ShieldCheck size={22} weight="fill" className="text-[#3182f6] shrink-0" />
+          {/* Price & Primary CTA Box */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-[#0B1222] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10">
             <div>
-              <span className="font-bold">100% 만족 보장 & 평생 소장: </span>
-              제공되는 모든 템플릿과 에이전트 스킬, 소스코드는 상업적 사용이 가능하며 평생 업데이트를 지원합니다.
+              <div className="flex items-center gap-2 mb-1">
+                {product.originalPrice > 0 && (
+                  <span className="text-sm text-slate-500 line-through">
+                    정가 {product.originalPrice.toLocaleString()}원
+                  </span>
+                )}
+                {discountRate > 0 && (
+                  <span className="text-xs font-mono font-bold text-rose-400 bg-rose-500/15 border border-rose-500/30 px-2 py-0.5 rounded">
+                    -{discountRate}% 얼리버드 혜택
+                  </span>
+                )}
+              </div>
+              <div className="text-3xl sm:text-4xl font-black text-white">
+                {product.salePrice === 0 ? '무료 (0원)' : product.salePrice.toLocaleString()}
+                {product.salePrice > 0 && (
+                  <span className="text-base font-medium text-slate-400 ml-1">원</span>
+                )}
+              </div>
+              {product.deliverableSummary && (
+                <p className="text-xs text-amber-300/90 mt-2 font-medium">
+                  📦 제공 구성: {product.deliverableSummary}
+                </p>
+              )}
             </div>
-          </div>
-        </section>
 
-        {/* ── 4. 추천 대상 ── */}
-        <section className="space-y-6">
-          <div className="text-center space-y-2">
-            <h2 className="text-xl sm:text-2xl font-black text-[#191f28]">
-              이런 분들께 특히 추천합니다
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-            <div className="p-5 rounded-2xl bg-white border border-black/[0.04] shadow-sm flex items-start gap-3">
-              <CheckCircle size={18} weight="fill" className="text-[#3182f6] shrink-0 mt-0.5" />
-              <span className="text-[#333d4b]">AI를 내 본업(마케팅/기획/디자인)에 꽂아 레버리지를 내고 싶은 직장인</span>
-            </div>
-            <div className="p-5 rounded-2xl bg-white border border-black/[0.04] shadow-sm flex items-start gap-3">
-              <CheckCircle size={18} weight="fill" className="text-[#3182f6] shrink-0 mt-0.5" />
-              <span className="text-[#333d4b]">개발 외주비 2,000만 원 없이 내 손으로 웹서비스를 런칭하고 싶은 1인 창업가</span>
-            </div>
-            <div className="p-5 rounded-2xl bg-white border border-black/[0.04] shadow-sm flex items-start gap-3">
-              <CheckCircle size={18} weight="fill" className="text-[#3182f6] shrink-0 mt-0.5" />
-              <span className="text-[#333d4b]">공포 마케팅이나 뜬구름 잡는 프롬프트 대신 진짜 검증된 시스템을 원하는 분</span>
-            </div>
-            <div className="p-5 rounded-2xl bg-white border border-black/[0.04] shadow-sm flex items-start gap-3">
-              <CheckCircle size={18} weight="fill" className="text-[#3182f6] shrink-0 mt-0.5" />
-              <span className="text-[#333d4b]">향후 1인 비즈니스나 B2B AX(기업 AI 전환) 컨설팅으로 몸값을 높이고 싶은 리더</span>
-            </div>
-          </div>
-        </section>
-
-        {/* 하단 최종 신청 CTA */}
-        <section className="pt-6 text-center space-y-4">
-          <div className="p-8 rounded-3xl bg-[#191f28] text-white space-y-4 shadow-xl">
-            <h3 className="text-2xl sm:text-3xl font-black text-white">
-              지금 바로 AI 레버리지를 시작하세요
-            </h3>
-            <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">
-              고민하는 시간에도 AI 도구는 발전하고 있습니다. 당신의 전문성에 가장 강력한 날개를 달아드립니다.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-              <button className="w-full sm:w-auto toss-button-primary px-8 py-4 text-sm sm:text-base font-bold shadow-lg">
-                {product.title} 즉시 신청하기 ({product.salePrice.toLocaleString()}원)
+            <div className="flex flex-col sm:flex-row gap-3">
+              {product.id === '4' && (
+                <Link
+                  href="/career"
+                  className="px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-sm flex items-center justify-center gap-2 transition-all"
+                >
+                  <Compass className="w-4 h-4 text-amber-400" />
+                  <span>전용 세션 안내 페이지 보기</span>
+                </Link>
+              )}
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="px-8 py-4 rounded-2xl btn-technic-gold text-sm sm:text-base flex items-center justify-center gap-2 shrink-0"
+              >
+                <Zap className="w-4 h-4" />
+                <span>이 브릭 즉시 조립 신청하기</span>
               </button>
             </div>
           </div>
-        </section>
 
+          {/* Target Problem Highlight */}
+          {product.target && (
+            <div className="p-6 rounded-2xl bg-amber-400/10 border border-amber-400/30 mb-10">
+              <div className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider mb-1.5">
+                TARGET BOTTLENECK · 이런 분들을 위해 설계했습니다
+              </div>
+              <p className="text-base sm:text-lg font-bold text-white">
+                {product.target}
+              </p>
+            </div>
+          )}
+
+          {/* Detailed Story / Description */}
+          <div className="mb-10">
+            <h2 className="text-lg sm:text-xl font-black text-white mb-4 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-amber-400" />
+              <span>왜 이 브릭이 필요한가요?</span>
+            </h2>
+            <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 text-slate-200 text-sm sm:text-base leading-relaxed whitespace-pre-line">
+              {product.description}
+            </div>
+          </div>
+
+          {/* Curriculum / Features List */}
+          <div className="mb-10">
+            <h2 className="text-lg sm:text-xl font-black text-white mb-4 flex items-center gap-2">
+              <Layers className="w-5 h-5 text-blue-400" />
+              <span>상세 조립 모듈 & 커리큘럼 구성</span>
+            </h2>
+            <div className="grid grid-cols-1 gap-3.5">
+              {product.features?.map((feature, index) => (
+                <div
+                  key={index}
+                  className="p-4 sm:p-5 rounded-2xl bg-[#0B101E] border border-white/10 flex items-start gap-3.5"
+                >
+                  <div className="w-6 h-6 rounded-lg bg-blue-500/20 border border-blue-400/40 text-blue-300 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                    0{index + 1}
+                  </div>
+                  <span className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
+                    {feature}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Guarantee & Trust Box */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-white/10">
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-3">
+              <Award className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-xs font-bold text-white mb-1">100% 실전 검증 데이터</h4>
+                <p className="text-[11px] text-slate-400 leading-relaxed">
+                  이론 짜깁기가 아닌 스레드 500만 뷰·메타 공식 인증 파운더의 실제 운영 에셋입니다.
+                </p>
+              </div>
+            </div>
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-3">
+              <Clock className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-xs font-bold text-white mb-1">평생 소장 & 업데이트</h4>
+                <p className="text-[11px] text-slate-400 leading-relaxed">
+                  한 번 조립한 브릭 노션/템플릿은 알고리즘 변화에 맞춰 지속 업데이트됩니다.
+                </p>
+              </div>
+            </div>
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-3">
+              <ShieldCheck className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-xs font-bold text-white mb-1">Builders Club 우대</h4>
+                <p className="text-[11px] text-slate-400 leading-relaxed">
+                  개별 브릭 구매자분들께는 추후 오픈할 멤버십 창립 멤버 할인권이 자동 부여됩니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Sticky Bottom Purchase Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[#070B14]/90 backdrop-blur-xl border-t border-white/15 p-4 z-40">
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
+          <div className="hidden sm:block">
+            <span className="text-[11px] font-mono text-amber-400 block">
+              {product.brickStageLabel}
+            </span>
+            <span className="text-sm font-bold text-white line-clamp-1">{product.title}</span>
+          </div>
+          <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4">
+            <div className="text-left sm:text-right">
+              {product.originalPrice > 0 && (
+                <span className="text-xs text-slate-500 line-through mr-2">
+                  {product.originalPrice.toLocaleString()}원
+                </span>
+              )}
+              <span className="text-xl font-black text-amber-300">
+                {product.salePrice === 0 ? '무료 (0원)' : `${product.salePrice.toLocaleString()}원`}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className="px-6 py-3.5 rounded-xl btn-technic-gold text-xs sm:text-sm font-black flex items-center gap-2 shrink-0"
+            >
+              <Zap className="w-4 h-4" />
+              <span>지금 브릭 조립 신청</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Checkout / Application Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="technic-card rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-white/20 relative">
+            <button
+              type="button"
+              onClick={() => {
+                setIsModalOpen(false);
+                setSubmitted(false);
+              }}
+              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-slate-300"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            {submitted ? (
+              <div className="text-center py-6 space-y-4">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-black text-white">신청이 완료되었습니다!</h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  입력하신 연락처(<strong className="text-amber-300">{buyerContact}</strong>)로{' '}
+                  <strong>{product.title}</strong> 결제 및 노션 템플릿/일정 안내 링크를 즉시 발송해 드립니다.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsModalOpen(false);
+                    setSubmitted(false);
+                  }}
+                  className="px-6 py-3 rounded-xl btn-technic-gold text-xs sm:text-sm"
+                >
+                  확인 및 닫기
+                </button>
+              </div>
+            ) : (
+              <div>
+                <span
+                  className={`text-[11px] font-mono font-bold px-2.5 py-1 rounded-md inline-block mb-3 ${getStageBadgeClass(
+                    product.brickStage
+                  )}`}
+                >
+                  {product.brickStageLabel}
+                </span>
+                <h3 className="text-lg sm:text-xl font-black text-white mb-1">{product.title}</h3>
+                <p className="text-xs text-slate-400 mb-5">{product.deliverableSummary}</p>
+
+                <form onSubmit={handleOrder} className="space-y-3.5">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-300 mb-1">성함 (또는 닉네임)</label>
+                    <input
+                      type="text"
+                      required
+                      value={buyerName}
+                      onChange={(e) => setBuyerName(e.target.value)}
+                      placeholder="홍길동"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/15 text-white text-sm focus:outline-none focus:border-amber-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-300 mb-1">
+                      이메일 또는 휴대폰 번호 (템플릿 발송용)
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={buyerContact}
+                      onChange={(e) => setBuyerContact(e.target.value)}
+                      placeholder="010-0000-0000 또는 이메일"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/15 text-white text-sm focus:outline-none focus:border-amber-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-300 mb-1">
+                      이 브릭으로 해결하고 싶은 목표 (선택)
+                    </label>
+                    <input
+                      type="text"
+                      value={buyerQuestion}
+                      onChange={(e) => setBuyerQuestion(e.target.value)}
+                      placeholder="예: 내 도구를 스레드와 메타 광고로 월 300만 원 수익화하고 싶습니다"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/15 text-white text-sm focus:outline-none focus:border-amber-400"
+                    />
+                  </div>
+
+                  <button type="submit" className="w-full py-4 rounded-xl btn-technic-gold text-sm mt-2">
+                    {product.salePrice === 0 ? '무료(0원) 브릭 즉시 신청하기' : `${product.salePrice.toLocaleString()}원 조립 신청 접수하기`}
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-

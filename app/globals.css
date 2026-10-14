@@ -4,17 +4,13 @@
 
 @layer base {
   :root {
-    --toss-blue: #3182f6;
-    --toss-blue-hover: #1b64da;
-    --toss-blue-light: #e8f3ff;
-    --toss-red: #f04452;
-    --toss-red-light: #ffebee;
-    --toss-grey-50: #f9fafb;
-    --toss-grey-100: #f2f4f6;
-    --toss-grey-200: #e5e8eb;
-    --toss-grey-300: #d1d6db;
-    --toss-grey-700: #4e5968;
-    --toss-grey-900: #191f28;
+    --studio-bg: #070b14;
+    --studio-surface: #0f1626;
+    --studio-card: #131c31;
+    --duplo-emerald: #10b981;
+    --classic-blue: #3b82f6;
+    --technic-amber: #f59e0b;
+    --technic-rose: #f43f5e;
   }
 
   * {
@@ -22,78 +18,149 @@
   }
 
   body {
-    background-color: #f2f4f6;
-    color: var(--toss-grey-900);
+    background-color: #070b14;
+    color: #f8fafc;
     font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', Roboto, sans-serif;
     letter-spacing: -0.025em;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     word-break: keep-all;
   }
+
   button {
     outline: none;
   }
+
   button:focus-visible {
-    outline: 2px solid #3182f6;
+    outline: 2px solid #f59e0b;
     outline-offset: 2px;
   }
 }
 
 .toss-container {
   width: 100%;
-  max-width: 1180px;
+  max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px;
 }
 
-/* ── Modern Toss & Linear Single-Surface Card Architecture ── */
-.bezel-card-outer {
-  border-radius: 24px;
-  background: transparent;
-  border: none;
-  padding: 0;
-  box-shadow: none;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+/* ── LEGO Duplo to Technic Studio Card System ── */
+.technic-card {
+  background: rgba(17, 24, 42, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bezel-card-outer:hover {
+.technic-card:hover {
+  border-color: rgba(245, 158, 11, 0.35);
   transform: translateY(-2px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.65), 0 0 25px -8px rgba(245, 158, 11, 0.12);
 }
 
-.bezel-card-inner {
-  border-radius: 24px;
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 4px 16px -4px rgba(0, 0, 0, 0.04);
+.technic-card-active {
+  background: rgba(22, 32, 56, 0.92);
+  border: 1px solid #f59e0b;
+  box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.22), 0 20px 40px -10px rgba(0, 0, 0, 0.75);
+}
+
+/* Stage-specific active borders */
+.stage-card-duplo {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 30px -8px rgba(16, 185, 129, 0.2);
+}
+
+.stage-card-classic {
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: 0 0 30px -8px rgba(59, 130, 246, 0.22);
+}
+
+.stage-card-technic {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 30px -8px rgba(245, 158, 11, 0.25);
+}
+
+/* Primary Buttons */
+.btn-technic-gold {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #070b14;
+  font-weight: 800;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.bezel-card-outer:hover .bezel-card-inner,
-.bezel-card-inner:hover {
-  border-color: rgba(49, 130, 246, 0.3);
-  box-shadow: 0 12px 30px -6px rgba(49, 130, 246, 0.1), 0 2px 6px rgba(0, 0, 0, 0.02);
+.btn-technic-gold:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px -4px rgba(245, 158, 11, 0.5);
 }
 
-/* 토스 버튼 & 햅틱 모션 */
+.btn-classic-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+  font-weight: 800;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-classic-blue:hover {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px -4px rgba(59, 130, 246, 0.5);
+}
+
+/* Stage Badges */
+.badge-duplo {
+  background: rgba(16, 185, 129, 0.14);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.badge-classic {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.badge-technic {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+/* Legacy compatibility aliases */
+.athletic-card {
+  background: rgba(17, 24, 42, 0.78);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.athletic-btn-volt {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #070b14;
+  font-weight: 800;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.athletic-badge-volt {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.38);
+}
+
 .toss-button-primary {
-  background-color: #3182f6;
+  background-color: #3b82f6;
   color: #ffffff;
   font-weight: 700;
   border-radius: 16px;
   transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  outline: none;
 }
 
 .toss-button-primary:hover {
-  background-color: #1b64da;
+  background-color: #2563eb;
   transform: translateY(-1px);
-}
-
-.toss-button-primary:active {
-  transform: scale(0.98);
 }
 
 .tactile-btn {
@@ -105,156 +172,32 @@
   transform: scale(0.98);
 }
 
-/* 숫자 자리수 고정 (데이터 넘버링) */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* 앰비언트 확산 그림자 */
-.ambient-glow {
-  box-shadow: 0 20px 50px -15px rgba(49, 130, 246, 0.12), 0 0 1px 1px rgba(0, 0, 0, 0.03);
-}
-
-/* ── Apple-Style Interactive & Micro-Animation System ── */
-@keyframes apple-float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
 @keyframes apple-glow {
   0%, 100% {
-    opacity: 0.45;
+    opacity: 0.4;
     transform: scale(1);
   }
   50% {
-    opacity: 0.75;
-    transform: scale(1.04);
+    opacity: 0.7;
+    transform: scale(1.03);
   }
-}
-
-@keyframes shimmer-sweep {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.animate-apple-float {
-  animation: apple-float 5s ease-in-out infinite;
 }
 
 .animate-apple-glow {
   animation: apple-glow 6s ease-in-out infinite;
 }
 
-.apple-glass {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
-}
-
-.apple-glass-dark {
-  background: rgba(25, 31, 40, 0.88);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.35);
-}
-
-.apple-glow-border {
-  position: relative;
-}
-
-.apple-glow-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(49, 130, 246, 0.5), rgba(124, 58, 237, 0.5), rgba(240, 68, 82, 0.3));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-/* ── Athletic Running Crew & Editorial Guild Styling ── */
-.athletic-canvas {
-  background-color: #080c14;
-  color: #f8fafc;
-}
-
-.athletic-card {
-  background: rgba(18, 24, 38, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.athletic-card:hover {
-  border-color: rgba(204, 255, 0, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px -8px rgba(204, 255, 0, 0.12);
-}
-
-.athletic-card-active {
-  background: rgba(22, 30, 46, 0.9);
-  border: 1px solid #ccff00;
-  box-shadow: 0 0 35px -5px rgba(204, 255, 0, 0.25), 0 20px 40px -10px rgba(0, 0, 0, 0.7);
-}
-
-.athletic-btn-volt {
-  background-color: #ccff00;
-  color: #080c14;
-  font-weight: 800;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.athletic-btn-volt:hover {
-  background-color: #d9ff3f;
-  transform: translateY(-1px);
-  box-shadow: 0 0 28px -4px rgba(204, 255, 0, 0.55);
-}
-
-.athletic-btn-volt:active {
-  transform: scale(0.98);
-}
-
-.athletic-badge-volt {
-  background: rgba(204, 255, 0, 0.12);
-  color: #ccff00;
-  border: 1px solid rgba(204, 255, 0, 0.3);
-}
-
-.athletic-badge-orange {
-  background: rgba(255, 85, 0, 0.12);
-  color: #ff6b22;
-  border: 1px solid rgba(255, 85, 0, 0.3);
-}
-
-.athletic-badge-blue {
-  background: rgba(59, 130, 246, 0.12);
-  color: #60a5fa;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
 .grid-track-bg {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
 }
 
 .split-line-glow {
-  background: linear-gradient(90deg, transparent, rgba(204, 255, 0, 0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.6), rgba(245, 158, 11, 0.7), transparent);
 }
-
-
-

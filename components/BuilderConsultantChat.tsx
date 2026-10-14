@@ -1,14 +1,18 @@
-'use client';
+'use client'
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkle, PaperPlaneTilt, ArrowRight, CheckCircle, LightbulbFilament, Target, Cpu, RocketLaunch, Crown } from '@phosphor-icons/react';
+import { Send, Bot, User, Sparkles, ArrowRight, Layers, Cpu } from 'lucide-react';
+import Link from 'next/link';
 
 interface Message {
-  id: string;
-  sender: 'ai' | 'user';
-  text: string;
-  step?: number;
-  timestamp: string;
+  role: 'user' | 'assistant';
+  content: string;
+  recommendedStep?: number;
+  productLink?: {
+    title: string;
+    href: string;
+    badge: string;
+  };
 }
 
 interface BuilderConsultantChatProps {
@@ -16,282 +20,308 @@ interface BuilderConsultantChatProps {
 }
 
 const QUICK_PROMPTS = [
-  { text: '💡 [Level 1] 아이디어는 있는데 시장성이 막막해요', step: 1, icon: LightbulbFilament },
-  { text: '⚡️ [Level 2] 프롬프트 복붙 지겹고 Git 에이전트 스킬로 자율 실행하고 싶어요', step: 2, icon: Cpu },
-  { text: '🚀 [Level 3] 외주비 없이 직접 상용 웹을 띄우고 싶어요', step: 3, icon: RocketLaunch },
-  { text: '🎯 [Level 4] 훅 자료집을 따라 써도 스레드가 안 터지고 결제가 안 돼요', step: 4, icon: Target },
-  { text: '👑 [Level 5] 퇴사/1인 기업 방향성을 1:1로 진단받고 싶어요', step: 5, icon: Crown },
+  {
+    label: '🟢 코딩은 모르지만 내 업무 도구를 만들고 싶어요',
+    query: '코딩은 잘 모르지만 내 반복 업무를 줄여줄 자동화 도구를 먼저 만들어보고 싶어요.',
+  },
+  {
+    label: '🔵 스레드 조회수는 나오는데 결제가 안 일어나요',
+    query: '스레드 팔로워와 조회수는 조금 나오는데 실제 수익화나 결제로 연결하는 방법을 모르겠어요.',
+  },
+  {
+    label: '🔵 내 사이드 프로젝트에 메타 광고를 붙여보고 싶어요',
+    query: '만들어둔 프로덕트나 전자책이 있는데 메타 광고를 소액으로라도 효율 있게 돌리는 법이 궁금해요.',
+  },
+  {
+    label: '🟡 직장 다니면서 1인 빌더 독립·퇴사 타이밍이 고민돼요',
+    query: '현재 직장에 재직 중인데 사이드 프로젝트 방향성과 퇴사/독립 타이밍을 어떻게 잡아야 할지 고민입니다.',
+  },
 ];
 
-const TRACK_DETAILS: Record<number, {
-  name: string;
-  deliverable: string;
-  brickLabel: string;
-  link: string;
-  actionText: string;
-}> = {
-  1: {
-    name: 'LEVEL 01. 시장 검증 & Aside 자율 리서치',
-    deliverable: 'Aside 24h 시장 감시 봇 & 검증된 BM 린 캔버스 1장',
-    brickLabel: '블루 기초 블록',
-    link: '#starter-kit',
-    actionText: '1단계 기획 가이드 받기'
-  },
-  2: {
-    name: 'LEVEL 02. Git 에이전트 스킬 & 자율 실행 파이프라인',
-    deliverable: 'Git 오픈소스 에이전트 스킬셋(.skills) & MCP 자율 실행 파이프라인',
-    brickLabel: '딥 퍼플 에이전트 블록',
-    link: '#sprint',
-    actionText: '2단계 에이전트 스킬 보기'
-  },
-  3: {
-    name: 'LEVEL 03. 외주비 0원 1인 상용 웹 런칭',
-    deliverable: '외주비 0원, 내 손으로 직접 띄운 상용 웹서비스 1개 배포',
-    brickLabel: '퍼플➔화이트 런칭 블록',
-    link: '#sprint',
-    actionText: '3단계 풀스택 런칭 보기'
-  },
-  4: {
-    name: 'LEVEL 04. 스레드 훅 구조학 & 고전환 퍼널',
-    deliverable: '스레드 500만 뷰 훅 구조도 & CVR 8.6%+ 고전환 퍼널 시스템',
-    brickLabel: '레드 핫포인트 블록',
-    link: '#starter-kit',
-    actionText: '스레드 훅 구조 해부서 받기'
-  },
-  5: {
-    name: 'LEVEL 05. 1인 비즈니스 마스터리 & 1:1 VIP',
-    deliverable: '사전 질의서 기반 90일 실행 Action Blueprint',
-    brickLabel: '순백 화이트 서밋 블록',
-    link: '/career',
-    actionText: '5단계 1:1 전략 세션 신청하기'
+function diagnoseInput(input: string): {
+  reply: string;
+  step: number;
+  productLink: { title: string; href: string; badge: string };
+} {
+  const text = input.toLowerCase();
+
+  if (
+    text.includes('퇴사') ||
+    text.includes('이직') ||
+    text.includes('커리어') ||
+    text.includes('직장') ||
+    text.includes('주재원') ||
+    text.includes('공기업') ||
+    text.includes('독립') ||
+    text.includes('고민') ||
+    text.includes('컨설팅') ||
+    text.includes('타이밍')
+  ) {
+    return {
+      step: 5,
+      reply:
+        '직장이라는 안전장치 안에서 "언제, 어떤 무기를 들고 나와야 할지"가 가장 막막하실 시점입니다.\n\n저 역시 공기업 7년·해외 주재원을 거치며 똑같은 고민을 했고, 퇴사 전 반드시 검증해야 할 현금흐름 지표와 90일 실행 로드맵을 1:1 세션에서 가감 없이 설계해 드립니다. 왼쪽 3D 시뮬레이터를 [Step 05. TECHNIC 독립 아키텍처] 블록으로 맞췄습니다.',
+      productLink: {
+        badge: '🟡 TECHNIC 주력 · 재능기부 & 자아실현',
+        title: '공기업·주재원 파운더 1:1 커리어 & 빌더 의사결정 세션 보기',
+        href: '/career',
+      },
+    };
   }
-};
+
+  if (
+    text.includes('메타') ||
+    text.includes('광고') ||
+    text.includes('타겟') ||
+    text.includes('전환') ||
+    text.includes('cvr') ||
+    text.includes('유료') ||
+    text.includes('퍼널')
+  ) {
+    return {
+      step: 4,
+      reply:
+        '오가닉 트래픽에만 의존하면 매달 매출이 롤러코스터를 탑니다.\n\nMeta 공식 인증(Media Planning Professional) 파운더가 일 예산 1~3만 원으로도 CVR 8.6%를 달성한 [소재 ➔ 랜딩 1:1 메시지 일치 공식]과 초기 픽셀 세팅법을 추천드립니다. 왼쪽 3D 블록을 [Step 04. CLASSIC 메타 광고 스케일업]으로 연결했습니다.',
+      productLink: {
+        badge: '🔵 CLASSIC 수익화 주력 · Meta 공식 인증',
+        title: '메타 광고 고전환 플레이북 (CVR 8.6%) 자세히 보기',
+        href: '/product/3',
+      },
+    };
+  }
+
+  if (
+    text.includes('스레드') ||
+    text.includes('조회수') ||
+    text.includes('팔로워') ||
+    text.includes('마케팅') ||
+    text.includes('수익화') ||
+    text.includes('글쓰기') ||
+    text.includes('바이럴') ||
+    text.includes('결제')
+  ) {
+    return {
+      step: 3,
+      reply:
+        '단순 어그로성 20만 뷰보다 "내 잠재고객의 지갑을 여는 1만 뷰"가 훨씬 강력합니다.\n\n2개 계정 누적 500만 뷰를 직접 터뜨리며 구축한 1줄 훅(Hook) 공식과 댓글 리드젠 수익화 아키텍처를 조립해 보세요. 왼쪽 3D 블록을 [Step 03. CLASSIC 스레드 500만 뷰 엔진]으로 활성화했습니다.',
+      productLink: {
+        badge: '🔵 CLASSIC 수익화 주력 · 누적 500만 뷰 실증',
+        title: '스레드 500만 뷰 알고리즘 & 수익화 바이블 보기',
+        href: '/product/1',
+      },
+    };
+  }
+
+  if (
+    text.includes('툴') ||
+    text.includes('자동화') ||
+    text.includes('초보') ||
+    text.includes('입문') ||
+    text.includes('듀플로') ||
+    text.includes('코딩') ||
+    text.includes('클로드') ||
+    text.includes('노션')
+  ) {
+    return {
+      step: 1,
+      reply:
+        '처음부터 거창한 SaaS를 만들 필요 없습니다! 어릴 때 레고 듀플로를 조립하듯, "내가 매일 겪는 귀찮은 반복 업무 1개"를 AI로 해결하는 것부터 시작하세요.\n\n비개발자도 주말 이틀이면 나만의 자동화 봇과 도구를 조립할 수 있습니다. 왼쪽 3D 블록을 [Step 01. DUPLO 나만의 첫 AI 도구 조립]으로 맞췄습니다.',
+      productLink: {
+        badge: '🟢 DUPLO 입문 블록 · 베스트셀러',
+        title: '방구석 1인 AI 도구 조립 & 24시간 업무 자동화 키트 보기',
+        href: '/product/2',
+      },
+    };
+  }
+
+  return {
+    step: 2,
+    reply:
+      '내가 쓰려고 만든 작은 도구와 노하우에 결제 버튼과 랜딩페이지를 붙이면 훌륭한 첫 디지털 프로덕트(CLASSIC 블록)가 됩니다.\n\n아이디어 발굴부터 첫 10만 원의 결제를 만드는 가장 빠른 조립 공정을 시작해 보세요. 왼쪽 3D 블록을 [Step 02. 내 도구의 프로덕트화]로 연결했습니다.',
+    productLink: {
+      badge: '🟢 DUPLO 스타터 블록',
+      title: '퇴근 후 첫 수익을 만드는 1인 AI 프로덕트 듀플로 키트 보기',
+      href: '/product/aside-starter',
+    },
+  };
+}
 
 export default function BuilderConsultantChat({ onStepDiagnosed }: BuilderConsultantChatProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: 'welcome',
-      sender: 'ai',
-      text: '반갑습니다! 1인 빌더 스튜디오 aizaler의 AI 아키텍트입니다. 🧱✨\n\n수많은 정보 속에서 "지금 당장 내가 무엇부터 시작해야 하는지" 막막하신가요? 아래 고민 칩을 탭하시거나 편하게 1줄로 적어주시면, 5단계 커리큘럼 중 지금 당장 조립해야 할 레벨 블록을 처방해 드립니다.',
-      timestamp: '지금'
-    }
+      role: 'assistant',
+      content:
+        '안녕하세요! aizaler 브릭 아키텍트입니다 🧱\n현재 어떤 단계에 계신가요? 아래 고민 버튼을 누르거나 직접 상황을 적어주시면, **듀플로 ➔ 클래식 ➔ 테크닉** 중 지금 바로 조립해야 할 블록을 3D 시뮬레이터와 함께 진단해 드립니다.',
+    },
   ]);
-  const [inputValue, setInputValue] = useState('');
+  const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [userEmail, setUserEmail] = useState('');
-  const [emailSent, setEmailSent] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, isLoading]);
+    if (messages.length > 1) {
+      scrollToBottom();
+    }
+  }, [messages]);
 
-  const handleSendMessage = async (textToSend: string) => {
-    if (!textToSend.trim() || isLoading) return;
+  const handleSend = (customQuery?: string) => {
+    const queryText = (customQuery ?? input).trim();
+    if (!queryText || isLoading) return;
 
-    const userMsg: Message = {
-      id: `user-${Date.now()}`,
-      sender: 'user',
-      text: textToSend,
-      timestamp: '방금 전'
-    };
-
-    setMessages((prev) => [...prev, userMsg]);
-    setInputValue('');
+    if (!customQuery) setInput('');
+    setMessages((prev) => [...prev, { role: 'user', content: queryText }]);
     setIsLoading(true);
 
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: textToSend })
-      });
-
-      const data = await res.json();
-
-      if (data.reply) {
-        const aiMsg: Message = {
-          id: `ai-${Date.now()}`,
-          sender: 'ai',
-          text: data.reply,
-          step: data.step || 1,
-          timestamp: '방금 전'
-        };
-
-        setMessages((prev) => [...prev, aiMsg]);
-
-        // Trigger live 3D Lego linkage
-        if (data.step && onStepDiagnosed) {
-          onStepDiagnosed(data.step);
-        }
-      }
-    } catch (err) {
-      console.error(err);
+    setTimeout(() => {
+      const result = diagnoseInput(queryText);
       setMessages((prev) => [
         ...prev,
         {
-          id: `ai-err-${Date.now()}`,
-          sender: 'ai',
-          text: '잠시 네트워크 연결이 원활하지 않습니다. 아래 추천 로드맵에서 내 단계를 직접 확인해 보세요!',
-          timestamp: '방금 전'
-        }
+          role: 'assistant',
+          content: result.reply,
+          recommendedStep: result.step,
+          productLink: result.productLink,
+        },
       ]);
-    } finally {
+      if (onStepDiagnosed) {
+        onStepDiagnosed(result.step);
+      }
       setIsLoading(false);
-    }
+    }, 350);
   };
 
-  const handleQuickPrompt = (promptText: string) => {
-    handleSendMessage(promptText);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleSend();
   };
-
-  const latestAiMessageWithStep = [...messages].reverse().find((m) => m.sender === 'ai' && m.step);
 
   return (
-    <div className="rounded-3xl bg-white border border-black/[0.08] shadow-[0_10px_35px_rgba(0,0,0,0.05)] p-5 sm:p-7 space-y-4 max-w-3xl mx-auto">
-      {/* ── Chat Header ── */}
-      <div className="flex items-center justify-between border-b border-black/[0.05] pb-3">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-[#3182f6] text-white flex items-center justify-center shadow-xs">
-            <Sparkle size={16} weight="fill" />
+    <div className="w-full h-full flex flex-col technic-card rounded-[28px] overflow-hidden border border-white/10">
+      {/* Header */}
+      <div className="bg-[#0B101E] px-6 py-4 border-b border-white/10 flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          <div className="w-9 h-9 bg-amber-400/15 border border-amber-400/30 rounded-xl flex items-center justify-center text-amber-400">
+            <Cpu className="w-5 h-5" />
           </div>
           <div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-black text-[#191f28]">AI 빌더 실시간 진단 상담소</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            </div>
-            <div className="text-[10px] text-[#8b95a1] font-medium">
-              Gemini Flash-Lite 기반 0.3초 실시간 맞춤 처방
-            </div>
+            <h4 className="font-bold text-white text-sm flex items-center gap-2">
+              aizaler 브릭 진단기
+              <span className="text-[10px] font-mono bg-blue-500/20 text-blue-300 border border-blue-500/30 px-2 py-0.5 rounded-full font-bold">
+                3D SYNC
+              </span>
+            </h4>
+            <p className="text-xs text-slate-400">내 상황에 맞는 레고 단계(Duplo · Classic · Technic) 즉시 매칭</p>
           </div>
         </div>
-
-        <span className="text-[11px] font-bold text-[#3182f6] bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200/50">
-          1:1 실시간 진단 중
-        </span>
+        <Sparkles className="w-4 h-4 text-amber-400" />
       </div>
 
-      {/* ── Quick Prompt Chips (1-Tap Experience) ── */}
-      <div className="space-y-1.5">
-        <div className="text-[11px] font-bold text-[#8b95a1]">
-          원클릭으로 내 고민 짚어보기:
-        </div>
+      {/* Quick Prompts */}
+      <div className="px-5 py-3 bg-[#080C17] border-b border-white/5">
+        <p className="text-[11px] font-mono text-slate-400 mb-2 uppercase tracking-wider">
+          원클릭 고민 진단 (클릭 시 좌측 3D 블록 연동)
+        </p>
         <div className="flex flex-wrap gap-1.5">
-          {QUICK_PROMPTS.map((p, idx) => {
-            const Icon = p.icon;
-            return (
-              <button
-                key={idx}
-                onClick={() => handleQuickPrompt(p.text)}
-                disabled={isLoading}
-                className="px-2.5 py-1.5 rounded-xl bg-gray-50 hover:bg-[#e8f3ff] hover:text-[#3182f6] border border-black/[0.05] text-[11px] font-bold text-[#4e5968] transition-all flex items-center gap-1 active:scale-95 disabled:opacity-50 text-left"
-              >
-                <Icon size={13} weight="bold" className="text-[#3182f6] shrink-0" />
-                <span>{p.text}</span>
-              </button>
-            );
-          })}
+          {QUICK_PROMPTS.map((item, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => handleSend(item.query)}
+              className="text-left text-xs bg-white/[0.04] hover:bg-white/[0.1] text-slate-200 border border-white/10 hover:border-amber-400/40 px-3 py-1.5 rounded-lg transition-all"
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* ── Message Stream Box ── */}
-      <div className="h-[240px] sm:h-[280px] overflow-y-auto space-y-3 p-3 rounded-2xl bg-[#f8fafc] border border-black/[0.04] scroll-smooth">
-        {messages.map((m) => {
-          const isAi = m.sender === 'ai';
-          return (
-            <div
-              key={m.id}
-              className={`flex flex-col ${isAi ? 'items-start' : 'items-end'} animate-in fade-in duration-200`}
-            >
+      {/* Chat Messages */}
+      <div className="flex-1 p-5 overflow-y-auto space-y-4 min-h-[290px] max-h-[380px] bg-[#070B14]/60">
+        {messages.map((m, idx) => (
+          <div key={idx} className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}`}>
+            <div className={`flex items-start max-w-[90%] ${m.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
               <div
-                className={`max-w-[88%] sm:max-w-[80%] rounded-2xl p-3.5 text-xs sm:text-sm leading-relaxed shadow-xs ${
-                  isAi
-                    ? 'bg-white text-[#191f28] border border-black/[0.06] rounded-tl-sm'
-                    : 'bg-[#191f28] text-white rounded-tr-sm'
+                className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-1 ${
+                  m.role === 'user'
+                    ? 'bg-blue-600 text-white ml-2.5'
+                    : 'bg-white/10 text-amber-400 mr-2.5 border border-white/10'
                 }`}
               >
-                {/* Step indicator tag if present */}
-                {m.step && (
-                  <div className="mb-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#e8f3ff] text-[#3182f6] text-[10px] font-black border border-blue-200/50">
-                    <Sparkle size={12} weight="fill" />
-                    <span>진단 완료: TRACK 0{m.step} 추천</span>
+                {m.role === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
+              </div>
+
+              <div className="space-y-2.5">
+                <div
+                  className={`p-3.5 rounded-2xl text-xs md:text-sm leading-relaxed whitespace-pre-wrap ${
+                    m.role === 'user'
+                      ? 'bg-blue-600 text-white rounded-tr-none font-medium'
+                      : 'bg-[#111827] border border-white/10 text-slate-200 rounded-tl-none'
+                  }`}
+                >
+                  {m.content}
+                </div>
+
+                {m.recommendedStep && (
+                  <div className="inline-flex items-center space-x-1.5 bg-amber-400/10 border border-amber-400/30 text-amber-300 px-3 py-1 rounded-lg text-[11px] font-bold">
+                    <Layers className="w-3.5 h-3.5" />
+                    <span>좌측 3D 블록 Step 0{m.recommendedStep} 활성화됨</span>
                   </div>
                 )}
-                <div className="whitespace-pre-wrap">{m.text}</div>
+
+                {m.productLink && (
+                  <Link
+                    href={m.productLink.href}
+                    className="block p-3.5 rounded-xl bg-gradient-to-r from-blue-600/20 to-amber-500/10 border border-blue-400/30 hover:border-amber-400/60 transition-all group"
+                  >
+                    <span className="text-[10px] font-mono font-bold text-amber-300 block mb-1">
+                      {m.productLink.badge}
+                    </span>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs md:text-sm font-bold text-white group-hover:text-amber-300 transition-colors">
+                        {m.productLink.title}
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-amber-400 shrink-0 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                )}
               </div>
-              <span className="text-[9px] text-[#8b95a1] px-1 mt-0.5">{m.timestamp}</span>
             </div>
-          );
-        })}
+          </div>
+        ))}
 
         {isLoading && (
-          <div className="flex items-center gap-2 p-3 rounded-2xl bg-white border border-black/[0.06] w-fit">
-            <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-bounce" />
-            <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-bounce [animation-delay:0.2s]" />
-            <span className="w-2 h-2 rounded-full bg-[#3182f6] animate-bounce [animation-delay:0.4s]" />
-            <span className="text-xs text-[#8b95a1] font-medium ml-1">AI가 비즈니스 트랙과 결과물을 처방 중입니다...</span>
+          <div className="flex items-center space-x-2 text-slate-400 text-xs pl-10">
+            <span className="w-2 h-2 bg-amber-400 rounded-full animate-bounce" />
+            <span className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+            <span className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+            <span className="ml-2 font-mono">최적의 브릭 모듈 분석 중...</span>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* ── Input Box ── */}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSendMessage(inputValue);
-        }}
-        className="flex items-center gap-2"
-      >
+      {/* Input Area */}
+      <form onSubmit={handleSubmit} className="p-3.5 bg-[#0B101E] border-t border-white/10 flex items-center gap-2">
         <input
           type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder="내 비즈니스 고민을 직접 1줄로 적어보세요..."
-          disabled={isLoading}
-          className="flex-1 px-4 py-3 rounded-xl bg-gray-50 border border-black/[0.08] text-xs sm:text-sm text-[#191f28] placeholder-gray-400 outline-none focus:border-[#3182f6] focus:bg-white transition-all disabled:opacity-50"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="예: 스레드 수익화가 막막해요 / 직장인 퇴사 전 무엇부터 만들까요?"
+          className="flex-1 bg-white/[0.05] text-white placeholder-slate-500 text-xs md:text-sm px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:border-amber-400 transition-all"
         />
         <button
           type="submit"
-          disabled={isLoading || !inputValue.trim()}
-          className="toss-button-primary px-4 py-3 rounded-xl flex items-center justify-center gap-1 shrink-0 disabled:opacity-50 shadow-xs active:scale-95"
-          title="상담 질문 전송"
+          disabled={!input.trim() || isLoading}
+          className="px-4 py-3 bg-amber-400 text-slate-950 rounded-xl hover:bg-amber-300 disabled:opacity-40 transition-all flex items-center justify-center shrink-0 font-bold text-xs gap-1.5"
         >
-          <PaperPlaneTilt size={16} weight="bold" />
-          <span className="hidden sm:inline text-xs">상담하기</span>
+          <span>진단</span>
+          <Send className="w-3.5 h-3.5" />
         </button>
       </form>
-
-      {/* ── Prescribed Step Direct Action Card ── */}
-      {latestAiMessageWithStep && latestAiMessageWithStep.step && TRACK_DETAILS[latestAiMessageWithStep.step] && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#e8f3ff]/80 border border-[#3182f6]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-300">
-          <div className="space-y-1 min-w-0">
-            <div className="text-[11px] font-bold text-[#3182f6] flex items-center gap-1.5">
-              <Sparkle size={13} weight="fill" />
-              <span>진단 결과 처방: {TRACK_DETAILS[latestAiMessageWithStep.step].name} ({TRACK_DETAILS[latestAiMessageWithStep.step].brickLabel})</span>
-            </div>
-            <div className="text-xs sm:text-sm font-black text-[#191f28]">
-              🎯 목표 결과물: {TRACK_DETAILS[latestAiMessageWithStep.step].deliverable}
-            </div>
-            <p className="text-[11px] text-[#4e5968]">
-              상단 3D 레고 위젯에서 해당 블록이 활성화되었습니다. 지금 바로 손에 쥐어질 결과물을 확인해 보세요.
-            </p>
-          </div>
-
-          <a
-            href={TRACK_DETAILS[latestAiMessageWithStep.step].link}
-            className="px-4 py-2.5 rounded-xl bg-[#3182f6] hover:bg-[#1b64da] text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 shadow-xs"
-          >
-            <span>{TRACK_DETAILS[latestAiMessageWithStep.step].actionText}</span>
-            <ArrowRight size={13} weight="bold" />
-          </a>
-        </div>
-      )}
     </div>
   );
 }
-
