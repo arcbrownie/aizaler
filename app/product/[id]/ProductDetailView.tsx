@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Check, X, Compass } from 'lucide-react';
+import { ArrowLeft, Check, X } from 'lucide-react';
 import { PRODUCTS, Product, BrickStage } from '../../../data/products';
 
 const STAGE_STYLE: Record<
@@ -71,29 +71,26 @@ export default function ProductDetailView({
   return (
     <div className="min-h-screen pb-28 pt-8">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        {/* Top Back Link */}
         <div className="mb-6">
           <Link
-            href="/#stack-builder"
+            href="/#curriculum"
             className="inline-flex items-center gap-1.5 text-gray-500 hover:text-gray-900 font-bold text-xs sm:text-sm transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>블록 조립 스테이션으로 돌아가기</span>
+            <span>전체 커리큘럼으로 돌아가기</span>
           </Link>
         </div>
 
-        {/* Main Tactile Block Card */}
         <motion.div
-          initial={{ opacity: 0, y: -24, scale: 0.97 }}
+          initial={{ opacity: 0, y: -20, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+          transition={{ type: 'spring', stiffness: 340, damping: 26 }}
         >
-          {/* Physical Top Studs */}
-          <div className="flex items-center gap-3 px-6 -mb-[2px] relative z-10">
+          <div className="flex items-center gap-2.5 px-6 -mb-[2px] relative z-10">
             {Array.from({ length: 5 }).map((_, idx) => (
               <div
                 key={idx}
-                className={`h-3.5 w-9 rounded-t-md border-t-2 border-x-2 ${style.studColor}`}
+                className={`h-2.5 w-7 rounded-t-[5px] border-t-2 border-x-2 ${style.studColor}`}
               />
             ))}
           </div>
@@ -103,23 +100,23 @@ export default function ProductDetailView({
               {product.brickStageLabel}
             </div>
 
-            <h1 className="text-2xl sm:text-4xl font-black text-gray-900 leading-tight mb-4">
+            <h1 className="text-2xl sm:text-4xl font-black text-gray-950 leading-tight mb-3">
               {product.title}
             </h1>
 
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-8">
               {product.tagline}
             </p>
 
-            {/* Price & Action Box */}
-            <div className="p-6 rounded-2xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-10">
+            {/* 가격 및 신청 바 */}
+            <div className="p-6 rounded-2xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-8">
               <div>
                 {product.originalPrice > 0 && (
-                  <span className="text-xs text-gray-400 line-through block mb-0.5">
+                  <span className="text-xs text-gray-400 line-through block mb-0.5 tabular-nums">
                     정가 {product.originalPrice.toLocaleString()}원
                   </span>
                 )}
-                <div className="text-3xl font-black text-gray-900 tabular-nums">
+                <div className="text-3xl font-black text-gray-950 tabular-nums">
                   {product.salePrice === 0 ? '무료' : `${product.salePrice.toLocaleString()}원`}
                 </div>
                 <p className="text-xs text-gray-500 mt-1">{product.deliverableSummary}</p>
@@ -129,10 +126,9 @@ export default function ProductDetailView({
                 {product.id === '4' && (
                   <Link
                     href="/career"
-                    className="px-5 py-3.5 rounded-2xl bg-white hover:bg-gray-100 border border-gray-200 text-gray-800 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5"
+                    className="px-5 py-3.5 rounded-2xl bg-white hover:bg-gray-100 border border-gray-200 text-gray-800 font-bold text-xs sm:text-sm flex items-center justify-center"
                   >
-                    <Compass className="w-4 h-4 text-blue-600" />
-                    <span>전용 안내 페이지</span>
+                    컨설팅 상세 안내
                   </Link>
                 )}
                 <button
@@ -140,28 +136,28 @@ export default function ProductDetailView({
                   onClick={() => setIsModalOpen(true)}
                   className={`px-7 py-4 text-sm ${style.btnClass}`}
                 >
-                  이 블록 조립 신청하기
+                  신청하기
                 </button>
               </div>
             </div>
 
-            {/* Target Section */}
+            {/* 추천 대상 */}
             <div className={`p-5 rounded-2xl border ${style.lightBox} mb-8`}>
               <div className="text-xs font-extrabold text-gray-500 mb-1">추천 대상</div>
               <p className="text-sm sm:text-base font-bold text-gray-900">{product.target}</p>
             </div>
 
-            {/* Description */}
+            {/* 과정 소개 */}
             <div className="mb-8">
-              <h2 className="text-lg font-black text-gray-900 mb-3">블록 설계 배경</h2>
+              <h2 className="text-base sm:text-lg font-black text-gray-950 mb-2.5">과정 소개</h2>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed whitespace-pre-line">
                 {product.description}
               </p>
             </div>
 
-            {/* Curriculum / Features */}
+            {/* 상세 커리큘럼 */}
             <div>
-              <h2 className="text-lg font-black text-gray-900 mb-3">포함된 상세 조립 모듈</h2>
+              <h2 className="text-base sm:text-lg font-black text-gray-950 mb-3">핵심 커리큘럼</h2>
               <div className="space-y-2.5">
                 {product.features.map((feat, idx) => (
                   <div
@@ -178,13 +174,13 @@ export default function ProductDetailView({
         </motion.div>
       </div>
 
-      {/* Modal */}
+      {/* 신청 모달 */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
           <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 12 }}
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 border-2 border-gray-200 shadow-2xl relative"
+            className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 border border-gray-200 shadow-2xl relative"
           >
             <button
               type="button"
@@ -202,9 +198,9 @@ export default function ProductDetailView({
                 <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
                   <Check className="w-6 h-6 stroke-[3]" />
                 </div>
-                <h3 className="text-lg font-black text-gray-900">신청이 완료되었습니다!</h3>
+                <h3 className="text-lg font-black text-gray-950">신청이 접수되었습니다</h3>
                 <p className="text-xs sm:text-sm text-gray-600">
-                  입력하신 연락처(<strong>{buyerContact}</strong>)로 안내 링크를 보내드립니다.
+                  입력하신 연락처(<strong>{buyerContact}</strong>)로 안내를 보내드립니다.
                 </p>
                 <button
                   type="button"
@@ -222,19 +218,19 @@ export default function ProductDetailView({
                 <div className={`text-xs font-extrabold ${style.accentText} mb-1`}>
                   {product.brickStageLabel}
                 </div>
-                <h3 className="text-lg font-black text-gray-900 mb-1">{product.title}</h3>
+                <h3 className="text-lg font-black text-gray-950 mb-1">{product.title}</h3>
                 <p className="text-xs text-gray-500 mb-5">{product.deliverableSummary}</p>
 
                 <form onSubmit={handleOrder} className="space-y-3.5">
                   <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">성함 / 닉네임</label>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">성함</label>
                     <input
                       type="text"
                       required
                       value={buyerName}
                       onChange={(e) => setBuyerName(e.target.value)}
                       placeholder="홍길동"
-                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:border-emerald-500"
+                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:border-gray-900"
                     />
                   </div>
                   <div>
@@ -245,24 +241,24 @@ export default function ProductDetailView({
                       value={buyerContact}
                       onChange={(e) => setBuyerContact(e.target.value)}
                       placeholder="010-0000-0000 또는 이메일"
-                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:border-emerald-500"
+                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:border-gray-900"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">목표 한 줄 (선택)</label>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">메모 (선택)</label>
                     <input
                       type="text"
                       value={buyerQuestion}
                       onChange={(e) => setBuyerQuestion(e.target.value)}
-                      placeholder="예: 스레드와 메타 광고로 첫 수익을 만들고 싶습니다"
-                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:border-emerald-500"
+                      placeholder="궁금한 점이나 목표를 남겨주세요"
+                      className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:border-gray-900"
                     />
                   </div>
 
                   <button type="submit" className={`w-full py-4 text-sm mt-2 ${style.btnClass}`}>
                     {product.salePrice === 0
-                      ? '무료 블록 신청하기'
-                      : `${product.salePrice.toLocaleString()}원 조립 신청하기`}
+                      ? '무료 신청하기'
+                      : `${product.salePrice.toLocaleString()}원 신청하기`}
                   </button>
                 </form>
               </div>
