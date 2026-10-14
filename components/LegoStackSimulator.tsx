@@ -3,12 +3,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, ArrowCounterClockwise, Plus, SpeakerHigh, SpeakerSlash, Cube } from '@phosphor-icons/react';
 
-interface LegoBrick {
+interface BrickModule {
   id: number;
   name: string;
   desc: string;
   stageName: string;
-  tier: 'DUPLO' | 'CLASSIC' | 'TECHNIC';
+  tier: 'STAGE 1' | 'STAGE 2' | 'STAGE 3' | 'CAREER';
   tag: string;
   badge: string;
   bgTop: string;
@@ -16,7 +16,7 @@ interface LegoBrick {
   bgRight: string;
   studColor: string;
   badgeClass: string;
-  isGoldBlock?: boolean;
+  isLightTextDark?: boolean;
   width: number;
   x: number;
   y: number;
@@ -24,112 +24,112 @@ interface LegoBrick {
   icon: string;
 }
 
-const BRICKS: LegoBrick[] = [
-  // ── [1. DUPLO 기초: 나를 위한 작은 문제 발견 & AI 일꾼] ──
+const BRICKS: BrickModule[] = [
+  // ── [1. 🟡 STAGE 1 (노란색): 나를 위한 작은 문제 발견 & 첫 AI 도구] ──
   {
     id: 1,
-    name: '01. [DUPLO] 내 불편함에서 시작하는 첫 AI 블록',
+    name: '01. [🟡 STAGE 1] 내 불편함에서 시작하는 첫 AI 도구 조립',
     desc: '거창한 사업계획서 대신 "내가 매일 겪는 귀찮은 일"을 해결할 작은 AI 스킬(.skills)과 자동화 블록 하나를 먼저 끼웁니다.',
-    stageName: 'DUPLO · 입문 조립',
-    tier: 'DUPLO',
-    tag: 'DUPLO 01',
-    badge: '내 도구 조립',
-    bgTop: 'bg-emerald-500',
-    bgFront: 'bg-emerald-600',
-    bgRight: 'bg-emerald-700',
-    studColor: 'bg-emerald-400 border-emerald-300',
-    badgeClass: 'badge-duplo',
-    width: 200,
-    x: 0,
-    y: 70,
-    studs: 6,
-    icon: '🧱'
-  },
-
-  // ── [2. DUPLO 확장: 외주비 0원 나만의 미니 프로덕트 완성] ──
-  {
-    id: 2,
-    name: '02. [DUPLO→CLASSIC] 나를 위한 도구를 프로덕트로 포장',
-    desc: '내가 쓰려고 만든 도구에 Cursor + Supabase로 깔끔한 화면과 결제창을 달아 누군가도 쓸 수 있는 웹 프로덕트로 조립합니다.',
-    stageName: 'CLASSIC · 프로덕트화',
-    tier: 'CLASSIC',
-    tag: 'CLASSIC 02',
-    badge: '프로덕트 포장',
-    bgTop: 'bg-cyan-500',
-    bgFront: 'bg-cyan-600',
-    bgRight: 'bg-cyan-700',
-    studColor: 'bg-cyan-400 border-cyan-300',
-    badgeClass: 'badge-classic',
-    width: 172,
-    x: -10,
-    y: 35,
-    studs: 5,
-    icon: '⚡'
-  },
-
-  // ── [3. CLASSIC 핵심: 스레드 500만 뷰 알고리즘 엔진] ──
-  {
-    id: 3,
-    name: '03. [CLASSIC 주력] 스레드 500만 뷰 진성 트래픽 엔진',
-    desc: '만들기만 해선 0원입니다. 허수 조회수를 걷어내고 진짜 내 제품을 필요로 하는 타겟 고객을 모으는 스레드 알고리즘 블록을 장착합니다.',
-    stageName: 'CLASSIC · 스레드 트래픽',
-    tier: 'CLASSIC',
-    tag: 'THREADS 5M',
-    badge: '스레드 수익화',
-    bgTop: 'bg-blue-500',
-    bgFront: 'bg-blue-600',
-    bgRight: 'bg-blue-700',
-    studColor: 'bg-blue-400 border-blue-300',
-    badgeClass: 'badge-classic',
-    width: 145,
-    x: 8,
-    y: 0,
-    studs: 4,
-    icon: '🔥'
-  },
-
-  // ── [4. CLASSIC 피니시: 메타 광고 CVR 8.6% 고전환 퍼널] ──
-  {
-    id: 4,
-    name: '04. [CLASSIC 주력] 메타 광고 CVR 8.6% 1:1 결제 퍼널',
-    desc: '광고 첫 문장과 랜딩 첫 화면을 1:1로 맞물리게 설계해, 유입된 트래픽을 누수 없이 실제 카드 결제로 전환시킵니다.',
-    stageName: 'CLASSIC · 메타 고전환',
-    tier: 'CLASSIC',
-    tag: 'META CVR 8.6%',
-    badge: '메타 고전환',
-    bgTop: 'bg-indigo-500',
-    bgFront: 'bg-indigo-600',
-    bgRight: 'bg-indigo-700',
-    studColor: 'bg-indigo-400 border-indigo-300',
-    badgeClass: 'badge-classic',
-    width: 120,
-    x: -12,
-    y: -35,
-    studs: 3,
-    icon: '🎯'
-  },
-
-  // ── [5. TECHNIC 마스터리: 월 $42 멀티 프로덕트 & 1:1 의사결정] ──
-  {
-    id: 5,
-    name: '05. [TECHNIC] 정밀 자동화 기어 & 솔로프리너 독립 완성',
-    desc: '레고 테크닉의 기어처럼 4개 상용 서비스가 월 $42 인프라 위에서 맞물려 돌아가며 지속 가능한 1인 스튜디오 현금흐름을 완성합니다.',
-    stageName: 'TECHNIC · 마스터리',
-    tier: 'TECHNIC',
-    tag: 'TECHNIC PRO',
-    badge: '테크닉 완성',
+    stageName: '🟡 STAGE 1 · 노란 브릭 (입문)',
+    tier: 'STAGE 1',
+    tag: 'STAGE 1 · STARTER',
+    badge: '🟡 내 도구 조립',
     bgTop: 'bg-amber-400',
     bgFront: 'bg-amber-500',
     bgRight: 'bg-amber-600',
     studColor: 'bg-amber-300 border-amber-200',
-    badgeClass: 'badge-technic',
-    isGoldBlock: true,
+    badgeClass: 'badge-stage1',
+    isLightTextDark: true,
+    width: 200,
+    x: 0,
+    y: 70,
+    studs: 6,
+    icon: '🟡',
+  },
+
+  // ── [2. 🟢 STAGE 2 (녹색 #1): 스레드 500만 뷰 알고리즘 엔진] ──
+  {
+    id: 2,
+    name: '02. [🟢 STAGE 2 주력] 스레드 500만 뷰 진성 트래픽 엔진',
+    desc: '만들기만 해선 0원입니다. 허수 조회수를 걷어내고 진짜 내 제품을 필요로 하는 타겟 고객을 모으는 스레드 알고리즘 블록을 장착합니다.',
+    stageName: '🟢 STAGE 2 · 초록 브릭 (스레드 수익화)',
+    tier: 'STAGE 2',
+    tag: 'STAGE 2 · THREADS 5M',
+    badge: '🟢 스레드 500만',
+    bgTop: 'bg-emerald-500',
+    bgFront: 'bg-emerald-600',
+    bgRight: 'bg-emerald-700',
+    studColor: 'bg-emerald-400 border-emerald-300',
+    badgeClass: 'badge-stage2',
+    width: 172,
+    x: -10,
+    y: 35,
+    studs: 5,
+    icon: '🟢',
+  },
+
+  // ── [3. 🟢 STAGE 2 (녹색 #2): 메타 광고 CVR 8.6% 고전환 퍼널] ──
+  {
+    id: 3,
+    name: '03. [🟢 STAGE 2 주력] 메타 광고 CVR 8.6% 고전환 퍼널',
+    desc: 'Meta 공인 미디어 플래닝 전문가의 1:1 메시지 일치 공식으로 소액 광고비를 즉각적인 유료 결제 현금흐름으로 전환합니다.',
+    stageName: '🟢 STAGE 2 · 초록 브릭 (메타 광고)',
+    tier: 'STAGE 2',
+    tag: 'STAGE 2 · META 8.6%',
+    badge: '🟢 메타 CVR 8.6%',
+    bgTop: 'bg-teal-500',
+    bgFront: 'bg-teal-600',
+    bgRight: 'bg-teal-700',
+    studColor: 'bg-teal-400 border-teal-300',
+    badgeClass: 'badge-stage2',
+    width: 146,
+    x: 8,
+    y: 0,
+    studs: 4,
+    icon: '📈',
+  },
+
+  // ── [4. 🔴 STAGE 3 (빨간색): 월 $42 풀스택 & 터미널 자동화] ──
+  {
+    id: 4,
+    name: '04. [🔴 STAGE 3] 월 $42 풀스택 아키텍처 & 터미널 자동화',
+    desc: '외주비 0원으로 결제창 달린 상용 웹서비스 4개를 직접 배포하고, Claude Code 터미널 에이전트로 혼자 10명분 생산성을 냅니다.',
+    stageName: '🔴 STAGE 3 · 빨간 브릭 (풀스택 시스템)',
+    tier: 'STAGE 3',
+    tag: 'STAGE 3 · FULLSTACK',
+    badge: '🔴 풀스택 시스템',
+    bgTop: 'bg-rose-500',
+    bgFront: 'bg-rose-600',
+    bgRight: 'bg-rose-700',
+    studColor: 'bg-rose-400 border-rose-300',
+    badgeClass: 'badge-stage3',
+    width: 122,
+    x: -6,
+    y: -35,
+    studs: 3,
+    icon: '🔴',
+  },
+
+  // ── [5. 🔵 CAREER (파란색 별도 트랙): 1:1 커리어 & 빌더 의사결정] ──
+  {
+    id: 5,
+    name: '05. [🔵 CAREER 1:1] 공기업·주재원 파운더 1:1 의사결정 세션',
+    desc: '안정된 직장 속 갈증을 느끼는 빌더를 위해 퇴사·부업·이직 손익 계산과 나만의 90일 수익화 로드맵을 1:1로 함께 설계합니다.',
+    stageName: '🔵 CAREER · 파란 브릭 (1:1 밀착 처방)',
+    tier: 'CAREER',
+    tag: 'CAREER 1:1 LAB',
+    badge: '🔵 1:1 커리어',
+    bgTop: 'bg-blue-500',
+    bgFront: 'bg-blue-600',
+    bgRight: 'bg-blue-700',
+    studColor: 'bg-blue-400 border-blue-300',
+    badgeClass: 'badge-career',
     width: 96,
     x: 0,
     y: -70,
     studs: 2,
-    icon: '⚙️'
-  }
+    icon: '🔵',
+  },
 ];
 
 interface LegoStackSimulatorProps {
@@ -138,7 +138,7 @@ interface LegoStackSimulatorProps {
 
 export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorProps) {
   const [visibleCount, setVisibleCount] = useState<number>(3);
-  const [selectedStep, setSelectedStep] = useState<number>(2);
+  const [selectedStep, setSelectedStep] = useState<number>(1);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -146,7 +146,9 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
   const playClickSound = (pitchIndex: number) => {
     if (!soundEnabled || typeof window === 'undefined') return;
     try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!audioCtxRef.current) {
         audioCtxRef.current = new AudioCtx();
       }
@@ -167,17 +169,17 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
       osc.connect(gain);
       gain.connect(ctx.destination);
       osc.start();
-      osc.stop(ctx.currentTime + 0.075);
+      osc.stop(ctx.currentTime + 0.07);
     } catch {
-      // Ignore audio errors
+      // Ignore audio errors on restricted browsers
     }
   };
 
   useEffect(() => {
     if (externalStep && externalStep >= 1 && externalStep <= BRICKS.length) {
-      setVisibleCount(externalStep);
+      setVisibleCount((prev) => Math.max(prev, externalStep));
       setSelectedStep(externalStep - 1);
-      setIsPlaying(false);
+      playClickSound(externalStep);
     }
   }, [externalStep]);
 
@@ -185,14 +187,15 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
     if (!isPlaying) return;
     const timer = setInterval(() => {
       setVisibleCount((prev) => {
-        if (prev >= BRICKS.length) {
+        if (prev < BRICKS.length) {
+          const next = prev + 1;
+          setSelectedStep(next - 1);
+          playClickSound(next);
+          return next;
+        } else {
           setIsPlaying(false);
-          return BRICKS.length;
+          return prev;
         }
-        const nextVal = prev + 1;
-        setSelectedStep(nextVal - 1);
-        playClickSound(nextVal);
-        return nextVal;
       });
     }, 950);
     return () => clearInterval(timer);
@@ -206,8 +209,7 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
       setSelectedStep(next - 1);
       playClickSound(next);
     } else {
-      setVisibleCount(1);
-      setSelectedStep(0);
+      setSelectedStep((prev) => (prev + 1) % BRICKS.length);
       playClickSound(1);
     }
   };
@@ -226,18 +228,18 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
       {/* ── 1. 상단 컨트롤 헤더 ── */}
       <div className="flex items-center justify-between gap-2 border-b border-white/[0.07] pb-3.5">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-400 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center">
             <Cube size={18} weight="fill" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-black text-white">DUPLO → TECHNIC 3D 조립기</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full badge-technic">
-                INTERACTIVE
+              <span className="text-sm font-black text-white">3D 브릭 타워 조립 시뮬레이터</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full badge-stage2">
+                🟡 S1 · 🟢 S2 · 🔴 S3 · 🔵 CAREER
               </span>
             </div>
             <p className="text-[11px] text-gray-400">
-              블록을 직접 쌓으며 나를 위한 도구가 수익화되는 5단계를 확인하세요
+              블록을 직접 쌓으며 내 도구가 수익화되는 성장 단계를 확인하세요
             </p>
           </div>
         </div>
@@ -247,15 +249,19 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
           className="p-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-gray-300 transition-colors"
           title={soundEnabled ? '조립 효과음 켜짐' : '조립 효과음 꺼짐'}
         >
-          {soundEnabled ? <SpeakerHigh size={15} weight="bold" className="text-amber-400" /> : <SpeakerSlash size={15} />}
+          {soundEnabled ? (
+            <SpeakerHigh size={15} weight="bold" className="text-emerald-400" />
+          ) : (
+            <SpeakerSlash size={15} />
+          )}
         </button>
       </div>
 
-      {/* ── 2. 3D 아이소메트릭 레고 조립 뷰포트 ── */}
+      {/* ── 2. 3D 아이소메트릭 브릭 조립 뷰포트 ── */}
       <div className="relative h-[250px] sm:h-[270px] rounded-2xl bg-gradient-to-b from-[#0B101E] to-[#111A2E] border border-white/[0.08] overflow-hidden flex items-center justify-center select-none">
         {/* Blueprint Grid Background */}
-        <div className="absolute inset-0 grid-track-bg opacity-45 pointer-events-none" />
-        <div className="absolute w-52 h-52 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-brick-grid opacity-45 pointer-events-none" />
+        <div className="absolute w-52 h-52 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
 
         {/* 3D Stack Container */}
         <div
@@ -319,11 +325,11 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
                 {/* 정면 */}
                 <div
                   className={`absolute ${b.bgFront} rounded-[3px] flex items-center justify-between px-2.5 text-[9px] font-black border-t shadow-lg ${
-                    b.isGoldBlock
+                    b.isLightTextDark
                       ? 'text-[#070B14] border-amber-200'
                       : 'text-white border-white/40'
                   } ${
-                    isSelected ? 'ring-2 ring-amber-400 ring-offset-2 ring-offset-[#0B101E]' : ''
+                    isSelected ? 'ring-2 ring-white ring-offset-2 ring-offset-[#0B101E]' : ''
                   }`}
                   style={{
                     width: `${b.width}px`,
@@ -354,13 +360,17 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
 
         {/* 좌상단 조립 진행도 뱃지 */}
         <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#070B14]/90 backdrop-blur-md border border-white/[0.12] text-[10px] font-mono font-bold text-gray-200 flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-          <span>BRICK {visibleCount} / {BRICKS.length}</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>
+            BRICK {visibleCount} / {BRICKS.length}
+          </span>
         </div>
 
         {/* 우상단 현재 등급 표시 */}
-        <div className={`absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-mono font-black ${activeBrick.badgeClass}`}>
-          {activeBrick.tier} STAGE
+        <div
+          className={`absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-mono font-black ${activeBrick.badgeClass}`}
+        >
+          {activeBrick.tier}
         </div>
       </div>
 
@@ -382,7 +392,7 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
               }}
               className={`py-2 px-1 rounded-xl text-center transition-all border ${
                 isSelected
-                  ? 'bg-amber-400 text-[#070B14] border-amber-300 shadow-md scale-[1.02]'
+                  ? 'bg-white text-[#070B14] border-white shadow-md scale-[1.02]'
                   : isBuilt
                   ? 'bg-white/[0.06] hover:bg-white/[0.1] text-gray-200 border-white/[0.1]'
                   : 'bg-white/[0.02] text-gray-500 border-dashed border-white/[0.08] opacity-60'
@@ -401,16 +411,14 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
       <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between gap-3">
         <div className="space-y-1 min-w-0">
           <div className="flex items-center gap-1.5">
-            <span className={`text-[9px] font-mono font-black px-2 py-0.5 rounded-full uppercase ${activeBrick.badgeClass}`}>
+            <span
+              className={`text-[9px] font-mono font-black px-2 py-0.5 rounded-full uppercase ${activeBrick.badgeClass}`}
+            >
               {activeBrick.stageName}
             </span>
           </div>
-          <div className="text-xs sm:text-sm font-black text-white truncate">
-            {activeBrick.name}
-          </div>
-          <p className="text-[11px] sm:text-xs text-gray-300 leading-relaxed">
-            {activeBrick.desc}
-          </p>
+          <div className="text-xs sm:text-sm font-black text-white truncate">{activeBrick.name}</div>
+          <p className="text-[11px] sm:text-xs text-gray-300 leading-relaxed">{activeBrick.desc}</p>
         </div>
         <div className="text-xl shrink-0 w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.1] flex items-center justify-center">
           {activeBrick.icon}
@@ -432,7 +440,7 @@ export default function LegoStackSimulator({ externalStep }: LegoStackSimulatorP
                 setIsPlaying(!isPlaying);
               }
             }}
-            className="px-4 py-2 rounded-xl btn-technic-gold text-xs font-black transition-all flex items-center gap-1.5 active:scale-95"
+            className="px-4 py-2 rounded-xl btn-stage2-green text-xs font-black transition-all flex items-center gap-1.5 active:scale-95"
           >
             <Play size={13} weight="fill" />
             <span>{isPlaying ? '일시 정지' : '자동 조립 재생'}</span>

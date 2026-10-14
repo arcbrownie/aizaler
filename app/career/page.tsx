@@ -15,23 +15,23 @@ export default function CareerPage() {
 
   return (
     <div className="min-h-screen bg-[#070B14] text-[#FAF6F0] relative overflow-x-hidden">
-      {/* ── Sub-Bar for 1:1 Career & Builder Decision Session ── */}
-      <div className="bg-[#0B1120] border-b border-amber-400/20 px-4 sm:px-6 py-3">
+      {/* ── Sub-Bar for 🔵 Blue Special Career & Builder Decision Track ── */}
+      <div className="bg-[#0B1224] border-b border-blue-500/25 px-4 sm:px-6 py-3">
         <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-amber-300 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-blue-300 transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>전체 브릭 스튜디오로</span>
             </Link>
             <span className="text-white/20">|</span>
-            <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-amber-300">
+            <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-blue-300">
               <Compass className="w-3.5 h-3.5" />
-              STAGE 03 · LEGO TECHNIC (1:1 커리어 & 빌더 의사결정)
+              🔵 SPECIAL CAREER TRACK (1:1 커리어 & 빌더 의사결정 연구소)
             </span>
-            <span className="hidden md:inline-flex items-center gap-1 text-[11px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">
+            <span className="hidden md:inline-flex items-center gap-1 text-[11px] font-mono bg-blue-500/15 text-sky-200 border border-blue-400/30 px-2.5 py-0.5 rounded-full">
               <HeartHandshake className="w-3 h-3" />
               재능기부 + 자아실현 세션
             </span>
@@ -40,10 +40,10 @@ export default function CareerPage() {
           <button
             type="button"
             onClick={() => setIsBookingOpen(true)}
-            className="px-4 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs flex items-center gap-1.5 transition-all"
+            className="px-4 py-1.5 rounded-xl btn-career-blue text-xs flex items-center gap-1.5 transition-all"
           >
             <Zap className="w-3.5 h-3.5" />
-            <span>1:1 세션 일정 신청하기 (잔여 3석)</span>
+            <span>🔵 1:1 세션 일정 신청하기 (잔여 3석)</span>
           </button>
         </div>
       </div>

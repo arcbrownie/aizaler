@@ -33,9 +33,10 @@ export default function ProductDetailView({
   const [submitted, setSubmitted] = useState(false);
 
   const getStageBadgeClass = (stage: BrickStage) => {
-    if (stage === 'DUPLO') return 'badge-duplo';
-    if (stage === 'CLASSIC') return 'badge-classic';
-    return 'badge-technic';
+    if (stage === 'STAGE_1') return 'badge-stage1';
+    if (stage === 'STAGE_2') return 'badge-stage2';
+    if (stage === 'STAGE_3') return 'badge-stage3';
+    return 'badge-career';
   };
 
   const handleOrder = (e: React.FormEvent) => {
