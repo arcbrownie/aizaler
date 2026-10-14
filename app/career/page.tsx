@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Compass, HeartHandshake, Zap } from 'lucide-react';
+import { ArrowLeft, Compass } from 'lucide-react';
 import CareerHero from '@/components/career/CareerHero';
 import CareerBentoGrid from '@/components/career/CareerBentoGrid';
 import CareerProtocolTimeline from '@/components/career/CareerProtocolTimeline';
@@ -15,35 +15,30 @@ export default function CareerPage() {
 
   return (
     <div className="min-h-screen bg-[#070B14] text-[#FAF6F0] relative overflow-x-hidden">
-      {/* ── Sub-Bar for 🔵 Blue Special Career & Builder Decision Track ── */}
-      <div className="bg-[#0B1224] border-b border-blue-500/25 px-4 sm:px-6 py-3">
+      {/* ── Clean Sub-Bar for Blue Career Track ── */}
+      <div className="bg-[#0B1224] border-b border-white/10 px-4 sm:px-6 py-3">
         <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-blue-300 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-300 hover:text-white transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>전체 브릭 스튜디오로</span>
+              <span>메인 스튜디오로</span>
             </Link>
             <span className="text-white/20">|</span>
-            <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-blue-300">
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400">
               <Compass className="w-3.5 h-3.5" />
-              🔵 SPECIAL CAREER TRACK (1:1 커리어 & 빌더 의사결정 연구소)
-            </span>
-            <span className="hidden md:inline-flex items-center gap-1 text-[11px] font-mono bg-blue-500/15 text-sky-200 border border-blue-400/30 px-2.5 py-0.5 rounded-full">
-              <HeartHandshake className="w-3 h-3" />
-              재능기부 + 자아실현 세션
+              CAREER 1:1 · 커리어 & 빌더 의사결정 연구소
             </span>
           </div>
 
           <button
             type="button"
             onClick={() => setIsBookingOpen(true)}
-            className="px-4 py-1.5 rounded-xl btn-career-blue text-xs flex items-center gap-1.5 transition-all"
+            className="px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-all"
           >
-            <Zap className="w-3.5 h-3.5" />
-            <span>🔵 1:1 세션 일정 신청하기 (잔여 3석)</span>
+            1:1 세션 일정 신청하기
           </button>
         </div>
       </div>
